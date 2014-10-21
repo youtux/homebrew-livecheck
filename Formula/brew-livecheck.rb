@@ -2,9 +2,8 @@ require 'formula'
 
 class BrewLivecheck < Formula
   homepage 'https://github.com/youtux/homebrew-livecheck'
-  url 'https://github.com/youtux/homebrew-livecheck.git'
+  url 'https://github.com/youtux/homebrew-livecheck/archive/0.1.tar.gz'
   head 'https://github.com/youtux/homebrew-livecheck.git'
-  version '0.1'
 
   skip_clean 'bin'
 
