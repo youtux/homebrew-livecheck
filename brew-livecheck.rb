@@ -36,6 +36,8 @@ def latest_version formula
     end
 end
 
+puts $LOAD_PATH if check_flags ['-d']
+
 if ARGV.size == 0 or check_flags ['-h', '--help']
   puts usage
 elsif check_flags ['-i', '--installed']
