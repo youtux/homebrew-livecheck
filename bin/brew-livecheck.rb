@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift(File.expand_path('../../', Pathname.new(__FILE__).realpath))
-require "lib/utils"
+require "livecheck/utils"
 
 usage = <<EOF
     brew livecheck formula1 formula2 ...
