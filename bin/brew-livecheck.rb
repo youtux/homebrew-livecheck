@@ -21,7 +21,7 @@ def check_flags flags
 end
 
 def latest_version formula
-    require "Livecheckables/#{formula}" if File.exists? "../Livecheckables/#{formula}.rb"
+    require "Livecheckables/#{formula}" if File.exists? File.expand_path("../../Livecheckables/#{formula}.rb", Pathname.new(__FILE__).realpath)
 
     if formula.respond_to? :get_latest_version
       formula.get_latest_version
@@ -34,6 +34,7 @@ def latest_version formula
 end
 
 if check_flags ['-d']
+    puts File.expand_path("../../Livecheckables/#{ARGV.formulae.first}.rb", Pathname.new(__FILE__).realpath)
     puts Pathname.new(__FILE__).realpath
     puts $LOAD_PATH
 end
