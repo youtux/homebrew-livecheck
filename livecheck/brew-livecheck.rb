@@ -1,5 +1,5 @@
-$LOAD_PATH.unshift(Pathname.new(__FILE__).realpath.dirname)
-require "utils"
+$LOAD_PATH.unshift(File.expand_path('../../', Pathname.new(__FILE__).realpath))
+require "livecheck/utils"
 
 usage = <<EOF
     brew livecheck formula1 formula2 ...
@@ -22,8 +22,8 @@ end
 
 def latest_version formula
     f_basename = File.basename formula.path
-    if Dir["Livecheckables/*.rb"].map{ |f| File.basename f }.include? f_basename
-      require "Livecheckables/#{f_basename}"
+    if Dir["../Livecheckables/*.rb"].map{ |f| File.basename f }.include? f_basename
+      require "../Livecheckables/#{f_basename}"
     end
 
     if formula.respond_to? :get_latest_version
@@ -37,6 +37,7 @@ def latest_version formula
 end
 
 if check_flags ['-d']
+
     puts Pathname.new(__FILE__).realpath
     puts $LOAD_PATH
 end
