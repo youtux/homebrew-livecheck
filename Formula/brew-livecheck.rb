@@ -8,7 +8,7 @@ class BrewLivecheck < Formula
   def install
     prefix.install 'bin', 'lib', 'Livecheckables'
 
-    bin.install 'livecheck/brew-livecheck.rb'
+    bin.install 'bin/brew-livecheck.rb'
     (bin + 'brew-livecheck.rb').chmod 0755
   end
 end
