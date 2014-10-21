@@ -1,4 +1,5 @@
-require_relative "utils"
+$LOAD_PATH.unshift(Pathname.new(__FILE__).realpath.dirname)
+require "utils"
 
 usage = <<EOF
     brew livecheck formula1 formula2 ...
@@ -22,7 +23,7 @@ end
 def latest_version formula
     f_basename = File.basename formula.path
     if Dir["Livecheckables/*.rb"].map{ |f| File.basename f }.include? f_basename
-      require_relative "Livecheckables/#{f_basename}"
+      require "Livecheckables/#{f_basename}"
     end
 
     if formula.respond_to? :get_latest_version

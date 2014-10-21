@@ -1,3 +1,5 @@
+require 'formula'
+
 class PebbleSdk
   def get_latest_version
     require 'net/http'
