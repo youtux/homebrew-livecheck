@@ -6,7 +6,7 @@ class BrewLivecheck < Formula
   head 'https://github.com/youtux/homebrew-livecheck.git'
 
   def install
-    prefix.install 'livecheck', 'Livecheckables'
+    prefix.install 'bin', 'lib', 'Livecheckables'
 
     bin.install 'livecheck/brew-livecheck.rb'
     (bin + 'brew-livecheck.rb').chmod 0755
