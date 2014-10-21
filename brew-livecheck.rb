@@ -36,7 +36,10 @@ def latest_version formula
     end
 end
 
-puts $LOAD_PATH if check_flags ['-d']
+if check_flags ['-d']
+    puts Pathname.new(__FILE__).realpath
+    puts $LOAD_PATH
+end
 
 if ARGV.size == 0 or check_flags ['-h', '--help']
   puts usage
