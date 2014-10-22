@@ -27,8 +27,8 @@ def latest_version formula
     puts "Warning: #{formula} does not implement livecheck"
   end
 
-  if formula.respond_to? :get_latest_version
-    formula.get_latest_version
+  if formula.respond_to? :livecheck
+    Version.new(formula.livecheck)
   elsif formula.head and DownloadStrategyDetector.detect(formula.head.url) == GitDownloadStrategy
     git_tags(formula.head.url).map { |tag| Version.new tag }.max
   else
