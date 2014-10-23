@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.2
+* __Livecheckables__
+  - 4 Livecheckables added
+
 ## 0.3.1
 * __Fixes__
   - Fixed crash when errors occoured while checking a formula
