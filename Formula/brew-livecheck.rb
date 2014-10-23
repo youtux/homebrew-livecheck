@@ -4,7 +4,7 @@ class BrewLivecheck < Formula
   homepage 'https://github.com/youtux/homebrew-livecheck'
   url 'https://github.com/youtux/homebrew-livecheck.git'
   head 'https://github.com/youtux/homebrew-livecheck.git'
-  version '0.2'
+  version '0.3'
 
   skip_clean 'bin'
   def install
