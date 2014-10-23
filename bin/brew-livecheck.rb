@@ -43,8 +43,8 @@ def print_latest_version formula
     latest = latest_version(formula)
 
     formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
-    current_s = current <= latest ? "#{current}" : "#{Tty.red}#{current}#{Tty.reset}"
-    latest_s = latest >= current ? "#{latest}" : "#{Tty.green}#{latest}#{Tty.reset}"
+    current_s = current > latest ? "#{Tty.red}#{current}#{Tty.reset}" : "#{current}"
+    latest_s = latest > current ? "#{Tty.green}#{latest}#{Tty.reset}" : "#{latest}"
 
     unless (check_flags ['-n', '--only-newer'] and current >= latest)
       oh1 "#{formula_s} : #{current_s} ==> #{latest_s}"
@@ -52,7 +52,7 @@ def print_latest_version formula
     if current > latest
       opoo "#{formula_s} version is greater than the upstream version" if ARGV.verbose?
     end
-  rescue TypeError => e
+  rescue Exception => e
     onoe e unless ARGV.quieter?
   end
 end
