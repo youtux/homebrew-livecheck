@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.3.1
+* __Fixes__
+  - Fixed crash when errors occoured while checking a formula
+  - Fixed colors
+
 ## 0.3
 
 * __Livecheckables__
