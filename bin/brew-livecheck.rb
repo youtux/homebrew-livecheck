@@ -1,11 +1,12 @@
 $LOAD_PATH.unshift(File.expand_path('../../', Pathname.new(__FILE__).realpath))
 require "livecheck/utils"
+require 'formula'
 
 usage = <<EOF
-    brew livecheck formula1 formula2 ...
-    brew livecheck [-i|--installed]
-    brew livecheck [-a|--all]
-    brew livecheck [-h|--help]
+brew livecheck formula1 formula2 ...
+brew livecheck [-i|--installed]
+brew livecheck [-a|--all]
+brew livecheck [-h|--help]
 
 Usage:
 Check if a formula is outdated
@@ -23,8 +24,8 @@ end
 def latest_version formula
   begin
     require "Livecheckables/#{formula}"
-  rescue Exception
-    puts "Warning: #{formula} does not implement livecheck"
+  rescue LoadError
+    opoo "#{Tty.blue}#{formula}#{Tty.reset} does not implement livecheck" if ARGV.verbose?
   end
 
   if formula.respond_to? :livecheck
@@ -32,12 +33,31 @@ def latest_version formula
   elsif formula.head and DownloadStrategyDetector.detect(formula.head.url) == GitDownloadStrategy
     git_tags(formula.head.url).map { |tag| Version.new tag }.max
   else
-    raise TypeError,
-    "Unable to get versions for #{formula}"
+    raise TypeError, "Unable to get versions for #{Tty.blue}#{formula}#{Tty.reset}"
   end
 end
 
-if check_flags ['-d']
+def print_latest_version formula
+  begin
+    current = formula.version
+    latest = latest_version(formula)
+
+    formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
+    current_s = current <= latest ? "#{current}" : "#{Tty.red}#{current}#{Tty.reset}"
+    latest_s = latest >= current ? "#{latest}" : "#{Tty.green}#{latest}#{Tty.reset}"
+
+    unless (check_flags ['-n', '--only-newer'] and current >= latest)
+      oh1 "#{formula_s} : #{current_s} ==> #{latest_s}"
+    end
+    if current > latest
+      opoo "#{formula_s} version is greater than the upstream version" if ARGV.verbose?
+    end
+  rescue TypeError => e
+    onoe e unless ARGV.quieter?
+  end
+end
+
+if ARGV.debug?
   puts File.expand_path("../../Livecheckables/#{ARGV.formulae.first}.rb", Pathname.new(__FILE__).realpath)
   puts Pathname.new(__FILE__).realpath
   puts $LOAD_PATH
@@ -46,16 +66,13 @@ end
 if ARGV.size == 0 or check_flags ['-h', '--help']
   puts usage
 elsif check_flags ['-i', '--installed']
-  puts "Not implemented -i"
+  Formula.installed.each do |formula|
+    print_latest_version formula
+  end
 elsif check_flags ['-a', '--all']
-  puts "Not implemented -a"
+  onoe "Not implemented -a"
 else
-  ARGV.formulae.each do |f|
-    begin
-      latest = latest_version(f)
-      puts latest unless check_flags ['-n', '--only-newer'] and f.version <= latest
-    rescue TypeError => e
-      puts e
-    end
+  ARGV.formulae.each do |formula|
+    print_latest_version formula
   end
 end
