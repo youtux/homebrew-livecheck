@@ -7,6 +7,11 @@ External command for Homebrew that checks for newer version of formulae in the u
     brew tap youtux/livecheck && brew install brew-livecheck
 
 # Usage
+The most useful way to use the command is by invoking
+
+    brew livecheck -i
+which shows all the outdated formulae that are installed.
+If you find a formula that can't be checked, please help the project by writing the Livecheckable version and make a pull request!
 ```
 brew livecheck [options] formula1 formula2 ...
 brew livecheck [-i|--installed]
