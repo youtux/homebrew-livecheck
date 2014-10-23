@@ -10,8 +10,7 @@ External command for Homebrew that checks for newer version of formulae in the u
 The most useful way to use the command is by invoking
 
     brew livecheck -i
-which shows all the outdated formulae that are installed.
-If you find a formula that can't be checked, please help the project by writing the Livecheckable version and make a pull request!
+which shows all the installed formulae that are outdated.
 ```
 brew livecheck [options] formula1 formula2 ...
 brew livecheck [-i|--installed]
@@ -28,9 +27,12 @@ Options:
   -v, --verbose     show more informations (useful when creating Livecheckables)
 ```
 
-In order to make a formula compatible with `homebrew-livecheck`, it is sufficient to place an extension of the formula into `Livecheckables`.
+Some of the formulae can be checked **out-of-the-box** (like sqlmap), but others need to some attention to make 'em work. If you find a formula that can't be checked, please help the project by writing the Livecheckable version and make a pull request!
 
-All the `Livecheckables` classes must implement the `livecheck` method.
+In order to make a formula compatible with `homebrew-livecheck`, it is sufficient to extend the formulae class and place it into the `Livecheckables` directory.
+
+The only requirement is that a `Livecheckable` formula must implement the `livecheck` method.
+
 You can look at [Livecheckables](Livecheckables/) to get the idea.
 
 ## Contributions are welcomed
