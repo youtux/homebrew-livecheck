@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4
+* __Breaking Changes__
+  - Livecheck only selected formulae! You can put the formulae you want to watch inside the watchlist file (default: ~/.brew_livecheck_watchlist)
+
 ## 0.3.3
 * __Fixes__
   - Fixed a bug preventing Ctrl + C (SIGINT) to exit the program
