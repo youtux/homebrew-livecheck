@@ -52,7 +52,7 @@ def print_latest_version formula
     if current > latest
       opoo "#{formula_s} version is greater than the upstream version" if ARGV.verbose?
     end
-  rescue Exception => e
+  rescue StandardError => e
     onoe e unless ARGV.quieter?
   end
 end
