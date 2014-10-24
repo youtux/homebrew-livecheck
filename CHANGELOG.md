@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.3.3
+* __Fixes__
+  - Fixed a bug preventing Ctrl + C (SIGINT) to exit the program
+* __Features__
+  - Added an environment source (env.sh) to auto load the bin folder into the PATH. Useful for debugging.
+
 ## 0.3.2
 * __Livecheckables__
   - 4 Livecheckables added
