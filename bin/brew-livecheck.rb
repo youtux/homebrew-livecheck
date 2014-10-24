@@ -61,9 +61,10 @@ def print_latest_version formula
 end
 
 if ARGV.debug?
-  puts File.expand_path("../../Livecheckables/#{ARGV.formulae.first}.rb", Pathname.new(__FILE__).realpath)
+  puts ARGV
+  puts ENV['HOMEBREW_LIVECHECK_WATCHLIST']
   puts Pathname.new(__FILE__).realpath
-  puts $LOAD_PATH
+  # puts $LOAD_PATH
 end
 
 if check_flags ['-h', '--help']
