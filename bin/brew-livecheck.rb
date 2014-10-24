@@ -16,8 +16,10 @@ Check if a formula is outdated. If no argument is passed, the list of formulae t
 
 Options:
 -h, --help        show this help message and exit
--n, --only-newer  show the latest version only if it's newer than the formula
-in Homebrew
+-n, --only-newer  show the latest version only if it's newer than the formula in Homebrew
+-v, --verbose     be more verbose :)
+-q, --quieter     be more quiet (do not show errors)
+-d, --debug       show debugging info
 EOF
 
 def check_flags flags
