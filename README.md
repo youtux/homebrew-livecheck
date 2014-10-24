@@ -9,16 +9,18 @@ External command for Homebrew that checks for newer version of formulae in the u
 # Usage
 The most useful way to use the command is by invoking
 
-    brew livecheck -i
-which shows all the installed formulae that are outdated.
+    brew livecheck
+which shows the formulae in your watchlist (default: ~/.brew_livecheck_watchlist) that are outdated. You can set your own watchlist file in the `HOMEBREW_LIVECHECK_WATCHLIST` env variable.
+
 ```
+brew livecheck
 brew livecheck [options] formula1 formula2 ...
 brew livecheck [-i|--installed]
 brew livecheck [-a|--all]       # not yet implemented
 brew livecheck [-h|--help]
 
 Usage:
-    Check if a formula is outdated
+    Check if a formula is outdated.  If no argument is passed, the list of formulae to check is taken from ~/.brew_livecheck_watchlist.
 
 Options:
   -h, --help        show this help message and exit
