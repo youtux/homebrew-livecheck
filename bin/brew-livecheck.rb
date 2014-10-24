@@ -2,14 +2,17 @@ $LOAD_PATH.unshift(File.expand_path('../../', Pathname.new(__FILE__).realpath))
 require "livecheck/utils"
 require 'formula'
 
+watchlist_path = ENV['HOMEBREW_LIVECHECK_WATCHLIST'] || Pathname.new(Dir.home) + ".brew_livecheck_watchlist"
+
 usage = <<EOF
+brew livecheck
 brew livecheck formula1 formula2 ...
 brew livecheck [-i|--installed]
 brew livecheck [-a|--all]
 brew livecheck [-h|--help]
 
 Usage:
-Check if a formula is outdated
+Check if a formula is outdated. If no argument is passed, the list of formulae to check is taken from #{watchlist_path}.
 
 Options:
 -h, --help        show this help message and exit
@@ -63,8 +66,18 @@ if ARGV.debug?
   puts $LOAD_PATH
 end
 
-if ARGV.size == 0 or check_flags ['-h', '--help']
+if check_flags ['-h', '--help']
   puts usage
+elsif ARGV.size == 0
+  begin
+    File.open( watchlist_path ).each do |line|
+      line.split.each do |word|
+        print_latest_version Formulary.factory(word)
+      end
+    end
+  rescue Errno::ENOENT => e
+    onoe e
+  end
 elsif check_flags ['-i', '--installed']
   Formula.installed.each do |formula|
     print_latest_version formula
