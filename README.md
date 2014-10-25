@@ -13,6 +13,7 @@ The most useful way to use the command is by invoking
     ==> git : 2.1.2 ==> 2.1.2
     ==> sqlmap : 0.9 ==> 0.9
     ==> pebble-sdk : 2.6 ==> 2.7
+    ...
 which shows (with colors!) the formulae in your watchlist (default: ~/.brew_livecheck_watchlist) that are outdated. You can set your own watchlist file in the `HOMEBREW_LIVECHECK_WATCHLIST` env variable.
 
 ```
