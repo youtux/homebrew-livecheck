@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5
+* __Features__
+  - Removed Formula. It is sufficient to tap the repository and you are ready to go!
+
 ## 0.4
 * __Breaking Changes__
   - Livecheck only selected formulae! You can put the formulae you want to watch inside the watchlist file (default: ~/.brew_livecheck_watchlist)
