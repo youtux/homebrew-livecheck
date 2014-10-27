@@ -2,7 +2,7 @@
 
 ## 0.5
 * __Features__
-  - Removed Formula. It is sufficient to tap the repository and you are ready to go!
+  - From now on it is sufficient to tap the repository and you are ready to go! Delete the old version by running `brew rm brew-livecheck`
 
 ## 0.4
 * __Breaking Changes__
