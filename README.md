@@ -1,10 +1,15 @@
 homebrew-livecheck
 ==================
-
 External command for Homebrew that checks for newer version of formulae in the upstream.
 
+# Warning: new update mechanism
+Since version 0.5, a new update mechanism has been introduced. From now on the command will be update whenever you do a `brew update`. It is strongly recommended to uninstall the formula and retap the repository:
+
+    brew update && brew tap --repair && brew uninstall livecheck
+
 # Install
-    brew tap youtux/livecheck && brew install brew-livecheck
+    brew tap youtux/livecheck
+That's it. You don't even need to install the formula. And it will autoupdate whenever you do a `brew update`.
 
 # Usage
 The most useful way to use the command is by invoking
