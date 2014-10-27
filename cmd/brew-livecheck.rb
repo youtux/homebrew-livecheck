@@ -65,8 +65,19 @@ end
 if ARGV.debug?
   puts ARGV
   puts ENV['HOMEBREW_LIVECHECK_WATCHLIST']
-  puts Pathname.new(__FILE__).realpath
+  puts Pathname.new(File.expand_path('..', __FILE__)).basename
   # puts $LOAD_PATH
+end
+
+if (Pathname.new(File.expand_path('..', __FILE__)).basename).to_s == 'bin'
+  opoo <<EOF
+It seems you are using an old version of homebrew-livecheck.
+Please run this command to get the latest version with auto-update:
+
+  brew update && brew tap --repair && brew uninstall livecheck
+
+More info at https://github.com/youtux/homebrew-livecheck/blob/master/README.md
+EOF
 end
 
 if check_flags ['-h', '--help']
