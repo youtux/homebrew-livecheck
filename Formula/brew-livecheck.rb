@@ -13,7 +13,7 @@ class BrewLivecheck < Formula
     Please run this command to get the latest version of
     brew-livecheck with auto-update:
 
-      brew uninstall brew-livecheck && brew update && brew tap --repair
+      brew uninstall brew-livecheck ; brew update && brew tap --repair
 
     More info at https://github.com/youtux/homebrew-livecheck
     EOS
