@@ -5,7 +5,9 @@ External command for Homebrew that checks for newer version of formulae in the u
 # Warning: new update mechanism
 Since version 0.5, a new update mechanism has been introduced. From now on the command will be update whenever you do a `brew update`. It is strongly recommended to uninstall the formula and retap the repository:
 
-    brew uninstall livecheck ; brew update && brew tap --repair
+    brew uninstall brew-livecheck ; brew update && brew tap --repair
+
+If the above line doesn't work, then unistall brew-livecheck, untap the repository and tap it again. If this does not fix the problem then open an issue. Sorry for the inconvenience.
 
 # Install
     brew tap youtux/livecheck
