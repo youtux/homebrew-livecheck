@@ -36,7 +36,10 @@ def latest_version formula
   if formula.respond_to? :livecheck
     Version.new(formula.livecheck)
   elsif formula.head and DownloadStrategyDetector.detect(formula.head.url) == GitDownloadStrategy
-    git_tags(formula.head.url).map { |tag| Version.new tag }.max
+    versions = git_tags(formula.head.url).map do |tag|
+      Version.detect(formula.head.url, {:tag => tag})
+    end
+    versions.max
   else
     raise TypeError, "Unable to get versions for #{Tty.blue}#{formula}#{Tty.reset}"
   end
