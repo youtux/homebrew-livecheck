@@ -1,4 +1,5 @@
 # CHANGELOG
+This file is no more maintained in favor of the git log.
 
 ## 0.5
 * __Features__
