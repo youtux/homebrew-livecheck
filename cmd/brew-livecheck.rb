@@ -19,7 +19,7 @@ usage = <<-EOF.undent
 
   Options:
   -h, --help        show this help message and exit
-  -n, --only-newer  show the latest version only if it's newer than the formula in Homebrew
+  -n, --newer-only  show the latest version only if it's newer than the formula in Homebrew
   -v, --verbose     be more verbose :)
   -q, --quieter     be more quiet (do not show errors)
   -d, --debug       show debugging info
@@ -79,7 +79,7 @@ def print_latest_version formula
     current_s = current > latest ? "#{Tty.red}#{current}#{Tty.reset}" : "#{current}"
     latest_s = latest > current ? "#{Tty.green}#{latest}#{Tty.reset}" : "#{latest}"
 
-    unless (check_flags ['-n', '--only-newer'] and current >= latest)
+    unless (ARGV.flag? "--newer-only" and current >= latest)
       oh1 "#{formula_s} : #{current_s} ==> #{latest_s}"
     end
     if current > latest
@@ -97,17 +97,18 @@ if ARGV.debug?
   # puts $LOAD_PATH
 end
 
-if check_flags ['-h', '--help']
+case
+when ARGV.flag?("--help")
   puts usage
-elsif check_flags ['-i', '--installed']
+when ARGV.flag?("--installed")
   Formula.installed.each do |formula|
     print_latest_version formula
   end
-elsif check_flags ['-a', '--all']
-  onoe "Not implemented -a"
-elsif ARGV.formulae.size == 0
+when ARGV.flag?("--all")
+  onoe "Not implemented --all"
+when ARGV.formulae.size == 0
   begin
-    File.open( watchlist_path ).each do |line|
+    File.open(watchlist_path).each do |line|
       line.split.each do |word|
         print_latest_version Formulary.factory(word)
       end
