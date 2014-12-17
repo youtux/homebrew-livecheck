@@ -99,7 +99,13 @@ end
 
 if check_flags ['-h', '--help']
   puts usage
-elsif ARGV.size == 0
+elsif check_flags ['-i', '--installed']
+  Formula.installed.each do |formula|
+    print_latest_version formula
+  end
+elsif check_flags ['-a', '--all']
+  onoe "Not implemented -a"
+elsif ARGV.formulae.size == 0
   begin
     File.open( watchlist_path ).each do |line|
       line.split.each do |word|
@@ -109,12 +115,6 @@ elsif ARGV.size == 0
   rescue Errno::ENOENT => e
     onoe e
   end
-elsif check_flags ['-i', '--installed']
-  Formula.installed.each do |formula|
-    print_latest_version formula
-  end
-elsif check_flags ['-a', '--all']
-  onoe "Not implemented -a"
 else
   ARGV.formulae.each do |formula|
     print_latest_version formula
