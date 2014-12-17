@@ -73,14 +73,14 @@ if ARGV.debug?
 end
 
 if (Pathname.new(File.expand_path('..', __FILE__)).basename).to_s == 'bin'
-  opoo <<EOF
-It seems you are using an old version of homebrew-livecheck.
-Please run this command to get the latest version with auto-update:
+  opoo <<-EOS.undent
+    It seems you are using an old version of homebrew-livecheck.
+    Please run this command to get the latest version with auto-update:
 
-  brew uninstall brew-livecheck ; brew update && brew tap --repair
+      brew uninstall brew-livecheck ; brew update && brew tap --repair
 
-More info at https://github.com/youtux/homebrew-livecheck/blob/master/README.md
-EOF
+    More info at https://github.com/youtux/homebrew-livecheck/blob/master/README.md
+  EOS
 end
 
 if check_flags ['-h', '--help']
