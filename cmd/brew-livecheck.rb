@@ -42,8 +42,19 @@ class Formulary
   end
 end
 
-def check_flags flags
-  ARGV.any? { |arg| flags.include? arg }
+class Formula
+  def latest
+    if respond_to? :livecheck
+      Version.new(livecheck)
+    elsif head and DownloadStrategyDetector.detect(head.url) == GitDownloadStrategy
+      versions = git_tags(head.url).map do |tag|
+        Version.detect(head.url, {:tag => tag})
+      end
+      versions.max
+    else
+      raise TypeError, "Unable to get versions for #{Tty.blue}#{name}#{Tty.reset}"
+    end
+  end
 end
 
 if (Pathname.new(File.expand_path('..', __FILE__)).basename).to_s == 'bin'
@@ -57,23 +68,10 @@ if (Pathname.new(File.expand_path('..', __FILE__)).basename).to_s == 'bin'
   EOS
 end
 
-def latest_version formula
-  if formula.respond_to? :livecheck
-    Version.new(formula.livecheck)
-  elsif formula.head and DownloadStrategyDetector.detect(formula.head.url) == GitDownloadStrategy
-    versions = git_tags(formula.head.url).map do |tag|
-      Version.detect(formula.head.url, {:tag => tag})
-    end
-    versions.max
-  else
-    raise TypeError, "Unable to get versions for #{Tty.blue}#{formula}#{Tty.reset}"
-  end
-end
-
 def print_latest_version formula
   begin
     current = formula.version
-    latest = latest_version(formula)
+    latest = formula.latest
 
     formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
     current_s = current > latest ? "#{Tty.red}#{current}#{Tty.reset}" : "#{current}"
