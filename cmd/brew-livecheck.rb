@@ -1,38 +1,63 @@
-$LOAD_PATH.unshift(File.expand_path('../../', Pathname.new(__FILE__).realpath))
+LIVECHECK_PATH = Pathname.new(__FILE__).realpath/".."/".."
+LIVECHECKABLES_PATH = LIVECHECK_PATH / 'Livecheckables'
+
+$LOAD_PATH.unshift(LIVECHECK_PATH)
 require "livecheck/utils"
-require 'formula'
+require "formula"
 
 watchlist_path = ENV['HOMEBREW_LIVECHECK_WATCHLIST'] || Pathname.new(Dir.home) + ".brew_livecheck_watchlist"
 
-usage = <<EOF
-brew livecheck
-brew livecheck formula1 formula2 ...
-brew livecheck [-i|--installed]
-brew livecheck [-a|--all]
-brew livecheck [-h|--help]
+usage = <<-EOF.undent
+  brew livecheck
+  brew livecheck formula1 formula2 ...
+  brew livecheck [-i|--installed]
+  brew livecheck [-a|--all]
+  brew livecheck [-h|--help]
 
-Usage:
-Check if a formula is outdated. If no argument is passed, the list of formulae to check is taken from #{watchlist_path}.
+  Usage:
+  Check if a formula is outdated. If no argument is passed, the list of formulae to check is taken from #{watchlist_path}.
 
-Options:
--h, --help        show this help message and exit
--n, --only-newer  show the latest version only if it's newer than the formula in Homebrew
--v, --verbose     be more verbose :)
--q, --quieter     be more quiet (do not show errors)
--d, --debug       show debugging info
+  Options:
+  -h, --help        show this help message and exit
+  -n, --only-newer  show the latest version only if it's newer than the formula in Homebrew
+  -v, --verbose     be more verbose :)
+  -q, --quieter     be more quiet (do not show errors)
+  -d, --debug       show debugging info
 EOF
+
+class Formulary
+  def self.load_livecheckable ref
+    begin
+      puts "Loading #{ref}" if ARGV.debug?
+      require LIVECHECKABLES_PATH / ref
+    rescue LoadError
+      opoo "#{Tty.blue}#{ref}#{Tty.reset} does not implement livecheck" if ARGV.verbose?
+    end
+  end
+
+  def self.factory(ref, spec=:stable)
+    r = loader_for(ref).get_formula(spec)
+    load_livecheckable(ref)
+    r
+  end
+end
 
 def check_flags flags
   ARGV.any? { |arg| flags.include? arg }
 end
 
-def latest_version formula
-  begin
-    require "Livecheckables/#{formula}"
-  rescue LoadError
-    opoo "#{Tty.blue}#{formula}#{Tty.reset} does not implement livecheck" if ARGV.verbose?
-  end
+if (Pathname.new(File.expand_path('..', __FILE__)).basename).to_s == 'bin'
+  opoo <<-EOS.undent
+    It seems you are using an old version of homebrew-livecheck.
+    Please run this command to get the latest version with auto-update:
 
+      brew uninstall brew-livecheck ; brew update && brew tap --repair
+
+    More info at https://github.com/youtux/homebrew-livecheck/blob/master/README.md
+  EOS
+end
+
+def latest_version formula
   if formula.respond_to? :livecheck
     Version.new(formula.livecheck)
   elsif formula.head and DownloadStrategyDetector.detect(formula.head.url) == GitDownloadStrategy
@@ -66,21 +91,10 @@ def print_latest_version formula
 end
 
 if ARGV.debug?
-  puts ARGV
-  puts ENV['HOMEBREW_LIVECHECK_WATCHLIST']
-  puts Pathname.new(File.expand_path('..', __FILE__)).basename
+  # puts ARGV
+  # puts ENV['HOMEBREW_LIVECHECK_WATCHLIST']
+  # puts Pathname.new(File.expand_path('..', __FILE__)).basename
   # puts $LOAD_PATH
-end
-
-if (Pathname.new(File.expand_path('..', __FILE__)).basename).to_s == 'bin'
-  opoo <<-EOS.undent
-    It seems you are using an old version of homebrew-livecheck.
-    Please run this command to get the latest version with auto-update:
-
-      brew uninstall brew-livecheck ; brew update && brew tap --repair
-
-    More info at https://github.com/youtux/homebrew-livecheck/blob/master/README.md
-  EOS
 end
 
 if check_flags ['-h', '--help']
