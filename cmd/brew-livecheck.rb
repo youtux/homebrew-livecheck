@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(LIVECHECK_PATH)
 require "livecheck/utils"
 require "formula"
 
-watchlist_path = ENV['HOMEBREW_LIVECHECK_WATCHLIST'] || Pathname.new(Dir.home) + ".brew_livecheck_watchlist"
+WATCHLIST_PATH = ENV['HOMEBREW_LIVECHECK_WATCHLIST'] || Pathname.new(Dir.home) + ".brew_livecheck_watchlist"
 
 usage = <<-EOF.undent
   brew livecheck
@@ -15,7 +15,7 @@ usage = <<-EOF.undent
   brew livecheck [-h|--help]
 
   Usage:
-  Check if a formula is outdated. If no argument is passed, the list of formulae to check is taken from #{watchlist_path}.
+  Check if a formula is outdated. If no argument is passed, the list of formulae to check is taken from #{WATCHLIST_PATH}.
 
   Options:
   -h, --help        show this help message and exit
@@ -106,7 +106,7 @@ when ARGV.flag?("--all")
   onoe "Not implemented --all"
 when ARGV.formulae.size == 0
   begin
-    File.open(watchlist_path).each do |line|
+    File.open(WATCHLIST_PATH).each do |line|
       line.split.each do |word|
         print_latest_version Formulary.factory(word)
       end
