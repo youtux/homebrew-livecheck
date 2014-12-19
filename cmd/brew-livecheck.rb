@@ -103,7 +103,9 @@ when ARGV.flag?("--installed")
     print_latest_version formula
   end
 when ARGV.flag?("--all")
-  onoe "Not implemented --all"
+  Formula.each do |formula|
+    print_latest_version formula
+  end
 when ARGV.formulae.size == 0
   begin
     File.open(WATCHLIST_PATH).each do |line|
