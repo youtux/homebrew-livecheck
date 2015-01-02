@@ -3,6 +3,7 @@ LIVECHECKABLES_PATH = LIVECHECK_PATH / 'Livecheckables'
 
 $LOAD_PATH.unshift(LIVECHECK_PATH)
 require "livecheck/utils"
+require "livecheck/euristic"
 require "formula"
 
 WATCHLIST_PATH = ENV['HOMEBREW_LIVECHECK_WATCHLIST'] || Pathname.new(Dir.home) + ".brew_livecheck_watchlist"
@@ -28,7 +29,7 @@ EOF
 class Formulary
   def self.load_livecheckable ref
     begin
-      puts "Loading #{ref}" if ARGV.debug?
+      puts "Loading #{LIVECHECKABLES_PATH/ref}" if ARGV.debug?
       require LIVECHECKABLES_PATH / ref
     rescue LoadError
       opoo "#{Tty.blue}#{ref}#{Tty.reset} does not implement livecheck" if ARGV.verbose?
@@ -45,14 +46,9 @@ end
 class Formula
   def latest
     if respond_to? :livecheck
-      Version.new(livecheck)
-    elsif head and DownloadStrategyDetector.detect(head.url) == GitDownloadStrategy
-      versions = git_tags(head.url).map do |tag|
-        Version.detect(head.url, {:tag => tag})
-      end
-      versions.max
+      return Version.new(livecheck)
     else
-      raise TypeError, "Unable to get versions for #{Tty.blue}#{name}#{Tty.reset}"
+      try_euristic(self)
     end
   end
 end
