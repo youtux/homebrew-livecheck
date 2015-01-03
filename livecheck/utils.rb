@@ -20,11 +20,3 @@ def page_matches(url, regex)
   return matches.map { |version_s| version_s[0] }.uniq
 end
 
-def sourceforge_versions project_name, regex=nil
-  url = "http://sourceforge.net/api/file/index/project-name/#{project_name}/rss"
-  if regex.nil?
-    regex = /\/#{project_name}\/([a-zA-Z0-9.]+\.[a-zA-Z0-9.]+)/
-  end
-
-  return page_matches(url, regex)
-end
