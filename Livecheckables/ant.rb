@@ -1,5 +1,3 @@
 class Ant
-  def livecheck
-    page_match("https://www.apache.org/dist/ant/", 'RELEASE\-NOTES\-(.*?)\.html')
-  end
+  livecheck :url => "https://www.apache.org/dist/ant/", :regex => /RELEASE\-NOTES\-(.*?)\.html/
 end

@@ -1,5 +1,3 @@
 class PebbleSdk
-  def livecheck
-    page_match("https://developer.getpebble.com/sdk/", 'Current Version: (.*) \(')
-  end
+  livecheck :url => "https://developer.getpebble.com/sdk/", :regex => /Current Version: (.*) \(/
 end

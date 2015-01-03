@@ -4,7 +4,8 @@ LIVECHECKABLES_PATH = LIVECHECK_PATH / 'Livecheckables'
 $LOAD_PATH.unshift(LIVECHECK_PATH)
 require "livecheck/utils"
 require "livecheck/euristic"
-require "formula"
+require "livecheck/extend/formula"
+require "livecheck/extend/formulary"
 
 WATCHLIST_PATH = ENV['HOMEBREW_LIVECHECK_WATCHLIST'] || Pathname.new(Dir.home) + ".brew_livecheck_watchlist"
 
@@ -26,32 +27,6 @@ usage = <<-EOF.undent
   -d, --debug       show debugging info
 EOF
 
-class Formulary
-  def self.load_livecheckable ref
-    begin
-      puts "Loading #{LIVECHECKABLES_PATH/ref}" if ARGV.debug?
-      require LIVECHECKABLES_PATH / ref
-    rescue LoadError
-      opoo "#{Tty.blue}#{ref}#{Tty.reset} does not implement livecheck" if ARGV.verbose?
-    end
-  end
-
-  def self.factory(ref, spec=:stable)
-    r = loader_for(ref).get_formula(spec)
-    load_livecheckable(ref)
-    r
-  end
-end
-
-class Formula
-  def latest
-    if respond_to? :livecheck
-      return Version.new(livecheck)
-    else
-      try_euristic(self)
-    end
-  end
-end
 
 if (Pathname.new(File.expand_path('..', __FILE__)).basename).to_s == 'bin'
   opoo <<-EOS.undent

@@ -12,10 +12,19 @@ def git_tags(repo_url, filter=nil)
   return tags
 end
 
-def page_match(url, pattern)
-  puts "Using page_match(\"#{url}\", \"#{pattern}\")" if ARGV.debug?
-  page = Net::HTTP.get(URI(url))
-  version = page.match(pattern)[1]
-  puts version.class
-  return version
+def page_matches(url, regex)
+  puts %Q[Using page_match("#{url}", "#{regex}")] if ARGV.debug?
+  page = open(url).read
+  matches = page.scan(regex)
+  puts matches if ARGV.debug?
+  return matches.map { |version_s| version_s[0] }.uniq
+end
+
+def sourceforge_versions project_name, regex=nil
+  url = "http://sourceforge.net/api/file/index/project-name/#{project_name}/rss"
+  if regex.nil?
+    regex = /\/#{project_name}\/([a-zA-Z0-9.]+\.[a-zA-Z0-9.]+)/
+  end
+
+  return page_matches(url, regex)
 end
