@@ -11,7 +11,9 @@ class Formula
       urls << self.head.url if self.head
       urls << self.stable.url if self.stable
       urls.concat(self.mirrors) if self.respond_to? :mirrors
-
+      
+      urls << self.homepage if self.homepage
+      
       urls.compact
     end
 
