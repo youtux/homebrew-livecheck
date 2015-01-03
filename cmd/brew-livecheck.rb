@@ -66,29 +66,33 @@ if ARGV.debug?
   # puts $LOAD_PATH
 end
 
-case
-when ARGV.flag?("--help")
+if ARGV.flag?("--help")
   puts usage
-when ARGV.flag?("--installed")
-  Formula.installed.each do |formula|
-    print_latest_version formula
-  end
-when ARGV.flag?("--all")
-  Formula.each do |formula|
-    print_latest_version formula
-  end
-when ARGV.formulae.size == 0
-  begin
-    File.open(WATCHLIST_PATH).each do |line|
-      line.split.each do |word|
-        print_latest_version Formulary.factory(word)
+  exit 0
+end
+
+formulae_to_check = case
+  when ARGV.flag?("--installed")
+    Formula.installed
+  when ARGV.flag?("--all")
+    Formula.names
+  when ARGV.formulae.size == 0
+    Enumerator.new do |enum|
+      begin
+        File.open(WATCHLIST_PATH).each do |line|
+          line.split.each do |word|
+            enum.yield Formulary.factory(word)
+          end
+        end
+      rescue Errno::ENOENT => e
+        onoe e
       end
     end
-  rescue Errno::ENOENT => e
-    onoe e
-  end
-else
-  ARGV.formulae.each do |formula|
+  else
+    ARGV.formulae
+end
+
+formulae_to_check.each do |formula|
     print_latest_version formula
   end
-end
+
