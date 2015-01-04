@@ -1,3 +1,3 @@
 class Curl
-  livecheck :url => "http://ftp.sunet.se/pub/www/utilities/curl/", :regex => /curl-(.*?)\.tar\.gz/
+  livecheck :url => "http://curl.haxx.se/download/", :regex => /curl-(.*?)\.tar\.gz/
 end
