@@ -10,7 +10,7 @@ class Formulary
 
   def self.factory(ref, spec=:stable)
     r = loader_for(ref).get_formula(spec)
-    load_livecheckable(ref)
+    load_livecheckable(r.name)
     r
   end
 end
