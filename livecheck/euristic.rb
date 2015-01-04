@@ -25,17 +25,33 @@ def version_euristic urls, regex=nil
       end
 
       page_matches(page_url, regex).map { |v| Version.new(v) }
-    when url =~ /gnu\.org\/software\//
-      project_name = url.match(/\/(software|gnu)\/(.*?)\//)[2]
-      page_url = "http://ftp.gnu.org/gnu/#{project_name}/?C=M&O=D"
+    when url =~ /gnu\.org/
+      project_name_regexps = [
+        /\/(?:software|gnu)\/(.*?)\//,
+        /\/\/(.*?)\.gnu\.org(?:\/)?$/
+      ]
+      match_list = project_name_regexps.map do |regex|
+        url.match(regex)
+      end.compact
 
-      puts "Possible GNU project [#{project_name}] detected at #{url}" if ARGV.debug?
-
-      if regex.nil?
-        regex = /#{project_name}-(\d+(?:\.\d+)*)/
+      if match_list.length > 1
+        puts "Multiple project names found: #{match_list}"
       end
 
-      versions = page_matches(page_url, regex).map { |v| Version.new(v) }
+      if match_list.empty?
+        []
+      else
+        project_name = match_list[0][1]
+        page_url = "http://ftp.gnu.org/gnu/#{project_name}/?C=M&O=D"
+
+        puts "Possible GNU project [#{project_name}] detected at #{url}" if ARGV.debug?
+
+        if regex.nil?
+          regex = /#{project_name}-(\d+(?:\.\d+)*)/
+        end
+
+        page_matches(page_url, regex).map { |v| Version.new(v) }
+      end
     when regex
       # Failback
       page_matches(url, regex).map { |v| Version.new(v) }
