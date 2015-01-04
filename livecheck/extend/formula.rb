@@ -10,7 +10,7 @@ class Formula
       urls = []
       urls << self.head.url if self.head
       urls << self.stable.url if self.stable
-      urls.concat(self.mirrors) if self.respond_to? :mirrors
+      urls.concat(self.stable.mirrors) if self.stable
       
       urls << self.homepage if self.homepage
       
