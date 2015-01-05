@@ -1,5 +1,5 @@
 LIVECHECK_PATH = Pathname.new(__FILE__).realpath/".."/".."
-LIVECHECKABLES_PATH = LIVECHECK_PATH / 'Livecheckables'
+LIVECHECKABLES_PATH = LIVECHECK_PATH / "Livecheckables"
 
 $LOAD_PATH.unshift(LIVECHECK_PATH)
 require "livecheck/utils"
@@ -7,7 +7,7 @@ require "livecheck/euristic"
 require "livecheck/extend/formula"
 require "livecheck/extend/formulary"
 
-WATCHLIST_PATH = ENV['HOMEBREW_LIVECHECK_WATCHLIST'] || Pathname.new(Dir.home) + ".brew_livecheck_watchlist"
+WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"] || Pathname.new(Dir.home) + ".brew_livecheck_watchlist"
 
 usage = <<-EOF.undent
   brew livecheck
@@ -28,7 +28,7 @@ usage = <<-EOF.undent
 EOF
 
 
-if (Pathname.new(File.expand_path('..', __FILE__)).basename).to_s == 'bin'
+if (Pathname.new(File.expand_path("..", __FILE__)).basename).to_s == "bin"
   opoo <<-EOS.undent
     It seems you are using an old version of homebrew-livecheck.
     Please run this command to get the latest version with auto-update:
@@ -61,8 +61,8 @@ end
 
 if ARGV.debug?
   # puts ARGV
-  # puts ENV['HOMEBREW_LIVECHECK_WATCHLIST']
-  # puts Pathname.new(File.expand_path('..', __FILE__)).basename
+  # puts ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
+  # puts Pathname.new(File.expand_path("..", __FILE__)).basename
   # puts $LOAD_PATH
 end
 
