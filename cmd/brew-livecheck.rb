@@ -30,7 +30,6 @@ usage = <<-EOF.undent
   -d, --debug       show debugging info
 EOF
 
-
 if (Pathname.new(File.expand_path("..", __FILE__)).basename).to_s == "bin"
   opoo <<-EOS.undent
     It seems you are using an old version of homebrew-livecheck.
@@ -42,29 +41,33 @@ if (Pathname.new(File.expand_path("..", __FILE__)).basename).to_s == "bin"
   EOS
 end
 
-def print_latest_version formula
+def print_latest_version(formula)
   begin
     current = formula.version
     latest = formula.latest
 
+    is_outdated = current < latest
+    is_newer_than_upstram = current > latest
+
     formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
-    current_s = if current > latest 
-      "#{Tty.red}#{current}#{Tty.reset}"
-    else
-      "#{current}"
-    end
+    current_s =
+      if is_newer_than_upstram
+        "#{Tty.red}#{current}#{Tty.reset}"
+      else
+        "#{current}"
+      end
 
-    latest_s = if latest > current 
-      "#{Tty.green}#{latest}#{Tty.reset}"
-    else
-      "#{latest}"
-    end
+    latest_s =
+      if is_outdated
+        "#{Tty.green}#{latest}#{Tty.reset}"
+      else
+        "#{latest}"
+      end
 
-    unless (ARGV.flag? "--newer-only" and current >= latest)
-      oh1 "#{formula_s} : #{current_s} ==> #{latest_s}"
-    end
-    
-    if current > latest && ARGV.verbose?
+    needs_to_show = is_outdated || !ARGV.flag? "--newer-only"
+    oh1 "#{formula_s} : #{current_s} ==> #{latest_s}" if needs_to_show
+
+    if is_newer_than_upstram && ARGV.verbose?
       opoo "#{formula_s} version is greater than the upstream version"
     end
   rescue StandardError => e
