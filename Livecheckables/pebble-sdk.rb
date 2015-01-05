@@ -1,3 +1,4 @@
 class PebbleSdk
-  livecheck :url => "https://developer.getpebble.com/sdk/", :regex => /Current Version: (.*) \(/
+  livecheck :url => "https://developer.getpebble.com/sdk/",
+            :regex => /Current Version: (.*) \(/
 end

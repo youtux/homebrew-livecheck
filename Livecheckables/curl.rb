@@ -1,3 +1,4 @@
 class Curl
-  livecheck :url => "http://curl.haxx.se/download/", :regex => /curl-(.*?)\.tar\.gz/
+  livecheck :url => "http://curl.haxx.se/download/",
+            :regex => /curl-(.*?)\.tar\.gz/
 end
