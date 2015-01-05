@@ -7,7 +7,8 @@ require "livecheck/euristic"
 require "livecheck/extend/formula"
 require "livecheck/extend/formulary"
 
-WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"] || Pathname.new(Dir.home) + ".brew_livecheck_watchlist"
+WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
+WATCHLIST_PATH ||= Pathname.new(Dir.home) / ".brew_livecheck_watchlist"
 
 usage = <<-EOF.undent
   brew livecheck
@@ -17,11 +18,13 @@ usage = <<-EOF.undent
   brew livecheck [-h|--help]
 
   Usage:
-  Check if a formula is outdated. If no argument is passed, the list of formulae to check is taken from #{WATCHLIST_PATH}.
+  Check if a formula is outdated. If no argument is passed, the list of
+  formulae to check is taken from #{WATCHLIST_PATH}.
 
   Options:
   -h, --help        show this help message and exit
-  -n, --newer-only  show the latest version only if it's newer than the formula in Homebrew
+  -n, --newer-only  show the latest version only if it's newer than the formula
+                    in Homebrew
   -v, --verbose     be more verbose :)
   -q, --quieter     be more quiet (do not show errors)
   -d, --debug       show debugging info
@@ -45,14 +48,24 @@ def print_latest_version formula
     latest = formula.latest
 
     formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
-    current_s = current > latest ? "#{Tty.red}#{current}#{Tty.reset}" : "#{current}"
-    latest_s = latest > current ? "#{Tty.green}#{latest}#{Tty.reset}" : "#{latest}"
+    current_s = if current > latest 
+      "#{Tty.red}#{current}#{Tty.reset}"
+    else
+      "#{current}"
+    end
+
+    latest_s = if latest > current 
+      "#{Tty.green}#{latest}#{Tty.reset}"
+    else
+      "#{latest}"
+    end
 
     unless (ARGV.flag? "--newer-only" and current >= latest)
       oh1 "#{formula_s} : #{current_s} ==> #{latest_s}"
     end
-    if current > latest
-      opoo "#{formula_s} version is greater than the upstream version" if ARGV.verbose?
+    
+    if current > latest && ARGV.verbose?
+      opoo "#{formula_s} version is greater than the upstream version"
     end
   rescue StandardError => e
     onoe e unless ARGV.quieter?
