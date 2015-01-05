@@ -64,7 +64,7 @@ def print_latest_version(formula)
         "#{latest}"
       end
 
-    needs_to_show = is_outdated || !ARGV.flag? "--newer-only"
+    needs_to_show = is_outdated || !ARGV.flag?("--newer-only")
     oh1 "#{formula_s} : #{current_s} ==> #{latest_s}" if needs_to_show
 
     if is_newer_than_upstram && ARGV.verbose?
