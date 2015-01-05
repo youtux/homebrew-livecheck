@@ -42,37 +42,35 @@ if (Pathname.new(File.expand_path("..", __FILE__)).basename).to_s == "bin"
 end
 
 def print_latest_version(formula)
-  begin
-    current = formula.version
-    latest = formula.latest
+  current = formula.version
+  latest = formula.latest
 
-    is_outdated = current < latest
-    is_newer_than_upstram = current > latest
+  is_outdated = current < latest
+  is_newer_than_upstram = current > latest
 
-    formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
-    current_s =
-      if is_newer_than_upstram
-        "#{Tty.red}#{current}#{Tty.reset}"
-      else
-        "#{current}"
-      end
-
-    latest_s =
-      if is_outdated
-        "#{Tty.green}#{latest}#{Tty.reset}"
-      else
-        "#{latest}"
-      end
-
-    needs_to_show = is_outdated || !ARGV.flag?("--newer-only")
-    oh1 "#{formula_s} : #{current_s} ==> #{latest_s}" if needs_to_show
-
-    if is_newer_than_upstram && ARGV.verbose?
-      opoo "#{formula_s} version is greater than the upstream version"
+  formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
+  current_s =
+    if is_newer_than_upstram
+      "#{Tty.red}#{current}#{Tty.reset}"
+    else
+      "#{current}"
     end
-  rescue StandardError => e
-    onoe e unless ARGV.quieter?
+
+  latest_s =
+    if is_outdated
+      "#{Tty.green}#{latest}#{Tty.reset}"
+    else
+      "#{latest}"
+    end
+
+  needs_to_show = is_outdated || !ARGV.flag?("--newer-only")
+  oh1 "#{formula_s} : #{current_s} ==> #{latest_s}" if needs_to_show
+
+  if is_newer_than_upstram && ARGV.verbose?
+    opoo "#{formula_s} version is greater than the upstream version"
   end
+rescue StandardError => e
+  onoe e unless ARGV.quieter?
 end
 
 if ARGV.debug?
@@ -87,7 +85,8 @@ if ARGV.flag?("--help")
   exit 0
 end
 
-formulae_to_check = case
+formulae_to_check = 
+  case
   when ARGV.flag?("--installed")
     Formula.installed
   when ARGV.flag?("--all")
@@ -106,9 +105,8 @@ formulae_to_check = case
     end
   else
     ARGV.formulae
-end
-
-formulae_to_check.each do |formula|
-    print_latest_version formula
   end
 
+formulae_to_check.each do |formula|
+  print_latest_version formula
+end
