@@ -1,10 +1,8 @@
-require 'formula'
-
 class BrewLivecheck < Formula
-  homepage 'https://github.com/youtux/homebrew-livecheck'
-  url 'https://github.com/youtux/homebrew-livecheck.git'
-  head 'https://github.com/youtux/homebrew-livecheck.git'
-  version '0.5'
+  homepage "https://github.com/youtux/homebrew-livecheck"
+  url "https://github.com/youtux/homebrew-livecheck.git"
+  head "https://github.com/youtux/homebrew-livecheck.git"
+  version "0.5"
 
   def install
     odie <<-EOS.undent

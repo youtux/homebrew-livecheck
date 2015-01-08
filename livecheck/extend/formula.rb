@@ -6,20 +6,19 @@ class Formula
   end
 
   class << self
-    def get_all_urls
+    def all_urls
       urls = []
-      urls << self.head.url if self.head
-      urls << self.stable.url if self.stable
-      urls.concat(self.stable.mirrors) if self.stable
-      
-      urls << self.homepage if self.homepage
+      urls << head.url if head
+      if stable
+        urls << stable.url
+        urls.concat(stable.mirrors)
+      end
+      urls << homepage if homepage
       
       urls.compact
     end
 
-    def livecheck arg
-      puts "self.livecheck #{arg} of type #{arg.class}" if ARGV.debug?
-
+    def livecheck(arg)
       case arg
       when String
         @latest = Version.new(arg)
@@ -29,7 +28,7 @@ class Formula
         if arg[:url]
           urls = [arg[:url]]
         else
-          urls = get_all_urls()
+          urls = all_urls
         end
         regex = arg[:regex]
 
@@ -41,7 +40,7 @@ class Formula
       if @latest
         @latest
       else
-        @latest = Version.new(version_euristic(get_all_urls))
+        @latest = Version.new(version_euristic(all_urls))
       end
     end
   end

@@ -14,7 +14,7 @@ def page_matches(url, regex)
   puts %[Using page_match("#{url}", "#{regex}")] if ARGV.debug?
   page = open(url).read
   matches = page.scan(regex)
-  puts matches if ARGV.debug?
-  matches.map { |version_s| version_s[0] }.uniq
+  puts matches.join(", ") if ARGV.debug?
+  matches.map(&:first).uniq
 end
 
