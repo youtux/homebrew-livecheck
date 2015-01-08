@@ -4,7 +4,6 @@ LIVECHECKABLES_PATH = LIVECHECK_PATH / "Livecheckables"
 $LOAD_PATH.unshift(LIVECHECK_PATH)
 require "livecheck/utils"
 require "livecheck/euristic"
-require "livecheck/extend/formula"
 require "livecheck/extend/formulary"
 
 WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]

@@ -1,16 +1,20 @@
-class Formulary
-  def self.load_livecheckable ref
-    begin
-      puts "Loading #{LIVECHECKABLES_PATH/ref}" if ARGV.debug?
-      require LIVECHECKABLES_PATH / ref
-    rescue LoadError
-      opoo "#{Tty.blue}#{ref}#{Tty.reset} does not implement livecheck" if ARGV.verbose?
-    end
-  end
+require_relative "formula"
 
-  def self.factory(ref, spec=:stable)
-    r = loader_for(ref).get_formula(spec)
-    load_livecheckable(r.name)
-    r
+class Formulary
+  class << self
+    # extended to load the Livecheckable version of a formula
+    alias_method :orig_factory, :factory
+    def factory(ref, spec = :stable)
+      formula = orig_factory(ref, spec)
+      livecheckable_path = LIVECHECKABLES_PATH / formula.path.basename
+
+      if File.exist?(livecheckable_path)
+        puts "Loading #{LIVECHECKABLES_PATH/ref}" if ARGV.debug?
+        Formulae.module_eval(livecheckable_path.read, livecheckable_path)
+      else
+        opoo "#{Tty.blue}#{ref}#{Tty.reset} does not implement livecheck" if ARGV.verbose?
+      end
+      formula
+    end
   end
 end
