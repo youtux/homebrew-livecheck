@@ -10,7 +10,9 @@ def version_euristic(urls, regex = nil)
 
         git_tags(url, regex).map do |tag|
           begin
-            Version.detect(url, :tag => tag)
+            # Remove any character before the first number
+            tag_cleaned = tag[/\D*(.*)/, 1]
+            Version.new(tag_cleaned)
           rescue TypeError
             nil
           end
