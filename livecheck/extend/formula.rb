@@ -26,7 +26,12 @@ class Formula
       @livecheck_args ||= {}
       version_s =
         if @livecheck_args.is_a? Proc
-          @livecheck_args.call
+          result = @livecheck_args.call
+          if result.is_a? Array
+            result.map { |s| Version.new(s) }.max
+          else
+            result
+          end
         else
           urls = [@livecheck_args[:url]] if @livecheck_args[:url]
           urls ||= all_urls
