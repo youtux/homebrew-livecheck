@@ -23,7 +23,6 @@ class Formula
     end
 
     def _latest
-      # puts "_latest #{livecheck_resource.inspect}"
       @livecheck_args ||= {}
       version_s =
         if @livecheck_args.is_a? Proc
