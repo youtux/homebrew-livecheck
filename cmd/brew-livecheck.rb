@@ -89,7 +89,7 @@ formulae_to_check =
   when ARGV.flag?("--installed")
     Formula.installed
   when ARGV.flag?("--all")
-    Formula.names
+    Formula.names.map { |name| Formula[name] }
   when ARGV.formulae.size == 0
     Enumerator.new do |enum|
       begin
