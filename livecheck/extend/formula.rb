@@ -18,30 +18,29 @@ class Formula
       urls.compact
     end
 
-    def livecheck(arg)
-      case arg
-      when String
-        @latest = Version.new(arg)
-      when Version
-        @latest = arg
-      when Hash
-        if arg[:url]
-          urls = [arg[:url]]
-        else
-          urls = all_urls
-        end
-        regex = arg[:regex]
+    def livecheck(arg = {}, &block)
+      @livecheck_args = block || arg
+    end
 
-        @latest = Version.new(version_euristic(urls, regex))
-      end
+    def _latest
+      # puts "_latest #{livecheck_resource.inspect}"
+      @livecheck_args ||= {}
+      version_s =
+        if @livecheck_args.is_a? Proc
+          @livecheck_args.call
+        else
+          urls = [@livecheck_args[:url]] if @livecheck_args[:url]
+          urls ||= all_urls
+          regex = @livecheck_args[:regex]
+
+          version_euristic(urls, regex)
+        end
+
+      Version.new(version_s)
     end
 
     def latest
-      if @latest
-        @latest
-      else
-        @latest = Version.new(version_euristic(all_urls))
-      end
+      @latest ||= _latest
     end
   end
 end
