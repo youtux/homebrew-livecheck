@@ -11,8 +11,6 @@ class Formulary
       if File.exist?(livecheckable_path)
         puts "Loading #{LIVECHECKABLES_PATH/ref}" if ARGV.debug?
         Formulae.module_eval(livecheckable_path.read, livecheckable_path)
-      else
-        opoo "#{Tty.blue}#{ref}#{Tty.reset} does not implement livecheck" if ARGV.verbose?
       end
       formula
     end

@@ -48,6 +48,7 @@ def print_latest_version(formula)
   is_newer_than_upstram = current > latest
 
   formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
+  formula_s += " (guessed)" unless formula.livecheckable
   current_s =
     if is_newer_than_upstram
       "#{Tty.red}#{current}#{Tty.reset}"

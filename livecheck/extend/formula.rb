@@ -5,7 +5,13 @@ class Formula
     self.class.latest
   end
 
+  def livecheckable
+    self.class.livecheckable
+  end
+
   class << self
+    attr_reader :livecheckable
+
     def all_urls
       urls = []
       urls << head.url if head
@@ -20,6 +26,7 @@ class Formula
 
     def livecheck(arg = {}, &block)
       @livecheck_args = block || arg
+      @livecheckable = true
     end
 
     def _latest
