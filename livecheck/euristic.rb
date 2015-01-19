@@ -1,6 +1,6 @@
 require "utils"
 
-# Todo: distinguish between a filter regex and a matching regex
+# TODO: distinguish between a filter regex and a matching regex
 def version_euristic(urls, regex = nil)
   urls.each do |url|
     puts "Trying with url #{url}" if ARGV.debug?
@@ -81,7 +81,7 @@ def version_euristic(urls, regex = nil)
     end
 
     empty_version = Version.new("")
-    match_version_map.delete_if { |match, version| version == empty_version}
+    match_version_map.delete_if { |_match, version| version == empty_version }
 
     # TODO: return nil, defer the print to the caller
     return match_version_map.values.max unless match_version_map.empty?
