@@ -2,12 +2,6 @@ homebrew-livecheck
 ==================
 External command for Homebrew that checks for newer version of formulae in the upstream.
 
-### Update 05/01/2015: ~~temporarily not working~~
-~~Since [Homebrew/homebrew@6cfaaa2](https://github.com/Homebrew/homebrew/commit/6cfaaa2) the command is not working. I'm trying to figure out why, if you can help that would be very appreciated.~~
-
-### Update 09/01/2015: fixed
-The issue has been fixed. `brew livecheck` now works as expected.
-
 # Warning: new update mechanism
 Since version 0.5, a new update mechanism has been introduced. From now on the command will be update whenever you do a `brew update`. It is strongly recommended to uninstall the formula and retap the repository:
 
