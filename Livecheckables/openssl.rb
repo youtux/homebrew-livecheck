@@ -1,4 +1,4 @@
 class Openssl
-  livecheck :url => "https://www.openssl.org/source/",
-            :regex => %r{<font(?:.*?)openssl-(.*?)\.tar\.gz(?:.*?)LATEST(?:.*?)</font>}
+  livecheck :url => "https://github.com/openssl/openssl.git",
+            :regex => /OpenSSL_(\d+_\d+_\d+.*)/
 end
