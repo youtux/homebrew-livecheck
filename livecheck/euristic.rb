@@ -19,7 +19,7 @@ def version_euristic(urls, regex = nil)
       end
     when url =~ %r{(sourceforge\.net|sf\.net)/}
       project_name = url.match(%r{/projects?/(.*?)/})[1]
-      page_url = "http://sourceforge.net/api/file/index/project-name/" \
+      page_url = "https://sourceforge.net/api/file/index/project-name/" \
                  "#{project_name}/rss"
 
       if ARGV.debug?
