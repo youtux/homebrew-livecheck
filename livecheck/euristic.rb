@@ -28,7 +28,7 @@ def version_euristic(urls, regex = nil)
       end
 
       if regex.nil?
-        regex = %r{/#{project_name}/([a-zA-Z0-9.]+(?:\.[a-zA-Z0-9.]+)*)}
+        regex = %r{/#{project_name}/([a-zA-Z0-9.]+(?:\.[a-zA-Z0-9.]+)*)}i
       end
 
       page_matches(page_url, regex).each do |match|
