@@ -94,7 +94,7 @@ if ARGV.flag?("--help")
   exit 0
 end
 
-require? "livecheck/commands/" + ARGV[0]
+require? "livecheck/commands/" + ARGV.named[0]
 
 formulae_to_check =
   case
