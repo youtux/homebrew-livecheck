@@ -29,6 +29,15 @@ usage = <<-EOF.undent
   -d, --debug       show debugging info
 EOF
 
+# Taken directly from Homebrew
+def require?(path)
+  require path
+rescue LoadError => e
+  # HACK: ( because we should raise on syntax errors but
+  # not if the file doesn't exist. TODO make robust!
+  raise unless e.to_s.include? path
+end
+
 if (Pathname.new(File.expand_path("..", __FILE__)).basename).to_s == "bin"
   opoo <<-EOS.undent
     It seems you are using an old version of homebrew-livecheck.
@@ -85,7 +94,9 @@ if ARGV.flag?("--help")
   exit 0
 end
 
-formulae_to_check = 
+require? "livecheck/commands/" + ARGV[0]
+
+formulae_to_check =
   case
   when ARGV.flag?("--installed")
     Formula.installed
