@@ -67,7 +67,7 @@ def version_euristic(urls, regex = nil)
         end
       end
     when regex
-      # Failback
+      # Fallback
       page_matches(url, regex).each do |match|
         version = Version.new(match)
         match_version_map[match] = version
