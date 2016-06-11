@@ -1,4 +1,4 @@
-require "net/http"
+require 'open-uri'
 
 def git_tags(repo_url, filter = nil)
   raw_tags = `git ls-remote --tags #{repo_url}`
@@ -17,4 +17,3 @@ def page_matches(url, regex)
   puts matches.join(", ") if ARGV.debug?
   matches.map(&:first).uniq
 end
-
