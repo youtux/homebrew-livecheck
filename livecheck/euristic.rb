@@ -6,7 +6,7 @@ def version_euristic(urls, regex = nil)
     puts "Trying with url #{url}" if ARGV.debug?
     match_version_map = {}
     case
-    when DownloadStrategyDetector.detect(url) == GitDownloadStrategy
+    when DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
       puts "Possible git repo detected at #{url}" if ARGV.debug?
 
       git_tags(url, regex).each do |tag|
