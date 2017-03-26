@@ -1,6 +1,6 @@
 require_relative "formula"
 
-class Formulary
+module Formulary
   class << self
     # extended to load the Livecheckable version of a formula
     def load_formula(name, path, contents, namespace)
