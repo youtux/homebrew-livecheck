@@ -1,4 +1,4 @@
 class Libosinfo < Formula
-  livecheck :url => "https://fedorahosted.org/releases/l/i/libosinfo/",
+  livecheck :url => "https://releases.pagure.org/libosinfo/",
             :regex => /libosinfo-([\d.]+)\.tar\.gz/
 end
