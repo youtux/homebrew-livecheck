@@ -1,4 +1,4 @@
 class Nano
-  livecheck :url => "http://www.nano-editor.org/dist/v2.2/",
-            :regex => /nano-(.*?)\.tar\.gz/
+  livecheck :url => "https://www.nano-editor.org/download.php",
+            :regex => /nano-(\d+\.\d+\.\d+)/
 end
