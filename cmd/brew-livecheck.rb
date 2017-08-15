@@ -52,6 +52,9 @@ end
 def print_latest_version(formula)
   current = formula.version
   latest = formula.latest
+  if (m = latest.to_s.match(/(.*)-release$/)) && !current.to_s.match(/.*-release$/)
+    latest = Version.new(m[1])
+  end
 
   is_outdated = current < latest
   is_newer_than_upstram = current > latest

@@ -4,20 +4,46 @@ require "utils"
 def version_euristic(urls, regex = nil)
   urls.each do |url|
     puts "Trying with url #{url}" if ARGV.debug?
+    if url.include?("github") && !url.include?("menhir") && !url.include?("mednafen")
+      if url.include? "archive"
+        url = url.sub(/\/archive\/.*/, ".git") if url.include? "github"
+      elsif url.include? "releases"
+        url = url.sub(/\/releases\/.*/, ".git")
+      elsif url.include? "downloads"
+        url = Pathname.new(url.sub(/\/downloads(.*)/, "\\1")).dirname.to_s+".git"
+      elsif !url.end_with?(".git")
+        if url.end_with?("/")
+          url = url[0..-2]
+        end
+        url += ".git"
+      end
+    end
     match_version_map = {}
     case
+    when url =~ /hackage\.haskell\.org/
+      package = ((url.split("/")[4]).split("-")[0..-2]).join("-")
+      ver = `curl -s https://hackage.haskell.org/package/"#{package}"/src/`.sub!(/.*Directory listing for #{package}-(.*) source tarball.*/, "\\1")
+      match_version_map[ver] = Version.new(ver)
     when DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
       puts "Possible git repo detected at #{url}" if ARGV.debug?
 
       git_tags(url, regex).each do |tag|
         begin
+          next if tag =~ /debian\//
           # Remove any character before the first number
           tag_cleaned = tag[/\D*(.*)/, 1]
           match_version_map[tag] = Version.new(tag_cleaned)
         rescue TypeError
         end
       end
-    when url =~ %r{(sourceforge\.net|sf\.net)/}
+    when url =~ %r{(sourceforge\.net|sf\.net)/} && !url.include?("nagios") &&
+                                                   !url.include?("mikmod") &&
+                                                   !url.include?("log4cpp") &&
+                                                   !url.include?("exiftool") &&
+                                                   !url.include?("libwps") &&
+                                                   !url.include?("gsmartcontrol") &&
+                                                   !url.include?("e2fsprogs") &&
+                                                   !url.include?("potrace")
       project_name = url.match(%r{/projects?/(.*?)/})[1]
       page_url = "https://sourceforge.net/api/file/index/project-name/" \
                  "#{project_name}/rss"
@@ -36,7 +62,7 @@ def version_euristic(urls, regex = nil)
         # puts "#{match} => #{version.inspect}" if ARGV.debug?
         match_version_map[match] = version
       end
-    when url =~ /gnu\.org/
+    when url =~ /gnu\.org/ && !url.include?("kawa") && !url.include?("lzip") && !url.include?("numdiff")
       project_name_regexps = [
         %r{/(?:software|gnu)/(.*?)/},
         %r{//(.*?)\.gnu\.org(?:/)?$},
@@ -87,5 +113,5 @@ def version_euristic(urls, regex = nil)
     return match_version_map.values.max unless match_version_map.empty?
   end
 
-  fail TypeError, "Unable to get versions for #{Tty.blue}#{name}#{Tty.reset}"
+  fail TypeError, "Unable to get versions for #{Tty.blue}#{stable.name}#{Tty.reset}"
 end
