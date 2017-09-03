@@ -43,7 +43,8 @@ def version_euristic(urls, regex = nil)
                                                    !url.include?("libwps") &&
                                                    !url.include?("gsmartcontrol") &&
                                                    !url.include?("e2fsprogs") &&
-                                                   !url.include?("potrace")
+                                                   !url.include?("potrace") &&
+                                                   !url.include?("remake")
       project_name = url.match(%r{/projects?/(.*?)/})[1]
       page_url = "https://sourceforge.net/api/file/index/project-name/" \
                  "#{project_name}/rss"
