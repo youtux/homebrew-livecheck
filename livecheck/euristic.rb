@@ -4,7 +4,7 @@ require "utils"
 def version_euristic(urls, regex = nil)
   urls.each do |url|
     puts "Trying with url #{url}" if ARGV.debug?
-    if url.include?("github") && !url.include?("menhir") && !url.include?("mednafen")
+    if url.include?("github") && !url.include?("menhir") && !url.include?("mednafen") && !url.include?("camlp5")
       if url.include? "archive"
         url = url.sub(/\/archive\/.*/, ".git") if url.include? "github"
       elsif url.include? "releases"
@@ -44,7 +44,9 @@ def version_euristic(urls, regex = nil)
                                                    !url.include?("gsmartcontrol") &&
                                                    !url.include?("e2fsprogs") &&
                                                    !url.include?("potrace") &&
-                                                   !url.include?("remake")
+                                                   !url.include?("remake") &&
+                                                   !url.include?("/avf/") &&
+                                                   !url.include?("/bashdb/")
       project_name = url.match(%r{/projects?/(.*?)/})[1]
       page_url = "https://sourceforge.net/api/file/index/project-name/" \
                  "#{project_name}/rss"
@@ -63,7 +65,7 @@ def version_euristic(urls, regex = nil)
         # puts "#{match} => #{version.inspect}" if ARGV.debug?
         match_version_map[match] = version
       end
-    when url =~ /gnu\.org/ && !url.include?("kawa") && !url.include?("lzip") && !url.include?("numdiff")
+    when url =~ /gnu\.org/ && !url.include?("kawa") && !url.include?("lzip") && !url.include?("numdiff") && !url.include?("icoutils") && !url.include?("dvdrtools")
       project_name_regexps = [
         %r{/(?:software|gnu)/(.*?)/},
         %r{//(.*?)\.gnu\.org(?:/)?$},
