@@ -1,4 +1,4 @@
 class Libtiff
-  livecheck :url => "http://libtiff.maptools.org/",
-            :regex => %r{<th>Latest Stable Release</th>.*<td><a href="v([0-9,\.]+)\.html">}m
+  livecheck :url => "https://mirrors.ocf.berkeley.edu/debian/pool/main/t/tiff/",
+            :regex => /href="tiff_([0-9\.\-]+)\.debian\.t/
 end
