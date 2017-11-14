@@ -123,6 +123,6 @@ formulae_to_check =
     ARGV.formulae
   end
 
-formulae_to_check.each do |formula|
+formulae_to_check.sort.each do |formula|
   print_latest_version formula
 end
