@@ -4,7 +4,14 @@ require "utils"
 def version_euristic(urls, regex = nil)
   urls.each do |url|
     puts "Trying with url #{url}" if ARGV.debug?
-    if url.include?("github") && !url.include?("menhir") && !url.include?("mednafen") && !url.include?("camlp5")
+    if url.include?("github") && !url.include?("menhir") &&
+                                 !url.include?("mednafen") &&
+                                 !url.include?("camlp5") &&
+                                 !url.include?("kotlin") &&
+                                 !url.include?("osrm-backend") &&
+                                 !url.include?("prometheus") &&
+                                 !url.include?("pyenv-virtualenv") &&
+                                 !url.include?("sysdig")
       if url.include? "archive"
         url = url.sub(/\/archive\/.*/, ".git") if url.include? "github"
       elsif url.include? "releases"
@@ -36,8 +43,7 @@ def version_euristic(urls, regex = nil)
         rescue TypeError
         end
       end
-    when url =~ %r{(sourceforge\.net|sf\.net)/} && !url.include?("nagios") &&
-                                                   !url.include?("mikmod") &&
+    when url =~ %r{(sourceforge\.net|sf\.net)/} && !url.include?("mikmod") &&
                                                    !url.include?("log4cpp") &&
                                                    !url.include?("exiftool") &&
                                                    !url.include?("libwps") &&
@@ -46,7 +52,8 @@ def version_euristic(urls, regex = nil)
                                                    !url.include?("potrace") &&
                                                    !url.include?("remake") &&
                                                    !url.include?("/avf/") &&
-                                                   !url.include?("/bashdb/")
+                                                   !url.include?("/bashdb/") &&
+                                                   !url.include?("/netpbm/")
       project_name = url.match(%r{/projects?/(.*?)/})[1]
       page_url = "https://sourceforge.net/api/file/index/project-name/" \
                  "#{project_name}/rss"
