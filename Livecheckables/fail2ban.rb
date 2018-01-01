@@ -1,4 +1,4 @@
 class Fail2ban
-  livecheck :url => "https://www.fail2ban.org/wiki/index.php/Downloads",
-            :regex => %r{<i>stable</i>.*?>fail2ban-([0-9.]+)<}m
+  livecheck :url => "https://github.com/fail2ban/fail2ban/releases",
+            :regex => %r{href="/fail2ban/fail2ban/tree/([0-9\.]+)}
 end
