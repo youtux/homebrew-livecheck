@@ -1,4 +1,4 @@
 class Rabbitmq
-  livecheck :url => "http://www.rabbitmq.com/releases/rabbitmq-server/current/",
-            :regex => /rabbitmq-server-(\d+(?:\.\d+)*)/
+  livecheck :url => "https://dl.bintray.com/rabbitmq/binaries/",
+            :regex => /rabbitmq-server-generic-unix-(\d+(?:\.\d+)*)/
 end
