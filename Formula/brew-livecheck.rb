@@ -5,7 +5,7 @@ class BrewLivecheck < Formula
   version "0.5"
 
   def install
-    odie <<-EOS.undent
+    odie <<~EOS
     Livecheck now uses a new update mechanism, therefore
     the formula is obsolete and will be deleted soon.
     Please run this command to get the latest version of
