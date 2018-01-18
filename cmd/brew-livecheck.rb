@@ -9,7 +9,7 @@ require "livecheck/extend/formulary"
 WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
 WATCHLIST_PATH ||= Pathname.new(Dir.home) / ".brew_livecheck_watchlist"
 
-usage = <<-EOF.undent
+usage = <<~EOS
   brew livecheck
   brew livecheck formula1 formula2 ...
   brew livecheck [-i|--installed]
@@ -27,7 +27,7 @@ usage = <<-EOF.undent
   -v, --verbose     be more verbose :)
   -q, --quieter     be more quiet (do not show errors)
   -d, --debug       show debugging info
-EOF
+EOS
 
 # Taken directly from Homebrew
 def require?(path)
@@ -39,7 +39,7 @@ rescue LoadError => e
 end
 
 if (Pathname.new(File.expand_path("..", __FILE__)).basename).to_s == "bin"
-  opoo <<-EOS.undent
+  opoo <<~EOS
     It seems you are using an old version of homebrew-livecheck.
     Please run this command to get the latest version with auto-update:
 
