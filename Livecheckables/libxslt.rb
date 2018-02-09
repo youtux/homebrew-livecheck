@@ -1,4 +1,4 @@
 class Libxslt
   livecheck :url => "http://xmlsoft.org/sources/",
-            :regex => /href="LATEST_LIBXSLT_IS_([0-9\.]+)"/
+            :regex => /href="libxslt-([0-9\.]+)\.t/
 end
