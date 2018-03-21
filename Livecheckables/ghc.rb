@@ -1,4 +1,4 @@
 class Ghc
-  livecheck :url => "https://downloads.haskell.org/~ghc/latest/",
-            :regex => /href="ghc-([0-9\.]+)-/
+  livecheck :url => "https://www.haskell.org/ghc/download.html",
+            :regex => /Current Stable Release \(([0-9\.]+)/
 end
