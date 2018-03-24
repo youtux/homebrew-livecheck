@@ -1,4 +1,4 @@
 class Dtc
-  livecheck :url => "https://mirrors.ocf.berkeley.edu/debian/pool/main/d/device-tree-compiler/",
-            :regex => /href="device-tree-compiler_([0-9\.]+)\.orig/
+  livecheck :url => "https://mirrors.edge.kernel.org/pub/software/utils/dtc/",
+            :regex => /href="dtc-([0-9\.]+)\.t/
 end
