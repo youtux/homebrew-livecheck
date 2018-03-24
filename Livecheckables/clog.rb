@@ -1,4 +1,4 @@
 class Clog
-  livecheck :url => "https://tasktools.org",
-            :regex => %r{tasktools.org/download/clog-([0-9\.]+)\.t}
+  livecheck :url => "https://gothenburgbitfactory.org",
+            :regex => %r{gothenburgbitfactory.org/download/clog-([0-9\.]+)\.t}
 end
