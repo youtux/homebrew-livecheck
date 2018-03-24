@@ -1,4 +1,4 @@
 class Zebra
-  livecheck :url => "http://www.indexdata.com/zebra",
-            :regex => /Latest:.*?>([0-9\.]+)</
+  livecheck :url => "https://www.indexdata.com/resources/software/zebra",
+            :regex => %r{>Latest:</strong>.*?([0-9\.]+)<}
 end
