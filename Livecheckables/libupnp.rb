@@ -1,4 +1,4 @@
 class Libupnp
-  livecheck :url => "http://sourceforge.net/projects/pupnp/files/pupnp/",
-            :regex => /title=\"libUPnP (\d+(?:\.\d+)*)/
+  livecheck :url => "https://github.com/mrjimenez/pupnp/releases",
+            :regex => %r{Latest.*?href="/mrjimenez/pupnp/tree/release-([0-9\.]+)}m
 end
