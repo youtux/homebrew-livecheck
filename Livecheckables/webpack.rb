@@ -1,4 +1,4 @@
 class Webpack
   livecheck :url => "https://www.npmjs.com/package/webpack",
-            :regex => %r{<strong>([0-9\.]+)<.*?latest}m
+            :regex => %r{package__sidebarText.*?>([0-9\.]+)</p>}
 end
