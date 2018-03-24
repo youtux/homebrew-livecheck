@@ -1,4 +1,4 @@
 class Httpd
-  livecheck :url => "http://httpd.apache.org/download.cgi",
-            :regex => /httpd-([0-9\.]+)\.t/
+  livecheck :url => "https://www.apache.org/dist/httpd/Announcement2.4.html",
+            :regex => /Apache HTTP Server ([0-9\.]+) Released/
 end
