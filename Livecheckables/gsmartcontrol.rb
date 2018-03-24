@@ -1,4 +1,4 @@
 class Gsmartcontrol
-  livecheck :url => "http://gsmartcontrol.sourceforge.net/",
+  livecheck :url => "https://gsmartcontrol.sourceforge.io/",
             :regex => %r{GSmartControl (\d+(\.\d+)*)}
 end
