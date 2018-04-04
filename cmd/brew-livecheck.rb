@@ -1,3 +1,23 @@
+#:  * `livecheck`
+#:  Check for newer versions of formulae from upstream
+#:
+#:  `brew livecheck`
+#:  `brew livecheck` <formula1> <formula2> <...>
+#:  `brew livecheck` [`-i`|`--installed`]
+#:  `brew livecheck` [`-a`|`--all`]
+#:  `brew livecheck` [`-h`|`--help`]
+#:
+#:  Usage:
+#:  Check if a formula is outdated.
+#:  If no argument is passed, the list of formulae to check is taken from #{WATCHLIST_PATH}
+#:
+#:  Options:
+#:  `-h`, `--help`        show this help message and exit
+#:  `-n`, `--newer-only`  show the latest version only if it's newer than the formula
+#:  `-v`, `--verbose`     be more verbose :)
+#:  `-q`, `--quieter`     be more quiet (do not show errors)
+#:  `-d`, `--debug`       show debugging info
+
 LIVECHECK_PATH = Pathname.new(__FILE__).realpath/".."/".."
 LIVECHECKABLES_PATH = LIVECHECK_PATH / "Livecheckables"
 
@@ -8,26 +28,6 @@ require "livecheck/extend/formulary"
 
 WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
 WATCHLIST_PATH ||= Pathname.new(Dir.home) / ".brew_livecheck_watchlist"
-
-usage = <<~EOS
-  brew livecheck
-  brew livecheck formula1 formula2 ...
-  brew livecheck [-i|--installed]
-  brew livecheck [-a|--all]
-  brew livecheck [-h|--help]
-
-  Usage:
-  Check if a formula is outdated. If no argument is passed, the list of
-  formulae to check is taken from #{WATCHLIST_PATH}.
-
-  Options:
-  -h, --help        show this help message and exit
-  -n, --newer-only  show the latest version only if it's newer than the formula
-                    in Homebrew
-  -v, --verbose     be more verbose :)
-  -q, --quieter     be more quiet (do not show errors)
-  -d, --debug       show debugging info
-EOS
 
 # Taken directly from Homebrew
 def require?(path)
@@ -90,11 +90,6 @@ if ARGV.debug?
   # puts ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
   # puts Pathname.new(File.expand_path("..", __FILE__)).basename
   # puts $LOAD_PATH
-end
-
-if ARGV.flag?("--help")
-  puts usage
-  exit 0
 end
 
 if ARGV.named[0]
