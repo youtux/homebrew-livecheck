@@ -1,4 +1,4 @@
 class Conserver
-  livecheck :url => "http://www.conserver.com",
-            :regex => /HREF="conserver-([0-9\.]+)\.t/
+  livecheck :url => "https://github.com/conserver/conserver/releases",
+            :regex => %r{href="/conserver/conserver/tree/v?([0-9\.]+)}
 end
