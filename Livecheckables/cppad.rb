@@ -1,4 +1,4 @@
 class Cppad
-  livecheck :url => "https://www.coin-or.org/CppAD/Doc/download.htm",
-            :regex => %r{href=".*?/cppad-([0-9]+).epl}
+  livecheck :url => "https://github.com/coin-or/CppAD.git",
+            :regex => %r{(20[0-9]+\.[0-9]+)}
 end
