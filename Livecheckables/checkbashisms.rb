@@ -1,4 +1,4 @@
 class Checkbashisms
-  livecheck :url => "https://launchpad.net/ubuntu/+source/devscripts/",
-            :regex => %r{Latest upload.*?href="/ubuntu/\+source/devscripts/([0-9\.a-z]+)"}m
+  livecheck :url => "https://mirrors.ocf.berkeley.edu/debian/pool/main/d/devscripts/",
+            :regex => /href="devscripts_([0-9\.]+)\.t/
 end
