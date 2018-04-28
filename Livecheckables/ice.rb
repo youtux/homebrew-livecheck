@@ -1,4 +1,4 @@
 class Ice
-  livecheck :url => "https://zeroc.com/downloads/ice",
-            :regex => %r{/download/Ice/.*?/Ice.*?-([0-9\.]+)\.d}
+  livecheck :url => "https://github.com/zeroc-ice/ice/releases",
+            :regex => %r{latest.*?href="/zeroc-ice/ice/tree/v?([0-9\.]+)}m
 end
