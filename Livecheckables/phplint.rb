@@ -1,4 +1,4 @@
 class Phplint
-  livecheck :url => "http://www.icosaedro.it/phplint/",
-            :regex => /Current version:.*?href="CHANGES.txt">([0-9\._]+)</m
+  livecheck :url => "http://www.icosaedro.it/phplint/CHANGES.txt",
+            :regex => /Version ([0-9\._]+):/
 end
