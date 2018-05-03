@@ -1,4 +1,4 @@
 class Metabase
   livecheck :url => "https://github.com/metabase/metabase/releases",
-            :regex => %r{href="/metabase/metabase/tree/v?([0-9\.]+)}
+            :regex => %r{Latest.*?href="/metabase/metabase/tree/v?([0-9\.]+)}m
 end
