@@ -1,4 +1,4 @@
 class OpenMpi
-  livecheck :url => "https://www.open-mpi.org/software/ompi/v3.0/downloads",
-            :regex => /openmpi-([0-9\.]+)\.t/
+  livecheck :url => "https://www.open-mpi.org/",
+            :regex => /MPI v?([0-9\.]+) release/
 end
