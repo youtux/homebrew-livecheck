@@ -1,4 +1,4 @@
 class Cython
-  livecheck :url => "http://cython.org",
-            :regex => %r{latest release</strong> of Cython is ([0-9\.]+) }
+  livecheck :url => "https://pypi.python.org/simple/cython/",
+            :regex => %r{href=".*?/Cython-([0-9\.]+)\.t}
 end
