@@ -1,4 +1,4 @@
 class Privoxy
   livecheck :url => "https://www.privoxy.org/feeds/privoxy-releases.xml",
-            :regex => /privoxy-(.*?)-stable-src\.tar\.gz/
+            :regex => /privoxy-([0-9\.]+)-stable-src\./
 end
