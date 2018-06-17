@@ -1,4 +1,4 @@
 class Cmake
   livecheck :url => "https://cmake.org/download/",
-            :regex => /cmake-?([0-9\.]+)\.tar\.gz/
+            :regex => /Latest Release \(([0-9\.]+)\)/
 end
