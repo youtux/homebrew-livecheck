@@ -1,4 +1,4 @@
 class Httrack
   livecheck :url => "https://mirror.httrack.com/historical/",
-            :regex => /httrack-(.*?)\.tar\.gz/
+            :regex => /httrack-([0-9\.]+)\./
 end
