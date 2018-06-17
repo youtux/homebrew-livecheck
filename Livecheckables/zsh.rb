@@ -1,4 +1,4 @@
 class Zsh
   livecheck :url => "https://www.zsh.org/pub/",
-            :regex => /zsh-?([0-9\.]+)\.tar\.gz/
+            :regex => /zsh-([0-9\.]+)\./
 end
