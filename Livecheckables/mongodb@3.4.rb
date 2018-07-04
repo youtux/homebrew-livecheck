@@ -1,4 +1,4 @@
 class MongodbAT34
-  livecheck :url => "https://docs.mongodb.com/manual/release-notes/3.4-changelog/",
-            :regex => /(\d+.\d+.\d+) Changelog/
+  livecheck :url => "https://www.mongodb.org/downloads",
+            :regex => /mongodb-src-r(3\.4\.\d+)\./
 end
