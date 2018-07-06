@@ -1,4 +1,4 @@
 class Llvm
-  livecheck :url => "https://releases.llvm.org/",
-            :regex => /(\d+.\d+.\d+)/
+  livecheck :url => "https://llvm.org/",
+            :regex => /LLVM (\d+.\d+.\d+)/
 end
