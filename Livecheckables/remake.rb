@@ -1,4 +1,4 @@
 class Remake
   livecheck :url => "https://sourceforge.net/projects/bashdb/files/remake/",
-            :regex => /<span.*?>remake-([0-9\.\+\-a-z]+)\.t/
+            :regex => %r{href="/projects/bashdb/files/remake/([0-9\.\+\-a-z\%B]+)/"}
 end
