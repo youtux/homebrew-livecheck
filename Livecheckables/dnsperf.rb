@@ -1,4 +1,4 @@
 class Dnsperf
-  livecheck :url => "https://nominum.com/measurement-tools/",
-            :regex => %r{href="ftp://ftp.nominum.com/pub/nominum/dnsperf/([0-9,\.]+)/.*-src-}
+  livecheck :url => "https://www.akamai.com/us/en/products/network-operator/measurement-tools.jsp",
+            :regex => /dnsperf and resperf ([0-9\.]+) – source distribution/
 end
