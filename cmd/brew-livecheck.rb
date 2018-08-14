@@ -50,6 +50,11 @@ if (Pathname.new(File.expand_path("..", __FILE__)).basename).to_s == "bin"
 end
 
 def print_latest_version(formula)
+  if formula.to_s.include?("@") && !formula.livecheckable
+    puts "#{Tty.red}#{formula}#{Tty.reset} : versioned" unless ARGV.quieter?
+    return
+  end
+
   current = formula.version
   latest = formula.latest
   if (m = latest.to_s.match(/(.*)-release$/)) && !current.to_s.match(/.*-release$/)
