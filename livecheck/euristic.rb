@@ -103,6 +103,18 @@ def version_euristic(urls, regex = nil)
           match_version_map[match] = version
         end
       end
+    when url =~ /registry\.npmjs\.org/
+      package = url.split("/")[3..-3].join("/")
+      page_url = "https://www.npmjs.com/package/#{package}/"
+
+      if regex.nil?
+        regex = %r{package__sidebarText.*?>([0-9\.]+)</p>}
+      end
+
+      page_matches(page_url, regex).each do |match|
+        version = Version.new(match)
+        match_version_map[match] = version
+      end
     when regex
       # Fallback
       page_matches(url, regex).each do |match|
