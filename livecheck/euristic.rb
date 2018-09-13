@@ -115,6 +115,14 @@ def version_euristic(urls, regex = nil)
         version = Version.new(match)
         match_version_map[match] = version
       end
+    when url =~ %r{(...\.x\.org|freedesktop.org)}
+      package = url.split("/")[-1].split("-")[0..-2].join("-")
+      page_url = url.split("/")[0..-2].join("/")
+      regex = /#{package}-([0-9.]+(?:\.[0-9.]+)*)\.tar\.[a-zA-Z0-9]*/
+      page_matches(page_url, regex).each do |match|
+        version = Version.new(match)
+        match_version_map[match] = version
+      end
     when regex
       # Fallback
       page_matches(url, regex).each do |match|
