@@ -1,4 +1,4 @@
 class Libtiff
-  livecheck :url => "https://mirrors.ocf.berkeley.edu/debian/pool/main/t/tiff/",
-            :regex => /href="tiff_([0-9\.\-]+)\.debian\.t/
+  livecheck :url => "https://download.osgeo.org/libtiff",
+            :regex => /href="tiff-([0-9\.\-]+)\.t/
 end
