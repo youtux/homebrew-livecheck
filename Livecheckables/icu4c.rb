@@ -1,4 +1,4 @@
 class Icu4c
-  livecheck :url => "http://site.icu-project.org/",
-            :regex => /Official Release - ([0-9\.]+)/
+  livecheck :url => "https://ssl.icu-project.org/files/icu4c/",
+            :regex => /href="([\d.]+\.[\d.]+\.?[\d.]*)\/"/
 end
