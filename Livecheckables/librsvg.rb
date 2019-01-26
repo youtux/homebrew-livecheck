@@ -1,4 +1,4 @@
 class Librsvg
-  livecheck :url => "https://download.gnome.org/sources/librsvg/2.42/",
-            :regex => /href="LATEST-IS-([\d.]+)"/
+  livecheck :url => "https://download.gnome.org/sources/librsvg/cache.json",
+            :regex => /librsvg-([\d.]+\.[\d.]+\.[\d.]+)\.t/
 end
