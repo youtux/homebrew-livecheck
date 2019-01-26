@@ -1,6 +1,6 @@
 class Gnutls
 #livecheck.url   [lindex ${master_sites} 0]
 #livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"
-  livecheck :url => "https://www.gnupg.org/ftp/gcrypt/gnutls/v3.5/",
+  livecheck :url => "https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/",
             :regex => /gnutls-(\d+(?:\.\d+)*)\.tar/
 end
