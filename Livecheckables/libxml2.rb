@@ -1,4 +1,4 @@
 class Libxml2
-  livecheck :url => "http://xmlsoft.org/news.html",
-            :regex => %r{<h3>[v]*(\d+(?:\.\d+)*): .*</h3>}
+  livecheck :url => "http://xmlsoft.org/sources",
+    :regex => /href=".*libxml2-([\d.]+\.[\d.]+\.[\d.]+)\.t/
 end
