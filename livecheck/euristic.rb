@@ -115,6 +115,22 @@ def version_euristic(urls, regex = nil)
         version = Version.new(match)
         match_version_map[match] = version
       end
+    when url =~ /gnome\.org/
+      package = url.match(%r{/sources\/(.*?)/})[1]
+      page_url = "https://download.gnome.org/sources/#{package}/cache.json"
+
+      if ARGV.debug?
+        puts "Possible GNOME package [#{package}] detected at #{url}"
+      end
+
+      if regex.nil?
+        regex = /#{package}-([\d.]+\.[\d.]+\.[\d.]+)\.t/
+      end
+
+      page_matches(page_url, regex).each do |match|
+        version = Version.new(match)
+        match_version_map[match] = version
+      end
     when regex
       # Fallback
       page_matches(url, regex).each do |match|
