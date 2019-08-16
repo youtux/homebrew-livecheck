@@ -18,25 +18,14 @@
 #:  `-q`, `--quieter`     be more quiet (do not show errors)
 #:  `-d`, `--debug`       show debugging info
 
-LIVECHECK_PATH = Pathname.new(__FILE__).realpath/".."/".."
-LIVECHECKABLES_PATH = LIVECHECK_PATH / "Livecheckables"
+require_relative "../livecheck/utils"
+require_relative "../livecheck/euristic"
+require_relative "../livecheck/extend/formulary"
 
-$LOAD_PATH.unshift(LIVECHECK_PATH)
-require "livecheck/utils"
-require "livecheck/euristic"
-require "livecheck/extend/formulary"
+LIVECHECKABLES_PATH = Pathname.new(__FILE__).realpath.dirname.dirname / "Livecheckables"
 
 WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
 WATCHLIST_PATH ||= Pathname.new(Dir.home) / ".brew_livecheck_watchlist"
-
-# Taken directly from Homebrew
-def require?(path)
-  require path
-rescue LoadError => e
-  # HACK: ( because we should raise on syntax errors but
-  # not if the file doesn't exist. TODO make robust!
-  raise unless e.to_s.include? path
-end
 
 if (Pathname.new(File.expand_path("..", __FILE__)).basename).to_s == "bin"
   opoo <<~EOS
