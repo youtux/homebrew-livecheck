@@ -17,10 +17,10 @@ module Formulary
       const_set(namespace, mod)
       mod.module_eval(contents, path)
 
-      livecheckable_path = livecheckable_path(path)
-      if File.exist?(livecheckable_path)
-        puts "Loading #{livecheckable_path}" if ARGV.debug?
-        mod.module_eval(livecheckable_path.read, livecheckable_path)
+      lc_path = livecheckable_path(path)
+      if File.exist?(lc_path)
+        puts "Loading #{lc_path}" if ARGV.debug?
+        mod.module_eval(lc_path.read, lc_path)
       end
 
       class_name = class_s(name)
