@@ -7,7 +7,7 @@ module Formulary
      def livecheckable_path(path)
        if (opt = path.realpath / "../../Livecheckables" / path.basename).exist?
          opt
-       elsif (opt = Pathname.new(__FILE__).realpath.dirname / "../../Livecheckables" / path.basename).exist?
+       elsif (opt = Pathname(__dir__) / "../../Livecheckables" / path.basename).exist?
          opt
        end
      end
