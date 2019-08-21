@@ -22,7 +22,7 @@ require_relative "../livecheck/utils"
 require_relative "../livecheck/euristic"
 require_relative "../livecheck/extend/formulary"
 
-LIVECHECKABLES_PATH = Pathname.new(__FILE__).realpath.dirname.dirname / "Livecheckables"
+LIVECHECKABLES_PATH = Pathname(__dir__).dirname / "Livecheckables"
 
 WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
 WATCHLIST_PATH ||= Pathname.new(Dir.home) / ".brew_livecheck_watchlist"
