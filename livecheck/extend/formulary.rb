@@ -5,7 +5,8 @@ module Formulary
     # extended to load the Livecheckable version of a formula
 
      def livecheckable_path(path)
-       if (opt = path.realpath / "../../Livecheckables" / path.basename).exist?
+       path_suffix = "../../Livecheckables/#{path.basename}"
+       if (opt = path.realpath/path_suffix).exist?
          opt
        elsif (opt = Pathname(__dir__) / "../../Livecheckables" / path.basename).exist?
          opt
