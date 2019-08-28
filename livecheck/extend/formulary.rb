@@ -8,7 +8,7 @@ module Formulary
        path_suffix = "../../Livecheckables/#{path.basename}"
        if (opt = path.realpath/path_suffix).exist?
          opt
-       elsif (opt = Pathname(__dir__) / "../../Livecheckables" / path.basename).exist?
+       elsif (opt = Pathname(__dir__)/path_suffix).exist?
          opt
        end
      end
