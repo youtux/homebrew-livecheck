@@ -1,0 +1,4 @@
+class Libev
+  livecheck :url => "http://dist.schmorp.de/libev/",
+            :regex => /libev-([\d\.]+)\./
+end
