@@ -19,7 +19,7 @@ module Formulary
       mod.module_eval(contents, path)
 
       lc_path = livecheckable_path(path)
-      if File.exist?(lc_path)
+      if lc_path.exist?
         puts "Loading #{lc_path}" if ARGV.debug?
         mod.module_eval(lc_path.read, lc_path)
       end
