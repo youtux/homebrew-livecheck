@@ -4,14 +4,14 @@ module Formulary
   class << self
     # extended to load the Livecheckable version of a formula
 
-     def livecheckable_path(path)
-       path_suffix = "../../Livecheckables/#{path.basename}"
-       if (opt = path.realpath/path_suffix).exist?
-         opt
-       elsif (opt = Pathname(__dir__)/path_suffix).exist?
-         opt
-       end
-     end
+    def livecheckable_path(path)
+      path_suffix = "../../Livecheckables/#{path.basename}"
+      if (opt = path.realpath/path_suffix).exist?
+        opt
+      elsif (opt = Pathname(__dir__)/path_suffix).exist?
+        opt
+      end
+    end
 
     def load_formula(name, path, contents, namespace)
       mod = Module.new
@@ -19,7 +19,7 @@ module Formulary
       mod.module_eval(contents, path)
 
       lc_path = livecheckable_path(path)
-      if lc_path.exist?
+      if lc_path&.exist?
         puts "Loading #{lc_path}" if ARGV.debug?
         mod.module_eval(lc_path.read, lc_path)
       end
