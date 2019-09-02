@@ -1,4 +1,4 @@
 class Orc
-  livecheck :url => "https://cgit.freedesktop.org/gstreamer/orc/",
-            :regex => %r{/gstreamer/orc/tag/\?h=orc-([0-9\.]+)}
+  livecheck :url => "https://gstreamer.freedesktop.org/src/orc/",
+            :regex => /href="orc-([\d.]+\.[\d.]+\.[\d.]+)\.t/
 end
