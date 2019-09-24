@@ -124,7 +124,7 @@ def version_euristic(urls, regex = nil)
       end
 
       if regex.nil?
-        regex = /#{package}-([\d.]+\.[\d.]+\.[\d.]+)\.t/
+        regex = /#{Regexp.escape(package)}-([\d.]+\.[\d.]+\.[\d.]+)\.t/
       end
 
       page_matches(page_url, regex).each do |match|
