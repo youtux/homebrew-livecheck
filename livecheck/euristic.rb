@@ -131,6 +131,17 @@ def version_euristic(urls, regex = nil)
         version = Version.new(match)
         match_version_map[match] = version
       end
+    when url =~ /launchpad\.net/
+      package = url.match(%r{launchpad\.net/([^/]*)})[1]
+      page_url = "https://launchpad.net/#{package}"
+
+      if regex.nil?
+        regex = /<div class="version">\s*Latest version is (.+)\s*<\/div>/
+      end
+      page_matches(page_url, regex).each do |match|
+        version = Version.new(match)
+        match_version_map[match] = version
+      end
     when regex
       # Fallback
       page_matches(url, regex).each do |match|
