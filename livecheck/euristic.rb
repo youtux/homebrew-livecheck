@@ -35,9 +35,22 @@ def version_euristic(urls, regex = nil)
     when DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
       puts "Possible git repo detected at #{url}" if ARGV.debug?
 
-      git_tags(url, regex).each do |tag|
+      tags = git_tags(url, regex)
+      tags_only_debian = true
+
+      # Check if upstream only does 'debian/' prefixed tags
+      tags.each do |tag|
+        if tag !~ /debian\//
+          tags_only_debian = false
+          break
+        end
+      end
+
+      tags.each do |tag|
         begin
-          next if tag =~ /debian\//
+          # Move to the next one if tag actually is prefixed with 'debian/'
+          # and upstream does not do only 'debian/' prefixed tags
+          next if tag =~ /debian\// && !tags_only_debian
           # Remove any character before the first number
           tag_cleaned = tag[/\D*(.*)/, 1]
           match_version_map[tag] = Version.new(tag_cleaned)
