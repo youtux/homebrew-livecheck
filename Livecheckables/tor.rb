@@ -1,4 +1,4 @@
 class Tor
-  livecheck :url => "https://www.torproject.org/download/download.html.en",
-            :regex => /The current stable version of Tor is ([0-9,\.]+)\. /
+  livecheck :url => "https://dist.torproject.org/",
+            :regex => %r{tor-([0-9\.]+)\.tar\.gz}
 end
