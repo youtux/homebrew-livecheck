@@ -64,9 +64,7 @@ def version_euristic(urls, regex = nil)
              "at #{url}"
       end
 
-      if regex.nil?
-        regex = %r{/#{project_name}/([a-zA-Z0-9.]+(?:\.[a-zA-Z0-9.]+)*)}i
-      end
+      regex ||= %r{/#{project_name}/([a-zA-Z0-9.]+(?:\.[a-zA-Z0-9.]+)*)}i
 
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
@@ -94,9 +92,7 @@ def version_euristic(urls, regex = nil)
           puts "Possible GNU project [#{project_name}] detected at #{url}"
         end
 
-        if regex.nil?
-          regex = /#{project_name}-(\d+(?:\.\d+)*)/
-        end
+        regex ||= /#{project_name}-(\d+(?:\.\d+)*)/
 
         page_matches(page_url, regex).each do |match|
           version = Version.new(match)
@@ -107,9 +103,7 @@ def version_euristic(urls, regex = nil)
       package = url.split("/")[3..-3].join("/")
       page_url = "https://www.npmjs.com/package/#{package}/"
 
-      if regex.nil?
-        regex = %r{package__sidebarText.*?>([0-9\.]+)</p>}
-      end
+      regex ||= %r{package__sidebarText.*?>([0-9\.]+)</p>}
 
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
@@ -123,9 +117,7 @@ def version_euristic(urls, regex = nil)
         puts "Possible GNOME package [#{package}] detected at #{url}"
       end
 
-      if regex.nil?
-        regex = /#{Regexp.escape(package)}-([\d.]+\.[\d.]+\.[\d.]+)\.t/
-      end
+      regex ||= /#{Regexp.escape(package)}-([\d.]+\.[\d.]+\.[\d.]+)\.t/
 
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
@@ -135,9 +127,7 @@ def version_euristic(urls, regex = nil)
       package = url.match(%r{launchpad\.net/([^/]*)})[1]
       page_url = "https://launchpad.net/#{package}"
 
-      if regex.nil?
-        regex = /<div class="version">\s*Latest version is (.+)\s*<\/div>/
-      end
+      regex ||= /<div class="version">\s*Latest version is (.+)\s*<\/div>/
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
         match_version_map[match] = version
