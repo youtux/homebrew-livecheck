@@ -3,6 +3,7 @@
 #:
 #:  `brew livecheck`
 #:  `brew livecheck` <formula1> <formula2> <...>
+#:  `brew livecheck` [`--tap=<tap>`]
 #:  `brew livecheck` [`-i`|`--installed`]
 #:  `brew livecheck` [`-a`|`--all`]
 #:  `brew livecheck` [`-h`|`--help`]
@@ -92,6 +93,9 @@ end
 
 formulae_to_check =
   case
+  when ARGV.value("tap")
+    tap = ARGV.value("tap")
+    Tap.fetch(tap).formula_names.map { |name| Formula[name] }
   when ARGV.flag?("--installed")
     Formula.installed
   when ARGV.flag?("--all")
