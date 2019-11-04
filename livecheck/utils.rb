@@ -10,6 +10,16 @@ def git_tags(repo_url, filter = nil)
   tags
 end
 
+# Check if upstream only does 'debian/' prefixed tags
+def git_tags_only_debian?(tags)
+  tags.each do |tag|
+    unless tag.match?(%r{^debian/})
+      return false
+    end
+  end
+  true
+end
+
 def page_matches(url, regex)
   puts %[Using page_match("#{url}", "#{regex}")] if ARGV.debug?
   page = open(url).read

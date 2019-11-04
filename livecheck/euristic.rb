@@ -36,15 +36,7 @@ def version_euristic(urls, regex = nil)
       puts "Possible git repo detected at #{url}" if ARGV.debug?
 
       tags = git_tags(url, regex)
-      tags_only_debian = true
-
-      # Check if upstream only does 'debian/' prefixed tags
-      tags.each do |tag|
-        if tag !~ /debian\//
-          tags_only_debian = false
-          break
-        end
-      end
+      tags_only_debian = git_tags_only_debian?(tags)
 
       tags.each do |tag|
         begin
