@@ -1,23 +1,22 @@
 #:  * `livecheck`
-#:  Check for newer versions of formulae from upstream
 #:
-#:  `brew livecheck`
-#:  `brew livecheck` <formula1> <formula2> <...>
-#:  `brew livecheck` [`--tap=<tap>`]
-#:  `brew livecheck` [`-i`|`--installed`]
-#:  `brew livecheck` [`-a`|`--all`]
-#:  `brew livecheck` [`-h`|`--help`]
+#:  Check for newer versions of formulae from upstream.
 #:
-#:  Usage:
-#:  Check if a formula is outdated.
 #:  If no argument is passed, the list of formulae to check is taken from #{WATCHLIST_PATH}
 #:
+#:    `brew livecheck`
+#:    `brew livecheck` <formula1> <formula2> <...>
+#:    `brew livecheck` [`--tap=<tap>`]
+#:    `brew livecheck` [`-i`|`--installed`]
+#:    `brew livecheck` [`-a`|`--all`]
+#:    `brew livecheck` [`-h`|`--help`]
+#:
 #:  Options:
-#:  `-h`, `--help`        show this help message and exit
-#:  `-n`, `--newer-only`  show the latest version only if it's newer than the formula
-#:  `-v`, `--verbose`     be more verbose :)
-#:  `-q`, `--quieter`     be more quiet (do not show errors)
-#:  `-d`, `--debug`       show debugging info
+#:    `-h`, `--help`        show this help message and exit
+#:    `-n`, `--newer-only`  show the latest version only if it's newer than the formula
+#:    `-v`, `--verbose`     be more verbose :)
+#:    `-q`, `--quieter`     be more quiet (do not show errors)
+#:    `-d`, `--debug`       show debugging info
 
 require_relative "../livecheck/utils"
 require_relative "../livecheck/euristic"
