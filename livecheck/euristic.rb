@@ -62,8 +62,7 @@ def version_euristic(urls, regex = nil)
                                                    !url.include?("/bashdb/") &&
                                                    !url.include?("/netpbm/")
       project_name = url.match(%r{/projects?/(.*?)/})[1]
-      page_url = "https://sourceforge.net/api/file/index/project-name/" \
-                 "#{project_name}/rss"
+      page_url = "https://sourceforge.net/projects/#{project_name}/rss"
 
       if ARGV.debug?
         puts "Possible SourceForge project [#{project_name}] detected" \
