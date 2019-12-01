@@ -12,7 +12,8 @@ def version_euristic(urls, regex = nil)
                                  !url.include?("prometheus") &&
                                  !url.include?("pyenv-virtualenv") &&
                                  !url.include?("sysdig") &&
-                                 !url.include?("shairport-sync")
+                                 !url.include?("shairport-sync") &&
+                                 !url.include?("yuicompressor")
       if url.include? "archive"
         url = url.sub(/\/archive\/.*/, ".git") if url.include? "github"
       elsif url.include? "releases"
