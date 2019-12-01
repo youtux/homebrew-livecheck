@@ -59,7 +59,8 @@ def version_euristic(urls, regex = nil)
                                                    !url.include?("remake") &&
                                                    !url.include?("/avf/") &&
                                                    !url.include?("/bashdb/") &&
-                                                   !url.include?("/netpbm/")
+                                                   !url.include?("/netpbm/") &&
+                                                   !url.include?("opencore-amr")
       project_name = url.match(%r{/projects?/(.*?)/})[1]
       page_url = "https://sourceforge.net/api/file/index/project-name/" \
                  "#{project_name}/rss"
