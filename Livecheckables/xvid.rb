@@ -1,4 +1,4 @@
 class Xvid
-  livecheck :url => "https://www.xvid.com/download/",
-            :regex => %r{href=".*?/Xvid-([0-9\.]+)-}
+  livecheck :url => "https://downloads.xvid.com/downloads/",
+            :regex => %r{href="[^"]+xvidcore-([\d\.]+)\.tar\.bz2"}
 end
