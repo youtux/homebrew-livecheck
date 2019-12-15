@@ -104,6 +104,16 @@ def version_euristic(urls, regex = nil)
           match_version_map[match] = version
         end
       end
+    when url =~ /files\.pythonhosted\.org/
+      package = url[%r{https://files.pythonhosted.org/packages/.*/.*/(.*)-.*}, 1]
+      page_url = "https://pypi.org/project/#{package}"
+
+      regex ||= /#{package} ([0-9\.]+)/
+
+      page_matches(page_url, regex).each do |match|
+        version = Version.new(match)
+        match_version_map[match] = version
+      end
     when url =~ /registry\.npmjs\.org/
       package = url.split("/")[3..-3].join("/")
       page_url = "https://www.npmjs.com/package/#{package}/"
