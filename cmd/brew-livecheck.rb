@@ -98,7 +98,7 @@ formulae_to_check =
     Formula.installed
   elsif ARGV.include?("--all")
     Formula.names.map { |name| Formula[name] }
-  elsif ARGV.formulae.empty?
+  elsif Homebrew.args.formulae.empty?
     Enumerator.new do |enum|
       File.open(WATCHLIST_PATH).each do |line|
         line.split.each do |word|
@@ -109,7 +109,7 @@ formulae_to_check =
       onoe e
     end
   else
-    ARGV.formulae
+    Homebrew.args.formulae
   end
 
 formulae_to_check.sort.each do |formula|
