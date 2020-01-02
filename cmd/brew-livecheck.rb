@@ -27,7 +27,7 @@ LIVECHECKABLES_PATH = Pathname(__dir__).parent/"Livecheckables"
 WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
 WATCHLIST_PATH ||= Pathname.new(Dir.home)/".brew_livecheck_watchlist"
 
-if (Pathname.new(File.expand_path("..", __FILE__)).basename).to_s == "bin"
+if Pathname.new(File.expand_path(__dir__)).basename.to_s == "bin"
   opoo <<~EOS
     It seems you are using an old version of homebrew-livecheck.
     Please run this command to get the latest version with auto-update:
@@ -59,23 +59,23 @@ def print_latest_version(formula)
     if is_newer_than_upstram
       "#{Tty.red}#{current}#{Tty.reset}"
     else
-      "#{current}"
+      current.to_s
     end
 
   latest_s =
     if is_outdated
       "#{Tty.green}#{latest}#{Tty.reset}"
     else
-      "#{latest}"
+      latest.to_s
     end
 
-  needs_to_show = is_outdated || !ARGV.flag?("--newer-only")
+  needs_to_show = is_outdated || !ARGV.include?("--newer-only")
   puts "#{formula_s} : #{current_s} ==> #{latest_s}" if needs_to_show
 
   if is_newer_than_upstram && ARGV.verbose?
     opoo "#{formula_s} version is greater than the upstream version"
   end
-rescue StandardError => e
+rescue => e
   onoe e unless ARGV.quieter?
 end
 
@@ -91,25 +91,22 @@ if ARGV.named[0]
 end
 
 formulae_to_check =
-  case
-  when ARGV.value("tap")
+  if ARGV.value("tap")
     tap = ARGV.value("tap")
     Tap.fetch(tap).formula_names.map { |name| Formula[name] }
-  when ARGV.flag?("--installed")
+  elsif ARGV.include?("--installed")
     Formula.installed
-  when ARGV.flag?("--all")
+  elsif ARGV.include?("--all")
     Formula.names.map { |name| Formula[name] }
-  when ARGV.formulae.size == 0
+  elsif ARGV.formulae.empty?
     Enumerator.new do |enum|
-      begin
-        File.open(WATCHLIST_PATH).each do |line|
-          line.split.each do |word|
-            enum.yield Formulary.factory(word)
-          end
+      File.open(WATCHLIST_PATH).each do |line|
+        line.split.each do |word|
+          enum.yield Formulary.factory(word)
         end
-      rescue Errno::ENOENT => e
-        onoe e
       end
+    rescue Errno::ENOENT => e
+      onoe e
     end
   else
     ARGV.formulae
