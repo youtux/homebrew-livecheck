@@ -25,5 +25,11 @@ jobs:
     - name: Run brew livecheck
       run: brew livecheck
 
+    - name: Fetch origin/master
+      run: git fetch --depth=1 origin master
+
     - name: Run brew livecheck on added/modified Livecheckables
-      run: git diff --name-only --diff-filter=AM origin/master -- Livecheckables/ | sed "s|Livecheckables/\(.+\)\.rb|\1|" | xargs brew livecheck
+      run: |
+          git diff --name-only --diff-filter=AM origin/master -- Livecheckables/ |
+          sed "s|Livecheckables/\(.*\)\.rb|\1|" |
+          xargs brew livecheck
