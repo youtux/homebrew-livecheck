@@ -75,8 +75,6 @@ def print_latest_version(formula)
   if is_newer_than_upstram && ARGV.verbose?
     opoo "#{formula_s} version is greater than the upstream version"
   end
-rescue => e
-  onoe e unless ARGV.quieter?
 end
 
 if ARGV.debug?
@@ -112,6 +110,13 @@ formulae_to_check =
     ARGV.formulae
   end
 
+exit_code = true
 formulae_to_check.sort.each do |formula|
-  print_latest_version formula
+  begin
+    print_latest_version formula
+  rescue => e
+    onoe e unless ARGV.quieter?
+    exit_code = false
+  end
 end
+exit exit_code
