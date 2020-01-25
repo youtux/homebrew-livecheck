@@ -1,4 +1,4 @@
 class Bonniexx
   livecheck :url => "https://www.coker.com.au/bonnie++/experimental/",
-            :regex => /href="bonnie\+\+-([0-9,\.]+)\./
+            :regex => /bonnie\+\+-([0-9,\.]+)\.tgz/
 end
