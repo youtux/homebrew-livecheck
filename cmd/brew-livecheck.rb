@@ -44,8 +44,13 @@ def print_latest_version(formula)
     return
   end
 
-  current = formula.version
-  latest = formula.latest
+  if !formula.stable? && !formula.installed?
+    puts "#{Tty.red}#{formula}#{Tty.reset} : HEAD only formula must be installed to be livecheckable" unless ARGV.quieter?
+    return
+  end
+
+  current = formula.stable? ? formula.version : formula.installed_version
+  latest = formula.stable? ? formula.latest : formula.latest_head_version
   if (m = latest.to_s.match(/(.*)-release$/)) && !current.to_s.match(/.*-release$/)
     latest = Version.new(m[1])
   end
