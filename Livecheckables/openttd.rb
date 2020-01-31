@@ -1,4 +1,4 @@
 class Openttd
-  livecheck :url => "http://www.openttd.org/en/",
+  livecheck :url => "https://www.openttd.org/",
             :regex => %r{Download stable \((\d+(\.\d+)+)\)}
 end
