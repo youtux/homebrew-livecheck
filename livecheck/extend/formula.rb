@@ -20,7 +20,7 @@ class Formula
         urls.concat(stable.mirrors)
       end
       urls << homepage if homepage
-      
+
       urls.compact
     end
 
@@ -44,7 +44,7 @@ class Formula
           urls ||= all_urls
           regex = @livecheck_args[:regex]
 
-          version_euristic(urls, regex)
+          version_heuristic(urls, regex)
         end
 
       Version.new(version_s)

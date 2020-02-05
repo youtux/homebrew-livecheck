@@ -1,4 +1,4 @@
-require 'open-uri'
+require "open-uri"
 
 def git_tags(repo_url, filter = nil)
   raw_tags = `git ls-remote --tags #{repo_url}`
@@ -21,9 +21,9 @@ def git_tags_only_debian?(tags)
 end
 
 def page_matches(url, regex)
-  puts %[Using page_match("#{url}", "#{regex}")] if ARGV.debug?
+  puts %Q[Using page_match("#{url}", "#{regex}")] if Homebrew.args.debug?
   page = open(url).read
   matches = page.scan(regex)
-  puts matches.join(", ") if ARGV.debug?
+  puts matches.join(", ") if Homebrew.args.debug?
   matches.map(&:first).uniq
 end

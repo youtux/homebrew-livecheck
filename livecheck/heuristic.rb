@@ -1,25 +1,25 @@
 require "utils"
 
 # TODO: distinguish between a filter regex and a matching regex
-def version_euristic(urls, regex = nil)
+def version_heuristic(urls, regex = nil)
   urls.each do |url|
-    puts "Trying with url #{url}" if ARGV.debug?
+    puts "Trying with url #{url}" if Homebrew.args.debug?
     if url.include?("github") && !url.include?("menhir") &&
-                                 !url.include?("mednafen") &&
-                                 !url.include?("camlp5") &&
-                                 !url.include?("kotlin") &&
-                                 !url.include?("osrm-backend") &&
-                                 !url.include?("prometheus") &&
-                                 !url.include?("pyenv-virtualenv") &&
-                                 !url.include?("sysdig") &&
-                                 !url.include?("shairport-sync") &&
-                                 !url.include?("yuicompressor")
+       !url.include?("mednafen") &&
+       !url.include?("camlp5") &&
+       !url.include?("kotlin") &&
+       !url.include?("osrm-backend") &&
+       !url.include?("prometheus") &&
+       !url.include?("pyenv-virtualenv") &&
+       !url.include?("sysdig") &&
+       !url.include?("shairport-sync") &&
+       !url.include?("yuicompressor")
       if url.include? "archive"
-        url = url.sub(/\/archive\/.*/, ".git") if url.include? "github"
+        url = url.sub(%r{/archive/.*}, ".git") if url.include? "github"
       elsif url.include? "releases"
-        url = url.sub(/\/releases\/.*/, ".git")
+        url = url.sub(%r{/releases/.*}, ".git")
       elsif url.include? "downloads"
-        url = Pathname.new(url.sub(/\/downloads(.*)/, "\\1")).dirname.to_s+".git"
+        url = Pathname.new(url.sub(%r{/downloads(.*)}, "\\1")).dirname.to_s+".git"
       elsif !url.end_with?(".git")
         if url.end_with?("/")
           url = url[0..-2]
@@ -28,44 +28,42 @@ def version_euristic(urls, regex = nil)
       end
     end
     match_version_map = {}
-    case
-    when url =~ /hackage\.haskell\.org/
+    if /hackage\.haskell\.org/.match?(url)
       package = ((url.split("/")[4]).split("-")[0..-2]).join("-")
       ver = `curl -s https://hackage.haskell.org/package/"#{package}"/src/`.sub!(/.*Directory listing for #{package}-(.*) source tarball.*/, "\\1")
       match_version_map[ver] = Version.new(ver)
-    when DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
-      puts "Possible git repo detected at #{url}" if ARGV.debug?
+    elsif DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
+      puts "Possible git repo detected at #{url}" if Homebrew.args.debug?
 
       tags = git_tags(url, regex)
       tags_only_debian = git_tags_only_debian?(tags)
 
       tags.each do |tag|
-        begin
-          # Move to the next one if tag actually is prefixed with 'debian/'
-          # and upstream does not do only 'debian/' prefixed tags
-          next if tag =~ /debian\// && !tags_only_debian
-          # Remove any character before the first number
-          tag_cleaned = tag[/\D*(.*)/, 1]
-          match_version_map[tag] = Version.new(tag_cleaned)
-        rescue TypeError
-        end
+        # Move to the next one if tag actually is prefixed with 'debian/'
+        # and upstream does not do only 'debian/' prefixed tags
+        next if tag =~ %r{debian/} && !tags_only_debian
+
+        # Remove any character before the first number
+        tag_cleaned = tag[/\D*(.*)/, 1]
+        match_version_map[tag] = Version.new(tag_cleaned)
+      rescue TypeError
       end
-    when url =~ %r{(sourceforge\.net|sf\.net)/} && !url.include?("mikmod") &&
-                                                   !url.include?("log4cpp") &&
-                                                   !url.include?("exiftool") &&
-                                                   !url.include?("libwps") &&
-                                                   !url.include?("gsmartcontrol") &&
-                                                   !url.include?("e2fsprogs") &&
-                                                   !url.include?("potrace") &&
-                                                   !url.include?("remake") &&
-                                                   !url.include?("/avf/") &&
-                                                   !url.include?("/bashdb/") &&
-                                                   !url.include?("/netpbm/") &&
-                                                   !url.include?("opencore-amr")
+    elsif url =~ %r{(sourceforge\.net|sf\.net)/} && !url.include?("mikmod") &&
+          !url.include?("log4cpp") &&
+          !url.include?("exiftool") &&
+          !url.include?("libwps") &&
+          !url.include?("gsmartcontrol") &&
+          !url.include?("e2fsprogs") &&
+          !url.include?("potrace") &&
+          !url.include?("remake") &&
+          !url.include?("/avf/") &&
+          !url.include?("/bashdb/") &&
+          !url.include?("/netpbm/") &&
+          !url.include?("opencore-amr")
       project_name = url.match(%r{/projects?/(.*?)/})[1]
       page_url = "https://sourceforge.net/projects/#{project_name}/rss"
 
-      if ARGV.debug?
+      if Homebrew.args.debug?
         puts "Possible SourceForge project [#{project_name}] detected" \
              "at #{url}"
       end
@@ -74,10 +72,10 @@ def version_euristic(urls, regex = nil)
 
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
-        # puts "#{match} => #{version.inspect}" if ARGV.debug?
+        # puts "#{match} => #{version.inspect}" if Homebrew.args.debug?
         match_version_map[match] = version
       end
-    when url =~ /gnu\.org/ && !url.include?("kawa") && !url.include?("lzip") && !url.include?("numdiff") && !url.include?("icoutils") && !url.include?("dvdrtools")
+    elsif url =~ /gnu\.org/ && !url.include?("kawa") && !url.include?("lzip") && !url.include?("numdiff") && !url.include?("icoutils") && !url.include?("dvdrtools")
       project_name_regexps = [
         %r{/(?:software|gnu)/(.*?)/},
         %r{//(.*?)\.gnu\.org(?:/)?$},
@@ -94,7 +92,7 @@ def version_euristic(urls, regex = nil)
         project_name = match_list[0][1]
         page_url = "http://ftp.gnu.org/gnu/#{project_name}/?C=M&O=D"
 
-        if ARGV.debug?
+        if Homebrew.args.debug?
           puts "Possible GNU project [#{project_name}] detected at #{url}"
         end
 
@@ -105,7 +103,7 @@ def version_euristic(urls, regex = nil)
           match_version_map[match] = version
         end
       end
-    when url =~ /files\.pythonhosted\.org/
+    elsif /files\.pythonhosted\.org/.match?(url)
       package = url[%r{https://files.pythonhosted.org/packages/.*/.*/(.*)-.*}, 1]
       page_url = "https://pypi.org/project/#{package}"
 
@@ -115,7 +113,7 @@ def version_euristic(urls, regex = nil)
         version = Version.new(match)
         match_version_map[match] = version
       end
-    when url =~ /registry\.npmjs\.org/
+    elsif /registry\.npmjs\.org/.match?(url)
       package = url.split("/")[3..-3].join("/")
       page_url = "https://www.npmjs.com/package/#{package}/"
 
@@ -125,11 +123,11 @@ def version_euristic(urls, regex = nil)
         version = Version.new(match)
         match_version_map[match] = version
       end
-    when url =~ /gnome\.org/
+    elsif /gnome\.org/.match?(url)
       package = url.match(%r{/sources\/(.*?)/})[1]
       page_url = "https://download.gnome.org/sources/#{package}/cache.json"
 
-      if ARGV.debug?
+      if Homebrew.args.debug?
         puts "Possible GNOME package [#{package}] detected at #{url}"
       end
 
@@ -139,16 +137,16 @@ def version_euristic(urls, regex = nil)
         version = Version.new(match)
         match_version_map[match] = version
       end
-    when url =~ /launchpad\.net/
+    elsif /launchpad\.net/.match?(url)
       package = url.match(%r{launchpad\.net/([^/]*)})[1]
       page_url = "https://launchpad.net/#{package}"
 
-      regex ||= /<div class="version">\s*Latest version is (.+)\s*<\/div>/
+      regex ||= %r{<div class="version">\s*Latest version is (.+)\s*</div>}
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
         match_version_map[match] = version
       end
-    when regex
+    elsif regex
       # Fallback
       page_matches(url, regex).each do |match|
         version = Version.new(match)
@@ -156,7 +154,7 @@ def version_euristic(urls, regex = nil)
       end
     end
 
-    if ARGV.debug?
+    if Homebrew.args.debug?
       match_version_map.each do |match, version|
         puts "#{match} => #{version.inspect}"
       end
@@ -169,5 +167,5 @@ def version_euristic(urls, regex = nil)
     return match_version_map.values.max unless match_version_map.empty?
   end
 
-  fail TypeError, "Unable to get versions for #{Tty.blue}#{stable.name}#{Tty.reset}"
+  raise TypeError, "Unable to get versions for #{Tty.blue}#{stable.name}#{Tty.reset}"
 end
