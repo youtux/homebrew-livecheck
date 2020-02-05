@@ -1,3 +1,2 @@
 # Ignores all formulae but first (this is by design)
-livecheckable_path = LIVECHECKABLES_PATH / "#{ARGV.named[1]}.rb"
-puts File.open(livecheckable_path).read
+puts (LIVECHECKABLES_PATH/"#{Homebrew.args.named[1]}.rb").read
