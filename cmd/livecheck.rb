@@ -29,6 +29,8 @@ module Homebrew
              description: "Check the formulae within the given tap, specified as <user>`/`<repo>."
       switch "--installed",
              description: "Check formulae that are currently installed."
+      switch "--json",
+             description: "Output informations in JSON format."
       switch "--all",
              description: "Check all available formulae."
       switch "--newer-only",
@@ -73,12 +75,14 @@ module Homebrew
         end
       end
 
-    formulae_to_check.sort.each do |formula|
+    formulae_checked = formulae_to_check.sort.map do |formula|
       print_latest_version formula
     rescue => e
       onoe e unless Homebrew.args.quiet?
       Homebrew.failed = true
     end
+
+    puts JSON.generate(formulae_checked.compact) if Homebrew.args.json?
   end
 
   def print_latest_version(formula)
@@ -101,12 +105,12 @@ module Homebrew
     end
 
     is_outdated = current < latest
-    is_newer_than_upstram = current > latest
+    is_newer_than_upstream = current > latest
 
     formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
     formula_s += " (guessed)" unless formula.livecheckable
     current_s =
-      if is_newer_than_upstram
+      if is_newer_than_upstream
         "#{Tty.red}#{current}#{Tty.reset}"
       else
         current.to_s
@@ -120,9 +124,24 @@ module Homebrew
       end
 
     needs_to_show = is_outdated || !Homebrew.args.newer_only?
-    puts "#{formula_s} : #{current_s} ==> #{latest_s}" if needs_to_show
+    if needs_to_show
+      if Homebrew.args.json?
+        return {
+          "formula": formula.full_name,
+          "version": {
+            "current": current.to_s,
+            "latest": latest.to_s,
+            "is_outdated": is_outdated,
+            "is_newer_than_upstream": is_newer_than_upstream,
+            "guessed": !formula.livecheckable,
+          }
+        }
+      else
+        puts "#{formula_s} : #{current_s} ==> #{latest_s}"
+      end
+    end
 
-    if is_newer_than_upstram && Homebrew.args.verbose?
+    if is_newer_than_upstream && Homebrew.args.verbose?
       opoo "#{formula_s} version is greater than the upstream version"
     end
   end
