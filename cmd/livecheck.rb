@@ -49,8 +49,7 @@ module Homebrew
     end
 
     if cmd = Homebrew.args.named.first
-      require?("livecheck/commands/#{cmd}")
-      return
+      require?("livecheck/commands/#{cmd}") && return
     end
 
     formulae_to_check =
