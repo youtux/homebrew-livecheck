@@ -78,7 +78,7 @@ module Homebrew
     formulae_checked = formulae_to_check.sort.map do |formula|
       print_latest_version formula
     rescue => e
-      onoe e unless Homebrew.args.quiet?
+      onoe "#{Tty.blue}#{formula}#{Tty.reset}: #{e}" unless Homebrew.args.quiet?
       Homebrew.failed = true
     end
 
