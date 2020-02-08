@@ -167,5 +167,5 @@ def version_heuristic(urls, regex = nil)
     return match_version_map.values.max unless match_version_map.empty?
   end
 
-  raise TypeError, "Unable to get versions for #{Tty.blue}#{stable.name}#{Tty.reset}"
+  raise TypeError, "Unable to get versions"
 end
