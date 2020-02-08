@@ -1,4 +1,4 @@
 class Simgrid
-  livecheck :url => "http://simgrid.gforge.inria.fr",
+  livecheck :url => "https://simgrid.org/",
             :regex => /href=".*?SimGrid-([0-9\.]+)\.t/
 end
