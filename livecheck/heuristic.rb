@@ -123,7 +123,7 @@ def version_heuristic(urls, regex = nil)
         version = Version.new(match)
         match_version_map[match] = version
       end
-    elsif /gnome\.org/.match?(url)
+    elsif /download\.gnome\.org/.match?(url)
       package = url.match(%r{/sources\/(.*?)/})[1]
       page_url = "https://download.gnome.org/sources/#{package}/cache.json"
 
