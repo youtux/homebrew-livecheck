@@ -44,7 +44,7 @@ class Formula
           urls ||= all_urls
           regex = @livecheck_args[:regex]
 
-          version_heuristic(urls, regex)
+          version_heuristic(livecheckable, urls, regex)
         end
 
       Version.new(version_s)

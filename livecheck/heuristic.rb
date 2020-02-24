@@ -1,7 +1,7 @@
 require "utils"
 
 # TODO: distinguish between a filter regex and a matching regex
-def version_heuristic(urls, regex = nil)
+def version_heuristic(livecheckable, urls, regex = nil)
   urls.each do |url|
     puts "Trying with url #{url}" if Homebrew.args.debug?
     if url.include?("github") && !url.include?("menhir") &&
@@ -154,14 +154,31 @@ def version_heuristic(urls, regex = nil)
       end
     end
 
+    version_rejections = %w[
+      alpha
+      beta
+      dev
+      experimental
+      prerelease
+      preview
+      rc
+    ].freeze
+
+    empty_version = Version.new("")
+    match_version_map.delete_if do |_match, version|
+      return true if version == empty_version
+      next if livecheckable
+
+      version_rejections.any? do |rejection|
+        version.to_s.include?(rejection)
+      end
+    end
+
     if Homebrew.args.debug?
       match_version_map.each do |match, version|
         puts "#{match} => #{version.inspect}"
       end
     end
-
-    empty_version = Version.new("")
-    match_version_map.delete_if { |_match, version| version == empty_version }
 
     # TODO: return nil, defer the print to the caller
     return match_version_map.values.max unless match_version_map.empty?
