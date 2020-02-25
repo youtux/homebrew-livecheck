@@ -27,12 +27,9 @@ jobs:
 
     - name: Fetch origin/master
       run: git fetch --depth=1 origin master
-    
-    - name: Get branch name
-      uses: nelonoel/branch-name@v1
 
     - name: Run brew livecheck on added/modified Livecheckables
       run: |
-          git diff --name-only --diff-filter=AM origin/master...${BRANCH_NAME} -- Livecheckables/ |
+          git diff --name-only --diff-filter=AM origin/master...${{ github.head_ref }} -- Livecheckables/ |
           sed "s|Livecheckables/\(.*\)\.rb|\1|" |
           xargs brew livecheck
