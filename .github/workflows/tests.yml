@@ -30,6 +30,6 @@ jobs:
 
     - name: Run brew livecheck on added/modified Livecheckables
       run: |
-          git diff --name-only --diff-filter=AM origin/master -- Livecheckables/ |
+          git diff --name-only --diff-filter=AM origin/master...${{ github.sha }} -- Livecheckables/ |
           sed "s|Livecheckables/\(.*\)\.rb|\1|" |
           xargs brew livecheck
