@@ -166,8 +166,8 @@ def version_heuristic(livecheckable, urls, regex = nil)
 
     empty_version = Version.new("")
     match_version_map.delete_if do |_match, version|
-      return true if version == empty_version
-      next if livecheckable
+      next true if version == empty_version
+      next false if livecheckable
 
       version_rejections.any? do |rejection|
         version.to_s.include?(rejection)
