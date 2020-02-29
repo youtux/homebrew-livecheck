@@ -1,4 +1,4 @@
 class Php
-  livecheck :url => "https://secure.php.net/releases/feed.php",
-            :regex => /PHP (7\.2[0-9\.]+)/
+  livecheck :url => "https://www.php.net/releases/feed.php",
+            :regex => /PHP (\d+(?:\.\d+)+) /
 end
