@@ -1,3 +1,3 @@
 class Rav1e
-  livecheck :regex => %r{v([\d\.]+)}
+  livecheck :regex => /v([\d\.]+)/
 end

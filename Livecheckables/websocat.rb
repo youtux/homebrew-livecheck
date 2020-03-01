@@ -1,3 +1,3 @@
 class Websocat
-  livecheck :regex => %r{v([\d\.]+$)}
+  livecheck :regex => /v([\d\.]+$)/
 end

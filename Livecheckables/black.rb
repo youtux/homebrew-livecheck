@@ -1,3 +1,3 @@
 class Black
-  livecheck :regex => %r{black (\d+\.\d+(b\d+)?)}
+  livecheck :regex => /black (\d+\.\d+(b\d+)?)/
 end

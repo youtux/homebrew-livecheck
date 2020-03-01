@@ -1,3 +1,3 @@
 class InteractiveRebaseTool
-  livecheck :regex => %r{([\d]+[\.]+)}
+  livecheck :regex => /([\d]+[\.]+)/
 end
