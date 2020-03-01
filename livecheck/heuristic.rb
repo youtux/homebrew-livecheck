@@ -117,7 +117,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
       package = url.split("/")[3..-3].reject {|s| s === '-'}.join("/")
       page_url = "https://www.npmjs.com/package/#{package}?activeTab=versions"
 
-      regex ||= %r{/package/#{package}/v/([^"]+)"}
+      regex ||= %r{/package/#{package}/v/(\d+(?:\.\d+)+)"}
 
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
