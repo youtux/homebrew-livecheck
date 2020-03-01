@@ -134,7 +134,7 @@ module Homebrew
             "is_outdated"            => is_outdated,
             "is_newer_than_upstream" => is_newer_than_upstream,
             "guessed"                => !formula.livecheckable,
-          }
+          },
         }
       else
         puts "#{formula_s} : #{current_s} ==> #{latest_s}"
