@@ -1,4 +1,4 @@
 class Mariadb
-  livecheck :url => "https://downloads.mariadb.org/",
+  livecheck :url   => "https://downloads.mariadb.org/",
             :regex => /Download ([0-9\.]+) Stable Now/
 end

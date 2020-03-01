@@ -1,4 +1,4 @@
 class Tclap
-  livecheck :url => "https://sourceforge.net/projects/tclap/",
+  livecheck :url   => "https://sourceforge.net/projects/tclap/",
             :regex => %r{.*?/tclap-([0-9\.]+\.[0-9\.]+)\.t}
 end

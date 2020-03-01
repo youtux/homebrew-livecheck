@@ -1,4 +1,4 @@
 class Dtc
-  livecheck :url => "https://mirrors.edge.kernel.org/pub/software/utils/dtc/",
+  livecheck :url   => "https://mirrors.edge.kernel.org/pub/software/utils/dtc/",
             :regex => /href="dtc-([0-9\.]+)\.t/
 end

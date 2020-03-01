@@ -1,4 +1,4 @@
 class Opus
-  livecheck :url => "https://www.opus-codec.org/downloads/",
+  livecheck :url   => "https://www.opus-codec.org/downloads/",
             :regex => %r{href="/release/stable/.*libopus ([0-9,\.]+)</a>}
 end
