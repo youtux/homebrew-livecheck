@@ -127,13 +127,13 @@ module Homebrew
     if needs_to_show
       if Homebrew.args.json?
         return {
-          "formula": formula.full_name,
-          "version": {
-            "current": current.to_s,
-            "latest": latest.to_s,
-            "is_outdated": is_outdated,
-            "is_newer_than_upstream": is_newer_than_upstream,
-            "guessed": !formula.livecheckable,
+          "formula" => formula.full_name,
+          "version" => {
+            "current"                => current.to_s,
+            "latest"                 => latest.to_s,
+            "is_outdated"            => is_outdated,
+            "is_newer_than_upstream" => is_newer_than_upstream,
+            "guessed"                => !formula.livecheckable,
           }
         }
       else
