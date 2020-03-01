@@ -114,7 +114,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
         match_version_map[match] = version
       end
     elsif /registry\.npmjs\.org/.match?(url)
-      package = url.split("/")[3..-3].reject {|s| s === '-'}.join("/")
+      package = url.split("/")[3..-3].reject { |s| s == "-" }.join("/")
       page_url = "https://www.npmjs.com/package/#{package}?activeTab=versions"
 
       regex ||= %r{/package/#{package}/v/(\d+(?:\.\d+)+)"}
