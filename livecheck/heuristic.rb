@@ -3,8 +3,15 @@ require "utils"
 # TODO: distinguish between a filter regex and a matching regex
 def version_heuristic(livecheckable, urls, regex = nil)
   urls.each do |url|
+    # Skip Gists until/unless we create a method of identifying revisions
+    next if url.include?("gist.github.com")
+
+    # Check for GitHub repos on github.com, not AWS
+    url.sub!("github.s3.amazonaws.com", "github.com") if url.include?("github")
+
     puts "Trying with url #{url}" if Homebrew.args.debug?
-    if url.include?("github") && !url.include?("menhir") &&
+    if url.include?("github.com") &&
+       !url.include?("menhir") &&
        !url.include?("mednafen") &&
        !url.include?("camlp5") &&
        !url.include?("kotlin") &&
@@ -21,9 +28,14 @@ def version_heuristic(livecheckable, urls, regex = nil)
       elsif url.include? "downloads"
         url = Pathname.new(url.sub(%r{/downloads(.*)}, "\\1")).dirname.to_s+".git"
       elsif !url.end_with?(".git")
+        # Truncate the URL at the user/repo part, if possible
+        github_repo_url = url[%r{((?:[a-z]+://)?github.com/[^/]+/[^/#]+)}]
+        url = github_repo_url unless github_repo_url.nil?
+
         if url.end_with?("/")
           url = url[0..-2]
         end
+
         url += ".git"
       end
     end
