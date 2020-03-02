@@ -1,4 +1,4 @@
 class Cfengine
-  livecheck :url   => "https://cfengine.com/product/community/source-code/",
-            :regex => %r{href=".*?/cfengine-([0-9\.]+)\.t}
+  livecheck :url   => "https://cfengine.com/release-data/community/releases.json",
+            :regex => /"version": ?"(\d+(?:\.\d+)+)"/
 end
