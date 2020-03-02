@@ -59,6 +59,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
         tag_cleaned = tag[/\D*(.*)/, 1]
         match_version_map[tag] = Version.new(tag_cleaned)
       rescue TypeError
+        nil
       end
     elsif url =~ %r{(sourceforge\.net|sf\.net)/} && !url.include?("mikmod") &&
           !url.include?("log4cpp") &&
