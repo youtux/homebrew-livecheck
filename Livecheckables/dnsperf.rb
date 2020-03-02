@@ -1,4 +1,4 @@
 class Dnsperf
-  livecheck :url   => "https://www.akamai.com/us/en/products/network-operator/measurement-tools.jsp",
-            :regex => /dnsperf and resperf ([0-9\.]+) – source distribution/
+  livecheck :url   => "https://www.dns-oarc.net/tools/dnsperf",
+            :regex => /dnsperf-(\d+(?:\.\d+)+)\.tar/
 end
