@@ -80,6 +80,7 @@ module Homebrew
     rescue => e
       onoe "#{Tty.blue}#{formula}#{Tty.reset}: #{e}" unless Homebrew.args.quiet?
       Homebrew.failed = true
+      nil
     end
 
     puts JSON.generate(formulae_checked.compact) if Homebrew.args.json?
