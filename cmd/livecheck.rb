@@ -126,6 +126,7 @@ module Homebrew
     is_newer_than_upstream = current > latest
 
     formula_name = Homebrew.args.full_name? ? formula.full_name : formula
+    formula_s = "#{Tty.blue}#{formula_name}#{Tty.reset}"
 
     if is_outdated || !Homebrew.args.newer_only?
       if Homebrew.args.json?
@@ -140,7 +141,6 @@ module Homebrew
           },
         }
       else
-        formula_s = "#{Tty.blue}#{formula_name}#{Tty.reset}"
         formula_s += " (guessed)" unless formula.livecheckable
         current_s =
           if is_newer_than_upstream
