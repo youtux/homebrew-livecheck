@@ -25,6 +25,8 @@ module Homebrew
       switch :verbose
       switch :quiet
       switch :debug
+      switch "--full-name",
+             description: "Print formulae with fully-qualified names."
       flag   "--tap=",
              description: "Check the formulae within the given tap, specified as <user>`/`<repo>."
       switch "--installed",
@@ -123,27 +125,12 @@ module Homebrew
     is_outdated = current < latest
     is_newer_than_upstream = current > latest
 
-    formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
-    formula_s += " (guessed)" unless formula.livecheckable
-    current_s =
-      if is_newer_than_upstream
-        "#{Tty.red}#{current}#{Tty.reset}"
-      else
-        current.to_s
-      end
+    formula_name = Homebrew.args.full_name? ? formula.full_name : formula
 
-    latest_s =
-      if is_outdated
-        "#{Tty.green}#{latest}#{Tty.reset}"
-      else
-        latest.to_s
-      end
-
-    needs_to_show = is_outdated || !Homebrew.args.newer_only?
-    if needs_to_show
+    if is_outdated || !Homebrew.args.newer_only?
       if Homebrew.args.json?
         return {
-          "formula" => formula.full_name,
+          "formula" => formula_name,
           "version" => {
             "current"                => current.to_s,
             "latest"                 => latest.to_s,
@@ -153,6 +140,20 @@ module Homebrew
           },
         }
       else
+        formula_s = "#{Tty.blue}#{formula_name}#{Tty.reset}"
+        formula_s += " (guessed)" unless formula.livecheckable
+        current_s =
+          if is_newer_than_upstream
+            "#{Tty.red}#{current}#{Tty.reset}"
+          else
+            current.to_s
+          end
+        latest_s =
+          if is_outdated
+            "#{Tty.green}#{latest}#{Tty.reset}"
+          else
+            latest.to_s
+          end
         puts "#{formula_s} : #{current_s} ==> #{latest_s}"
       end
     end
