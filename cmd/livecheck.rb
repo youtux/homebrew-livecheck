@@ -99,6 +99,21 @@ module Homebrew
       return
     end
 
+    has_hash_arg_with_skip =
+      formula.livecheck_args.is_a?(Hash) && formula.livecheck_args.key?(:skip)
+    if has_hash_arg_with_skip || formula.livecheck_args == :skip
+      if has_hash_arg_with_skip &&
+         formula.livecheck_args[:skip].is_a?(String) &&
+         !formula.livecheck_args[:skip].empty?
+        skip_msg = " - #{formula.livecheck_args[:skip]}"
+      else
+        skip_msg = ""
+      end
+
+      puts "#{Tty.red}#{formula}#{Tty.reset} : skipped#{skip_msg}" unless Homebrew.args.quiet?
+      return
+    end
+
     current = formula.stable? ? formula.version : formula.installed_version
     latest = formula.stable? ? formula.latest : formula.latest_head_version
     if (m = latest.to_s.match(/(.*)-release$/)) && !current.to_s.match(/.*-release$/)
