@@ -5,12 +5,16 @@ class Formula
     self.class.latest
   end
 
+  def livecheck_args
+    self.class.livecheck_args
+  end
+
   def livecheckable
     self.class.livecheckable
   end
 
   class << self
-    attr_reader :livecheckable
+    attr_reader :livecheck_args, :livecheckable
 
     def all_urls
       urls = []
