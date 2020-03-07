@@ -2,6 +2,15 @@ require "utils"
 
 # TODO: distinguish between a filter regex and a matching regex
 def version_heuristic(livecheckable, urls, regex = nil)
+  # Formulae that do not use GNOME's "even-numbered minor is stable" scheme
+  gnome_devel_whitelist = [
+    "gcab",
+    "gtk-doc",
+    "gtk-mac-integration",
+    "libart_lgpl", # The package name for libart is "libart_lgpl"
+    "libepoxy",
+  ].freeze
+
   urls.each do |url|
     # Skip Gists until/unless we create a method of identifying revisions
     next if url.include?("gist.github.com")
@@ -144,7 +153,12 @@ def version_heuristic(livecheckable, urls, regex = nil)
         puts "Possible GNOME package [#{package}] detected at #{url}"
       end
 
-      regex ||= /#{Regexp.escape(package)}-([\d.]+\.[\d.]+\.[\d.]+)\.t/
+      # Restrict versions to even numbered minor versions (except x.90+)
+      if gnome_devel_whitelist.include?(package)
+        regex ||= /#{Regexp.escape(package)}-(\d+(?:\.\d+)+)\.t/
+      else
+        regex ||= /#{Regexp.escape(package)}-(\d+\.([0-8]\d*?)?[02468](?:\.\d+)*?)\.t/
+      end
 
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
