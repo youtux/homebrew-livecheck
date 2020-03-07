@@ -169,6 +169,17 @@ def version_heuristic(livecheckable, urls, regex = nil)
       page_url = "https://launchpad.net/#{package}"
 
       regex ||= %r{<div class="version">\s*Latest version is (.+)\s*</div>}
+
+      page_matches(page_url, regex).each do |match|
+        version = Version.new(match)
+        match_version_map[match] = version
+      end
+    elsif %r{www\.apache\.org/dyn}.match?(url)
+      path, prefix, suffix = url.match(%r{path=(.+?)/([^/]*?)\d+(?:\.\d+)+(/|[^/]*)})[1, 3]
+      page_url = "https://archive.apache.org/dist/#{path}/"
+
+      regex ||= /href="#{Regexp.escape(prefix)}(\d+(?:\.\d+)+)#{Regexp.escape(suffix)}/
+
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
         match_version_map[match] = version
