@@ -42,11 +42,12 @@ In order to make a formula compatible with `homebrew-livecheck`, it is sufficien
 
 The only requirement is that a `Livecheckable` formula must implement the `latest` method, that can be easily made by calling the `livecheck` function available from [formula.rb](livecheck/extend/formula.rb).
 
-Here's an example from [python@2.rb](Livecheckables/python@2.rb):
+Here's an example from [python.rb](Livecheckables/python.rb):
+
 ```ruby
-class PythonAT2
-  livecheck :url => "https://www.python.org/ftp/python",
-            :regex => %r{href="(2(?:\.\d+)+)/"}
+class Python
+  livecheck :url   => "https://www.python.org/downloads/",
+            :regex => %r{href="https://www.python.org/ftp/python/([0-9\.]+)}
 end
 ```
 
