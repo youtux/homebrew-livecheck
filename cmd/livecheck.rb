@@ -41,6 +41,10 @@ module Homebrew
     end
   end
 
+  def formula_name(formula)
+    Homebrew.args.full_name? ? formula.full_name : formula
+  end
+
   def livecheck
     livecheck_args.parse
 
@@ -80,7 +84,7 @@ module Homebrew
     formulae_checked = formulae_to_check.sort.map do |formula|
       print_latest_version formula
     rescue => e
-      onoe "#{Tty.blue}#{formula}#{Tty.reset}: #{e}" unless Homebrew.args.quiet?
+      onoe "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}: #{e}" unless Homebrew.args.quiet?
       Homebrew.failed = true
       nil
     end
@@ -90,13 +94,13 @@ module Homebrew
 
   def print_latest_version(formula)
     if formula.to_s.include?("@") && !formula.livecheckable
-      puts "#{Tty.red}#{formula}#{Tty.reset} : versioned" unless Homebrew.args.quiet?
+      puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : versioned" unless Homebrew.args.quiet?
       return
     end
 
     if !formula.stable? && !formula.installed?
       unless Homebrew.args.quiet?
-        puts "#{Tty.red}#{formula}#{Tty.reset} : HEAD only formula must be installed to be livecheckable"
+        puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : HEAD only formula must be installed to be livecheckable"
       end
       return
     end
@@ -112,7 +116,7 @@ module Homebrew
         skip_msg = ""
       end
 
-      puts "#{Tty.red}#{formula}#{Tty.reset} : skipped#{skip_msg}" unless Homebrew.args.quiet?
+      puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : skipped#{skip_msg}" unless Homebrew.args.quiet?
       return
     end
 
@@ -125,13 +129,12 @@ module Homebrew
     is_outdated = current < latest
     is_newer_than_upstream = current > latest
 
-    formula_name = Homebrew.args.full_name? ? formula.full_name : formula
-    formula_s = "#{Tty.blue}#{formula_name}#{Tty.reset}"
+    formula_s = "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}"
 
     if is_outdated || !Homebrew.args.newer_only?
       if Homebrew.args.json?
         return {
-          "formula" => formula_name,
+          "formula" => formula_name(formula),
           "version" => {
             "current"                => current.to_s,
             "latest"                 => latest.to_s,
