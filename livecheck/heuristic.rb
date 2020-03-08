@@ -184,6 +184,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
     version_rejections = %w[
       alpha
       beta
+      bpo
       dev
       experimental
       prerelease
