@@ -1,4 +1,4 @@
 class Exempi
-  livecheck :url   => "https://libopenraw.freedesktop.org/download/",
-            :regex => /href="exempi-([0-9\.]+)\.t/
+  livecheck :url   => "https://libopenraw.freedesktop.org/exempi/",
+            :regex => /href="[^"']+exempi-(\d+(?:\.\d+)+)\.t/
 end
