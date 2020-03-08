@@ -1,4 +1,4 @@
 class Embulk
-  livecheck :url   => "http://www.embulk.org/docs/release.html",
-            :regex => />Release ([0-9\.]+)</
+  livecheck :url   => "https://github.com/embulk/embulk.git",
+            :regex => /^v?(\d+(?:\.\d+)+)$/
 end
