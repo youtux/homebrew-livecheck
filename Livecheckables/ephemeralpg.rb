@@ -1,4 +1,4 @@
 class Ephemeralpg
-  livecheck :url   => "http://eradman.com/ephemeralpg/",
-            :regex => %r{href=.*?/ephemeralpg-(\d+(?:\.\d+)+)\.t}
+  livecheck :url   => "https://eradman.com/ephemeralpg/",
+            :regex => /href=['"][^'"]*?ephemeralpg-(\d+(?:\.\d+)+)\.t/
 end
