@@ -1,4 +1,4 @@
 class Etsh
-  livecheck :url   => "https://etsh.io/",
-            :regex => %r{href="/src/etsh-([\d.]+)\.t}
+  livecheck :url   => "https://etsh.nl/src/",
+            :regex => %r{href="etsh[-_](\d+(?:\.\d+)+)(?:(?:\.t)|/)?}
 end
