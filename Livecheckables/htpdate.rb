@@ -1,4 +1,4 @@
 class Htpdate
-  livecheck :url   => "http://www.vervest.org/htp/download",
-            :regex => %r{href=.*?/htpdate-([0-9\.]+)\.t}
+  livecheck :url   => "http://www.vervest.org/htp/archive/c/?C=M&O=D",
+            :regex => /href="htpdate-(\d+(?:\.\d+)+)\.t/
 end
