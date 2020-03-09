@@ -1,4 +1,3 @@
 class Rabbitmq
-  livecheck :url   => "https://dl.bintray.com/rabbitmq/binaries/",
-            :regex => /rabbitmq-server-generic-unix-(\d+(?:\.\d+)*)/
+  livecheck :regex => /^v?(\d+(?:\.\d+)+)$/
 end
