@@ -1,4 +1,3 @@
 class Telegraf
-  livecheck :url   => "https://portal.influxdata.com/downloads",
-            :regex => /telegraf.*?>v?([0-9\.]+)</
+  livecheck :regex => /^v?(\d+(?:\.\d+)+)$/
 end
