@@ -1,4 +1,4 @@
 class Libnice
-  livecheck :url   => "https://nice.freedesktop.org/releases/",
-            :regex => /href="libnice-([\d.]+\.[\d.]+\.[\d.]+)\.t/
+  livecheck :url   => "https://github.com/libnice/libnice.git",
+            :regex => /^v?(\d+(?:\.\d+)+)$/
 end
