@@ -1,3 +1,3 @@
 class Ibex
-  livecheck :regex => /ibex-(\d+(?:\.\d+)+)/
+  livecheck :regex => /^ibex-(\d+(?:\.\d+)+)$/
 end
