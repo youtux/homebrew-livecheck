@@ -1,4 +1,4 @@
 class RakudoStar
-  livecheck :url   => "https://rakudo.perl6.org/downloads/star/",
-            :regex => /href="rakudo-star-([0-9\.]+)\.t/
+  livecheck :url   => "https://rakudo.org/dl/star/",
+            :regex => /rakudo-star-(\d+(?:\.\d+)+)\.t/
 end
