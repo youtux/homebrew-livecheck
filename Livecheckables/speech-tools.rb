@@ -1,4 +1,4 @@
 class SpeechTools
-  livecheck :url   => "http://festvox.org/packed/festival/",
-            :regex => %r{href="([0-9\.]+)/">}
+  livecheck :url   => "http://festvox.org/packed/festival/?C=M&O=D",
+            :regex => %r{href="(\d+(?:\.\d+)+)/?"}
 end
