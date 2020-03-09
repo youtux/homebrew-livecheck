@@ -1,4 +1,4 @@
 class PerconaXtrabackup
-  livecheck :url   => "https://www.percona.com/downloads/XtraBackup/LATEST/",
-            :regex => %r{value="XtraBackup/Percona-XtraBackup-([0-9\-\.]+)"}
+  livecheck :url   => "https://github.com/percona/percona-xtrabackup.git",
+            :regex => /^percona-xtrabackup-(\d+(?:\.\d+)+)$/
 end
