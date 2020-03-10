@@ -1,4 +1,4 @@
 class Spades
-  livecheck :url   => "http://bioinf.spbau.ru/en/content/spades-download-0",
-            :regex => /href=".*SPAdes-([0-9\.]+)\.t/
+  livecheck :url   => "http://cab.spbu.ru/files/?C=M&O=D",
+            :regex => %r{href="release(\d+(?:\.\d+)+)/?"}
 end
