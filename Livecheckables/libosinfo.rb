@@ -1,4 +1,4 @@
 class Libosinfo
-  livecheck :url   => "https://releases.pagure.org/libosinfo/",
-            :regex => /libosinfo-([\d.]+)\.tar\.gz/
+  livecheck :url   => "https://releases.pagure.org/libosinfo/?C=M&O=D",
+            :regex => /href="libosinfo-([\d.]+)\.t/
 end
