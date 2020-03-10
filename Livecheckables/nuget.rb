@@ -1,4 +1,4 @@
 class Nuget
-  livecheck :url   => "http://www.crufty.net/ftp/pub/sjg/",
-            :regex => /href="bmake-([0-9,\.]+)\.tar/
+  livecheck :url   => "https://dist.nuget.org/index.json",
+            :regex => /"displayName":\s*?"nuget.exe",\s*?"version":\s*?"v?(\d+(?:\.\d+)+)"/i
 end
