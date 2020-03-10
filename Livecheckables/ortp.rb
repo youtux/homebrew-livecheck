@@ -1,4 +1,4 @@
 class Ortp
-  livecheck :url   => "http://nongnu.askapache.com/linphone/ortp/sources/",
-            :regex => /href="ortp-([0-9\.]+)\.t/
+  livecheck :url   => "https://www.linphone.org/releases/sources/ortp",
+            :regex => /href="ortp-(\d+(?:\.\d+)+)\.t/
 end
