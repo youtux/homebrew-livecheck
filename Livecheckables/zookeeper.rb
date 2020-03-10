@@ -1,4 +1,4 @@
 class Zookeeper
-  livecheck :url   => "http://apache.claz.org/zookeeper/stable",
-            :regex => /href="zookeeper-([0-9\.]+)\.t/
+  livecheck :url   => "https://zookeeper.apache.org/releases.html",
+            :regex => /ZooKeeper (\d+(?:\.\d+)+) is our latest stable release/
 end
