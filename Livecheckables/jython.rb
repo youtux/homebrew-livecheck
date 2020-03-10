@@ -1,4 +1,4 @@
 class Jython
-  livecheck :url   => "http://www.jython.org/downloads.html",
-            :regex => /Jython (\d+(?:\.\d+)*)/
+  livecheck :url   => "https://github.com/jythontools/jython.git",
+            :regex => /^v?(\d+(?:\.\d+)+)$/
 end
