@@ -1,4 +1,4 @@
 class Clinfo
-  livecheck :url   => "https://github.com/Oblomov/clinfo",
-            :regex => /([0-9]+\.[0-9]+)/
+  livecheck :url   => "https://github.com/Oblomov/clinfo.git",
+            :regex => /^v?(\d+(?:\.\d+)+)$/
 end
