@@ -50,7 +50,7 @@ module Homebrew
       puts $LOAD_PATH
     end
 
-    if cmd = Homebrew.args.named.first
+    if (cmd = Homebrew.args.named.first)
       require?("livecheck/commands/#{cmd}") && return
     end
 
