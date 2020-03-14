@@ -13,9 +13,7 @@ end
 # Check if upstream only does 'debian/' prefixed tags
 def git_tags_only_debian?(tags)
   tags.each do |tag|
-    unless tag.match?(%r{^debian/})
-      return false
-    end
+    return false unless tag.match?(%r{^debian/})
   end
   true
 end
