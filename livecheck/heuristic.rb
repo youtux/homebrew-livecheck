@@ -41,9 +41,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
         github_repo_url = url[%r{((?:[a-z]+://)?github.com/[^/]+/[^/#]+)}]
         url = github_repo_url unless github_repo_url.nil?
 
-        if url.end_with?("/")
-          url = url[0..-2]
-        end
+        url = url[0..-2] if url.end_with?("/")
 
         url += ".git"
       end
@@ -106,17 +104,13 @@ def version_heuristic(livecheckable, urls, regex = nil)
         url.match(r)
       end.compact
 
-      if match_list.length > 1
-        puts "Multiple project names found: #{match_list}"
-      end
+      puts "Multiple project names found: #{match_list}" if match_list.length > 1
 
       unless match_list.empty?
         project_name = match_list[0][1]
         page_url = "http://ftp.gnu.org/gnu/#{project_name}/?C=M&O=D"
 
-        if Homebrew.args.debug?
-          puts "Possible GNU project [#{project_name}] detected at #{url}"
-        end
+        puts "Possible GNU project [#{project_name}] detected at #{url}" if Homebrew.args.debug?
 
         regex ||= /#{project_name}-(\d+(?:\.\d+)*)/
 
@@ -149,9 +143,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
       package = url.match(%r{/sources\/(.*?)/})[1]
       page_url = "https://download.gnome.org/sources/#{package}/cache.json"
 
-      if Homebrew.args.debug?
-        puts "Possible GNOME package [#{package}] detected at #{url}"
-      end
+      puts "Possible GNOME package [#{package}] detected at #{url}" if Homebrew.args.debug?
 
       # Restrict versions to even numbered minor versions (except x.90+)
       if gnome_devel_whitelist.include?(package)
