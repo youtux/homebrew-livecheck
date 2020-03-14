@@ -49,7 +49,8 @@ def version_heuristic(livecheckable, urls, regex = nil)
     match_version_map = {}
     if /hackage\.haskell\.org/.match?(url)
       package = ((url.split("/")[4]).split("-")[0..-2]).join("-")
-      ver = `curl -s https://hackage.haskell.org/package/"#{package}"/src/`.sub!(/.*Directory listing for #{package}-(.*) source tarball.*/, "\\1")
+      haskell_pkg_url = "https://hackage.haskell.org/package/#{package}/src"
+      ver = `curl -s "#{haskell_pkg_url}"`.sub!(/.*Directory listing for #{package}-(.*) source tarball.*/, "\\1")
       match_version_map[ver] = Version.new(ver)
     elsif DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
       puts "Possible git repo detected at #{url}" if Homebrew.args.debug?
@@ -95,7 +96,11 @@ def version_heuristic(livecheckable, urls, regex = nil)
         # puts "#{match} => #{version.inspect}" if Homebrew.args.debug?
         match_version_map[match] = version
       end
-    elsif url =~ /gnu\.org/ && !url.include?("kawa") && !url.include?("lzip") && !url.include?("numdiff") && !url.include?("icoutils") && !url.include?("dvdrtools")
+    elsif url =~ /gnu\.org/ && !url.include?("kawa") &&
+          !url.include?("lzip") &&
+          !url.include?("numdiff") &&
+          !url.include?("icoutils") &&
+          !url.include?("dvdrtools")
       project_name_regexps = [
         %r{/(?:software|gnu)/(.*?)/},
         %r{//(.*?)\.gnu\.org(?:/)?$},
