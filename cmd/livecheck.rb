@@ -102,12 +102,12 @@ module Homebrew
     has_hash_arg_with_skip =
       formula.livecheck_args.is_a?(Hash) && formula.livecheck_args.key?(:skip)
     if has_hash_arg_with_skip || formula.livecheck_args == :skip
-      if has_hash_arg_with_skip &&
-         formula.livecheck_args[:skip].is_a?(String) &&
-         !formula.livecheck_args[:skip].empty?
-        skip_msg = " - #{formula.livecheck_args[:skip]}"
+      skip_msg = if has_hash_arg_with_skip &&
+                    formula.livecheck_args[:skip].is_a?(String) &&
+                    !formula.livecheck_args[:skip].empty?
+        " - #{formula.livecheck_args[:skip]}"
       else
-        skip_msg = ""
+        ""
       end
 
       puts "#{Tty.red}#{formula}#{Tty.reset} : skipped#{skip_msg}" unless Homebrew.args.quiet?
