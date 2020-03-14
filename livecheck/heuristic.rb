@@ -146,10 +146,10 @@ def version_heuristic(livecheckable, urls, regex = nil)
       puts "Possible GNOME package [#{package}] detected at #{url}" if Homebrew.args.debug?
 
       # Restrict versions to even numbered minor versions (except x.90+)
-      if gnome_devel_whitelist.include?(package)
-        regex ||= /#{Regexp.escape(package)}-(\d+(?:\.\d+)+)\.t/
+      regex ||= if gnome_devel_whitelist.include?(package)
+        /#{Regexp.escape(package)}-(\d+(?:\.\d+)+)\.t/
       else
-        regex ||= /#{Regexp.escape(package)}-(\d+\.([0-8]\d*?)?[02468](?:\.\d+)*?)\.t/
+        /#{Regexp.escape(package)}-(\d+\.([0-8]\d*?)?[02468](?:\.\d+)*?)\.t/
       end
 
       page_matches(page_url, regex).each do |match|
