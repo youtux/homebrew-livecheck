@@ -1,4 +1,4 @@
 class Scummvm
-  livecheck :url   => "https://www.scummvm.org/downloads/",
-            :regex => %r{href=".*?/scummvm-([0-9\.]+)\.t}
+  livecheck :url   => "https://github.com/scummvm/scummvm.git",
+            :regex => /^v?(\d+(?:\.\d+)+)$/
 end
