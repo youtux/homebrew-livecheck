@@ -1,4 +1,4 @@
 class Fortune
   livecheck :url   => "http://www.ibiblio.org/pub/linux/games/amusements/fortune/",
-            :regex => /fortune-mod-([\d\.]+)\.tar\.gz/
+            :regex => /href=.*?fortune-mod-v?(\d+(?:\.\d+)*)\.t/
 end
