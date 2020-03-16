@@ -66,6 +66,8 @@ module Homebrew
       else
         Enumerator.new do |enum|
           File.open(WATCHLIST_PATH).each do |line|
+            next if line.match?(/^#/)
+
             line.split.each do |word|
               enum.yield Formulary.factory(word)
             end
