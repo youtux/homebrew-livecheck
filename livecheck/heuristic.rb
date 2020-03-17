@@ -190,6 +190,18 @@ def version_heuristic(livecheckable, urls, regex = nil)
         version = Version.new(match)
         match_version_map[match] = version
       end
+    elsif %r{bitbucket\.org(/[^/]+){4}\.\w+}.match?(url)
+      path, kind, suffix =
+        url.match(%r{bitbucket\.org/(.+?)/(get|downloads)/(?:.*?[-_])?v?\d+(?:\.\d+)+([^/]+)})[1, 3]
+      page_url = "https://bitbucket.org/#{path}/downloads/"
+      page_url << "?tab=tags" if kind == "get"
+
+      regex ||= /(\d+(?:\.\d+)+)#{Regexp.escape(suffix)}"/
+
+      page_matches(page_url, regex).each do |match|
+        version = Version.new(match)
+        match_version_map[match] = version
+      end
     elsif regex
       # Fallback
       page_matches(url, regex).each do |match|
