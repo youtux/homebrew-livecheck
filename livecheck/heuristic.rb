@@ -20,6 +20,8 @@ def version_heuristic(livecheckable, urls, regex = nil)
 
     puts "Trying with url #{url}" if Homebrew.args.debug?
     if url.include?("github.com") &&
+       !url.include?("api.github.com") &&
+       !url.include?("/latest") &&
        !url.include?("menhir") &&
        !url.include?("mednafen") &&
        !url.include?("camlp5") &&
