@@ -11,6 +11,44 @@ def version_heuristic(livecheckable, urls, regex = nil)
     "libepoxy",
   ].freeze
 
+  github_special_cases = %w[
+    api.github.com
+    /latest
+    menhir
+    mednafen
+    camlp5
+    kotlin
+    osrm-backend
+    prometheus
+    pyenv-virtualenv
+    sysdig
+    shairport-sync
+    yuicompressor
+  ].freeze
+
+  sourceforge_special_cases = %w[
+    mikmod
+    log4cpp
+    exiftool
+    libwps
+    gsmartcontrol
+    e2fsprogs
+    potrace
+    remake
+    /avf/
+    /bashdb/
+    /netpbm/
+    opencore-amr
+  ].freeze
+
+  gnu_special_cases = %w[
+    kawa
+    lzip
+    numdiff
+    icoutils
+    dvdrtools
+  ].freeze
+
   urls.each do |url|
     # Skip Gists until/unless we create a method of identifying revisions
     next if url.include?("gist.github.com")
@@ -19,19 +57,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
     url.sub!("github.s3.amazonaws.com", "github.com") if url.include?("github")
 
     puts "Trying with url #{url}" if Homebrew.args.debug?
-    if url.include?("github.com") &&
-       !url.include?("api.github.com") &&
-       !url.include?("/latest") &&
-       !url.include?("menhir") &&
-       !url.include?("mednafen") &&
-       !url.include?("camlp5") &&
-       !url.include?("kotlin") &&
-       !url.include?("osrm-backend") &&
-       !url.include?("prometheus") &&
-       !url.include?("pyenv-virtualenv") &&
-       !url.include?("sysdig") &&
-       !url.include?("shairport-sync") &&
-       !url.include?("yuicompressor")
+    if url.include?("github.com") && github_special_cases.none? { |sc| url.include? sc }
       if url.include? "archive"
         url = url.sub(%r{/archive/.*}, ".git") if url.include? "github"
       elsif url.include? "releases"
@@ -80,18 +106,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
       rescue TypeError
         nil
       end
-    elsif url =~ %r{(sourceforge\.net|sf\.net)/} && !url.include?("mikmod") &&
-          !url.include?("log4cpp") &&
-          !url.include?("exiftool") &&
-          !url.include?("libwps") &&
-          !url.include?("gsmartcontrol") &&
-          !url.include?("e2fsprogs") &&
-          !url.include?("potrace") &&
-          !url.include?("remake") &&
-          !url.include?("/avf/") &&
-          !url.include?("/bashdb/") &&
-          !url.include?("/netpbm/") &&
-          !url.include?("opencore-amr")
+    elsif url =~ %r{(sourceforge\.net|sf\.net)/} && sourceforge_special_cases.none? { |sc| url.include? sc }
       project_name = url.match(%r{/projects?/(.*?)/})[1]
       page_url = "https://sourceforge.net/projects/#{project_name}/rss"
 
@@ -107,11 +122,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
         # puts "#{match} => #{version.inspect}" if Homebrew.args.debug?
         match_version_map[match] = version
       end
-    elsif url =~ /gnu\.org/ && !url.include?("kawa") &&
-          !url.include?("lzip") &&
-          !url.include?("numdiff") &&
-          !url.include?("icoutils") &&
-          !url.include?("dvdrtools")
+    elsif url =~ /gnu\.org/ && gnu_special_cases.none? { |sc| url.include? sc }
       project_name_regexps = [
         %r{/(?:software|gnu)/(.*?)/},
         %r{//(.*?)\.gnu\.org(?:/)?$},
