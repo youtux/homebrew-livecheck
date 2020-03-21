@@ -102,7 +102,8 @@ module Homebrew
 
     if !formula.stable? && !formula.installed?
       unless Homebrew.args.quiet?
-        puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : HEAD only formula must be installed to be livecheckable"
+        puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : " \
+          "HEAD only formula must be installed to be livecheckable"
       end
       return
     end
