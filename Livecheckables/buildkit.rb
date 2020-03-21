@@ -1,3 +1,3 @@
 class Buildkit
-  livecheck :regex => /v([0-9\.]+)/
+  livecheck :regex => /^v?(\d+(?:\.\d+)+)$/
 end
