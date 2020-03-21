@@ -25,6 +25,8 @@ module Homebrew
       switch :verbose
       switch :quiet
       switch :debug
+      switch "--full-name",
+             description: "Print formulae with fully-qualified names."
       flag   "--tap=",
              description: "Check the formulae within the given tap, specified as <user>`/`<repo>."
       switch "--installed",
@@ -37,6 +39,10 @@ module Homebrew
              description: "Show the latest version only if it's newer than the formula."
       conflicts "--tap=", "--all", "--installed"
     end
+  end
+
+  def formula_name(formula)
+    Homebrew.args.full_name? ? formula.full_name : formula
   end
 
   def livecheck
@@ -80,7 +86,7 @@ module Homebrew
     formulae_checked = formulae_to_check.sort.map do |formula|
       print_latest_version formula
     rescue => e
-      onoe "#{Tty.blue}#{formula}#{Tty.reset}: #{e}" unless Homebrew.args.quiet?
+      onoe "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}: #{e}" unless Homebrew.args.quiet?
       Homebrew.failed = true
       nil
     end
@@ -90,13 +96,13 @@ module Homebrew
 
   def print_latest_version(formula)
     if formula.to_s.include?("@") && !formula.livecheckable
-      puts "#{Tty.red}#{formula}#{Tty.reset} : versioned" unless Homebrew.args.quiet?
+      puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : versioned" unless Homebrew.args.quiet?
       return
     end
 
     if !formula.stable? && !formula.installed?
       unless Homebrew.args.quiet?
-        puts "#{Tty.red}#{formula}#{Tty.reset} : HEAD only formula must be installed to be livecheckable"
+        puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : HEAD only formula must be installed to be livecheckable"
       end
       return
     end
@@ -112,7 +118,7 @@ module Homebrew
         ""
       end
 
-      puts "#{Tty.red}#{formula}#{Tty.reset} : skipped#{skip_msg}" unless Homebrew.args.quiet?
+      puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : skipped#{skip_msg}" unless Homebrew.args.quiet?
       return
     end
 
@@ -125,27 +131,12 @@ module Homebrew
     is_outdated = current < latest
     is_newer_than_upstream = current > latest
 
-    formula_s = "#{Tty.blue}#{formula}#{Tty.reset}"
-    formula_s += " (guessed)" unless formula.livecheckable
-    current_s =
-      if is_newer_than_upstream
-        "#{Tty.red}#{current}#{Tty.reset}"
-      else
-        current.to_s
-      end
+    formula_s = "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}"
 
-    latest_s =
-      if is_outdated
-        "#{Tty.green}#{latest}#{Tty.reset}"
-      else
-        latest.to_s
-      end
-
-    needs_to_show = is_outdated || !Homebrew.args.newer_only?
-    if needs_to_show
+    if is_outdated || !Homebrew.args.newer_only?
       if Homebrew.args.json?
         return {
-          "formula" => formula.full_name,
+          "formula" => formula_name(formula),
           "version" => {
             "current"                => current.to_s,
             "latest"                 => latest.to_s,
@@ -155,6 +146,19 @@ module Homebrew
           },
         }
       else
+        formula_s += " (guessed)" unless formula.livecheckable
+        current_s =
+          if is_newer_than_upstream
+            "#{Tty.red}#{current}#{Tty.reset}"
+          else
+            current.to_s
+          end
+        latest_s =
+          if is_outdated
+            "#{Tty.green}#{latest}#{Tty.reset}"
+          else
+            latest.to_s
+          end
         puts "#{formula_s} : #{current_s} ==> #{latest_s}"
       end
     end
