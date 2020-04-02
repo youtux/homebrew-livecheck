@@ -37,12 +37,14 @@ module Homebrew
              description: "Check all available formulae."
       switch "--newer-only",
              description: "Show the latest version only if it's newer than the formula."
+      switch "--check-pulls",
+             description: "Check open pull requests."
       conflicts "--tap=", "--all", "--installed"
     end
   end
 
   def formula_name(formula)
-    Homebrew.args.full_name? ? formula.full_name : formula
+    Homebrew.args.full_name? ? formula.full_name : formula.name
   end
 
   def livecheck
@@ -83,18 +85,79 @@ module Homebrew
         end
       end
 
-    formulae_checked = formulae_to_check.sort.map do |formula|
-      print_latest_version formula
+    formulae_info_checked = formulae_to_check.sort.map do |formula|
+      info = check_latest_version formula
+      print_latest_version info unless Homebrew.args.json?
+      info
     rescue => e
       onoe "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}: #{e}" unless Homebrew.args.quiet?
       Homebrew.failed = true
       nil
     end
 
-    puts JSON.generate(formulae_checked.compact) if Homebrew.args.json?
+    formulae_info_checked.compact!
+
+    if Homebrew.args.check_pulls?
+      formulae = formulae_info_checked.map do |info|
+        Formula[info["formula"]]
+      end
+
+      repos = formulae.map do |formula|
+        formula_repo formula
+      end
+
+      repos.uniq!
+
+      repos.each do |repo|
+        pulls = GitHub.search("issues", type: "pr", state: "open", repo: repo)
+        pulls.each do |pull|
+          formulae.each do |formula|
+            next unless formula_repo(formula) == repo
+            next unless pull["title"].include?(formula.name)
+
+            if Homebrew.args.json?
+              formulae_info_checked.each_index do |ind|
+                next unless formulae_info_checked[ind]["formula"] == formula_name(formula)
+
+                formulae_info_checked[ind]["pull"] = pull["title"]
+              end
+            else
+              puts "#{formula_name(formula)}: #{pull["title"]}"
+            end
+          end
+        end
+      end
+    end
+
+    puts JSON.generate(formulae_info_checked) if Homebrew.args.json?
   end
 
-  def print_latest_version(formula)
+  def formula_repo(formula)
+    linux_only_formula = formula.requirements.any? { |req| req.is_a? LinuxRequirement }
+    repo = formula.tap.full_name
+    repo = repo.gsub "linuxbrew", "homebrew" if !linux_only_formula && formula.tap.core_tap?
+    repo
+  end
+
+  def print_latest_version(info)
+    formula_s = "#{Tty.blue}#{info["formula"]}#{Tty.reset}"
+    formula_s += " (guessed)" if info["version"]["guessed"]
+    current_s =
+      if info["version"]["is_newer_than_upstream"]
+        "#{Tty.red}#{info["version"]["current"]}#{Tty.reset}"
+      else
+        info["version"]["current"]
+      end
+    latest_s =
+      if info["version"]["is_outdated"]
+        "#{Tty.green}#{info["version"]["latest"]}#{Tty.reset}"
+      else
+        info["version"]["latest"]
+      end
+    puts "#{formula_s} : #{current_s} ==> #{latest_s}"
+  end
+
+  def check_latest_version(formula)
     if formula.to_s.include?("@") && !formula.livecheckable
       puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : versioned" unless Homebrew.args.quiet?
       return
@@ -132,36 +195,18 @@ module Homebrew
     is_outdated = current < latest
     is_newer_than_upstream = current > latest
 
-    formula_s = "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}"
-
     if is_outdated || !Homebrew.args.newer_only?
-      if Homebrew.args.json?
-        return {
-          "formula" => formula_name(formula),
-          "version" => {
-            "current"                => current.to_s,
-            "latest"                 => latest.to_s,
-            "is_outdated"            => is_outdated,
-            "is_newer_than_upstream" => is_newer_than_upstream,
-            "guessed"                => !formula.livecheckable,
-          },
-        }
-      else
-        formula_s += " (guessed)" unless formula.livecheckable
-        current_s =
-          if is_newer_than_upstream
-            "#{Tty.red}#{current}#{Tty.reset}"
-          else
-            current.to_s
-          end
-        latest_s =
-          if is_outdated
-            "#{Tty.green}#{latest}#{Tty.reset}"
-          else
-            latest.to_s
-          end
-        puts "#{formula_s} : #{current_s} ==> #{latest_s}"
-      end
+      return {
+        "formula" => formula_name(formula),
+        "version" => {
+          "current"                => current.to_s,
+          "latest"                 => latest.to_s,
+          "is_outdated"            => is_outdated,
+          "is_newer_than_upstream" => is_newer_than_upstream,
+          "guessed"                => !formula.livecheckable,
+        },
+        "pull"    => nil,
+      }
     end
 
     if is_newer_than_upstream && Homebrew.args.verbose?
