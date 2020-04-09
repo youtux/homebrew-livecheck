@@ -78,7 +78,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
     if /hackage\.haskell\.org/.match?(url)
       package = ((url.split("/")[4]).split("-")[0..-2]).join("-")
       haskell_pkg_url = "https://hackage.haskell.org/package/#{package}/src"
-      ver = `curl -s "#{haskell_pkg_url}"`.sub!(/.*Directory listing for #{package}-(.*) source tarball.*/, "\\1")
+      ver = URI.open(haskell_pkg_url).read.sub(/.*Directory listing for #{package}-(.*) source tarball.*/, "\\1")
       match_version_map[ver] = Version.new(ver)
     elsif DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
       puts "Possible git repo detected at #{url}" if Homebrew.args.debug?
