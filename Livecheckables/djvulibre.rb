@@ -1,4 +1,4 @@
 class Djvulibre
-  livecheck :url   => "https://git.code.sf.net/p/djvu/djvulibre-git.git",
-            :regex => /^release.?(\d+(?:\.\d+)+)$/
+  livecheck :url   => "https://sourceforge.net/projects/djvu/files/DjVuLibre/",
+            :regex => /djvulibre-(\d+(?:\.\d+)+)\.t/
 end
