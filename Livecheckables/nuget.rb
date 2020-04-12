@@ -1,4 +1,4 @@
 class Nuget
-  livecheck :url   => "https://dist.nuget.org/index.json",
-            :regex => /"displayName":\s*?"nuget.exe - recommended latest",\s*?"version":\s*?"v?(\d+(?:\.\d+)+)"/i
+  livecheck :url   => "https://dist.nuget.org/tools.json",
+            :regex => %r{"url":\s*?"[^"]+/v?(\d+(?:\.\d+)+)/nuget\.exe",\s*?"stage":\s*?"ReleasedAndBlessed"}i
 end
