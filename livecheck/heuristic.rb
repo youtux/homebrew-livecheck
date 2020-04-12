@@ -244,6 +244,12 @@ def version_heuristic(livecheckable, urls, regex = nil)
       end
     end
 
+    if livecheck_args.is_a?(Hash) &&
+       livecheck_args.key?(:versions) &&
+       livecheck_args[:versions].is_a?(Hash)
+      filter_versions(match_version_map, livecheck_args[:versions])
+    end
+
     if Homebrew.args.debug?
       match_version_map.each do |match, version|
         puts "#{match} => #{version.inspect}"
