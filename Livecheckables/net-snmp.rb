@@ -1,4 +1,4 @@
 class NetSnmp
   livecheck :url   => "https://sourceforge.net/projects/net-snmp/",
-            :regex => %r{/net-snmp-([0-9\.]+)\.t}
+            :regex => %r{url=.+?/net-snmp-v?(\d+(?:\.\d+)+)\.t}
 end
