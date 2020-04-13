@@ -14,7 +14,6 @@ def version_heuristic(livecheckable, urls, regex = nil)
   github_special_cases = %w[
     api.github.com
     /latest
-    menhir
     mednafen
     camlp5
     kotlin
@@ -57,6 +56,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
     url.sub!("github.s3.amazonaws.com", "github.com") if url.include?("github")
 
     puts "Trying with url #{url}" if Homebrew.args.debug?
+    # Use repo from GitHub or GitLab inferred from download URL
     if url.include?("github.com") && github_special_cases.none? { |sc| url.include? sc }
       if url.include? "archive"
         url = url.sub(%r{/archive/.*}, ".git") if url.include? "github"
@@ -73,6 +73,8 @@ def version_heuristic(livecheckable, urls, regex = nil)
 
         url += ".git"
       end
+    elsif url.include?("/-/archive/")
+      url = url.sub(%r{/-/archive/.*$}i, ".git")
     end
     match_version_map = {}
     if /hackage\.haskell\.org/.match?(url)
