@@ -14,7 +14,6 @@ def version_heuristic(livecheckable, urls, regex = nil)
   github_special_cases = %w[
     api.github.com
     /latest
-    menhir
     mednafen
     camlp5
     kotlin
