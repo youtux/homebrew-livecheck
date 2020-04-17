@@ -1,4 +1,4 @@
 class Gtksourceviewmm
   livecheck :url   => "https://download.gnome.org/sources/gtksourceviewmm/",
-            :regex => /gtksourceviewmm-(2\.([0-8]\d*?)?[02468](?:\.\d+)+)\.t/
+            :regex => /gtksourceviewmm-(2\.([0-8]\d*?)?[02468](?:\.\d+)*?)\.t/
 end
