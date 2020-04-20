@@ -1,4 +1,4 @@
 class Paperkey
-  livecheck :url   => "http://www.jabberwocky.com/software/paperkey",
+  livecheck :url   => "https://www.jabberwocky.com/software/paperkey",
             :regex => /paperkey-([0-9.]+)\.t/
 end

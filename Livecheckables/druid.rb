@@ -1,4 +1,4 @@
 class Druid
-  livecheck :url   => "http://druid.io/downloads.html",
+  livecheck :url   => "https://druid.io/downloads.html",
             :regex => /href=".*druid-([0-9,\.]+)-bin\.t/
 end
