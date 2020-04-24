@@ -109,14 +109,11 @@ module Homebrew
       return
     end
 
-    has_hash_arg_with_skip =
-      formula.livecheck_args.is_a?(Hash) && formula.livecheck_args.key?(:skip)
     is_gist = formula.stable.url.include?("gist.github.com")
-    if has_hash_arg_with_skip || formula.livecheck_args == :skip || is_gist
-      skip_msg = if has_hash_arg_with_skip &&
-                    formula.livecheck_args[:skip].is_a?(String) &&
-                    !formula.livecheck_args[:skip].empty?
-        " - #{formula.livecheck_args[:skip]}"
+    if formula.livecheck.skip? || is_gist
+      skip_msg = if formula.livecheck.skip_msg.is_a?(String) &&
+                    !formula.livecheck.skip_msg.blank?
+        " - #{formula.livecheck.skip_msg}"
       elsif is_gist
         " - Stable URL is a GitHub Gist"
       else
