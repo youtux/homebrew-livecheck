@@ -106,7 +106,6 @@ def version_heuristic(livecheckable, urls, regex = nil)
 
         match_version_map[tag] = Version.new(tag_cleaned)
       rescue TypeError
-        nil
       end
     elsif url =~ %r{(sourceforge\.net|sf\.net)/} && sourceforge_special_cases.none? { |sc| url.include? sc }
       project_name = url.match(%r{/projects?/(.*?)/})[1]
