@@ -1,3 +1,4 @@
 class Autoconf
-  livecheck :url => "git://git.sv.gnu.org/autoconf", :regex => /^v(.*)$/
+  livecheck :url   => "https://git.savannah.gnu.org/git/autoconf.git",
+            :regex => /^(?:autoconf-)?v?(\d+(?:\.\d+)+)$/i
 end
