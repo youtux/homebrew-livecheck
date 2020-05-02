@@ -1,4 +1,4 @@
 class Icoutils
-  livecheck :url   => "http://www.nongnu.org/icoutils/",
-            :regex => /icoutils-(\d+\.\d+\.\d+)\.t/
+  livecheck :url   => "https://download.savannah.gnu.org/releases/icoutils/",
+            :regex => /href=.+icoutils-(\d+\.\d+\.\d+)\.t/
 end
