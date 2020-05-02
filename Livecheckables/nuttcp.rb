@@ -1,4 +1,4 @@
 class Nuttcp
-  livecheck :url   => "http://nuttcp.net/nuttcp/",
-            :regex => /href="nuttcp-([0-9\.]+)\.t/
+  livecheck :url   => "https://www.nuttcp.net/nuttcp/",
+            :regex => /href=.+nuttcp-v?(\d+(?:\.\d+)+)\.t/
 end
