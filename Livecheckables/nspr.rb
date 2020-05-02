@@ -1,4 +1,4 @@
 class Nspr
-  livecheck :url   => "http://ftp.mozilla.org/pub/mozilla.org/nspr/releases/",
+  livecheck :url   => "https://ftp.mozilla.org/pub/nspr/releases/",
             :regex => /v(\d+(?:\.\d+)*)/
 end

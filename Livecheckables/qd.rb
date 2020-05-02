@@ -1,4 +1,4 @@
 class Qd
-  livecheck :url   => "http://crd-legacy.lbl.gov/~dhbailey/mpdist/",
+  livecheck :url   => "https://www.davidhbailey.com/dhbsoftware/",
             :regex => %r{href=".*?/qd-([0-9\.]+)\.t}
 end

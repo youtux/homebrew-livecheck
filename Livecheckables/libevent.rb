@@ -1,4 +1,4 @@
 class Libevent
-  livecheck :url   => "http://libevent.org/",
+  livecheck :url   => "https://libevent.org/",
             :regex => /libevent-([0-9,\.]+)-stable/
 end
