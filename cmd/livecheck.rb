@@ -69,7 +69,7 @@ module Homebrew
         Formula.names.map { |name| Formula[name] }
       elsif !Homebrew.args.formulae.empty?
         Homebrew.args.formulae
-      else
+      elsif File.exist?(WATCHLIST_PATH)
         Enumerator.new do |enum|
           File.open(WATCHLIST_PATH).each do |line|
             next if line.match?(/^#/)
@@ -82,6 +82,7 @@ module Homebrew
           onoe e
         end
       end
+    return unless formulae_to_check
 
     formulae_checked = formulae_to_check.sort.map do |formula|
       print_latest_version formula
