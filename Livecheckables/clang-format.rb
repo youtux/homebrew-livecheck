@@ -1,4 +1,4 @@
 class ClangFormat
-  livecheck :url   => "https://llvm.org/svn/llvm-project/llvm/tags/google/stable/",
-            :regex => /(\d+-\d+-\d+)/
+  livecheck :url   => "https://github.com/llvm/llvm-project/releases/latest",
+            :regex => %r{href=.+?/tag/llvmorg-v?(\d+(?:\.\d+)+)}i
 end
