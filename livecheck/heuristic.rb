@@ -28,9 +28,7 @@ def version_heuristic(livecheckable, urls, regex = nil)
   sourceforge_special_cases = %w[
     mikmod
     log4cpp
-    exiftool
     libwps
-    gsmartcontrol
     e2fsprogs
     potrace
     remake
@@ -108,16 +106,19 @@ def version_heuristic(livecheckable, urls, regex = nil)
       rescue TypeError
         nil
       end
-    elsif url =~ %r{(sourceforge\.net|sf\.net)/} && sourceforge_special_cases.none? { |sc| url.include? sc }
-      project_name = url.match(%r{/projects?/(.*?)/})[1]
+    elsif /(sourceforge|sf)\.net/.match?(url) && sourceforge_special_cases.none? { |sc| url.include? sc }
+      project_name = if url.include?("/project")
+        url.match(%r{/projects?/([^/]+)/})[1]
+      elsif url.include?(".net/p/")
+        url.match(%r{\.net/p/([^/]+)/})[1]
+      else
+        url.match(%r{\.net(?::/cvsroot)?/([^/]+)})[1]
+      end
       page_url = "https://sourceforge.net/projects/#{project_name}/rss"
 
-      if Homebrew.args.debug?
-        puts "Possible SourceForge project [#{project_name}] detected" \
-             "at #{url}"
-      end
+      puts "Possible SourceForge project [#{project_name}] detected at #{url}" if Homebrew.args.debug?
 
-      regex ||= %r{/#{project_name}/([a-zA-Z0-9.]+(?:\.[a-zA-Z0-9.]+)*)}i
+      regex ||= %r{url=.+?/#{project_name}/files/.*?[-_/](\d+(?:[-.]\d+)+)[-_/%.]}i
 
       page_matches(page_url, regex).each do |match|
         version = Version.new(match)
