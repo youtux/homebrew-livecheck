@@ -9,8 +9,8 @@ class Formula
     self.class.livecheck_args
   end
 
-  def livecheckable
-    self.class.livecheckable
+  def livecheckable?
+    self.class.livecheckable == true
   end
 
   class << self
