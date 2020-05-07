@@ -96,7 +96,7 @@ module Homebrew
   end
 
   def print_latest_version(formula)
-    if formula.to_s.include?("@") && !formula.livecheckable
+    if formula.to_s.include?("@") && !formula.livecheckable?
       puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : versioned" unless Homebrew.args.quiet?
       return
     end
@@ -147,11 +147,11 @@ module Homebrew
             "latest"                 => latest.to_s,
             "is_outdated"            => is_outdated,
             "is_newer_than_upstream" => is_newer_than_upstream,
-            "guessed"                => !formula.livecheckable,
+            "guessed"                => !formula.livecheckable?,
           },
         }
       else
-        formula_s += " (guessed)" unless formula.livecheckable
+        formula_s += " (guessed)" unless formula.livecheckable?
         current_s =
           if is_newer_than_upstream
             "#{Tty.red}#{current}#{Tty.reset}"
