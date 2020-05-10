@@ -1,4 +1,4 @@
 class Avfs
-  livecheck :url   => "https://sourceforge.net/projects/avf/",
-            :regex => /avfs-([0-9\.]+)\.t/
+  livecheck :url   => "https://sourceforge.net/projects/avf/rss",
+            :regex => %r{url=.+?/avfs-v?(\d+(?:\.\d+)+)\.t}
 end
