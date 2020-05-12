@@ -1,3 +1,4 @@
 class Ant
-  livecheck :url => "https://www.apache.org/dist/ant/", :regex => /RELEASE\-NOTES\-(.*?)\.html/
+  livecheck :url   => "https://downloads.apache.org/ant/binaries/",
+            :regex => /href=.+?apache-ant-v?(\d+(?:\.\d+)+)(?:-bin)?\.t/
 end
