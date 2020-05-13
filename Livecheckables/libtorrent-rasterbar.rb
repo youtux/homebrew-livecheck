@@ -1,4 +1,3 @@
 class LibtorrentRasterbar
-  livecheck :url   => "https://libtorrent.org/",
-            :regex => %r{<tr><th class="docinfo-name">Version:</th>\n<td>([0-9\.]+)</td></tr>}
+  livecheck :regex => /^libtorrent.v?(\d+(?:[-_.]\d+)+)$/i
 end
