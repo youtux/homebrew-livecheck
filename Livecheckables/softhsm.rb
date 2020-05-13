@@ -1,4 +1,4 @@
 class Softhsm
-  livecheck :url   => "https://www.opendnssec.org/download/",
-            :regex => %r{href=".*?/softhsm-([0-9\.]+)\.t}
+  livecheck :url   => "https://dist.opendnssec.org/source/",
+            :regex => /href=.+?softhsm-v?(\d+(?:\.\d+)+)\.t/
 end
