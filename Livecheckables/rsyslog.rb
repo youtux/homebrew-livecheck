@@ -1,4 +1,4 @@
 class Rsyslog
   livecheck :url   => "https://www.rsyslog.com/",
-            :regex => /Current Version.*?>([0-9\.]+)</
+            :regex => /Current Version.+?v?(\d+(?:\.\d+)+)/m
 end
