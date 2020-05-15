@@ -1,4 +1,4 @@
 class TclTk
-  livecheck :url   => "https://www.tcl-lang.org/software/tcltk/download.html",
-            :regex => %r{href="[^"]+/tcl([\d\.]+)-src\.tar\.[a-z]+"}
+  livecheck :url   => "https://sourceforge.net/projects/tcl/rss",
+            :regex => %r{url=.+?/(?:tcl|tk).?v?(\d+(?:\.\d+)+)-src\.t}i
 end
