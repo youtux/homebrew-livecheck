@@ -1,4 +1,4 @@
 class Qmmp
-  livecheck :url   => "https://qmmp.ylsoftware.com/downloads.php",
-            :regex => /href=".*?qmmp-([0-9\.]+)\.t/
+  livecheck :url   => "https://sourceforge.net/projects/qmmp-dev/rss",
+            :regex => %r{url=.+?/qmmp-v?(\d+(?:\.\d+)+)\.t}
 end
