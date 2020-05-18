@@ -4,6 +4,6 @@ class Zabbix
   # CDN index page instead. Unfortunately, the versions are separated into
   # folders for a given major/minor version, so this will quietly stop being
   # a proper check sometime in the future and need to be updated.
-  livecheck :url   => "https://cdn.zabbix.com/zabbix/sources/stable/4.4/",
+  livecheck :url   => "https://cdn.zabbix.com/zabbix/sources/stable/5.0/",
             :regex => /href=.+?zabbix-(\d+(?:\.\d+)+)\.t/
 end
