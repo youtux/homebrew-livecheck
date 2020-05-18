@@ -1,4 +1,4 @@
 class Nsd
-  livecheck :url   => "https://www.nlnetlabs.nl/projects/nsd/",
-            :regex => %r{Most Recent Version.*?href=".*?/nsd-([0-9\.]+)\.t}m
+  livecheck :url   => "https://github.com/NLnetLabs/nsd.git",
+            :regex => /^NSD.v?(\d+(?:[-_.]\d+)+).REL$/i
 end
