@@ -1,3 +1,4 @@
 class Theora
-  livecheck :regex => /^v?(\d+(?:\.\d+)+)$/
+  livecheck :url   => "https://www.theora.org/downloads/",
+            :regex => /href=.+?libtheora-v?(\d+(?:\.\d+)+)\.t/
 end
