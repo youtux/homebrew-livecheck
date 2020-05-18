@@ -1,4 +1,4 @@
 class Bgpdump
-  livecheck :url   => "https://www.ris.ripe.net/source/bgpdump/?C=M&O=D",
-            :regex => /href="libbgpdump-(\d+(?:\.\d+)+)\.[^"]+"/
+  livecheck :url   => "https://github.com/RIPE-NCC/bgpdump.git",
+            :regex => /^v?(\d+(?:\.\d+)+)$/
 end
