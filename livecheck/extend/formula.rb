@@ -1,21 +1,13 @@
 require "formula"
 
 class Formula
+  delegate :livecheck => :"self.class"
+
   def latest
     self.class.latest
   end
 
-  def livecheck_args
-    self.class.livecheck_args
-  end
-
-  def livecheckable?
-    self.class.livecheckable == true
-  end
-
   class << self
-    attr_reader :livecheck_args, :livecheckable
-
     def all_urls
       urls = []
       urls << head.url if head
@@ -29,28 +21,23 @@ class Formula
     end
 
     def livecheck(arg = {}, &block)
-      @livecheck_args = block || arg
+      @livecheck ||= Livecheck.new
+      return @livecheck if livecheckable? || (!block_given? && arg.empty?)
+
       @livecheckable = true
+      if block_given?
+        @livecheck.instance_eval(&block)
+      else
+        arg.each do |key, value|
+          @livecheck.send(key.to_s, value)
+        end
+      end
     end
 
     def _latest
-      @livecheck_args ||= {}
-      version_s =
-        if @livecheck_args.is_a? Proc
-          result = @livecheck_args.call
-          if result.is_a? Array
-            result.map { |s| Version.new(s) }.max
-          else
-            result
-          end
-        else
-          urls = [@livecheck_args[:url]] if @livecheck_args[:url]
-          urls ||= all_urls
-          regex = @livecheck_args[:regex]
-
-          version_heuristic(livecheckable, urls, regex)
-        end
-
+      urls = [@livecheck.url] if @livecheck.url.is_a?(String) && !@livecheck.url.blank?
+      urls ||= all_urls
+      version_s = version_heuristic(livecheckable?, urls, @livecheck.regex)
       Version.new(version_s)
     end
 
