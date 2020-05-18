@@ -1,4 +1,3 @@
 class Ddclient
-  livecheck :url   => "https://sourceforge.net/projects/ddclient/",
-            :regex => /ddclient-(\d+(?:\.\d+)+)/
+  livecheck :regex => /^v?(\d+(?:\.\d+)+)$/
 end
