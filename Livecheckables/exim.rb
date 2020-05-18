@@ -1,4 +1,11 @@
 class Exim
-  livecheck :url   => "https://mirrors.ocf.berkeley.edu/debian/pool/main/e/exim4/",
-            :regex => /href="exim4_([0-9\.\-]+)\.debian\.t/
+  # The upstream download page at https://ftp.exim.org/pub/exim/exim4/ places
+  # maintenance releases (e.g., 4.93.0.4) in a separate "fixes" subdirectory.
+  # As a result, we can't create a check that finds both the main releases
+  # (e.g., 4.93) and the aforementioned maintenance releases. The Git repo tags
+  # seem to be the best solution currently and we're using the GitHub mirror
+  # below since the upstream repo (git://git.exim.org/exim.git) doesn't work
+  # over https.
+  livecheck :url   => "https://github.com/Exim/exim.git",
+            :regex => /^exim-v?(\d+(?:\.\d+)+)$/
 end
