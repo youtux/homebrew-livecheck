@@ -3,7 +3,7 @@ require "open-uri"
 def git_tags(repo_url, filter = nil)
   raw_tags = `git ls-remote --tags #{repo_url}`
   raw_tags.gsub!(%r{^.*\trefs/tags/}, "")
-  raw_tags.gsub!(/\^\{\}$/, "")
+  raw_tags.delete_suffix!("^{}")
 
   tags = raw_tags.split("\n").uniq.sort
   tags.select! { |t| t =~ filter } if filter
@@ -13,7 +13,7 @@ end
 # Check if upstream only does 'debian/' prefixed tags
 def git_tags_only_debian?(tags)
   tags.each do |tag|
-    return false unless tag.match?(%r{^debian/})
+    return false unless tag.start_with?("debian/")
   end
   true
 end
