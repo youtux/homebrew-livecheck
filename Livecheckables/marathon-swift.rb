@@ -1,6 +1,6 @@
 class MarathonSwift
-  # repo deprecated in favor of official swift package manager
-  # see https://github.com/JohnSundell/Marathon/issues/208
-  # also there is un-fixed compilation issue, https://github.com/JohnSundell/Marathon/issues/151
-  livecheck :skip => "Not maintained"
+  # This software was deprecated in favor of the official Swift package manager
+  # and the upstream repository has been archived as of 2019-09-09
+  # (see https://github.com/JohnSundell/Marathon/issues/208).
+  livecheck :skip => "No longer developed/maintained"
 end
