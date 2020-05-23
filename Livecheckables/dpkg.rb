@@ -1,4 +1,4 @@
 class Dpkg
-  livecheck :url   => "https://mirrors.ocf.berkeley.edu/debian/pool/main/d/dpkg/",
-            :regex => /href="dpkg_([0-9\.]+)\.t/
+  livecheck :url   => "https://deb.debian.org/debian/pool/main/d/dpkg/",
+            :regex => /href=.*?dpkg.v?(\d+(?:\.\d+)+)\.t/i
 end
