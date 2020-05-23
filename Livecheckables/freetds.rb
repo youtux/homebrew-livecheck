@@ -1,4 +1,4 @@
 class Freetds
-  livecheck :url   => "https://fossies.org/linux/privat/",
-            :regex => /HREF="freetds-([\d.]+)\.tar/
+  livecheck :url   => "http://www.freetds.org/files/stable/",
+            :regex => /href=.*?freetds-v?(\d+(?:\.\d+)+)\.t/i
 end
