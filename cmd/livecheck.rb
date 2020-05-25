@@ -101,7 +101,7 @@ module Homebrew
       return
     end
 
-    if !formula.stable? && !formula.installed?
+    if !formula.stable? && !formula.any_version_installed?
       unless Homebrew.args.quiet?
         puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : " \
           "HEAD only formula must be installed to be livecheckable"
@@ -109,7 +109,7 @@ module Homebrew
       return
     end
 
-    is_gist = formula.stable.url.include?("gist.github.com")
+    is_gist = formula&.stable&.url&.include?("gist.github.com")
     if formula.livecheck.skip? || is_gist
       skip_msg = if formula.livecheck.skip_msg.is_a?(String) &&
                     !formula.livecheck.skip_msg.blank?
@@ -124,14 +124,16 @@ module Homebrew
       return
     end
 
-    current = formula.stable? ? formula.version : formula.installed_version
-    latest = formula.stable? ? formula.latest : formula.latest_head_version
+    formula.head.downloader.shutup! unless formula.stable?
+
+    current = formula.stable? ? formula.version : formula.installed_version.version.commit
+    latest = formula.stable? ? formula.latest : formula.head.downloader.fetch_last_commit
     if (m = latest.to_s.match(/(.*)-release$/)) && !current.to_s.match(/.*-release$/)
       latest = Version.new(m[1])
     end
 
-    is_outdated = current < latest
-    is_newer_than_upstream = current > latest
+    is_outdated = formula.stable? ? (current < latest) : (current != latest)
+    is_newer_than_upstream = formula.stable? && (current > latest)
 
     formula_s = "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}"
 
@@ -145,6 +147,7 @@ module Homebrew
             "is_outdated"            => is_outdated,
             "is_newer_than_upstream" => is_newer_than_upstream,
             "guessed"                => !formula.livecheckable?,
+            "head"                   => !formula.stable?,
           },
         }
       else
