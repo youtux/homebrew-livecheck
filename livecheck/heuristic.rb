@@ -91,17 +91,8 @@ def version_heuristic(livecheckable, urls, regex = nil)
         # and upstream does not do only 'debian/' prefixed tags
         next if tag =~ %r{debian/} && !tags_only_debian
 
-        captures = tag.scan(regex) if regex
-        tag_cleaned = if captures &&
-                         !captures.empty? &&
-                         captures[0].is_a?(Array)
-          # Use the first capture group as the version
-          captures[0][0]
-        else
-          # Remove any character before the first number
-          tag[/\D*(.*)/, 1]
-        end
-
+        # Remove any character before the first number
+        tag_cleaned = tag[/\D*(.*)/, 1]
         match_version_map[tag] = Version.new(tag_cleaned)
       rescue TypeError
         nil
