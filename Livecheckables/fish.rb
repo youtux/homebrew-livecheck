@@ -1,3 +1,5 @@
 class Fish
-  livecheck :regex => /^v?(\d+(?:\.\d+)+)$/
+  livecheck do
+    regex(/^v?(\d+(?:\.\d+)+)$/)
+  end
 end

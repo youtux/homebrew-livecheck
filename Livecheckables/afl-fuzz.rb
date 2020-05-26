@@ -1,3 +1,5 @@
 class AflFuzz
-  livecheck :regex => /^v?(\d+(?:\.\d+)+)b?$/
+  livecheck do
+    regex(/^v?(\d+(?:\.\d+)+)b?$/)
+  end
 end

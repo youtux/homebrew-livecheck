@@ -1,3 +1,5 @@
 class Libvterm
-  livecheck :regex => /libvterm-(\d+(?:\.\d+)+)\./
+  livecheck do
+    regex(/libvterm-(\d+(?:\.\d+)+)\./)
+  end
 end

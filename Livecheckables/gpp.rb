@@ -1,3 +1,5 @@
 class Gpp
-  livecheck :url => "https://github.com/logological/gpp.git"
+  livecheck do
+    url "https://github.com/logological/gpp.git"
+  end
 end

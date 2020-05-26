@@ -1,3 +1,5 @@
 class Libupnp
-  livecheck :regex => /^release-(\d+(?:\.\d+)+)$/
+  livecheck do
+    regex(/^release-(\d+(?:\.\d+)+)$/)
+  end
 end

@@ -1,3 +1,5 @@
 class Cntlm
-  livecheck :regex => %r{url=.+?/cntlm-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/cntlm-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

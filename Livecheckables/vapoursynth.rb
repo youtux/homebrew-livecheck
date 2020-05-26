@@ -1,3 +1,5 @@
 class Vapoursynth
-  livecheck :regex => /^R(\d+(?:\.\d+)*?)$/
+  livecheck do
+    regex(/^R(\d+(?:\.\d+)*?)$/)
+  end
 end

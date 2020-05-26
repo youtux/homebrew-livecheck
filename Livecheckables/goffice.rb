@@ -1,3 +1,5 @@
 class Goffice
-  livecheck :url => "https://download.gnome.org/sources/goffice/cache.json"
+  livecheck do
+    url "https://download.gnome.org/sources/goffice/cache.json"
+  end
 end

@@ -1,3 +1,5 @@
 class Jrtplib
-  livecheck :skip => "No longer developed"
+  livecheck do
+    skip "No longer developed"
+  end
 end

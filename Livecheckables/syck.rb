@@ -1,3 +1,5 @@
 class Syck
-  livecheck :skip => "Not maintained"
+  livecheck do
+    skip "Not maintained"
+  end
 end

@@ -1,3 +1,5 @@
 class Castxml
-  livecheck :regex => /^v?(\d+(?:\.\d+)+)$/i
+  livecheck do
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+  end
 end

@@ -1,3 +1,5 @@
 class Mkvalidator
-  livecheck :regex => %r{url=.+?/mkvalidator-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/mkvalidator-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

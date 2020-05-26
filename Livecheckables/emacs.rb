@@ -1,3 +1,5 @@
 class Emacs
-  livecheck :regex => /emacs-(\d+\.\d+)$/
+  livecheck do
+    regex(/emacs-(\d+\.\d+)$/)
+  end
 end

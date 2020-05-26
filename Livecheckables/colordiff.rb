@@ -1,4 +1,6 @@
 class Colordiff
-  livecheck :url   => "https://www.colordiff.org/",
-            :regex => /colordiff-([0-9.]+)\.tar/
+  livecheck do
+    url "https://www.colordiff.org/"
+    regex(/colordiff-([0-9.]+)\.tar/)
+  end
 end

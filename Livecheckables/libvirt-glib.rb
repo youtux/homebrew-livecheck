@@ -1,4 +1,6 @@
 class LibvirtGlib
-  livecheck :url   => "https://libvirt.org/sources/glib/",
-            :regex => /libvirt-glib-([\d.]+)\.tar\.gz/
+  livecheck do
+    url "https://libvirt.org/sources/glib/"
+    regex(/libvirt-glib-([\d.]+)\.tar\.gz/)
+  end
 end

@@ -1,4 +1,6 @@
 class Dnsperf
-  livecheck :url   => "https://www.dns-oarc.net/tools/dnsperf",
-            :regex => /dnsperf-(\d+(?:\.\d+)+)\.tar/
+  livecheck do
+    url "https://www.dns-oarc.net/tools/dnsperf"
+    regex(/dnsperf-(\d+(?:\.\d+)+)\.tar/)
+  end
 end

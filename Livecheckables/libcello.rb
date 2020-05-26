@@ -1,4 +1,6 @@
 class Libcello
-  livecheck :url   => "http://libcello.org/",
-            :regex => %r{href=".*?/libCello-([0-9\.]+)\.t.*?>Download}
+  livecheck do
+    url "http://libcello.org/"
+    regex(%r{href=".*?/libCello-([0-9\.]+)\.t.*?>Download})
+  end
 end

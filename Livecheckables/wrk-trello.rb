@@ -1,3 +1,5 @@
 class WrkTrello
-  livecheck :skip => "Not actively developed or maintained"
+  livecheck do
+    skip "Not actively developed or maintained"
+  end
 end

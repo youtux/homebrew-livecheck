@@ -1,3 +1,5 @@
 class SstpClient
-  livecheck :regex => %r{url=.+?/sstp-client-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/sstp-client-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

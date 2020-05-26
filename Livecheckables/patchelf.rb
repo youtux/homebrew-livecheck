@@ -1,3 +1,5 @@
 class Patchelf
-  livecheck :url => "https://github.com/NixOS/patchelf.git"
+  livecheck do
+    url "https://github.com/NixOS/patchelf.git"
+  end
 end

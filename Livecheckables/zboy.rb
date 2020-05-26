@@ -1,3 +1,5 @@
 class Zboy
-  livecheck :regex => %r{url=.+?/zboy-v?(\d+(?:\.\d+)+)\.t}i
+  livecheck do
+    regex(%r{url=.+?/zboy-v?(\d+(?:\.\d+)+)\.t}i)
+  end
 end

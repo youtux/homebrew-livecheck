@@ -1,3 +1,5 @@
 class Zip
-  livecheck :regex => %r{url=.+?/v?(\d+(?:\.\d+)+)/zip\d+\.(?:t|z)}
+  livecheck do
+    regex(%r{url=.+?/v?(\d+(?:\.\d+)+)/zip\d+\.(?:t|z)})
+  end
 end

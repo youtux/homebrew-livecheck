@@ -1,4 +1,6 @@
 class BareosClient
-  livecheck :url   => "https://github.com/bareos/bareos.git",
-            :regex => %r{^Release/(\d+(?:\.\d+)+)$}i
+  livecheck do
+    url "https://github.com/bareos/bareos.git"
+    regex(%r{^Release/(\d+(?:\.\d+)+)$}i)
+  end
 end

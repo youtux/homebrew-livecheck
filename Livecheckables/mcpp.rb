@@ -1,3 +1,5 @@
 class Mcpp
-  livecheck :regex => %r{url=.+?/mcpp-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/mcpp-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

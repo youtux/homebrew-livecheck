@@ -1,3 +1,5 @@
 class Libquvi
-  livecheck :regex => %r{url=.+?/libquvi-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/libquvi-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

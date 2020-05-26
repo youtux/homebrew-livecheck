@@ -1,3 +1,5 @@
 class Gupnp
-  livecheck :url => "https://github.com/GNOME/gupnp.git"
+  livecheck do
+    url "https://github.com/GNOME/gupnp.git"
+  end
 end

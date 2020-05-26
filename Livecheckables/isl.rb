@@ -1,4 +1,6 @@
 class Isl
-  livecheck :url   => "http://isl.gforge.inria.fr/",
-            :regex => /href="isl-([0-9\.]+)\.t/
+  livecheck do
+    url "http://isl.gforge.inria.fr/"
+    regex(/href="isl-([0-9\.]+)\.t/)
+  end
 end

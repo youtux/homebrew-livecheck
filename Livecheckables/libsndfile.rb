@@ -1,4 +1,6 @@
 class Libsndfile
-  livecheck :url   => "http://www.mega-nerd.com/libsndfile/",
-            :regex => /libsndfile-([\d\.]+)\.tar\.gz/
+  livecheck do
+    url "http://www.mega-nerd.com/libsndfile/"
+    regex(/libsndfile-([\d\.]+)\.tar\.gz/)
+  end
 end

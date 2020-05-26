@@ -1,3 +1,5 @@
 class SourceHighlight
-  livecheck :regex => /source-highlight-(\d+(?:\.\d+)+)/
+  livecheck do
+    regex(/source-highlight-(\d+(?:\.\d+)+)/)
+  end
 end

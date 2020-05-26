@@ -1,3 +1,5 @@
 class Jenkins
-  livecheck :regex => /^jenkins-(\d+(?:\.\d+)+)$/
+  livecheck do
+    regex(/^jenkins-(\d+(?:\.\d+)+)$/)
+  end
 end

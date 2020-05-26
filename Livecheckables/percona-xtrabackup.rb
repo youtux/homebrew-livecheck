@@ -1,4 +1,6 @@
 class PerconaXtrabackup
-  livecheck :url   => "https://github.com/percona/percona-xtrabackup.git",
-            :regex => /^percona-xtrabackup-(\d+(?:\.\d+)+)$/
+  livecheck do
+    url "https://github.com/percona/percona-xtrabackup.git"
+    regex(/^percona-xtrabackup-(\d+(?:\.\d+)+)$/)
+  end
 end

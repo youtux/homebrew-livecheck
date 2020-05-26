@@ -1,3 +1,5 @@
 class Cppcms
-  livecheck :regex => %r{url=.+?/cppcms-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/cppcms-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

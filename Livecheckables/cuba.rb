@@ -1,4 +1,6 @@
 class Cuba
-  livecheck :url   => "http://www.feynarts.de/cuba/",
-            :regex => /href="Cuba-([0-9\.]+)\.t/
+  livecheck do
+    url "http://www.feynarts.de/cuba/"
+    regex(/href="Cuba-([0-9\.]+)\.t/)
+  end
 end

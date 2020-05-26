@@ -1,3 +1,5 @@
 class Elinks
-  livecheck :regex => /^elinks-(\d+(?:\.\d+)+)$/
+  livecheck do
+    regex(/^elinks-(\d+(?:\.\d+)+)$/)
+  end
 end

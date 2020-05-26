@@ -1,3 +1,5 @@
 class Sc68
-  livecheck :regex => %r{url=.+?/sc68-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/sc68-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

@@ -1,3 +1,5 @@
 class Tivodecode
-  livecheck :regex => %r{url=.+?/tivodecode-v?(\d+(?:\.\d+)+(?:pre\d+)?)\.t}
+  livecheck do
+    regex(%r{url=.+?/tivodecode-v?(\d+(?:\.\d+)+(?:pre\d+)?)\.t})
+  end
 end

@@ -1,3 +1,5 @@
 class Zssh
-  livecheck :regex => %r{url=.+?/zssh-v?(\d+(?:\.\d+)+[a-z]?)\.t}i
+  livecheck do
+    regex(%r{url=.+?/zssh-v?(\d+(?:\.\d+)+[a-z]?)\.t}i)
+  end
 end

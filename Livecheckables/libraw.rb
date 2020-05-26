@@ -1,4 +1,6 @@
 class Libraw
-  livecheck :url   => "https://www.libraw.org/download/",
-            :regex => /LibRaw-(\d+(?:\.\d+)*)\.tar/
+  livecheck do
+    url "https://www.libraw.org/download/"
+    regex(/LibRaw-(\d+(?:\.\d+)*)\.tar/)
+  end
 end

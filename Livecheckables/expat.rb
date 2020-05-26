@@ -1,3 +1,5 @@
 class Expat
-  livecheck :url => "https://sourceforge.net/projects/expat/files/"
+  livecheck do
+    url "https://sourceforge.net/projects/expat/files/"
+  end
 end

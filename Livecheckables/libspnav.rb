@@ -1,3 +1,5 @@
 class Libspnav
-  livecheck :regex => %r{url=.+?/libspnav-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/libspnav-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

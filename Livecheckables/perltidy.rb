@@ -1,3 +1,5 @@
 class Perltidy
-  livecheck :regex => %r{url=.+?/Perl-Tidy-(\d+)\.t}i
+  livecheck do
+    regex(%r{url=.+?/Perl-Tidy-(\d+)\.t}i)
+  end
 end

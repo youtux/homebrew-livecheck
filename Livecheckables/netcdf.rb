@@ -1,3 +1,5 @@
 class Netcdf
-  livecheck :regex => /^(?:netcdf-|v)?(\d+(?:\.\d+)+)$/
+  livecheck do
+    regex(/^(?:netcdf-|v)?(\d+(?:\.\d+)+)$/)
+  end
 end

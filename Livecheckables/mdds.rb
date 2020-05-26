@@ -1,3 +1,5 @@
 class Mdds
-  livecheck :url => "https://gitlab.com/mdds/mdds.git"
+  livecheck do
+    url "https://gitlab.com/mdds/mdds.git"
+  end
 end

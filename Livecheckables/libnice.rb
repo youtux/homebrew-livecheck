@@ -1,4 +1,6 @@
 class Libnice
-  livecheck :url   => "https://github.com/libnice/libnice.git",
-            :regex => /^v?(\d+(?:\.\d+)+)$/
+  livecheck do
+    url "https://github.com/libnice/libnice.git"
+    regex(/^v?(\d+(?:\.\d+)+)$/)
+  end
 end

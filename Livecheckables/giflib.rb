@@ -1,3 +1,5 @@
 class Giflib
-  livecheck :regex => %r{/giflib-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{/giflib-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

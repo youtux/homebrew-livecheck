@@ -1,3 +1,5 @@
 class ExVi
-  livecheck :regex => %r{url=.+?/ex-v?(\d+)\.t}i
+  livecheck do
+    regex(%r{url=.+?/ex-v?(\d+)\.t}i)
+  end
 end

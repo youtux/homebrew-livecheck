@@ -1,3 +1,5 @@
 class Kettle
-  livecheck :regex => %r{url=.+?/pdi-ce-v?(\d+(?:\.\d+)+(?:-\d+)?)\.(?:z|t)}
+  livecheck do
+    regex(%r{url=.+?/pdi-ce-v?(\d+(?:\.\d+)+(?:-\d+)?)\.(?:z|t)})
+  end
 end

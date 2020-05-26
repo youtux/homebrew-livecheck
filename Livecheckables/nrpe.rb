@@ -1,3 +1,5 @@
 class Nrpe
-  livecheck :regex => %r{url=.+?/nrpe-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/nrpe-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

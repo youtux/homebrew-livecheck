@@ -1,3 +1,5 @@
 class Log4c
-  livecheck :regex => %r{url=.+?/log4c-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/log4c-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

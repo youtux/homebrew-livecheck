@@ -1,3 +1,5 @@
 class Libpano
-  livecheck :regex => %r{url=.+?/libpano(\d+-\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/libpano(\d+-\d+(?:\.\d+)+)\.t})
+  end
 end

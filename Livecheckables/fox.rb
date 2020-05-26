@@ -1,4 +1,6 @@
 class Fox
-  livecheck :url   => "http://www.fox-toolkit.org/news.html",
-            :regex => /FOX STABLE ([0-9\.]+)/
+  livecheck do
+    url "http://www.fox-toolkit.org/news.html"
+    regex(/FOX STABLE ([0-9\.]+)/)
+  end
 end

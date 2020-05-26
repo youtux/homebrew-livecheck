@@ -1,3 +1,5 @@
 class Herrie
-  livecheck :url => "https://github.com/EdSchouten/herrie"
+  livecheck do
+    url "https://github.com/EdSchouten/herrie"
+  end
 end

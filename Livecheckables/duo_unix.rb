@@ -1,3 +1,5 @@
 class DuoUnix
-  livecheck :url => "https://github.com/duosecurity/duo_unix.git"
+  livecheck do
+    url "https://github.com/duosecurity/duo_unix.git"
+  end
 end

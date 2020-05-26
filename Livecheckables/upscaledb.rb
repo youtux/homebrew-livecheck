@@ -1,4 +1,6 @@
 class Upscaledb
-  livecheck :url   => "http://files.upscaledb.com/dl/",
-            :regex => /href="upscaledb-(\d+(?:\.\d+)+)\.t/
+  livecheck do
+    url "http://files.upscaledb.com/dl/"
+    regex(/href="upscaledb-(\d+(?:\.\d+)+)\.t/)
+  end
 end
