@@ -20,18 +20,12 @@ class Formula
       urls.compact
     end
 
-    def livecheck(arg = {}, &block)
+    def livecheck(&block)
       @livecheck ||= Livecheck.new
-      return @livecheck if livecheckable? || (!block_given? && arg.empty?)
+      return @livecheck if livecheckable? || !block_given?
 
       @livecheckable = true
-      if block_given?
-        @livecheck.instance_eval(&block)
-      else
-        arg.each do |key, value|
-          @livecheck.send(key.to_s, value)
-        end
-      end
+      @livecheck.instance_eval(&block)
     end
 
     def _latest
