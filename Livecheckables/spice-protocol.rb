@@ -1,6 +1,6 @@
 class SpiceProtocol
   livecheck do
     url "https://www.spice-space.org/download/releases/"
-    regex(/spice-protocol-([\d.]+)\.tar\.bz2/)
+    regex(/href=.*?spice-protocol-v?(\d+(?:\.\d+)+)\.t/)
   end
 end
