@@ -109,7 +109,7 @@ module Homebrew
       return
     end
 
-    is_gist = formula&.stable&.url&.include?("gist.github.com")
+    is_gist = formula.stable&.url&.include?("gist.github.com")
     if formula.livecheck.skip? || is_gist
       skip_msg = if formula.livecheck.skip_msg.is_a?(String) &&
                     !formula.livecheck.skip_msg.blank?
