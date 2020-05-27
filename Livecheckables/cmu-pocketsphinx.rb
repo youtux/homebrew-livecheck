@@ -1,3 +1,5 @@
 class CmuPocketsphinx
-  livecheck :regex => %r{url=.+?/pocketsphinx-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/pocketsphinx-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

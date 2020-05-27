@@ -1,3 +1,5 @@
 class Disktype
-  livecheck :regex => /release_(\d+)/
+  livecheck do
+    regex(/release_(\d+)/)
+  end
 end

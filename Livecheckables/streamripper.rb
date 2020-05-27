@@ -1,3 +1,5 @@
 class Streamripper
-  livecheck :regex => %r{url=.+?/streamripper-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/streamripper-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

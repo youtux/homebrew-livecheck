@@ -1,3 +1,5 @@
 class Aamath
-  livecheck :regex => /aamath-(\d+(?:\.\d+)+)\.tar/
+  livecheck do
+    regex(/aamath-(\d+(?:\.\d+)+)\.tar/)
+  end
 end

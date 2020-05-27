@@ -1,4 +1,6 @@
 class Wireshark
-  livecheck :url   => "https://www.wireshark.org/download.html",
-            :regex => /Stable Release \((\d+(?:\.\d+)*)/
+  livecheck do
+    url "https://www.wireshark.org/download.html"
+    regex(/Stable Release \((\d+(?:\.\d+)*)/)
+  end
 end

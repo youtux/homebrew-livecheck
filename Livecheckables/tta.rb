@@ -1,3 +1,5 @@
 class Tta
-  livecheck :regex => %r{url=.+?/libtta-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/libtta-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

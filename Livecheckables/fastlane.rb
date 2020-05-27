@@ -1,4 +1,6 @@
 class Fastlane
-  livecheck :url   => "https://github.com/fastlane/fastlane.git",
-            :regex => /^([\d\.]+)$/
+  livecheck do
+    url "https://github.com/fastlane/fastlane.git"
+    regex(/^([\d\.]+)$/)
+  end
 end

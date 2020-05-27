@@ -1,4 +1,6 @@
 class Cvsync
-  livecheck :url   => "https://www.cvsync.org",
-            :regex => /href=.+cvsync-v?(\d+(?:\.\d+)+)\.t/
+  livecheck do
+    url "https://www.cvsync.org"
+    regex(/href=.+cvsync-v?(\d+(?:\.\d+)+)\.t/)
+  end
 end

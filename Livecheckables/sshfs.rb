@@ -1,3 +1,5 @@
 class Sshfs
-  livecheck :regex => /^sshfs-(\d+(?:\.\d+)+)$/
+  livecheck do
+    regex(/^sshfs-(\d+(?:\.\d+)+)$/)
+  end
 end

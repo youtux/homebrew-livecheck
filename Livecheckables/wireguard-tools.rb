@@ -1,3 +1,5 @@
 class WireguardTools
-  livecheck :url => "https://github.com/WireGuard/wireguard-tools"
+  livecheck do
+    url "https://github.com/WireGuard/wireguard-tools"
+  end
 end

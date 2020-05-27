@@ -1,3 +1,5 @@
 class Fdroidserver
-  livecheck :url => "https://gitlab.com/fdroid/fdroidserver.git"
+  livecheck do
+    url "https://gitlab.com/fdroid/fdroidserver.git"
+  end
 end

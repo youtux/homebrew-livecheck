@@ -6,6 +6,8 @@ class Exim
   # seem to be the best solution currently and we're using the GitHub mirror
   # below since the upstream repo (git://git.exim.org/exim.git) doesn't work
   # over https.
-  livecheck :url   => "https://github.com/Exim/exim.git",
-            :regex => /^exim-v?(\d+(?:\.\d+)+)$/
+  livecheck do
+    url "https://github.com/Exim/exim.git"
+    regex(/^exim-v?(\d+(?:\.\d+)+)$/)
+  end
 end

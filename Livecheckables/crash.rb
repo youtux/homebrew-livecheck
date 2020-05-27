@@ -1,3 +1,5 @@
 class Crash
-  livecheck :url => "https://github.com/crashub/crash"
+  livecheck do
+    url "https://github.com/crashub/crash"
+  end
 end

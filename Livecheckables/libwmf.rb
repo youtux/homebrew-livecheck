@@ -1,3 +1,5 @@
 class Libwmf
-  livecheck :regex => %r{url=.+?/libwmf-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/libwmf-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

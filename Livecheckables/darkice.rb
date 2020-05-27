@@ -1,3 +1,5 @@
 class Darkice
-  livecheck :regex => %r{url=.+?/darkice-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/darkice-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

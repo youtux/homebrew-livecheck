@@ -1,3 +1,5 @@
 class LittleCms
-  livecheck :regex => %r{url=.+?/lcms-v?(1(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/lcms-v?(1(?:\.\d+)+)\.t})
+  end
 end

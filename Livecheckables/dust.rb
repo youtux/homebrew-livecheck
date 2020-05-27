@@ -1,3 +1,5 @@
 class Dust
-  livecheck :regex => /v([\d\.]+)/
+  livecheck do
+    regex(/v([\d\.]+)/)
+  end
 end

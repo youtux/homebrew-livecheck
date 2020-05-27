@@ -1,3 +1,5 @@
 class Inlets
-  livecheck :regex => /^(\d+\.\d+.\d+)$/
+  livecheck do
+    regex(/^(\d+\.\d+.\d+)$/)
+  end
 end

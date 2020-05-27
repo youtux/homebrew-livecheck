@@ -1,4 +1,6 @@
 class Docbook
-  livecheck :url   => "https://docbook.org/xml/",
-            :regex => %r{href="(\d+(?:\.\d+)+)/?"}
+  livecheck do
+    url "https://docbook.org/xml/"
+    regex(%r{href="(\d+(?:\.\d+)+)/?"})
+  end
 end

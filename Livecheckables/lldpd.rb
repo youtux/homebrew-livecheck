@@ -1,3 +1,5 @@
 class Lldpd
-  livecheck :url => "https://github.com/vincentbernat/lldpd.git"
+  livecheck do
+    url "https://github.com/vincentbernat/lldpd.git"
+  end
 end

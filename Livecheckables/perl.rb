@@ -1,4 +1,6 @@
 class Perl
-  livecheck :url   => "https://www.perl.org/get.html",
-            :regex => %r{href=".*?/perl-([0-9\.]+)\.t}
+  livecheck do
+    url "https://www.perl.org/get.html"
+    regex(%r{href=".*?/perl-([0-9\.]+)\.t})
+  end
 end

@@ -1,3 +1,5 @@
 class Cataclysm
-  livecheck :regex => /^(\d+(\.(?:\d+|[A-Z]+))+)$/
+  livecheck do
+    regex(/^(\d+(\.(?:\d+|[A-Z]+))+)$/)
+  end
 end

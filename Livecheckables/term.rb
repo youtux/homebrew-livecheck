@@ -1,3 +1,5 @@
 class Term
-  livecheck :skip => "Cannot reliably check for new releases upstream"
+  livecheck do
+    skip "Cannot reliably check for new releases upstream"
+  end
 end

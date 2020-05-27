@@ -1,4 +1,6 @@
 class NagiosPlugins
-  livecheck :url   => "https://nagios-plugins.org/download/",
-            :regex => /href="nagios-plugins-([\d.]+)\.tar/
+  livecheck do
+    url "https://nagios-plugins.org/download/"
+    regex(/href="nagios-plugins-([\d.]+)\.tar/)
+  end
 end

@@ -1,4 +1,6 @@
 class Pixman
-  livecheck :url   => "https://cairographics.org/releases/",
-            :regex => /href="LATEST-pixman-([\d.]+\.[\d.]+\.[\d.]+)"/
+  livecheck do
+    url "https://cairographics.org/releases/"
+    regex(/href="LATEST-pixman-([\d.]+\.[\d.]+\.[\d.]+)"/)
+  end
 end

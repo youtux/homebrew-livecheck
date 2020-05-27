@@ -1,3 +1,5 @@
 class Nethack
-  livecheck :regex => /^NetHack-(\d+(?:\.\d+)+)_Released?$/
+  livecheck do
+    regex(/^NetHack-(\d+(?:\.\d+)+)_Released?$/)
+  end
 end

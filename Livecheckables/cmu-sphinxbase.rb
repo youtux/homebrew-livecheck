@@ -1,3 +1,5 @@
 class CmuSphinxbase
-  livecheck :regex => %r{url=.+?/sphinxbase-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/sphinxbase-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

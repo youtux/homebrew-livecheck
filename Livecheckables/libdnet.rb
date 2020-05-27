@@ -1,3 +1,5 @@
 class Libdnet
-  livecheck :regex => /^libdnet-(\d+(?:\.\d+)+)$/
+  livecheck do
+    regex(/^libdnet-(\d+(?:\.\d+)+)$/)
+  end
 end

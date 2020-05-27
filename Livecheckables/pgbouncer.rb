@@ -1,3 +1,5 @@
 class Pgbouncer
-  livecheck :url => "https://github.com/pgbouncer/pgbouncer"
+  livecheck do
+    url "https://github.com/pgbouncer/pgbouncer"
+  end
 end

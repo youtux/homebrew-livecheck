@@ -1,4 +1,6 @@
 class Traildb
-  livecheck :url   => "https://github.com/traildb/traildb.git",
-            :regex => /^v?(\d+(?:\.\d+)+)$/
+  livecheck do
+    url "https://github.com/traildb/traildb.git"
+    regex(/^v?(\d+(?:\.\d+)+)$/)
+  end
 end

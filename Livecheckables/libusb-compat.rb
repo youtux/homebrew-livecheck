@@ -1,3 +1,5 @@
 class LibusbCompat
-  livecheck :regex => %r{/libusb-compat-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{/libusb-compat-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

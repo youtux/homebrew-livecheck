@@ -1,3 +1,5 @@
 class Pidgin
-  livecheck :regex => %r{url=.+?/pidgin-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/pidgin-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

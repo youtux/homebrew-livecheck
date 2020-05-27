@@ -1,3 +1,5 @@
 class Quvi
-  livecheck :regex => %r{url=.+?/quvi-v?(\d+(?:\.\d+)+)\.t}
+  livecheck do
+    regex(%r{url=.+?/quvi-v?(\d+(?:\.\d+)+)\.t})
+  end
 end

@@ -1,3 +1,5 @@
 class Insect
-  livecheck :url => "https://github.com/sharkdp/insect.git"
+  livecheck do
+    url "https://github.com/sharkdp/insect.git"
+  end
 end

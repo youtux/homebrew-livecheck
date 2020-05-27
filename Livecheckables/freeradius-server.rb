@@ -1,3 +1,5 @@
 class FreeradiusServer
-  livecheck :regex => /^release_(\d+(?:[_\.]\d+)+)$/
+  livecheck do
+    regex(/^release_(\d+(?:[_\.]\d+)+)$/)
+  end
 end

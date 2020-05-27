@@ -1,3 +1,5 @@
 class Mad
-  livecheck :regex => %r{url=.+?/libmad-v?(\d+(?:\.\d+)+[a-z]?)\.t}i
+  livecheck do
+    regex(%r{url=.+?/libmad-v?(\d+(?:\.\d+)+[a-z]?)\.t}i)
+  end
 end

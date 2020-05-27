@@ -1,3 +1,5 @@
 class DosboxX
-  livecheck :regex => /^dosbox-x-v?(\d+(?:\.\d+)+)$/
+  livecheck do
+    regex(/^dosbox-x-v?(\d+(?:\.\d+)+)$/)
+  end
 end

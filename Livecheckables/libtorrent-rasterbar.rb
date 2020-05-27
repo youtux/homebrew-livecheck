@@ -1,3 +1,5 @@
 class LibtorrentRasterbar
-  livecheck :regex => /^libtorrent.v?(\d+(?:[-_.]\d+)+)$/i
+  livecheck do
+    regex(/^libtorrent.v?(\d+(?:[-_.]\d+)+)$/i)
+  end
 end

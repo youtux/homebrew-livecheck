@@ -1,3 +1,5 @@
 class Squirrel
-  livecheck :regex => %r{url=.+?/squirrel.v?(\d+(?:[-_]\d+)+).stable\.t}
+  livecheck do
+    regex(%r{url=.+?/squirrel.v?(\d+(?:[-_]\d+)+).stable\.t})
+  end
 end

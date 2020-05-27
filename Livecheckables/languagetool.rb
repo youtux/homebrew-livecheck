@@ -1,3 +1,5 @@
 class Languagetool
-  livecheck :url => "https://github.com/languagetool-org/languagetool.git"
+  livecheck do
+    url "https://github.com/languagetool-org/languagetool.git"
+  end
 end

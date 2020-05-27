@@ -1,3 +1,5 @@
 class Msdl
-  livecheck :regex => %r{url=.+?/msdl-v?(\d+(?:\.\d+)+(?:-r\d+)?)\.t}i
+  livecheck do
+    regex(%r{url=.+?/msdl-v?(\d+(?:\.\d+)+(?:-r\d+)?)\.t}i)
+  end
 end

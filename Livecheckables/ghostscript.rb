@@ -1,3 +1,5 @@
 class Ghostscript
-  livecheck :regex => /^ghostscript-(\d+(?:\.\d+)+)$/
+  livecheck do
+    regex(/^ghostscript-(\d+(?:\.\d+)+)$/)
+  end
 end

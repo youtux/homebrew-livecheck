@@ -1,3 +1,5 @@
 class Portmidi
-  livecheck :regex => %r{url=.+?/portmidi-src-(\d+)\.}i
+  livecheck do
+    regex(%r{url=.+?/portmidi-src-(\d+)\.}i)
+  end
 end

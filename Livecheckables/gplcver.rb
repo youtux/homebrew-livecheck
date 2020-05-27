@@ -1,5 +1,7 @@
 class Gplcver
   # This regex intentionally matches seemingly unstable versions, as the only
   # available version at the time of writing was `2.12a`.
-  livecheck :regex => %r{url=.+?/gplcver-v?(\d+(?:\.\d+)+[a-z]?)\.src\.}i
+  livecheck do
+    regex(%r{url=.+?/gplcver-v?(\d+(?:\.\d+)+[a-z]?)\.src\.}i)
+  end
 end

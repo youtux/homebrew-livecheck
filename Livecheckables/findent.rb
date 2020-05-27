@@ -1,3 +1,5 @@
 class Findent
-  livecheck :regex => %r{url=.+?/findent-v?(\d+(?:\.\d+)+)\.(?:t|z)}
+  livecheck do
+    regex(%r{url=.+?/findent-v?(\d+(?:\.\d+)+)\.(?:t|z)})
+  end
 end
