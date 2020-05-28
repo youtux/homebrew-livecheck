@@ -1,6 +1,6 @@
 class Libdca
   livecheck do
-    url "https://www.videolan.org/developers/libdca.html"
-    regex(%r{Current release is <a href=".*?/libdca-([0-9\.]+)\.t})
+    url "https://download.videolan.org/pub/videolan/libdca/"
+    regex(%r{href=.*?v?(\d+(?:\.\d+)+)[/"'>]}i)
   end
 end
