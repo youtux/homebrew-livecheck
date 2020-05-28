@@ -1,6 +1,6 @@
 class Coq
   livecheck do
-    url "https://coq.inria.fr/download"
-    regex(%r{<a href="https://github.com/coq/coq/releases/tag/V(\d+(?:\.\w+)*)">})
+    url "https://github.com/coq/coq.git"
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end
