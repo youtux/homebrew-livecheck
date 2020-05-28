@@ -1,6 +1,6 @@
 class Simgrid
   livecheck do
-    url "https://simgrid.org/"
-    regex(/href=".*?SimGrid-([0-9\.]+)\.t/)
+    url "https://framagit.org/simgrid/simgrid.git"
+    regex(/^v?(\d+(?:[_.]\d+)+)$/i)
   end
 end
