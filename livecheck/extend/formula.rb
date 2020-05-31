@@ -21,7 +21,7 @@ class Formula
     end
 
     def livecheck(&block)
-      @livecheck ||= Livecheck.new
+      @livecheck ||= Livecheck.new(self)
       return @livecheck if livecheckable? || !block_given?
 
       @livecheckable = true
