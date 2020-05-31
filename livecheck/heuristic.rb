@@ -1,17 +1,67 @@
+require_relative "livecheck_strategy"
 require "utils"
-require_relative "heuristics/apache"
-require_relative "heuristics/bitbucket"
-require_relative "heuristics/github"
-require_relative "heuristics/gnome"
-require_relative "heuristics/gnu"
-require_relative "heuristics/haskell"
-require_relative "heuristics/launchpad"
-require_relative "heuristics/npmjs"
-require_relative "heuristics/python"
-require_relative "heuristics/sourceforge"
 
-def fallback_heuristics(url, regex = nil)
-  page_matches(url, regex).map { |match| [match, Version.new(match)] }.to_h
+GITHUB_SPECIAL_CASES = %w[
+  api.github.com
+  /latest
+  mednafen
+  camlp5
+  kotlin
+  osrm-backend
+  prometheus
+  pyenv-virtualenv
+  sysdig
+  shairport-sync
+  yuicompressor
+].freeze
+
+GNU_SPECIAL_CASES = %w[
+  kawa
+  lzip
+  numdiff
+  icoutils
+  dvdrtools
+].freeze
+
+SOURCEFORGE_SPECIAL_CASES = %w[
+  mikmod
+  log4cpp
+  libwps
+  e2fsprogs
+  potrace
+  remake
+  /avf/
+  /bashdb/
+  /netpbm/
+  opencore-amr
+].freeze
+
+def preprocess_url(url)
+  # Check for GitHub repos on github.com, not AWS
+  url.sub!("github.s3.amazonaws.com", "github.com") if url.include?("github")
+
+  # Use repo from GitHub or GitLab inferred from download URL
+  if url.include?("github.com") && GITHUB_SPECIAL_CASES.none? { |sc| url.include? sc }
+    if url.include? "archive"
+      url = url.sub(%r{/archive/.*}, ".git") if url.include? "github"
+    elsif url.include? "releases"
+      url = url.sub(%r{/releases/.*}, ".git")
+    elsif url.include? "downloads"
+      url = Pathname.new(url.sub(%r{/downloads(.*)}, "\\1")).dirname.to_s+".git"
+    elsif !url.end_with?(".git")
+      # Truncate the URL at the user/repo part, if possible
+      github_repo_url = url[%r{((?:[a-z]+://)?github.com/[^/]+/[^/#]+)}]
+      url = github_repo_url unless github_repo_url.nil?
+
+      url = url[0..-2] if url.end_with?("/")
+
+      url += ".git"
+    end
+  elsif url.include?("/-/archive/")
+    url = url.sub(%r{/-/archive/.*$}i, ".git")
+  end
+
+  url
 end
 
 # TODO: distinguish between a filter regex and a matching regex
@@ -22,32 +72,34 @@ def version_heuristic(livecheckable, urls, regex = nil)
     # Skip Gists until/unless we create a method of identifying revisions
     next if url.include?("gist.github.com")
 
-    url = github_preprocess(url)
+    puts "Trying with url #{url}" if Homebrew.args.debug?
+    url = preprocess_url(url)
 
-    method = case url
-    when /hackage\.haskell\.org/
-      :haskell_heuristics
-    when ->(u) { DownloadStrategyDetector.detect(u) <= GitDownloadStrategy }
-      :github_heuristics
-    when /(sourceforge|sf)\.net/
-      :sourceforge_heuristics
-    when /gnu\.org/
-      :gnu_heuristics
-    when /files\.pythonhosted\.org/
-      :python_heuristics
-    when /registry\.npmjs\.org/
-      :npmjs_heuristics
-    when /download\.gnome\.org/
-      :gnome_heuristics
-    when /launchpad\.net/
-      :launchpad_heuristics
-    when %r{www\.apache\.org/dyn}
-      :apache_heuristics
-    when %r{bitbucket\.org(/[^/]+){4}\.\w+}
-      :bitbucket_heuristics
-    when ->(_) { regex }
-      :fallback_heuristics
+    method = if /hackage\.haskell\.org/.match?(url)
+      :hackage_strategy
+    elsif DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
+      :git_strategy
+    elsif /(sourceforge|sf)\.net/.match?(url) &&
+          SOURCEFORGE_SPECIAL_CASES.none? { |sc| url.include? sc }
+      :sourceforge_strategy
+    elsif url =~ /gnu\.org/ && GNU_SPECIAL_CASES.none? { |sc| url.include? sc }
+      :gnu_strategy
+    elsif /files\.pythonhosted\.org/.match?(url)
+      :pypi_strategy
+    elsif /registry\.npmjs\.org/.match?(url)
+      :npm_strategy
+    elsif /download\.gnome\.org/.match?(url)
+      :gnome_strategy
+    elsif /launchpad\.net/.match?(url)
+      :launchpad_strategy
+    elsif %r{www\.apache\.org/dyn}.match?(url)
+      :apache_strategy
+    elsif %r{bitbucket\.org(/[^/]+){4}\.\w+}.match?(url)
+      :bitbucket_strategy
+    elsif regex
+      :page_match_strategy
     end
+    next if method.nil?
 
     match_version_map = Symbol.send(method, url, regex)
 
