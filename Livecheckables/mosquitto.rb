@@ -1,6 +1,6 @@
 class Mosquitto
   livecheck do
-    url "https://mosquitto.org/download/"
-    regex(%r{href=".*?/mosquitto-([0-9.]+)\.t})
+    url "https://mosquitto.org/files/source/"
+    regex(/href=.*?mosquitto-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
