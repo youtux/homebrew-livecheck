@@ -1,5 +1,5 @@
 class FreeradiusServer
   livecheck do
-    regex(/^release_(\d+(?:[_\.]\d+)+)$/)
+    regex(/^release_(\d+(?:[_.]\d+)+)$/)
   end
 end

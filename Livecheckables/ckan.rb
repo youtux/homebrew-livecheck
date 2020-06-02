@@ -1,6 +1,6 @@
 class Ckan
   livecheck do
     url "https://github.com/KSP-CKAN/CKAN/releases"
-    regex(%r{Latest.*?href="/KSP-CKAN/CKAN/tree/v?([0-9\.]+)}m)
+    regex(%r{Latest.*?href="/KSP-CKAN/CKAN/tree/v?([0-9.]+)}m)
   end
 end

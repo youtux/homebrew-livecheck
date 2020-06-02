@@ -1,6 +1,6 @@
 class Gwyddion
   livecheck do
     url "http://gwyddion.net/download.php"
-    regex(/stable version Gwyddion ([0-9\.]+):/)
+    regex(/stable version Gwyddion ([0-9.]+):/)
   end
 end

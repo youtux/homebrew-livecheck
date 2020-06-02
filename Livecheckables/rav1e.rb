@@ -1,5 +1,5 @@
 class Rav1e
   livecheck do
-    regex(/v([\d\.]+)/)
+    regex(/v([\d.]+)/)
   end
 end

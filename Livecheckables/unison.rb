@@ -1,6 +1,6 @@
 class Unison
   livecheck do
     url "https://github.com/bcpierce00/unison/releases"
-    regex(%r{Latest.*?href="/bcpierce00/unison/tree/v?([a-z0-9\.]+)}m)
+    regex(%r{Latest.*?href="/bcpierce00/unison/tree/v?([a-z0-9.]+)}m)
   end
 end

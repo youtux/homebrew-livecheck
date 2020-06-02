@@ -75,7 +75,7 @@ end
 def gnome_strategy(url, regex = nil)
   match_version_map = {}
 
-  package = url.match(%r{/sources\/(.*?)/})[1]
+  package = url.match(%r{/sources/(.*?)/})[1]
   page_url = "https://download.gnome.org/sources/#{package}/cache.json"
 
   puts "Possible GNOME package [#{package}] detected at #{url}" if Homebrew.args.debug?
@@ -181,7 +181,7 @@ def pypi_strategy(url, regex = nil)
   package = url[%r{https://files.pythonhosted.org/packages/.*/.*/(.*)-.*}, 1]
   page_url = "https://pypi.org/project/#{package}"
 
-  regex ||= /#{package} ([0-9\.]+)/
+  regex ||= /#{package} ([0-9.]+)/
 
   page_matches(page_url, regex).each do |match|
     version = Version.new(match)

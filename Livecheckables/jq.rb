@@ -1,6 +1,6 @@
 class Jq
   livecheck do
     url "https://github.com/stedolan/jq/releases"
-    regex(%r{Latest.*?href="/stedolan/jq/tree/jq-?([0-9\.]+)}m)
+    regex(%r{Latest.*?href="/stedolan/jq/tree/jq-?([0-9.]+)}m)
   end
 end

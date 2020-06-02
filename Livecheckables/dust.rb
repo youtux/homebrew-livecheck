@@ -1,5 +1,5 @@
 class Dust
   livecheck do
-    regex(/v([\d\.]+)/)
+    regex(/v([\d.]+)/)
   end
 end
