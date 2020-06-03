@@ -1,6 +1,6 @@
 class Frei0r
   livecheck do
     url "https://github.com/dyne/frei0r/releases"
-    regex(%r{<a href="/dyne/frei0r/releases/tag/v([\d\.]+)"})
+    regex(%r{<a href="/dyne/frei0r/releases/tag/v([\d.]+)"})
   end
 end

@@ -1,6 +1,6 @@
 class Composer
   livecheck do
     url "https://github.com/composer/composer.git"
-    regex(/^[\d\.]+$/)
+    regex(/^[\d.]+$/)
   end
 end

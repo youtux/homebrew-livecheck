@@ -1,5 +1,5 @@
 class Websocat
   livecheck do
-    regex(/v([\d\.]+$)/)
+    regex(/v([\d.]+$)/)
   end
 end
