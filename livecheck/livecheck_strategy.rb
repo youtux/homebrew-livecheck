@@ -1,4 +1,4 @@
-GNOME_DEVEL_WHITELIST = [
+GNOME_DEVEL_SKIP_LIST = [
   "gcab",
   "gtk-doc",
   "gtk-mac-integration",
@@ -81,7 +81,7 @@ def gnome_strategy(url, regex = nil)
   puts "Possible GNOME package [#{package}] detected at #{url}" if Homebrew.args.debug?
 
   # Restrict versions to even numbered minor versions (except x.90+)
-  regex ||= if GNOME_DEVEL_WHITELIST.include?(package)
+  regex ||= if GNOME_DEVEL_SKIP_LIST.include?(package)
     /#{Regexp.escape(package)}-(\d+(?:\.\d+)+)\.t/
   else
     /#{Regexp.escape(package)}-(\d+\.([0-8]\d*?)?[02468](?:\.\d+)*?)\.t/
