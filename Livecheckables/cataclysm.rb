@@ -1,5 +1,6 @@
 class Cataclysm
   livecheck do
-    regex(/^(\d+(\.(?:\d+|[A-Z]+))+)$/)
+    url "https://github.com/CleverRaven/Cataclysm-DDA/releases/latest"
+    regex(%r{href=.*?/tag/([^"'>]+)["'>]}i)
   end
 end
