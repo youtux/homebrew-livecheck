@@ -34,6 +34,7 @@ SOURCEFORGE_SPECIAL_CASES = %w[
   /bashdb/
   /netpbm/
   opencore-amr
+  liba52.sourceforge.net/
 ].freeze
 
 def preprocess_url(url)
