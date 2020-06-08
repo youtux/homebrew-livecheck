@@ -37,6 +37,17 @@ SOURCEFORGE_SPECIAL_CASES = %w[
   liba52.sourceforge.net/
 ].freeze
 
+UNSTABLE_VERSION_KEYWORDS = %w[
+  alpha
+  beta
+  bpo
+  dev
+  experimental
+  prerelease
+  preview
+  rc
+].freeze
+
 def preprocess_url(url)
   # Check for GitHub repos on github.com, not AWS
   url.sub!("github.s3.amazonaws.com", "github.com") if url.include?("github")
@@ -104,23 +115,12 @@ def version_heuristic(livecheckable, urls, regex = nil)
 
     match_version_map = Symbol.send(method, url, regex)
 
-    version_rejections = %w[
-      alpha
-      beta
-      bpo
-      dev
-      experimental
-      prerelease
-      preview
-      rc
-    ].freeze
-
     empty_version = Version.new("")
     match_version_map.delete_if do |_match, version|
       next true if version == empty_version
       next false if livecheckable
 
-      version_rejections.any? do |rejection|
+      UNSTABLE_VERSION_KEYWORDS.any? do |rejection|
         version.to_s.include?(rejection)
       end
     end
