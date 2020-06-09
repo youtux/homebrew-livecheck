@@ -1,6 +1,6 @@
 class Flowgrind
   livecheck do
-    url "https://launchpad.net/flowgrind"
+    url :homepage
     regex(/Latest version is flowgrind-([0-9.]+)/)
   end
 end

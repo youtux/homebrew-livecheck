@@ -1,6 +1,6 @@
 class Pigz
   livecheck do
-    url "https://zlib.net/pigz/"
+    url :homepage
     regex(/href="pigz-([0-9.]+)\.t/)
   end
 end

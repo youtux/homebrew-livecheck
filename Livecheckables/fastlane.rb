@@ -1,6 +1,6 @@
 class Fastlane
   livecheck do
-    url "https://github.com/fastlane/fastlane.git"
+    url :head
     regex(/^([\d.]+)$/)
   end
 end

@@ -3,7 +3,7 @@ class Unbound
   # https://nlnetlabs.nl/downloads/unbound/ since the first-party site has a
   # tendency to lead to an `execution expired` error.
   livecheck do
-    url "https://github.com/NLnetLabs/unbound.git"
+    url :head
     regex(/^(?:release-)?v?(\d+(?:\.\d+)+)$/)
   end
 end

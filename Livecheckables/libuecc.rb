@@ -1,6 +1,6 @@
 class Libuecc
   livecheck do
-    url "https://git.universe-factory.net/libuecc/"
+    url :head
     regex(%r{href='/libuecc/tag/\?h=v([0-9]+)'>})
   end
 end

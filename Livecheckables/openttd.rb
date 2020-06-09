@@ -1,6 +1,6 @@
 class Openttd
   livecheck do
-    url "https://www.openttd.org/"
+    url :homepage
     regex(/Download stable \((\d+(\.\d+)+)\)/)
   end
 end

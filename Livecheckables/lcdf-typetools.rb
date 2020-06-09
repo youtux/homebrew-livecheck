@@ -1,6 +1,6 @@
 class LcdfTypetools
   livecheck do
-    url "https://www.lcdf.org/type/"
+    url :homepage
     regex(/href='lcdf-typetools-([0-9.]+)\.t/)
   end
 end

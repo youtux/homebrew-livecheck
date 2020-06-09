@@ -1,6 +1,6 @@
 class Icbirc
   livecheck do
-    url "https://www.benzedrine.ch/icbirc.html"
+    url :homepage
     regex(%r{href="/icbirc-([0-9.]+)\.t})
   end
 end

@@ -1,6 +1,6 @@
 class GnuProlog
   livecheck do
-    url "http://www.gprolog.org/"
+    url :homepage
     regex(/href=.+gprolog-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

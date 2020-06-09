@@ -1,6 +1,6 @@
 class Chkrootkit
   livecheck do
-    url "http://www.chkrootkit.org/"
+    url :homepage
     regex(%r{href="/download/">chkrootkit ([0-9,.]+)})
   end
 end

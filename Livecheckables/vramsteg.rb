@@ -1,6 +1,6 @@
 class Vramsteg
   livecheck do
-    url "https://github.com/GothenburgBitFactory/vramsteg.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

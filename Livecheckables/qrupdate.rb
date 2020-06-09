@@ -1,6 +1,6 @@
 class Qrupdate
   livecheck do
-    url "https://sourceforge.net/projects/qrupdate/"
+    url :homepage
     regex(%r{url=.+?/qrupdate-v?(\d+(?:\.\d+)+)\.t})
   end
 end

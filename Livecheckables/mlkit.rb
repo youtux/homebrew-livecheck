@@ -1,6 +1,6 @@
 class Mlkit
   livecheck do
-    url "https://github.com/melsman/mlkit.git"
+    url :head
     regex(/mlkit-([0-9.]+)$/)
   end
 end

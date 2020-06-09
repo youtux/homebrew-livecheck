@@ -1,6 +1,6 @@
 class RobotFramework
   livecheck do
-    url "https://github.com/robotframework/robotframework.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

@@ -1,6 +1,6 @@
 class Ngt
   livecheck do
-    url "https://github.com/yahoojapan/NGT.git"
+    url :homepage
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

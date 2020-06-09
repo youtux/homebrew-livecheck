@@ -1,6 +1,6 @@
 class Cppunit
   livecheck do
-    url "https://wiki.freedesktop.org/www/Software/cppunit/"
+    url :homepage
     regex(/href=.+cppunit-v?(\d+(?:\.\d+)+)\.t/)
   end
 end

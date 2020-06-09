@@ -1,6 +1,6 @@
 class Oclgrind
   livecheck do
-    url "https://github.com/jrprice/Oclgrind.git"
+    url :homepage
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

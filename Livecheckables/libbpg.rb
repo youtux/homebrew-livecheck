@@ -1,6 +1,6 @@
 class Libbpg
   livecheck do
-    url "https://bellard.org/bpg/"
+    url :homepage
     regex(/href="libbpg-([0-9.]+)\.t/)
   end
 end

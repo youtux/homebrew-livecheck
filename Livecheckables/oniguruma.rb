@@ -1,6 +1,6 @@
 class Oniguruma
   livecheck do
-    url "https://github.com/kkos/oniguruma.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+(?:.(?:mark|rev)\d+)?)$/i)
   end
 end

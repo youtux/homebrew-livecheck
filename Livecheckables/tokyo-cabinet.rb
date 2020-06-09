@@ -1,6 +1,6 @@
 class TokyoCabinet
   livecheck do
-    url "https://fallabs.com/tokyocabinet/"
+    url :homepage
     regex(/href="tokyocabinet-([\d.]+)\.tar\.gz"/)
   end
 end

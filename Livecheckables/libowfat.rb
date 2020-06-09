@@ -1,6 +1,6 @@
 class Libowfat
   livecheck do
-    url "https://www.fefe.de/libowfat/"
+    url :homepage
     regex(/href="libowfat-([0-9.]+)\.t/)
   end
 end

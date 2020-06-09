@@ -1,6 +1,6 @@
 class Abnfgen
   livecheck do
-    url "http://www.quut.com/abnfgen/"
+    url :homepage
     regex(%r{href=.*?/abnfgen-([0-9.]+)\.t})
   end
 end

@@ -1,6 +1,6 @@
 class Reminiscence
   livecheck do
-    url "http://cyxdown.free.fr/reminiscence/"
+    url :homepage
     regex(/href="REminiscence-([0-9.]+)\.t/)
   end
 end

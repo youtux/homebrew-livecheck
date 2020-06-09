@@ -1,6 +1,6 @@
 class Feh
   livecheck do
-    url "https://feh.finalrewind.org/"
+    url :homepage
     regex(/href="feh-([0-9,.]+)\.t/)
   end
 end

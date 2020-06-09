@@ -1,6 +1,6 @@
 class Jhiccup
   livecheck do
-    url "https://www.azul.com/jhiccup/"
+    url :homepage
     regex(%r{href=".*?/jHiccup-([0-9.]+)-dist})
   end
 end

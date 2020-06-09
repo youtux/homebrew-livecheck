@@ -1,6 +1,6 @@
 class Rsyslog
   livecheck do
-    url "https://www.rsyslog.com/"
+    url :homepage
     regex(/Current Version.+?v?(\d+(?:\.\d+)+)/m)
   end
 end

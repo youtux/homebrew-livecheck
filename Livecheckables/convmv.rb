@@ -1,6 +1,6 @@
 class Convmv
   livecheck do
-    url "https://www.j3e.de/linux/convmv/"
+    url :homepage
     regex(/convmv-([0-9.]+)\.t/)
   end
 end

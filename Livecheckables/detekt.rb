@@ -1,6 +1,6 @@
 class Detekt
   livecheck do
-    url "https://github.com/detekt/detekt.git"
+    url :homepage
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

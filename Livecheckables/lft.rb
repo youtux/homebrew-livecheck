@@ -1,6 +1,6 @@
 class Lft
   livecheck do
-    url "https://pwhois.org/lft/"
+    url :homepage
     regex(/value="lft-([0-9.]+)\.t/)
   end
 end

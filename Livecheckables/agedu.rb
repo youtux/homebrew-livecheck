@@ -1,6 +1,6 @@
 class Agedu
   livecheck do
-    url "https://www.chiark.greenend.org.uk/~sgtatham/agedu/"
+    url :homepage
     regex(/href="agedu-(\d+)(?:\.[\da-z]+)?\.t/)
   end
 end

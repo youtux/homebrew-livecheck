@@ -1,6 +1,6 @@
 class Graphicsmagick
   livecheck do
-    url "http://www.graphicsmagick.org/"
+    url :homepage
     regex(/<td>([0-9.]+) \(Released/)
   end
 end

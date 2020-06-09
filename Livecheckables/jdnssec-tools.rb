@@ -1,6 +1,6 @@
 class JdnssecTools
   livecheck do
-    url "https://github.com/dblacka/jdnssec-tools.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

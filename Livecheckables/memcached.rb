@@ -1,6 +1,6 @@
 class Memcached
   livecheck do
-    url "https://memcached.org/"
+    url :homepage
     regex(/memcached-(\d+(?:\.\d+){2,})\./)
   end
 end

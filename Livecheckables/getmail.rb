@@ -1,6 +1,6 @@
 class Getmail
   livecheck do
-    url "http://pyropus.ca/software/getmail/"
+    url :homepage
     regex(/getmail-(\d+(?:\.\d+)*)\.t/)
   end
 end
