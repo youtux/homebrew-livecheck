@@ -1,6 +1,6 @@
 class KubernetesCli
   livecheck do
-    url "https://github.com/kubernetes/kubernetes.git"
+    url :head
     regex(/^v([\d.]+)$/)
   end
 end

@@ -1,6 +1,6 @@
 class Dps8m
   livecheck do
-    url "https://gitlab.com/dps8m/dps8m.git"
+    url :head
     regex(/^R?(\d+(?:\.\d+)+)$/i)
   end
 end

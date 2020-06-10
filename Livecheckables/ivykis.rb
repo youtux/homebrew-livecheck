@@ -1,6 +1,6 @@
 class Ivykis
   livecheck do
-    url "https://sourceforge.net/projects/libivykis/"
+    url :homepage
     regex(%r{/ivykis-([0-9.]+)\.t})
   end
 end

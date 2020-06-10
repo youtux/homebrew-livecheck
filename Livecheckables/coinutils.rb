@@ -1,6 +1,6 @@
 class Coinutils
   livecheck do
-    url "https://github.com/coin-or/CoinUtils.git"
+    url :homepage
     regex(%r{^(?:releases/)?(\d+(?:\.\d+)+)$}i)
   end
 end

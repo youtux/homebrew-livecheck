@@ -1,6 +1,6 @@
 class Nzbget
   livecheck do
-    url "https://github.com/nzbget/nzbget.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

@@ -1,6 +1,6 @@
 class Hevea
   livecheck do
-    url "http://hevea.inria.fr"
+    url :homepage
     regex(/Current version is ([0-9.]+)\./)
   end
 end

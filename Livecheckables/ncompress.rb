@@ -1,6 +1,6 @@
 class Ncompress
   livecheck do
-    url "https://github.com/vapier/ncompress.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

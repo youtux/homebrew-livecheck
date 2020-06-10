@@ -1,6 +1,6 @@
 class OmegaRpg
   livecheck do
-    url "http://www.alcyone.com/max/projects/omega/"
+    url :homepage
     regex(/latest.*?>([0-9.]+)</)
   end
 end

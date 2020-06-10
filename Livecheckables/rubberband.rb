@@ -1,6 +1,6 @@
 class Rubberband
   livecheck do
-    url "https://breakfastquay.com/rubberband/"
+    url :homepage
     regex(/Rubber Band Library v([0-9.]+) released/)
   end
 end

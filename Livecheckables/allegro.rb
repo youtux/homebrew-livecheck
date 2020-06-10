@@ -1,6 +1,6 @@
 class Allegro
   livecheck do
-    url "https://github.com/liballeg/allegro5.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

@@ -1,6 +1,6 @@
 class Cpanminus
   livecheck do
-    url "https://github.com/miyagawa/cpanminus.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

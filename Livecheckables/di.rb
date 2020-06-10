@@ -1,6 +1,6 @@
 class Di
   livecheck do
-    url "https://gentoo.com/di/"
+    url :homepage
     regex(%r{<p>Current Version: ([0-9,.]+)</p>})
   end
 end

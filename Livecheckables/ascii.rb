@@ -1,6 +1,6 @@
 class Ascii
   livecheck do
-    url "http://www.catb.org/~esr/ascii/"
+    url :homepage
     regex(/ascii-(\d+(?:\.\d+)+)/)
   end
 end

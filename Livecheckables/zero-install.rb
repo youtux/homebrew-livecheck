@@ -1,6 +1,6 @@
 class ZeroInstall
   livecheck do
-    url "https://github.com/0install/0install.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

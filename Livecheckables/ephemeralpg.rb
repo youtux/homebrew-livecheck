@@ -1,6 +1,6 @@
 class Ephemeralpg
   livecheck do
-    url "https://eradman.com/ephemeralpg/"
+    url :homepage
     regex(/href=['"][^'"]*?ephemeralpg-(\d+(?:\.\d+)+)\.t/)
   end
 end

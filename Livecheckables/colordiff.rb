@@ -1,6 +1,6 @@
 class Colordiff
   livecheck do
-    url "https://www.colordiff.org/"
+    url :homepage
     regex(/colordiff-([0-9.]+)\.tar/)
   end
 end

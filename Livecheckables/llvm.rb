@@ -1,6 +1,6 @@
 class Llvm
   livecheck do
-    url "https://llvm.org/"
+    url :homepage
     regex(/LLVM (\d+.\d+.\d+)/)
   end
 end

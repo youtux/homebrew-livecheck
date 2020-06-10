@@ -1,5 +1,5 @@
 class Mdds
   livecheck do
-    url "https://gitlab.com/mdds/mdds.git"
+    url :head
   end
 end

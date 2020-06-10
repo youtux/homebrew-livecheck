@@ -5,7 +5,7 @@ class Curaengine
   # but thankfully that hasn't been true yet. This should be handled in a better
   # way in the future, to avoid the possibility of missing good versions.
   livecheck do
-    url "https://github.com/Ultimaker/CuraEngine.git"
+    url :head
     regex(/^v?(\d+\.\d(?:\.\d+)+)$/)
   end
 end

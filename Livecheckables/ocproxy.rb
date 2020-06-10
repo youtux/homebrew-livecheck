@@ -1,6 +1,6 @@
 class Ocproxy
   livecheck do
-    url "https://github.com/cernekee/ocproxy.git"
+    url :head
     regex(/^v?(\d+(?:\.\d{1,3})+)$/)
   end
 end

@@ -1,6 +1,6 @@
 class Scc
   livecheck do
-    url "https://github.com/boyter/scc.git"
+    url :homepage
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

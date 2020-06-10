@@ -1,6 +1,6 @@
 class Pass
   livecheck do
-    url "https://git.zx2c4.com/password-store.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end

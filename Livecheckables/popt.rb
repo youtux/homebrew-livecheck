@@ -5,7 +5,7 @@ class Popt
   # candidate at: http://ftp.rpm.org/releases/testing/popt-1.18-rc1.tar.gz
   # Checking the Git repo seems like a safe bet until we see how this plays out.
   livecheck do
-    url "https://github.com/rpm-software-management/popt.git"
+    url :homepage
     regex(/^(?:popt)?-v?(\d+(?:[._-]\d+)+)(?:-release)?$/i)
   end
 end

@@ -1,6 +1,6 @@
 class Archivemount
   livecheck do
-    url "https://www.cybernoia.de/software/archivemount.html"
+    url :homepage
     regex(%r{href=".*?/archivemount-([0-9.]+)\.t})
   end
 end

@@ -1,6 +1,6 @@
 class Pike
   livecheck do
-    url "https://pike.lysator.liu.se/"
+    url :homepage
     regex(%r{href=".*?/latest-stable/Pike-v([0-9.]+)\.t})
   end
 end

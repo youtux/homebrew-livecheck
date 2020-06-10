@@ -1,6 +1,6 @@
 class Xapian
   livecheck do
-    url "https://xapian.org/"
+    url :homepage
     regex(/latest stable version.*?is ([0-9.]+)</m)
   end
 end

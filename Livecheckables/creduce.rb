@@ -1,6 +1,6 @@
 class Creduce
   livecheck do
-    url "https://embed.cs.utah.edu/creduce/"
+    url :homepage
     regex(/href="creduce-([0-9,.]+)\.tar/)
   end
 end

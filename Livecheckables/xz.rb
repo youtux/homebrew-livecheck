@@ -1,6 +1,6 @@
 class Xz
   livecheck do
-    url "https://tukaani.org/xz/"
+    url :homepage
     regex(/([0-9.]+) was released/)
   end
 end

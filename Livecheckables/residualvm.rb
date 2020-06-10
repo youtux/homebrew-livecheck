@@ -1,6 +1,6 @@
 class Residualvm
   livecheck do
-    url "https://github.com/residualvm/residualvm.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/)
   end
 end
