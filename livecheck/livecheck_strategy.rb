@@ -1,3 +1,4 @@
+# Formulae that do not use GNOME's "even-numbered minor is stable" scheme
 GNOME_DEVEL_ALLOWLIST = [
   "gcab",
   "gtk-doc",

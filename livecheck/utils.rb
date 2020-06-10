@@ -1,5 +1,17 @@
 require "open-uri"
 
+def checkable_urls(formula)
+  urls = []
+  urls << formula.head.url if formula.head
+  if formula.stable
+    urls << formula.stable.url
+    urls.concat(formula.stable.mirrors)
+  end
+  urls << formula.homepage if formula.homepage
+
+  urls.compact
+end
+
 def git_tags(repo_url, filter = nil)
   raw_tags = `git ls-remote --tags #{repo_url}`
   raw_tags.gsub!(%r{^.*\trefs/tags/}, "")
