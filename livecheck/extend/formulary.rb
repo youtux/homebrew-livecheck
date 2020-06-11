@@ -1,5 +1,3 @@
-require_relative "formula"
-
 module Formulary
   class << self
     # extended to load the Livecheckable version of a formula

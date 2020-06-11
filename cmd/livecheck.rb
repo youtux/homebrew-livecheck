@@ -127,7 +127,7 @@ module Homebrew
     formula.head.downloader.shutup! unless formula.stable?
 
     current = formula.stable? ? formula.version : formula.installed_version.version.commit
-    latest = formula.stable? ? formula.latest : formula.head.downloader.fetch_last_commit
+    latest = formula.stable? ? latest_version(formula) : formula.head.downloader.fetch_last_commit
     if (m = latest.to_s.match(/(.*)-release$/)) && !current.to_s.match(/.*-release$/)
       latest = Version.new(m[1])
     end
