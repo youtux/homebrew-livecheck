@@ -41,6 +41,7 @@ SOURCEFORGE_SPECIAL_CASES = %w[
   opencore-amr
   liba52.sourceforge.net/
   foremost.sourceforge.net/
+  bcrypt.sourceforge.net
 ].freeze
 
 UNSTABLE_VERSION_KEYWORDS = %w[
