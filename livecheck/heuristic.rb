@@ -40,6 +40,7 @@ SOURCEFORGE_SPECIAL_CASES = %w[
   /netpbm/
   opencore-amr
   liba52.sourceforge.net/
+  foremost.sourceforge.net/
 ].freeze
 
 UNSTABLE_VERSION_KEYWORDS = %w[
