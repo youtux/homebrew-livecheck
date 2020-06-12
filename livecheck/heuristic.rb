@@ -22,6 +22,7 @@ GNU_SPECIAL_CASES = %w[
   icoutils
   dvdrtools
   avrdude
+  oath-toolkit
 ].freeze
 
 SOURCEFORGE_SPECIAL_CASES = %w[
