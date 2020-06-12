@@ -25,6 +25,7 @@ GNU_SPECIAL_CASES = %w[
   oath-toolkit
   cvs
   mit-scheme
+  clisp
 ].freeze
 
 SOURCEFORGE_SPECIAL_CASES = %w[
