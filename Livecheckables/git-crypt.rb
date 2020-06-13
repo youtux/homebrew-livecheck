@@ -1,6 +1,6 @@
 class GitCrypt
   livecheck do
-    url "https://github.com/AGWA/git-crypt.git"
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    url :homepage
+    regex(/href=.*?git-crypt-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
