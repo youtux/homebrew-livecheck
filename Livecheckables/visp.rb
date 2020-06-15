@@ -1,6 +1,6 @@
 class Visp
   livecheck do
-    url :homepage
-    regex(/href=.*?visp-v?(\d+(?:\.\d+)+)/i)
+    url "https://visp.inria.fr/download/"
+    regex(/href=.*?visp-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
