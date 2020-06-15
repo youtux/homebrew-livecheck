@@ -21,6 +21,7 @@ GNU_SPECIAL_CASES = %w[
   numdiff
   icoutils
   dvdrtools
+  avrdude
 ].freeze
 
 SOURCEFORGE_SPECIAL_CASES = %w[
