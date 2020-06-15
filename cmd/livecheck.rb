@@ -175,19 +175,24 @@ module Homebrew
 
     if is_outdated || !Homebrew.args.newer_only?
       if Homebrew.args.json?
-        return {
+        json_hash = {
           "formula" => formula_name(formula),
           "version" => {
             "current"             => current.to_s,
             "latest"              => latest.to_s,
             "outdated"            => is_outdated,
             "newer_than_upstream" => is_newer_than_upstream,
-            "livecheckable"       => formula.livecheckable?,
-            "head"                => !formula.stable?,
           },
         }
+
+        if Homebrew.args.verbose?
+          json_hash["head"] = !formula.stable?
+          json_hash["livecheckable"] = formula.livecheckable?
+        end
+
+        return json_hash
       else
-        formula_s += " (guessed)" unless formula.livecheckable?
+        formula_s += " (guessed)" if !formula.livecheckable? && Homebrew.args.verbose?
         current_s =
           if is_newer_than_upstream
             "#{Tty.red}#{current}#{Tty.reset}"
