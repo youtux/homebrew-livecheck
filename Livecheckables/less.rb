@@ -1,6 +1,6 @@
 class Less
   livecheck do
-    url "http://www.greenwoodsoftware.com/less/download.html"
-    regex(%r{<strong>RECOMMENDED</strong> version v?(\d+)}i)
+    url :homepage
+    regex(/less-v?(\d+).+?released.+?general use/i)
   end
 end
