@@ -47,7 +47,7 @@ def git_strategy(url, regex = nil)
   match_version_map = {}
 
   tags = git_tags(url, regex)
-  tags_only_debian = git_tags_only_debian?(tags)
+  tags_only_debian = tags.all? { |tag| tag.start_with?("debian/") }
 
   tags.each do |tag|
     # Move to the next one if tag actually is prefixed with 'debian/'
