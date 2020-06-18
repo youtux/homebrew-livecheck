@@ -1,6 +1,6 @@
 class Rethinkdb
   livecheck do
-    url "https://github.com/rethinkdb/rethinkdb.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end
