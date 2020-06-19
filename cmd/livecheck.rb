@@ -208,9 +208,5 @@ module Homebrew
         puts "#{formula_s} : #{current_s} ==> #{latest_s}"
       end
     end
-
-    if is_newer_than_upstream && Homebrew.args.verbose?
-      opoo "#{formula_s} version is greater than the upstream version"
-    end
   end
 end
