@@ -154,7 +154,22 @@ def latest_version(formula)
 
     next if match_version_map.empty?
 
-    return Version.new(match_version_map.values.max)
+    version_info = {
+      "latest" => Version.new(match_version_map.values.max),
+    }
+
+    if Homebrew.args.json? && Homebrew.args.verbose?
+      version_info["meta"] = {
+        "url"      => {
+          "original" => original_url,
+        },
+        "strategy" => strategy.nil? ? nil : strategy.to_s.delete_suffix("_strategy"),
+      }
+      version_info["meta"]["url"]["processed"] = url if url != original_url
+      version_info["meta"]["regex"] = livecheck_regex.inspect unless livecheck_regex.nil?
+    end
+
+    return version_info
   end
 
   nil

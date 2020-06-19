@@ -150,7 +150,14 @@ module Homebrew
     formula.head.downloader.shutup! unless formula.stable?
 
     current = formula.stable? ? formula.version : formula.installed_version.version.commit
-    latest = formula.stable? ? latest_version(formula) : formula.head.downloader.fetch_last_commit
+
+    version_info = nil
+    latest = if formula.stable?
+      version_info = latest_version(formula)
+      version_info.nil? ? nil : version_info["latest"]
+    else
+      formula.head.downloader.fetch_last_commit
+    end
 
     if latest.nil?
       if Homebrew.args.json?
@@ -173,40 +180,42 @@ module Homebrew
 
     formula_s = "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}"
 
-    if is_outdated || !Homebrew.args.newer_only?
-      if Homebrew.args.json?
-        json_hash = {
-          "formula" => formula_name(formula),
-          "version" => {
-            "current"             => current.to_s,
-            "latest"              => latest.to_s,
-            "outdated"            => is_outdated,
-            "newer_than_upstream" => is_newer_than_upstream,
-          },
-        }
+    return if Homebrew.args.newer_only? && !is_outdated
 
-        if Homebrew.args.verbose?
-          json_hash["head"] = !formula.stable?
-          json_hash["livecheckable"] = formula.livecheckable?
-        end
+    if Homebrew.args.json?
+      json_hash = {
+        "formula" => formula_name(formula),
+        "version" => {
+          "current"             => current.to_s,
+          "latest"              => latest.to_s,
+          "outdated"            => is_outdated,
+          "newer_than_upstream" => is_newer_than_upstream,
+        },
+      }
 
-        return json_hash
-      else
-        formula_s += " (guessed)" if !formula.livecheckable? && Homebrew.args.verbose?
-        current_s =
-          if is_newer_than_upstream
-            "#{Tty.red}#{current}#{Tty.reset}"
-          else
-            current.to_s
-          end
-        latest_s =
-          if is_outdated
-            "#{Tty.green}#{latest}#{Tty.reset}"
-          else
-            latest.to_s
-          end
-        puts "#{formula_s} : #{current_s} ==> #{latest_s}"
+      if Homebrew.args.verbose?
+        json_hash["meta"] = {}
+        json_hash["meta"]["livecheckable"] = formula.livecheckable?
+        json_hash["meta"]["head_only"] = !formula.stable? unless formula.stable?
+        json_hash["meta"].merge!(version_info["meta"]) unless version_info.nil?
       end
+
+      return json_hash
     end
+
+    formula_s += " (guessed)" if !formula.livecheckable? && Homebrew.args.verbose?
+    current_s =
+      if is_newer_than_upstream
+        "#{Tty.red}#{current}#{Tty.reset}"
+      else
+        current.to_s
+      end
+    latest_s =
+      if is_outdated
+        "#{Tty.green}#{latest}#{Tty.reset}"
+      else
+        latest.to_s
+      end
+    puts "#{formula_s} : #{current_s} ==> #{latest_s}"
   end
 end
