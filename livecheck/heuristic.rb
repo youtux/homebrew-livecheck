@@ -89,6 +89,7 @@ def latest_version(formula)
 
   if Homebrew.args.debug?
     puts "Formula:         #{formula_name(formula)}"
+    puts "Head only?:      #{!formula.stable?}" unless formula.stable?
     puts "Livecheckable?:  #{has_livecheckable ? "Yes" : "No"}"
   end
 
