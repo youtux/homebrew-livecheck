@@ -44,6 +44,14 @@ module Homebrew
   def livecheck
     livecheck_args.parse
 
+    if Homebrew.args.debug? && Homebrew.args.verbose?
+      puts ARGV
+      puts Homebrew.args
+      puts ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
+      puts Pathname.new(File.expand_path(__dir__)).basename
+      puts $LOAD_PATH
+    end
+
     if (cmd = Homebrew.args.named.first)
       require?("livecheck/commands/#{cmd}") && return
     end
