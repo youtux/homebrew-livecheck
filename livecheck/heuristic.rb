@@ -23,6 +23,7 @@ GNU_SPECIAL_CASES = %w[
   dvdrtools
   avrdude
   oath-toolkit
+  cvs
 ].freeze
 
 SOURCEFORGE_SPECIAL_CASES = %w[
