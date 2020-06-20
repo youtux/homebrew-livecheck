@@ -1,6 +1,6 @@
 class MitScheme
   livecheck do
     url :homepage
-    regex(/href=.*?mit-scheme-v?(\d+(?:\.\d+)+)-svm1\.t/i)
+    regex(/href=.*?mit-scheme-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
