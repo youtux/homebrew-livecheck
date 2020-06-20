@@ -37,6 +37,7 @@ module Homebrew
              description: "Check all available formulae."
       switch "--newer-only",
              description: "Show the latest version only if it's newer than the formula."
+      conflicts "--debug", "--json"
       conflicts "--tap=", "--all", "--installed"
     end
   end
