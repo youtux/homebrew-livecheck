@@ -87,14 +87,19 @@ def latest_version(formula)
   urls = [livecheck_url] if livecheck_url.is_a?(String) && !livecheck_url.blank?
   urls ||= checkable_urls(formula)
 
-  urls.each do |url|
+  if Homebrew.args.debug?
+    puts "Formula:         #{formula_name(formula)}"
+    puts "Head only?:      #{!formula.stable?}" unless formula.stable?
+    puts "Livecheckable?:  #{has_livecheckable ? "Yes" : "No"}"
+  end
+
+  urls.each do |original_url|
     # Skip Gists until/unless we create a method of identifying revisions
-    next if url.include?("gist.github.com")
+    next if original_url.include?("gist.github.com")
 
-    puts "Trying with url #{url}" if Homebrew.args.debug?
-    url = preprocess_url(url)
+    url = preprocess_url(original_url)
 
-    method = if /hackage\.haskell\.org/.match?(url)
+    strategy = if /hackage\.haskell\.org/.match?(url)
       :hackage_strategy
     elsif DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
       :git_strategy
@@ -118,9 +123,17 @@ def latest_version(formula)
     elsif livecheck_regex
       :page_match_strategy
     end
-    next if method.nil?
 
-    match_version_map = Symbol.send(method, url, livecheck_regex)
+    if Homebrew.args.debug?
+      puts "\nURL:             #{original_url}"
+      puts "URL (processed): #{url}" if url != original_url
+      puts "Strategy:        #{strategy.nil? ? "None" : strategy.to_s.delete_suffix("_strategy")}"
+      puts "Regex:           #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
+    end
+
+    next if strategy.nil?
+
+    match_version_map = Symbol.send(strategy, url, livecheck_regex)
 
     empty_version = Version.new("")
     match_version_map.delete_if do |_match, version|
@@ -132,7 +145,8 @@ def latest_version(formula)
       end
     end
 
-    if Homebrew.args.debug?
+    if Homebrew.args.debug? && !match_version_map.empty?
+      puts "\nMatched Versions:\n"
       match_version_map.each do |match, version|
         puts "#{match} => #{version.inspect}"
       end
@@ -140,9 +154,23 @@ def latest_version(formula)
 
     next if match_version_map.empty?
 
-    # TODO: return nil, defer the print to the caller
-    return Version.new(match_version_map.values.max)
+    version_info = {
+      "latest" => Version.new(match_version_map.values.max),
+    }
+
+    if Homebrew.args.json? && Homebrew.args.verbose?
+      version_info["meta"] = {
+        "url"      => {
+          "original" => original_url,
+        },
+        "strategy" => strategy.nil? ? nil : strategy.to_s.delete_suffix("_strategy"),
+      }
+      version_info["meta"]["url"]["processed"] = url if url != original_url
+      version_info["meta"]["regex"] = livecheck_regex.inspect unless livecheck_regex.nil?
+    end
+
+    return version_info
   end
 
-  raise TypeError, "Unable to get versions"
+  nil
 end

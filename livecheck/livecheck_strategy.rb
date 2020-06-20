@@ -42,8 +42,6 @@ def bitbucket_strategy(url, regex = nil)
 end
 
 def git_strategy(url, regex = nil)
-  puts "Possible git repo detected at #{url}" if Homebrew.args.debug?
-
   match_version_map = {}
 
   tags = git_tags(url, regex)
@@ -79,8 +77,6 @@ def gnome_strategy(url, regex = nil)
   package = url.match(%r{/sources/(.*?)/})[1]
   page_url = "https://download.gnome.org/sources/#{package}/cache.json"
 
-  puts "Possible GNOME package [#{package}] detected at #{url}" if Homebrew.args.debug?
-
   # Restrict versions to even numbered minor versions (except x.90+)
   regex ||= if GNOME_DEVEL_ALLOWLIST.include?(package)
     /#{Regexp.escape(package)}-(\d+(?:\.\d+)+)\.t/
@@ -107,13 +103,11 @@ def gnu_strategy(url, regex = nil)
     url.match(r)
   end.compact
 
-  puts "Multiple project names found: #{match_list}" if match_list.length > 1
+  puts "Multiple project names found: #{match_list}" if match_list.length > 1 && Homebrew.args.debug?
 
   unless match_list.empty?
     project_name = match_list[0][1]
     page_url = "http://ftp.gnu.org/gnu/#{project_name}/?C=M&O=D"
-
-    puts "Possible GNU project [#{project_name}] detected at #{url}" if Homebrew.args.debug?
 
     regex ||= /#{project_name}-(\d+(?:\.\d+)*)/
 
@@ -204,13 +198,10 @@ def sourceforge_strategy(url, regex = nil)
   end
   page_url = "https://sourceforge.net/projects/#{project_name}/rss"
 
-  puts "Possible SourceForge project [#{project_name}] detected at #{url}" if Homebrew.args.debug?
-
   regex ||= %r{url=.+?/#{project_name}/files/.*?[-_/](\d+(?:[-.]\d+)+)[-_/%.]}i
 
   page_matches(page_url, regex).each do |match|
     version = Version.new(match)
-    # puts "#{match} => #{version.inspect}" if Homebrew.args.debug?
     match_version_map[match] = version
   end
 

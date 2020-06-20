@@ -12,6 +12,10 @@ def checkable_urls(formula)
   urls.compact
 end
 
+def formula_name(formula)
+  Homebrew.args.full_name? ? formula.full_name : formula
+end
+
 def git_tags(repo_url, filter = nil)
   raw_tags = `git ls-remote --tags #{repo_url}`
   raw_tags.gsub!(%r{^.*\trefs/tags/}, "")
@@ -23,9 +27,8 @@ def git_tags(repo_url, filter = nil)
 end
 
 def page_matches(url, regex)
-  puts %Q[Using page_match("#{url}", "#{regex}")] if Homebrew.args.debug?
   page = URI.open(url).read
   matches = page.scan(regex)
-  puts matches.join(", ") if Homebrew.args.debug?
+  puts "\nMatched Text on Page:\n", matches.join(", ") if Homebrew.args.debug? && !matches.empty?
   matches.map(&:first).uniq
 end
