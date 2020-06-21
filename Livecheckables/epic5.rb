@@ -1,6 +1,6 @@
 class Epic5
   livecheck do
-    url :head
-    regex(/^epic5-(\d+(?:\.\d+)+)$/i)
+    url "http://ftp.epicsol.org/pub/epic/EPIC5-PRODUCTION/"
+    regex(/href=.*?epic5-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
