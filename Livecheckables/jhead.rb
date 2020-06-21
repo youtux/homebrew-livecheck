@@ -1,6 +1,6 @@
 class Jhead
   livecheck do
-    url "https://www.sentex.net/~mwandel/jhead/"
+    url :homepage
     regex(/href=.*?jhead-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
