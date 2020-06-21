@@ -1,6 +1,6 @@
 class AwscliAT1
   livecheck do
-    url "https://github.com/aws/aws-cli.git"
-    regex(/v?(1(?:\.\d+)+)$/)
+    url :stable
+    regex(/^v?(1(?:\.\d+)+)$/i)
   end
 end
