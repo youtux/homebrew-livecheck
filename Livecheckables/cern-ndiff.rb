@@ -1,6 +1,6 @@
 class CernNdiff
   livecheck do
-    url :stable
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    url :head
+    regex(/^(?:mad-?X.)?v?(\d+(?:[_.]\d+)+)$/i)
   end
 end
