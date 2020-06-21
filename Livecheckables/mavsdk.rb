@@ -1,6 +1,6 @@
 class Mavsdk
   livecheck do
-    url :satble
+    url :stable
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end
