@@ -1,6 +1,6 @@
 class ErlangAT22
   livecheck do
     url :stable
-    regex(/^OTP-(22.[0-9.]+)$/i)
+    regex(/^OTP-v?(22(?:\.\d+)+)$/i)
   end
 end
