@@ -1,6 +1,6 @@
 class PipesSh
   livecheck do
-    url :stable
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end
