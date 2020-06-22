@@ -1,6 +1,6 @@
 class ChocolateDoom
   livecheck do
-    url :head
-    regex(/^chocolate-doom-(\d+(?:\.\d+)+)$/i)
+    url "https://www.chocolate-doom.org/downloads/"
+    regex(%r{href=.*?v?(\d+(?:\.\d+)+)/?[ '">]}i)
   end
 end
