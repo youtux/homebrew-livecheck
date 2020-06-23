@@ -1,8 +1,8 @@
 class PipCompletion
-  # The Formula's GitHub repo at https://github.com/ekalinin/pip-bash-completion
-  # does not have any releases or tags, so it isn't possible to check for newer
-  # versions. The Formula definition uses a 'YYYYMMDD' timestamp to indicate the
-  # version.
+  # There currently aren't any versions of pip-completion and the formula
+  # simply uses a revision from the upstream GitHub repo. The YYYYMMDD version
+  # in the formula isn't from upstream and was created on our end to indicate
+  # the date of the revision that's being used.
   livecheck do
     skip "No version information available"
   end
