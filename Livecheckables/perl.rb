@@ -1,6 +1,6 @@
 class Perl
   livecheck do
-    url "https://www.perl.org/get.html"
-    regex(%r{href=".*?/perl-([0-9.]+)\.t})
+    url "https://www.cpan.org/src/"
+    regex(/href=.*?perl-v?(\d+(?:\.\d+)+)\.t/)
   end
 end
