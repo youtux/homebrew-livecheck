@@ -1,6 +1,6 @@
 class Perl
   livecheck do
-    url :head
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    url "https://www.cpan.org/src/"
+    regex(/href=.*?perl-v?(\d+(?:\.\d+)+)\.t/)
   end
 end
