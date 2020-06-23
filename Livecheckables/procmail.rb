@@ -1,7 +1,8 @@
 class Procmail
-  # We use the patched version obtained from Apple for this
-  # formula, so it is appropriate to check for the version
-  # number supplied by Apple.
+  # Procmail is no longer developed/maintained and the formula uses tarballs
+  # from Apple, so we check this source for new releases. The "version" here is
+  # the numeric portion of the archive name (e.g. 14 for procmail-14.tar.gz)
+  # instead of the actual procmail version.
   livecheck do
     url "https://opensource.apple.com/tarballs/procmail/"
     regex(/href=.*?procmail-v?(\d+(?:\.\d+)*)\.t/i)
