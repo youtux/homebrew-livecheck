@@ -1,6 +1,6 @@
 class GstPluginsUgly
   livecheck do
     url "https://gstreamer.freedesktop.org/src/gst-plugins-ugly/"
-    regex(/href="gst-plugins-ugly-([\d.]+\.[\d.]+\.[\d.]+)\.t/)
+    regex(/href="gst-plugins-ugly-v?(\d+\.\d*[02468](?:\.\d+)*)\.t/i)
   end
 end
