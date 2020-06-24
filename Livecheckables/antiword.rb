@@ -1,6 +1,6 @@
 class Antiword
   livecheck do
-    url :homepage
-    regex(/href=.*?antiword-v?(\d+(?:\.\d+)+)\.t/i)
+    url "http://www.winfield.demon.nl/linux/"
+    regex(/href=.*?antiword-v?(\d+(?:\.\d+)+)\.t[a-z]+(?:\.[a-z]+)?[ '">]/i)
   end
 end
