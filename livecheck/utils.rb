@@ -29,6 +29,8 @@ end
 def page_matches(url, regex)
   page = URI.open(url).read
   matches = page.scan(regex)
-  puts "\nMatched Text on Page:\n", matches.join(", ") if Homebrew.args.debug? && !matches.empty?
+  if Homebrew.args.debug? && Homebrew.args.verbose? && !matches.empty?
+    puts "Matched Text on Page:\n", matches.join(", ")
+  end
   matches.map(&:first).uniq
 end
