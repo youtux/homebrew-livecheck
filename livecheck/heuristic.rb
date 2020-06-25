@@ -15,35 +15,6 @@ GITHUB_SPECIAL_CASES = %w[
   yuicompressor
 ].freeze
 
-GNU_SPECIAL_CASES = %w[
-  kawa
-  lzip
-  numdiff
-  icoutils
-  dvdrtools
-  avrdude
-  oath-toolkit
-  cvs
-  mit-scheme
-  clisp
-].freeze
-
-SOURCEFORGE_SPECIAL_CASES = %w[
-  mikmod
-  log4cpp
-  libwps
-  e2fsprogs
-  potrace
-  remake
-  /avf/
-  /bashdb/
-  /netpbm/
-  opencore-amr
-  liba52.sourceforge.net/
-  foremost.sourceforge.net/
-  bcrypt.sourceforge.net
-].freeze
-
 UNSTABLE_VERSION_KEYWORDS = %w[
   alpha
   beta
@@ -93,9 +64,9 @@ def latest_version(formula)
   urls ||= checkable_urls(formula)
 
   if Homebrew.args.debug?
-    puts "Formula:         #{formula_name(formula)}"
-    puts "Head only?:      #{!formula.stable?}" unless formula.stable?
-    puts "Livecheckable?:  #{has_livecheckable ? "Yes" : "No"}"
+    puts "Formula:          #{formula_name(formula)}"
+    puts "Head only?:       #{!formula.stable?}" unless formula.stable?
+    puts "Livecheckable?:   #{has_livecheckable ? "Yes" : "No"}"
   end
 
   urls.each do |original_url|
@@ -103,42 +74,25 @@ def latest_version(formula)
     next if original_url.include?("gist.github.com")
 
     url = preprocess_url(original_url)
-
-    strategy = if /hackage\.haskell\.org/.match?(url)
-      :hackage_strategy
-    elsif DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
-      :git_strategy
-    elsif /(sourceforge|sf)\.net/.match?(url) &&
-          SOURCEFORGE_SPECIAL_CASES.none? { |sc| url.include? sc }
-      :sourceforge_strategy
-    elsif url =~ /gnu\.org/ && GNU_SPECIAL_CASES.none? { |sc| url.include? sc }
-      :gnu_strategy
-    elsif /files\.pythonhosted\.org/.match?(url)
-      :pypi_strategy
-    elsif /registry\.npmjs\.org/.match?(url)
-      :npm_strategy
-    elsif /download\.gnome\.org/.match?(url)
-      :gnome_strategy
-    elsif /launchpad\.net/.match?(url)
-      :launchpad_strategy
-    elsif %r{www\.apache\.org/dyn}.match?(url)
-      :apache_strategy
-    elsif %r{bitbucket\.org(/[^/]+){4}\.\w+}.match?(url)
-      :bitbucket_strategy
-    elsif livecheck_regex
-      :page_match_strategy
-    end
+    strategy = LivecheckStrategy.from_url(url, !livecheck_regex.nil?)
 
     if Homebrew.args.debug?
-      puts "\nURL:             #{original_url}"
-      puts "URL (processed): #{url}" if url != original_url
-      puts "Strategy:        #{strategy.nil? ? "None" : strategy.to_s.delete_suffix("_strategy")}"
-      puts "Regex:           #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
+      puts "\nURL:              #{original_url}"
+      puts "URL (processed):  #{url}" if url != original_url
+      puts "Strategy:         #{strategy.nil? ? "None" : strategy::NICE_NAME}"
+      puts "Regex:            #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
     end
 
     next if strategy.nil?
 
-    match_version_map = Symbol.send(strategy, url, livecheck_regex)
+    strategy_data = strategy.find_versions(url, livecheck_regex)
+    match_version_map = strategy_data[:matches]
+    regex = strategy_data[:regex]
+
+    if Homebrew.args.debug?
+      puts "URL (strategy):   #{strategy_data[:url]}" if strategy_data[:url] != url
+      puts "Regex (strategy): #{strategy_data[:regex].inspect}\n" if strategy_data[:regex] != livecheck_regex
+    end
 
     empty_version = Version.new("")
     match_version_map.delete_if do |_match, version|
@@ -168,10 +122,11 @@ def latest_version(formula)
         "url"      => {
           "original" => original_url,
         },
-        "strategy" => strategy.nil? ? nil : strategy.to_s.delete_suffix("_strategy"),
+        "strategy" => strategy.nil? ? nil : strategy::NAME,
       }
       version_info["meta"]["url"]["processed"] = url if url != original_url
-      version_info["meta"]["regex"] = livecheck_regex.inspect unless livecheck_regex.nil?
+      version_info["meta"]["url"]["strategy"] = strategy_data[:url] if strategy_data[:url] != url
+      version_info["meta"]["regex"] = regex.inspect unless regex.nil?
     end
 
     return version_info

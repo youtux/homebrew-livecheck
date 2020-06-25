@@ -1,0 +1,39 @@
+# frozen_string_literal: true
+
+module LivecheckStrategy
+  class Git
+    NICE_NAME = "Git"
+    NAME = NICE_NAME.downcase
+
+    def self.match?(url)
+      DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
+    end
+
+    def self.find_versions(url, regex)
+      tags = git_tags(url, regex)
+      tags_only_debian = tags.all? { |tag| tag.start_with?("debian/") }
+
+      match_data = { :matches => {}, :regex => regex, :url => url }
+      tags.each do |tag|
+        # Skip tag if it has a 'debian/' prefix and upstream does not do only
+        # 'debian/' prefixed tags
+        next if tag =~ %r{debian/} && !tags_only_debian
+
+        captures = tag.scan(regex) if regex
+        tag_cleaned = if captures && !captures.empty? && captures[0].is_a?(Array)
+          # Use the first capture group as the version
+          captures[0][0]
+        else
+          # Remove any character before the first number
+          tag[/\D*(.*)/, 1]
+        end
+
+        match_data[:matches][tag] = Version.new(tag_cleaned)
+      rescue TypeError
+        nil
+      end
+
+      match_data
+    end
+  end
+end
