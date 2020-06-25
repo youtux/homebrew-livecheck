@@ -1,6 +1,6 @@
 class Ballerina
   livecheck do
-    url "https://github.com/ballerina-platform/ballerina-lang.git"
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    url "https://ballerina.io/learn/installing-ballerina/"
+    regex(/href=.*?ballerina[._-]v?(\d+(?:\.\d+)+)/i)
   end
 end
