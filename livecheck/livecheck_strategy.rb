@@ -121,10 +121,19 @@ def gnu_strategy(url, regex = nil)
 end
 
 def hackage_strategy(url, _regex = nil)
+  match_version_map = {}
+
   package = ((url.split("/")[4]).split("-")[0..-2]).join("-")
-  haskell_pkg_url = "https://hackage.haskell.org/package/#{package}/src"
-  ver = URI.open(haskell_pkg_url).read.sub(/.*Directory listing for #{package}-(.*) source tarball.*/, "\\1")
-  { ver => Version.new(ver) }
+  page_url = "https://hackage.haskell.org/package/#{package}/src"
+
+  regex ||= %r{<h3>#{package}-(.*?)/?</h3>}i
+
+  page_matches(page_url, regex).each do |match|
+    version = Version.new(match)
+    match_version_map[match] = version
+  end
+
+  match_version_map
 end
 
 def launchpad_strategy(url, regex = nil)
