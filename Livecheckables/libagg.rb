@@ -1,9 +1,10 @@
 class Libagg
-  # The homepage for this formula is reachable, but it does not
-  # provide any version information, while other pages are not
-  # accessible. Furthermore, the formula is not being developed
-  # or maintained, so we skip checking for new versions.
+  # The homepage for this formula is a copy of the original and was created
+  # after the original was discontinued. There will be no further releases of
+  # the copy of this software used in the formula, as the developer is deceased.
+  # New development of libagg occurs in a fork of v2.4 and can be found at:
+  # https://sourceforge.net/projects/agg/
   livecheck do
-    skip "Not actively developed or maintained"
+    skip "No longer developed/maintained"
   end
 end
