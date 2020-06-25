@@ -17,7 +17,7 @@ def formula_name(formula)
 end
 
 def git_tags(repo_url, filter = nil)
-  raw_tags = `git ls-remote --tags #{repo_url}`
+  raw_tags = `GIT_TERMINAL_PROMPT=0 git ls-remote --tags #{repo_url}`
   raw_tags.gsub!(%r{^.*\trefs/tags/}, "")
   raw_tags.delete_suffix!("^{}")
 
