@@ -103,6 +103,18 @@ module Homebrew
   end
 
   def print_latest_version(formula)
+    if formula.deprecated? && !formula.livecheckable?
+      if Homebrew.args.json?
+        return {
+          "formula" => formula_name(formula),
+          "status"  => "deprecated",
+        }
+      elsif !Homebrew.args.quiet?
+        puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : deprecated"
+        return
+      end
+    end
+
     if formula.to_s.include?("@") && !formula.livecheckable?
       if Homebrew.args.json?
         return {
