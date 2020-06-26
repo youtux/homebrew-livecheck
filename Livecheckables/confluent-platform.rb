@@ -1,6 +1,6 @@
 class ConfluentPlatform
   livecheck do
-    url "https://docs.confluent.io/current/release-notes/index.html"
-    regex(/Confluent Platform v?(\d+(?:\.\d+)+) Release Notes/i)
+    url "https://docs.confluent.io/current/release-notes/changelog.html"
+    regex(/>Version (\d+(?:\.\d+)+)</i)
   end
 end
