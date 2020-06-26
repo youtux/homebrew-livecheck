@@ -1,6 +1,6 @@
 class NodeExporter
   livecheck do
-    url "https://github.com/prometheus/node_exporter.git"
+    url :head
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end
