@@ -31,13 +31,7 @@ module LivecheckStrategy
         /#{Regexp.escape(package)}-(\d+\.([0-8]\d*?)?[02468](?:\.\d+)*?)\.t/
       end
 
-      match_data = { :matches => {}, :regex => regex, :url => page_url }
-      page_matches(page_url, regex).each do |match|
-        version = Version.new(match)
-        match_data[:matches][match] = version
-      end
-
-      match_data
+      PageMatch.find_versions(page_url, regex)
     end
   end
 end

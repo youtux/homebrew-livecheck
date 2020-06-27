@@ -30,26 +30,18 @@ module LivecheckStrategy
     end
 
     def self.find_versions(url, regex)
-      match_data = { :matches => {}, :regex => regex, :url => url }
-
       match_list = PROJECT_NAME_REGEXES.map { |r| url.match(r) }.compact
 
       puts "\nMultiple project names found: #{match_list}\n" if match_list.length > 1 && Homebrew.args.debug?
 
-      return match_data if match_list.empty?
+      return { :matches => {}, :regex => regex, :url => url } if match_list.empty?
 
       project_name = match_list[0][1]
       page_url = "http://ftp.gnu.org/gnu/#{project_name}/?C=M&O=D"
-      match_data[:url] = page_url
 
       regex ||= /#{project_name}-(\d+(?:\.\d+)*)/
 
-      page_matches(page_url, regex).each do |match|
-        version = Version.new(match)
-        match_data[:matches][match] = version
-      end
-
-      match_data
+      PageMatch.find_versions(page_url, regex)
     end
   end
 end

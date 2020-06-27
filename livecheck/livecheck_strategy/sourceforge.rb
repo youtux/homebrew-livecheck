@@ -39,13 +39,7 @@ module LivecheckStrategy
 
       regex ||= %r{url=.+?/#{project_name}/files/.*?[-_/](\d+(?:[-.]\d+)+)[-_/%.]}i
 
-      match_data = { :matches => {}, :regex => regex, :url => page_url }
-      page_matches(page_url, regex).each do |match|
-        version = Version.new(match)
-        match_data[:matches][match] = version
-      end
-
-      match_data
+      PageMatch.find_versions(page_url, regex)
     end
   end
 end
