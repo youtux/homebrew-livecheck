@@ -5,7 +5,7 @@ module LivecheckStrategy
     NICE_NAME = "SourceForge"
     NAME = NICE_NAME.downcase
 
-    SOURCEFORGE_SPECIAL_CASES = %w[
+    SPECIAL_CASES = %w[
       /avf/
       /bashdb/
       /netpbm/
@@ -23,7 +23,7 @@ module LivecheckStrategy
 
     def self.match?(url)
       /(sourceforge|sf)\.net/.match?(url) &&
-        SOURCEFORGE_SPECIAL_CASES.none? { |sc| url.include? sc }
+        SPECIAL_CASES.none? { |sc| url.include? sc }
     end
 
     def self.find_versions(url, regex)

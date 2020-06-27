@@ -7,7 +7,7 @@ module LivecheckStrategy
 
     # Formulae that do not use GNOME's "even-numbered minor is stable" scheme
     # "libart_lgpl" is the package name for libart
-    GNOME_DEVEL_ALLOWLIST = %w[
+    DEV_VERSION_ALLOWLIST = %w[
       gcab
       gtk-doc
       gtk-mac-integration
@@ -24,7 +24,7 @@ module LivecheckStrategy
       page_url = "https://download.gnome.org/sources/#{package}/cache.json"
 
       # Restrict versions to even numbered minor versions (except x.90+)
-      regex ||= if GNOME_DEVEL_ALLOWLIST.include?(package)
+      regex ||= if DEV_VERSION_ALLOWLIST.include?(package)
         /#{Regexp.escape(package)}-(\d+(?:\.\d+)+)\.t/
       else
         /#{Regexp.escape(package)}-(\d+\.([0-8]\d*?)?[02468](?:\.\d+)*?)\.t/
