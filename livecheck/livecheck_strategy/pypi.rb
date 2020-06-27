@@ -10,10 +10,10 @@ module LivecheckStrategy
     end
 
     def self.find_versions(url, regex)
-      package = url[%r{https://files.pythonhosted.org/packages/.*/.*/(.*)-.*}, 1]
+      package_name = url[%r{https://files.pythonhosted.org/packages/.*/.*/(.*)-.*}, 1]
 
-      page_url = "https://pypi.org/project/#{package}"
-      regex ||= /#{package} ([0-9.]+)/
+      page_url = "https://pypi.org/project/#{package_name}"
+      regex ||= /#{package_name} ([0-9.]+)/
 
       PageMatch.find_versions(page_url, regex)
     end

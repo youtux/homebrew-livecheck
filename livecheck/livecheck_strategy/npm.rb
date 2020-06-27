@@ -10,10 +10,10 @@ module LivecheckStrategy
     end
 
     def self.find_versions(url, regex)
-      package = url.split("/")[3..-3].reject { |s| s == "-" }.join("/")
+      package_name = url.split("/")[3..-3].reject { |s| s == "-" }.join("/")
 
-      page_url = "https://www.npmjs.com/package/#{package}?activeTab=versions"
-      regex ||= %r{/package/#{package}/v/(\d+(?:\.\d+)+)"}
+      page_url = "https://www.npmjs.com/package/#{package_name}?activeTab=versions"
+      regex ||= %r{/package/#{package_name}/v/(\d+(?:\.\d+)+)"}
 
       PageMatch.find_versions(page_url, regex)
     end
