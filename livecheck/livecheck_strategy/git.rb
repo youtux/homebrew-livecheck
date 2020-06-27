@@ -19,13 +19,11 @@ module LivecheckStrategy
         # 'debian/' prefixed tags
         next if tag =~ %r{debian/} && !tags_only_debian
 
-        captures = tag.scan(regex) if regex
-        tag_cleaned = if captures && !captures.empty? && captures[0].is_a?(Array)
-          # Use the first capture group as the version
-          captures[0][0]
+        captures = regex.is_a?(Regexp) ? tag.scan(regex) : []
+        tag_cleaned = if captures[0].is_a?(Array)
+          captures[0][0]  # Extract the first capture group
         else
-          # Remove any character before the first number
-          tag[/\D*(.*)/, 1]
+          tag[/\D*(.*)/, 1]  # Remove non-digits from the beginning of the tag
         end
 
         match_data[:matches][tag] = Version.new(tag_cleaned)
