@@ -6,12 +6,13 @@ module LivecheckStrategy
     NAME = NICE_NAME.downcase
 
     # Formulae that do not use GNOME's "even-numbered minor is stable" scheme
-    GNOME_DEVEL_ALLOWLIST = [
-      "gcab",
-      "gtk-doc",
-      "gtk-mac-integration",
-      "libart_lgpl", # The package name for libart is "libart_lgpl"
-      "libepoxy",
+    # "libart_lgpl" is the package name for libart
+    GNOME_DEVEL_ALLOWLIST = %w[
+      gcab
+      gtk-doc
+      gtk-mac-integration
+      libart_lgpl
+      libepoxy
     ].freeze
 
     def self.match?(url)
