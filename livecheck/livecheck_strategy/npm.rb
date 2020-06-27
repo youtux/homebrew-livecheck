@@ -11,8 +11,8 @@ module LivecheckStrategy
 
     def self.find_versions(url, regex)
       package = url.split("/")[3..-3].reject { |s| s == "-" }.join("/")
-      page_url = "https://www.npmjs.com/package/#{package}?activeTab=versions"
 
+      page_url = "https://www.npmjs.com/package/#{package}?activeTab=versions"
       regex ||= %r{/package/#{package}/v/(\d+(?:\.\d+)+)"}
 
       PageMatch.find_versions(page_url, regex)

@@ -7,6 +7,7 @@ module LivecheckStrategy
 
     def self.find_versions(url, regex)
       match_data = { :matches => {}, :regex => regex, :url => url }
+
       page_matches(url, regex).each do |match|
         match_data[:matches][match] = Version.new(match)
       end

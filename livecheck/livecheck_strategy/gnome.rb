@@ -22,12 +22,12 @@ module LivecheckStrategy
 
     def self.find_versions(url, regex)
       package = url.match(%r{/sources/(.*?)/})[1]
-      page_url = "https://download.gnome.org/sources/#{package}/cache.json"
 
-      # Restrict versions to even numbered minor versions (except x.90+)
+      page_url = "https://download.gnome.org/sources/#{package}/cache.json"
       regex ||= if DEV_VERSION_ALLOWLIST.include?(package)
         /#{Regexp.escape(package)}-(\d+(?:\.\d+)+)\.t/
       else
+        # Only match versions with an even-numbered minor (except x.90+)
         /#{Regexp.escape(package)}-(\d+\.([0-8]\d*?)?[02468](?:\.\d+)*?)\.t/
       end
 

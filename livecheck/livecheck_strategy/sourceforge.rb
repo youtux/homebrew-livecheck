@@ -35,8 +35,8 @@ module LivecheckStrategy
       else
         url.match(%r{\.net(?::/cvsroot)?/([^/]+)})[1]
       end
-      page_url = "https://sourceforge.net/projects/#{project_name}/rss"
 
+      page_url = "https://sourceforge.net/projects/#{project_name}/rss"
       regex ||= %r{url=.+?/#{project_name}/files/.*?[-_/](\d+(?:[-.]\d+)+)[-_/%.]}i
 
       PageMatch.find_versions(page_url, regex)

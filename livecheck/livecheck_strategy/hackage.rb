@@ -11,8 +11,8 @@ module LivecheckStrategy
 
     def self.find_versions(url, regex)
       package = ((url.split("/")[4]).split("-")[0..-2]).join("-")
-      page_url = "https://hackage.haskell.org/package/#{package}/src"
 
+      page_url = "https://hackage.haskell.org/package/#{package}/src"
       regex ||= %r{<h3>#{package}-(.*?)/?</h3>}i
 
       PageMatch.find_versions(page_url, regex)
