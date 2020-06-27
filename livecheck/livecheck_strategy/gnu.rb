@@ -32,9 +32,7 @@ module LivecheckStrategy
     def self.find_versions(url, regex)
       match_data = { :matches => {}, :regex => regex, :url => url }
 
-      match_list = PROJECT_NAME_REGEXES.map do |r|
-        url.match(r)
-      end.compact
+      match_list = PROJECT_NAME_REGEXES.map { |r| url.match(r) }.compact
 
       puts "\nMultiple project names found: #{match_list}\n" if match_list.length > 1 && Homebrew.args.debug?
 
