@@ -21,9 +21,9 @@ module LivecheckStrategy
 
         captures = regex.is_a?(Regexp) ? tag.scan(regex) : []
         tag_cleaned = if captures[0].is_a?(Array)
-          captures[0][0]  # Extract the first capture group
+          captures[0][0] # Extract the first capture group
         else
-          tag[/\D*(.*)/, 1]  # Remove non-digits from the beginning of the tag
+          tag[/\D*(.*)/, 1] # Remove non-digits from the beginning of the tag
         end
 
         match_data[:matches][tag] = Version.new(tag_cleaned)
