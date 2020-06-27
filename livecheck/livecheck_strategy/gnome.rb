@@ -14,6 +14,7 @@ module LivecheckStrategy
       libart_lgpl
       libepoxy
     ].freeze
+    private_constant :DEV_VERSION_ALLOWLIST
 
     def self.match?(url)
       /download\.gnome\.org/.match?(url)

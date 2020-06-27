@@ -20,6 +20,7 @@ module LivecheckStrategy
       potrace
       remake
     ].freeze
+    private_constant :SPECIAL_CASES
 
     def self.match?(url)
       /(sourceforge|sf)\.net/.match?(url) &&

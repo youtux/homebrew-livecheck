@@ -9,6 +9,7 @@ module LivecheckStrategy
       %r{/(?:software|gnu)/(.*?)/},
       %r{//(.*?)\.gnu\.org(?:/)?$},
     ].freeze
+    private_constant :PROJECT_NAME_REGEXES
 
     SPECIAL_CASES = %w[
       avrdude
@@ -22,6 +23,7 @@ module LivecheckStrategy
       numdiff
       oath-toolkit
     ].freeze
+    private_constant :SPECIAL_CASES
 
     def self.match?(url)
       url =~ /gnu\.org/ && SPECIAL_CASES.none? { |sc| url.include? sc }
