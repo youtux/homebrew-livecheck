@@ -24,30 +24,28 @@ module LivecheckStrategy
 
   def self.from_url(url, regex_provided = nil)
     if Hackage.match?(url)
-      return Hackage
+      Hackage
     elsif Git.match?(url)
-      return Git
+      Git
     elsif SourceForge.match?(url)
-      return SourceForge
+      SourceForge
     elsif Gnu.match?(url)
-      return Gnu
+      Gnu
     elsif PyPI.match?(url)
-      return PyPI
+      PyPI
     elsif Npm.match?(url)
-      return Npm
+      Npm
     elsif Gnome.match?(url)
-      return Gnome
+      Gnome
     elsif Launchpad.match?(url)
-      return Launchpad
+      Launchpad
     elsif Apache.match?(url)
-      return Apache
+      Apache
     elsif Bitbucket.match?(url)
-      return Bitbucket
+      Bitbucket
     elsif regex_provided
-      return PageMatch
+      PageMatch
     end
-
-    nil
   end
 end
 
