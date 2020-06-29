@@ -63,24 +63,28 @@ def latest_version(formula)
   urls ||= checkable_urls(formula)
 
   if Homebrew.args.debug?
-    puts "Formula:          #{formula_name(formula)}"
+    puts "\nFormula:          #{formula_name(formula)}"
     puts "Head only?:       #{!formula.stable?}" unless formula.stable?
     puts "Livecheckable?:   #{has_livecheckable ? "Yes" : "No"}"
   end
 
   urls.each do |original_url|
+    puts "\nURL:              #{original_url}" if Homebrew.args.debug?
+
     # Skip Gists until/unless we create a method of identifying revisions
-    next if original_url.include?("gist.github.com")
+    if original_url.include?("gist.github.com")
+      odebug "Skipping: GitHub Gists are not supported"
+      next
+    end
 
     url = preprocess_url(original_url)
     strategies = LivecheckStrategy.from_url(url, livecheck_regex.present?)
     strategy = strategies[0]
 
     if Homebrew.args.debug?
-      puts "\nURL:              #{original_url}"
       puts "URL (processed):  #{url}" if url != original_url
       puts "Strategies:       #{strategies.map { |s| s.name.demodulize }}" unless strategies.empty? || !Homebrew.args.verbose?
-      puts "Strategy:         #{strategy.nil? ? "None" : strategy::NICE_NAME}"
+      puts "Strategy:         #{strategy.nil? ? "None" : strategy.name.demodulize}"
       puts "Regex:            #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
     end
 
@@ -107,8 +111,13 @@ def latest_version(formula)
 
     if Homebrew.args.debug? && !match_version_map.empty?
       puts "\nMatched Versions:\n"
-      match_version_map.each do |match, version|
-        puts "#{match} => #{version.inspect}"
+
+      if Homebrew.args.verbose?
+        match_version_map.each do |match, version|
+          puts "#{match} => #{version.inspect}"
+        end
+      else
+        puts match_version_map.values.join(", ")
       end
     end
 

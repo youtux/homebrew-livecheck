@@ -50,11 +50,9 @@ module Homebrew
     require_relative "../livecheck/livecheck_strategy"
 
     if Homebrew.args.debug? && Homebrew.args.verbose?
-      puts ARGV
+      puts ARGV.inspect
       puts Homebrew.args
-      puts ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
-      puts Pathname.new(File.expand_path(__dir__)).basename
-      puts $LOAD_PATH
+      puts ENV["HOMEBREW_LIVECHECK_WATCHLIST"] if ENV["HOMEBREW_LIVECHECK_WATCHLIST"].present?
     end
 
     if (cmd = Homebrew.args.named.first)
