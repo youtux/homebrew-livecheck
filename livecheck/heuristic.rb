@@ -132,10 +132,11 @@ def latest_version(formula)
         "url"      => {
           "original" => original_url,
         },
-        "strategy" => strategy.nil? ? nil : strategy::NAME,
+        "strategy" => strategy.nil? ? nil : strategy.name.demodulize,
       }
       version_info["meta"]["url"]["processed"] = url if url != original_url
       version_info["meta"]["url"]["strategy"] = strategy_data[:url] if strategy_data[:url] != url
+      version_info["meta"]["strategies"] = strategies.map { |s| s.name.demodulize } unless strategies.empty?
       version_info["meta"]["regex"] = regex.inspect unless regex.nil?
     end
 
