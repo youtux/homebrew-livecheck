@@ -4,6 +4,7 @@ module LivecheckStrategy
   class Git
     NICE_NAME = "Git"
     NAME = NICE_NAME.downcase
+    PRIORITY = 8
 
     def self.match?(url)
       DownloadStrategyDetector.detect(url) <= GitDownloadStrategy

@@ -45,6 +45,10 @@ module Homebrew
   def livecheck
     livecheck_args.parse
 
+    # It's necessary to require livecheck_strategy.rb here, so that it has
+    # access to Homebrew.args.tap
+    require_relative "../livecheck/livecheck_strategy"
+
     if Homebrew.args.debug? && Homebrew.args.verbose?
       puts ARGV
       puts Homebrew.args

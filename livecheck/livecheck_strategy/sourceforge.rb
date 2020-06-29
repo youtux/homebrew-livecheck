@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  class SourceForge
+  class Sourceforge
     NICE_NAME = "SourceForge"
     NAME = NICE_NAME.downcase
 

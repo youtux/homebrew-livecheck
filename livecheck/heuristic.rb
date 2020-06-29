@@ -1,4 +1,3 @@
-require_relative "livecheck_strategy"
 require "utils"
 
 GITHUB_SPECIAL_CASES = %w[

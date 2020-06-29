@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  class PyPI
+  class Pypi
     NICE_NAME = "PyPI"
     NAME = NICE_NAME.downcase
 

@@ -4,6 +4,7 @@ module LivecheckStrategy
   class PageMatch
     NICE_NAME = "Page match"
     NAME = "page_match"
+    PRIORITY = 0
 
     def self.find_versions(url, regex)
       match_data = { :matches => {}, :regex => regex, :url => url }
