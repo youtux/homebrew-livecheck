@@ -25,11 +25,9 @@ module LivecheckStrategy
 
     usable_strategies << strategies[:page_match] if strategies.key?(:page_match) && regex_provided
 
-    usable_strategies.sort_by! do |strategy|
+    usable_strategies.sort_by do |strategy|
       (strategy.const_defined?(:PRIORITY) ? strategy::PRIORITY : 5)
-    end.reverse!
-
-    usable_strategies[0]
+    end.reverse
   end
 end
 

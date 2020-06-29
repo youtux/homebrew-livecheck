@@ -73,11 +73,13 @@ def latest_version(formula)
     next if original_url.include?("gist.github.com")
 
     url = preprocess_url(original_url)
-    strategy = LivecheckStrategy.from_url(url, livecheck_regex.present?)
+    strategies = LivecheckStrategy.from_url(url, livecheck_regex.present?)
+    strategy = strategies[0]
 
     if Homebrew.args.debug?
       puts "\nURL:              #{original_url}"
       puts "URL (processed):  #{url}" if url != original_url
+      puts "Strategies:       #{strategies.map { |s| s.name.demodulize }}" unless strategies.empty? || !Homebrew.args.verbose?
       puts "Strategy:         #{strategy.nil? ? "None" : strategy::NICE_NAME}"
       puts "Regex:            #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
     end
