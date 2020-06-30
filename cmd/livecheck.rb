@@ -62,7 +62,7 @@ module Homebrew
       elsif Homebrew.args.installed?
         Formula.installed
       elsif Homebrew.args.all?
-        Formula.names.map { |name| Formula[name] }
+        Formula.full_names.map { |name| Formula[name] }
       elsif !Homebrew.args.formulae.empty?
         Homebrew.args.formulae
       elsif File.exist?(WATCHLIST_PATH)
