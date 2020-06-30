@@ -2,8 +2,7 @@
 
 module LivecheckStrategy
   class Launchpad
-    NICE_NAME = "Launchpad"
-    NAME = NICE_NAME.downcase
+    NAME = name.demodulize
 
     def self.match?(url)
       /launchpad\.net/.match?(url)

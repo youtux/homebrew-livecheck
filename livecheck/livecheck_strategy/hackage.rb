@@ -2,8 +2,7 @@
 
 module LivecheckStrategy
   class Hackage
-    NICE_NAME = "Hackage"
-    NAME = NICE_NAME.downcase
+    NAME = name.demodulize
 
     def self.match?(url)
       /hackage\.haskell\.org/.match?(url)

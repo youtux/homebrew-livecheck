@@ -3,7 +3,7 @@
 module LivecheckStrategy
   class Sourceforge
     NICE_NAME = "SourceForge"
-    NAME = NICE_NAME.downcase
+    NAME = name.demodulize
 
     SPECIAL_CASES = %w[
       /avf/

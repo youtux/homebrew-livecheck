@@ -2,8 +2,7 @@
 
 module LivecheckStrategy
   class Bitbucket
-    NICE_NAME = "Bitbucket"
-    NAME = NICE_NAME.downcase
+    NAME = name.demodulize
 
     def self.match?(url)
       %r{bitbucket\.org(/[^/]+){4}\.\w+}.match?(url)

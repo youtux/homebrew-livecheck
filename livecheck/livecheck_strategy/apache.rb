@@ -2,8 +2,7 @@
 
 module LivecheckStrategy
   class Apache
-    NICE_NAME = "Apache"
-    NAME = NICE_NAME.downcase
+    NAME = name.demodulize
 
     def self.match?(url)
       %r{www\.apache\.org/dyn}.match?(url)

@@ -84,7 +84,7 @@ def latest_version(formula)
     if Homebrew.args.debug?
       puts "URL (processed):  #{url}" if url != original_url
       unless strategies.empty? || !Homebrew.args.verbose?
-        puts "Strategies:       #{strategies.map { |s| s.name.demodulize }.join(", ")}"
+        puts "Strategies:       #{strategies.map { |s| s::NAME }.join(", ")}"
       end
       puts "Strategy:         #{strategy.nil? ? "None" : strategy.name.demodulize}"
       puts "Regex:            #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
@@ -134,11 +134,11 @@ def latest_version(formula)
         "url"      => {
           "original" => original_url,
         },
-        "strategy" => strategy.nil? ? nil : strategy.name.demodulize,
+        "strategy" => strategy.nil? ? nil : strategy::NAME,
       }
       version_info["meta"]["url"]["processed"] = url if url != original_url
       version_info["meta"]["url"]["strategy"] = strategy_data[:url] if strategy_data[:url] != url
-      version_info["meta"]["strategies"] = strategies.map { |s| s.name.demodulize } unless strategies.empty?
+      version_info["meta"]["strategies"] = strategies.map { |s| s::NAME } unless strategies.empty?
       version_info["meta"]["regex"] = regex.inspect unless regex.nil?
     end
 

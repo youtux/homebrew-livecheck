@@ -2,8 +2,7 @@
 
 module LivecheckStrategy
   class Git
-    NICE_NAME = "Git"
-    NAME = NICE_NAME.downcase
+    NAME = name.demodulize
     PRIORITY = 8
 
     def self.match?(url)

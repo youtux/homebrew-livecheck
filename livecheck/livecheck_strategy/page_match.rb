@@ -3,7 +3,7 @@
 module LivecheckStrategy
   class PageMatch
     NICE_NAME = "Page match"
-    NAME = "page_match"
+    NAME = name.demodulize
     PRIORITY = 0
 
     def self.find_versions(url, regex)

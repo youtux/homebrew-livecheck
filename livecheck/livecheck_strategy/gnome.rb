@@ -3,7 +3,7 @@
 module LivecheckStrategy
   class Gnome
     NICE_NAME = "GNOME"
-    NAME = NICE_NAME.downcase
+    NAME = name.demodulize
 
     # Formulae that do not use GNOME's "even-numbered minor is stable" scheme
     # "libart_lgpl" is the package name for libart

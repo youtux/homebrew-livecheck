@@ -2,8 +2,8 @@
 
 module LivecheckStrategy
   class Npm
-    NICE_NAME = "NPM"
-    NAME = NICE_NAME.downcase
+    NICE_NAME = "npm"
+    NAME = name.demodulize
 
     def self.match?(url)
       /registry\.npmjs\.org/.match?(url)
