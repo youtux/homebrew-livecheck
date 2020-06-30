@@ -32,9 +32,3 @@ module LivecheckStrategy
 end
 
 Dir.glob(File.join(__dir__, "livecheck_strategy", "*.rb"), &method(:require))
-
-if Homebrew.args.tap
-  current_tap = Tap.fetch(Homebrew.args.tap)
-  tap_strategy_path = File.join(current_tap.path, "livecheck_strategy")
-  Dir.glob(File.join(tap_strategy_path, "*.rb"), &method(:require)) if Dir.exist?(tap_strategy_path)
-end

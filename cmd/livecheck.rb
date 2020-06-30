@@ -1,5 +1,6 @@
 require "cli/parser"
 
+require_relative "../livecheck/livecheck_strategy"
 require_relative "../livecheck/utils"
 require_relative "../livecheck/heuristic"
 require_relative "../livecheck/extend/formulary"
@@ -45,10 +46,6 @@ module Homebrew
   def livecheck
     livecheck_args.parse
 
-    # It's necessary to require livecheck_strategy.rb here, so that it has
-    # access to Homebrew.args.tap
-    require_relative "../livecheck/livecheck_strategy"
-
     if Homebrew.args.debug? && Homebrew.args.verbose?
       puts ARGV.inspect
       puts Homebrew.args
@@ -82,6 +79,21 @@ module Homebrew
         end
       end
     return unless formulae_to_check
+
+    # Identify any non-homebrew/core taps in use for current formulae
+    other_taps_hash = {}
+    formulae_to_check.each do |f|
+      other_taps_hash[f.tap.name] = true unless f.tap.name == "homebrew/core" || other_taps_hash.key?(f.tap.name)
+    end
+    other_taps = other_taps_hash.keys.sort
+
+    # Load additional LivecheckStrategy files from taps
+    unless other_taps.empty?
+      other_taps.each do |tap_name|
+        tap_strategy_path = File.join(Tap.fetch(tap_name).path, "livecheck_strategy")
+        Dir.glob(File.join(tap_strategy_path, "*.rb"), &method(:require)) if Dir.exist?(tap_strategy_path)
+      end
+    end
 
     formulae_checked = formulae_to_check.sort.map.with_index do |formula, i|
       puts "\n----------\n" if Homebrew.args.debug? && i.positive?
