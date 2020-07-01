@@ -1,6 +1,6 @@
 class Cairo
   livecheck do
-    url "https://www.cairographics.org/news/"
-    regex(/cairo-([0-9]+\.[0-9]*[02468]\.[0-9]+)/)
+    url "https://cairographics.org/releases/?C=M&O=D"
+    regex(%r{href=(?:["']?|.*?/)cairo-v?(\d+\.\d*[02468](?:\.\d+)*)\.t}i)
   end
 end
