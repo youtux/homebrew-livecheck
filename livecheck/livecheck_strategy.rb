@@ -25,9 +25,11 @@ module LivecheckStrategy
 
     usable_strategies << strategies[:page_match] if strategies.key?(:page_match) && regex_provided
 
+    # Sort usable strategies in descending order by priority, using 5 as the
+    # default when a PRIORITY isn't provided in the LivecheckStrategy itself.
     usable_strategies.sort_by do |strategy|
-      (strategy.const_defined?(:PRIORITY) ? strategy::PRIORITY : 5)
-    end.reverse
+      (strategy.const_defined?(:PRIORITY) ? -strategy::PRIORITY : -5)
+    end
   end
 end
 
