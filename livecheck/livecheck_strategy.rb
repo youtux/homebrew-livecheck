@@ -10,7 +10,7 @@ module LivecheckStrategy
       strategy = LivecheckStrategy.const_get(strategy_symbol)
       @strategies[key] = strategy
     end
-    @strategies.freeze
+    @strategies
   end
   private_class_method :strategies
 

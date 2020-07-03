@@ -2,8 +2,8 @@
 
 module LivecheckStrategy
   class Sourceforge
-    NICE_NAME = "SourceForge"
     NAME = name.demodulize
+    NICE_NAME = "SourceForge"
 
     SPECIAL_CASES = %w[
       /avf/
@@ -37,7 +37,7 @@ module LivecheckStrategy
       end
 
       page_url = "https://sourceforge.net/projects/#{project_name}/rss"
-      regex ||= %r{url=.+?/#{project_name}/files/.*?[-_/](\d+(?:[-.]\d+)+)[-_/%.]}i
+      regex ||= %r{url=.*?/#{project_name}/files/.*?[-_/](\d+(?:[-.]\d+)+)[-_/%.]}i
 
       PageMatch.find_versions(page_url, regex)
     end

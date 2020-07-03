@@ -2,8 +2,8 @@
 
 module LivecheckStrategy
   class Gnu
-    NICE_NAME = "GNU"
     NAME = name.demodulize
+    NICE_NAME = "GNU"
 
     PROJECT_NAME_REGEXES = [
       %r{/(?:software|gnu)/(.*?)/},

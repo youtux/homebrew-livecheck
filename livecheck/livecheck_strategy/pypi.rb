@@ -2,8 +2,8 @@
 
 module LivecheckStrategy
   class Pypi
-    NICE_NAME = "PyPI"
     NAME = name.demodulize
+    NICE_NAME = "PyPI"
 
     def self.match?(url)
       /files\.pythonhosted\.org/.match?(url)
