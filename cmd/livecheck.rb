@@ -81,18 +81,16 @@ module Homebrew
     return unless formulae_to_check
 
     # Identify any non-homebrew/core taps in use for current formulae
-    other_taps_hash = {}
+    non_core_taps = {}
     formulae_to_check.each do |f|
-      other_taps_hash[f.tap.name] = true unless f.tap.name == "homebrew/core" || other_taps_hash.key?(f.tap.name)
+      non_core_taps[f.tap.name] = true unless f.tap.name == "homebrew/core" || non_core_taps.key?(f.tap.name)
     end
-    other_taps = other_taps_hash.keys.sort
+    non_core_taps = non_core_taps.keys.sort
 
     # Load additional LivecheckStrategy files from taps
-    unless other_taps.empty?
-      other_taps.each do |tap_name|
-        tap_strategy_path = File.join(Tap.fetch(tap_name).path, "livecheck_strategy")
-        Dir.glob(File.join(tap_strategy_path, "*.rb"), &method(:require)) if Dir.exist?(tap_strategy_path)
-      end
+    non_core_taps.each do |tap_name|
+      tap_strategy_path = File.join(Tap.fetch(tap_name).path, "livecheck_strategy")
+      Dir.glob(File.join(tap_strategy_path, "*.rb"), &method(:require)) if Dir.exist?(tap_strategy_path)
     end
 
     formulae_checked = formulae_to_check.sort.map.with_index do |formula, i|
