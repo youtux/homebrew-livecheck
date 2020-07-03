@@ -81,7 +81,7 @@ module Homebrew
       end
     return unless formulae_to_check
 
-    formulae_checked = formulae_to_check.sort.map.with_index do |formula, i|
+    formulae_checked = formulae_to_check.shuffle.map.with_index do |formula, i|
       puts "\n----------\n" if Homebrew.args.debug? && i.positive?
       print_latest_version formula
     rescue => e
