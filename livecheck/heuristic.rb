@@ -101,9 +101,8 @@ def latest_version(formula)
       puts "Regex (strategy): #{strategy_data[:regex].inspect}\n" if strategy_data[:regex] != livecheck_regex
     end
 
-    empty_version = Version.new("")
     match_version_map.delete_if do |_match, version|
-      next true if version == empty_version
+      next true if version.empty?
       next false if has_livecheckable
 
       UNSTABLE_VERSION_KEYWORDS.any? do |rejection|
