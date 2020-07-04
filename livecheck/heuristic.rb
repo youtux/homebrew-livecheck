@@ -86,7 +86,7 @@ def latest_version(formula)
       unless strategies.empty? || !Homebrew.args.verbose?
         puts "Strategies:       #{strategies.map { |s| s::NAME }.join(", ")}"
       end
-      puts "Strategy:         #{strategy.nil? ? "None" : strategy.name.demodulize}"
+      puts "Strategy:         #{strategy.nil? ? "None" : strategy::NAME}"
       puts "Regex:            #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
     end
 
