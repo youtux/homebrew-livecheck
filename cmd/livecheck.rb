@@ -1,5 +1,6 @@
 require "cli/parser"
 
+require_relative "../livecheck/livecheck_strategy"
 require_relative "../livecheck/utils"
 require_relative "../livecheck/heuristic"
 require_relative "../livecheck/extend/formulary"
@@ -46,11 +47,9 @@ module Homebrew
     livecheck_args.parse
 
     if Homebrew.args.debug? && Homebrew.args.verbose?
-      puts ARGV
+      puts ARGV.inspect
       puts Homebrew.args
-      puts ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
-      puts Pathname.new(File.expand_path(__dir__)).basename
-      puts $LOAD_PATH
+      puts ENV["HOMEBREW_LIVECHECK_WATCHLIST"] if ENV["HOMEBREW_LIVECHECK_WATCHLIST"].present?
     end
 
     if (cmd = Homebrew.args.named.first)
@@ -63,7 +62,7 @@ module Homebrew
       elsif Homebrew.args.installed?
         Formula.installed
       elsif Homebrew.args.all?
-        Formula.names.map { |name| Formula[name] }
+        Formula.full_names.map { |name| Formula[name] }
       elsif !Homebrew.args.formulae.empty?
         Homebrew.args.formulae
       elsif File.exist?(WATCHLIST_PATH)
@@ -80,6 +79,19 @@ module Homebrew
         end
       end
     return unless formulae_to_check
+
+    # Identify any non-homebrew/core taps in use for current formulae
+    non_core_taps = {}
+    formulae_to_check.each do |f|
+      non_core_taps[f.tap.name] = true unless f.tap.name == "homebrew/core" || non_core_taps.key?(f.tap.name)
+    end
+    non_core_taps = non_core_taps.keys.sort
+
+    # Load additional LivecheckStrategy files from taps
+    non_core_taps.each do |tap_name|
+      tap_strategy_path = File.join(Tap.fetch(tap_name).path, "livecheck_strategy")
+      Dir.glob(File.join(tap_strategy_path, "*.rb"), &method(:require)) if Dir.exist?(tap_strategy_path)
+    end
 
     formulae_checked = formulae_to_check.sort.map.with_index do |formula, i|
       puts "\n----------\n" if Homebrew.args.debug? && i.positive?

@@ -1,218 +1,36 @@
-# Formulae that do not use GNOME's "even-numbered minor is stable" scheme
-GNOME_DEVEL_ALLOWLIST = [
-  "gcab",
-  "gtk-doc",
-  "gtk-mac-integration",
-  "libart_lgpl", # The package name for libart is "libart_lgpl"
-  "libepoxy",
-].freeze
+# frozen_string_literal: true
 
-def apache_strategy(url, regex = nil)
-  match_version_map = {}
+module LivecheckStrategy
+  def self.strategies
+    return @strategies if defined? @strategies
 
-  path, prefix, suffix = url.match(%r{path=(.+?)/([^/]*?)\d+(?:\.\d+)+(/|[^/]*)})[1, 3]
-  page_url = "https://archive.apache.org/dist/#{path}/"
+    @strategies = {}
+    LivecheckStrategy.constants.sort.each do |strategy_symbol|
+      key = strategy_symbol.to_s.underscore.to_sym
+      strategy = LivecheckStrategy.const_get(strategy_symbol)
+      @strategies[key] = strategy
+    end
+    @strategies
+  end
+  private_class_method :strategies
 
-  regex ||= /href="#{Regexp.escape(prefix)}(\d+(?:\.\d+)+)#{Regexp.escape(suffix)}/
-
-  page_matches(page_url, regex).each do |match|
-    version = Version.new(match)
-    match_version_map[match] = version
+  def self.from_symbol(symbol)
+    strategies[symbol]
   end
 
-  match_version_map
-end
-
-def bitbucket_strategy(url, regex = nil)
-  match_version_map = {}
-
-  path, kind, suffix =
-    url.match(%r{bitbucket\.org/(.+?)/(get|downloads)/(?:.*?[-_])?v?\d+(?:\.\d+)+([^/]+)})[1, 3]
-  page_url = "https://bitbucket.org/#{path}/downloads/"
-  page_url << "?tab=tags" if kind == "get"
-
-  regex ||= /(\d+(?:\.\d+)+)#{Regexp.escape(suffix)}"/
-
-  page_matches(page_url, regex).each do |match|
-    version = Version.new(match)
-    match_version_map[match] = version
-  end
-
-  match_version_map
-end
-
-def git_strategy(url, regex = nil)
-  match_version_map = {}
-
-  tags = git_tags(url, regex)
-  tags_only_debian = tags.all? { |tag| tag.start_with?("debian/") }
-
-  tags.each do |tag|
-    # Move to the next one if tag actually is prefixed with 'debian/'
-    # and upstream does not do only 'debian/' prefixed tags
-    next if tag =~ %r{debian/} && !tags_only_debian
-
-    captures = tag.scan(regex) if regex
-    tag_cleaned = if captures &&
-                     !captures.empty? &&
-                     captures[0].is_a?(Array)
-      # Use the first capture group as the version
-      captures[0][0]
-    else
-      # Remove any character before the first number
-      tag[/\D*(.*)/, 1]
+  def self.from_url(url, regex_provided = nil)
+    usable_strategies = strategies.except(:page_match).values.select do |strategy|
+      strategy.respond_to?(:match?) && strategy.match?(url)
     end
 
-    match_version_map[tag] = Version.new(tag_cleaned)
-  rescue TypeError
-    nil
-  end
+    usable_strategies << strategies[:page_match] if strategies.key?(:page_match) && regex_provided
 
-  match_version_map
-end
-
-def gnome_strategy(url, regex = nil)
-  match_version_map = {}
-
-  package = url.match(%r{/sources/(.*?)/})[1]
-  page_url = "https://download.gnome.org/sources/#{package}/cache.json"
-
-  # Restrict versions to even numbered minor versions (except x.90+)
-  regex ||= if GNOME_DEVEL_ALLOWLIST.include?(package)
-    /#{Regexp.escape(package)}-(\d+(?:\.\d+)+)\.t/
-  else
-    /#{Regexp.escape(package)}-(\d+\.([0-8]\d*?)?[02468](?:\.\d+)*?)\.t/
-  end
-
-  page_matches(page_url, regex).each do |match|
-    version = Version.new(match)
-    match_version_map[match] = version
-  end
-
-  match_version_map
-end
-
-def gnu_strategy(url, regex = nil)
-  match_version_map = {}
-
-  project_name_regexps = [
-    %r{/(?:software|gnu)/(.*?)/},
-    %r{//(.*?)\.gnu\.org(?:/)?$},
-  ]
-  match_list = project_name_regexps.map do |r|
-    url.match(r)
-  end.compact
-
-  puts "Multiple project names found: #{match_list}" if match_list.length > 1 && Homebrew.args.debug?
-
-  unless match_list.empty?
-    project_name = match_list[0][1]
-    page_url = "http://ftp.gnu.org/gnu/#{project_name}/?C=M&O=D"
-
-    regex ||= /#{project_name}-(\d+(?:\.\d+)*)/
-
-    page_matches(page_url, regex).each do |match|
-      version = Version.new(match)
-      match_version_map[match] = version
+    # Sort usable strategies in descending order by priority, using 5 as the
+    # default when a PRIORITY isn't provided in the LivecheckStrategy itself.
+    usable_strategies.sort_by do |strategy|
+      (strategy.const_defined?(:PRIORITY) ? -strategy::PRIORITY : -5)
     end
   end
-
-  match_version_map
 end
 
-def hackage_strategy(url, _regex = nil)
-  match_version_map = {}
-
-  package = ((url.split("/")[4]).split("-")[0..-2]).join("-")
-  page_url = "https://hackage.haskell.org/package/#{package}/src"
-
-  regex ||= %r{<h3>#{package}-(.*?)/?</h3>}i
-
-  page_matches(page_url, regex).each do |match|
-    version = Version.new(match)
-    match_version_map[match] = version
-  end
-
-  match_version_map
-end
-
-def launchpad_strategy(url, regex = nil)
-  match_version_map = {}
-
-  package = url.match(%r{launchpad\.net/([^/]*)})[1]
-  page_url = "https://launchpad.net/#{package}"
-
-  regex ||= %r{<div class="version">\s*Latest version is (.+)\s*</div>}
-
-  page_matches(page_url, regex).each do |match|
-    version = Version.new(match)
-    match_version_map[match] = version
-  end
-
-  match_version_map
-end
-
-def npm_strategy(url, regex = nil)
-  match_version_map = {}
-
-  package = url.split("/")[3..-3].reject { |s| s == "-" }.join("/")
-  page_url = "https://www.npmjs.com/package/#{package}?activeTab=versions"
-
-  regex ||= %r{/package/#{package}/v/(\d+(?:\.\d+)+)"}
-
-  page_matches(page_url, regex).each do |match|
-    version = Version.new(match)
-    match_version_map[match] = version
-  end
-
-  match_version_map
-end
-
-def page_match_strategy(url, regex = nil)
-  match_version_map = {}
-
-  page_matches(url, regex).each do |match|
-    version = Version.new(match)
-    match_version_map[match] = version
-  end
-
-  match_version_map
-end
-
-def pypi_strategy(url, regex = nil)
-  match_version_map = {}
-
-  package = url[%r{https://files.pythonhosted.org/packages/.*/.*/(.*)-.*}, 1]
-  page_url = "https://pypi.org/project/#{package}"
-
-  regex ||= /#{package} ([0-9.]+)/
-
-  page_matches(page_url, regex).each do |match|
-    version = Version.new(match)
-    match_version_map[match] = version
-  end
-
-  match_version_map
-end
-
-def sourceforge_strategy(url, regex = nil)
-  match_version_map = {}
-
-  project_name = if url.include?("/project")
-    url.match(%r{/projects?/([^/]+)/})[1]
-  elsif url.include?(".net/p/")
-    url.match(%r{\.net/p/([^/]+)/})[1]
-  else
-    url.match(%r{\.net(?::/cvsroot)?/([^/]+)})[1]
-  end
-  page_url = "https://sourceforge.net/projects/#{project_name}/rss"
-
-  regex ||= %r{url=.+?/#{project_name}/files/.*?[-_/](\d+(?:[-.]\d+)+)[-_/%.]}i
-
-  page_matches(page_url, regex).each do |match|
-    version = Version.new(match)
-    match_version_map[match] = version
-  end
-
-  match_version_map
-end
+Dir.glob(File.join(__dir__, "livecheck_strategy", "*.rb"), &method(:require))
