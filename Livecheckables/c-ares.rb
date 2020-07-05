@@ -1,6 +1,6 @@
 class CAres
   livecheck do
     url :homepage
-    regex(%r{href="/download/c-ares-([0-9]+\.[0-9]+\.[0-9]+)\.tar\.gz"})
+    regex(/href=.*?c-ares[._-](\d+(?:\.\d+)+)\.t/i)
   end
 end
