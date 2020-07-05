@@ -1,6 +1,6 @@
 class Groovy
   livecheck do
     url "https://dl.bintray.com/groovy/maven/"
-    regex(/groovy-binary-([\d.]+)\.z/)
+    regex(/groovy-binary-([\d.]+)\.zip/)
   end
 end
