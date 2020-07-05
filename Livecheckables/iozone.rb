@@ -1,6 +1,6 @@
 class Iozone
   livecheck do
-    url :homepage
-    regex(%r{HREF="src/current/iozone(3_[0-9]+)\.tar">Stable})
+    url "http://www.iozone.org/src/current"
+    regex(/href=.*?iozone[._-]?v?(\d+(?:[._-]\d+)+)\.t/i)
   end
 end
