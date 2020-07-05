@@ -83,7 +83,9 @@ module Homebrew
     # Identify any non-homebrew/core taps in use for current formulae
     non_core_taps = {}
     formulae_to_check.each do |f|
-      non_core_taps[f.tap.name] = true unless f.tap.name == "homebrew/core" || non_core_taps.key?(f.tap.name)
+      unless f.tap.nil?
+        non_core_taps[f.tap.name] = true unless f.tap.name == "homebrew/core" || non_core_taps.key?(f.tap.name)
+      end
     end
     non_core_taps = non_core_taps.keys.sort
 
