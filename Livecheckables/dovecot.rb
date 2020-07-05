@@ -1,6 +1,6 @@
 class Dovecot
   livecheck do
     url "https://dovecot.org/releases/2.3/"
-    regex(/dovecot-(\d+\.\d+([0-9rc.]+)?)\.tar/)
+    regex(/dovecot-(\d+\.\d+([0-9rc.]+)?)\.t/)
   end
 end
