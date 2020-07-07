@@ -1,6 +1,6 @@
 class FreeradiusServer
   livecheck do
     url :head
-    regex(/^release_(\d+(?:[_.]\d+)+)$/)
+    regex(/^release[._-](\d+(?:[._]\d+)+)$/)
   end
 end
