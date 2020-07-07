@@ -26,7 +26,7 @@ module LivecheckStrategy
     private_constant :SPECIAL_CASES
 
     def self.match?(url)
-      url =~ /gnu\.org/ && SPECIAL_CASES.none? { |sc| url.include? sc }
+      url.include?("gnu.org") && SPECIAL_CASES.none? { |sc| url.include? sc }
     end
 
     def self.find_versions(url, regex)

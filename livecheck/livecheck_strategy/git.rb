@@ -17,7 +17,7 @@ module LivecheckStrategy
       tags.each do |tag|
         # Skip tag if it has a 'debian/' prefix and upstream does not do only
         # 'debian/' prefixed tags
-        next if tag =~ %r{debian/} && !tags_only_debian
+        next if tag =~ %r{^debian/} && !tags_only_debian
 
         captures = regex.is_a?(Regexp) ? tag.scan(regex) : []
         tag_cleaned = if captures[0].is_a?(Array)
