@@ -55,8 +55,15 @@ end
 
 You can look at [Livecheckables](Livecheckables/) to get the idea.
 
-## Contributions are welcomed
-If you like this project and you find it useful, help me by adding more Livecheckables or by improving the code (or the non-existing wiki, the readme, etc.).
+## Contributing
+
+The homebrew-livecheck repository is currently in a state of transition and we are discouraging contributions for a brief period of time while we do some important and time-sensitive work.
+
+Existing livecheckables are being brought up to our current standards and then they will be integrated into their respective formulae in homebrew-core. After this point, livecheckable files will no longer be necessary and new `livecheck` blocks will simply be added to formulae directly.
+
+Similarly, we're working on refactoring some of livecheck's internal files to ready it for its own migration. After the homebrew-core migration is finished, the `brew livecheck` command and its related files will be integrated into Homebrew/brew.
+
+After these migrations are completed, related contributions can be resumed in the homebrew-core and Homebrew/brew repositories. We hope to see you again in the future and we appreciate your understanding in the interim time.
 
 ## Changelog
 See the git log. An old changelog (not maintained) is available at [CHANGELOG.md](CHANGELOG.md).
