@@ -45,10 +45,10 @@ The only requirement is that a `Livecheckable` formula must implement the `lates
 Here's an example from [python.rb](Livecheckables/python.rb):
 
 ```ruby
-class Python
+class A52dec
   livecheck do
-    url "https://www.python.org/downloads/"
-    regex(%r{href="https://www.python.org/ftp/python/([0-9.]+)})
+    url "http://liba52.sourceforge.net/downloads.html"
+    regex(/href=.*?a52dec-(\d+(?:\.\d+)+)\.t/)
   end
 end
 ```
