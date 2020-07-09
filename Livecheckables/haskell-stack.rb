@@ -1,6 +1,6 @@
 class HaskellStack
   livecheck do
-    url "https://github.com/commercialhaskell/stack/releases"
-    regex(%r{latest.*?href="/commercialhaskell/stack/tree/v?([0-9.]+)}m)
+    url "https://github.com/commercialhaskell/stack/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

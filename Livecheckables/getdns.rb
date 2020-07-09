@@ -4,6 +4,6 @@ class Getdns
   # `execution expired` error.
   livecheck do
     url "https://github.com/getdnsapi/getdns/releases/latest"
-    regex(%r{href=.+?/tag/v?(\d+(?:\.\d+)+)["']})
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

@@ -1,6 +1,6 @@
 class Bcal
   livecheck do
-    url "https://github.com/jarun/bcal/releases"
-    regex(%r{Latest.*?href="/jarun/bcal/tree/v?([0-9.]+)}m)
+    url "https://github.com/jarun/bcal/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

@@ -1,6 +1,6 @@
 class Ninja
   livecheck do
-    url "https://github.com/ninja-build/ninja/releases"
-    regex(%r{href="/ninja-build/ninja/tree/v([\d.]+\.[\d.]+\.[\d.]+)"})
+    url "https://github.com/ninja-build/ninja/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

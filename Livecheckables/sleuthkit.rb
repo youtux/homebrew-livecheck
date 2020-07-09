@@ -1,6 +1,6 @@
 class Sleuthkit
   livecheck do
-    url "https://github.com/sleuthkit/sleuthkit/releases"
-    regex(%r{Latest.*?href="/sleuthkit/sleuthkit/tree/sleuthkit-?([0-9.]+)}m)
+    url "https://github.com/sleuthkit/sleuthkit/releases/latest"
+    regex(%r{href=.*?/tag/sleuthkit[._-]v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

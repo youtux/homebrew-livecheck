@@ -1,6 +1,6 @@
 class RancherCli
   livecheck do
-    url "https://github.com/rancher/cli/releases"
-    regex(%r{latest.*?href="/rancher/cli/tree/v?([0-9.]+)}m)
+    url "https://github.com/rancher/cli/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

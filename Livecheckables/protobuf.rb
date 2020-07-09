@@ -1,6 +1,6 @@
 class Protobuf
   livecheck do
-    url "https://github.com/protocolbuffers/protobuf/releases"
-    regex(%r{latest.*?href="/protocolbuffers/protobuf/tree/v?([0-9.]+)}m)
+    url "https://github.com/protocolbuffers/protobuf/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

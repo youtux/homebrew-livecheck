@@ -1,6 +1,6 @@
 class Xmrig
   livecheck do
-    url "https://github.com/xmrig/xmrig/releases"
-    regex(%r{latest.*?href="/xmrig/xmrig/tree/v?([0-9.]+)}m)
+    url "https://github.com/xmrig/xmrig/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

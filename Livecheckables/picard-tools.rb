@@ -1,6 +1,6 @@
 class PicardTools
   livecheck do
-    url "https://github.com/broadinstitute/picard/releases"
-    regex(%r{href="/broadinstitute/picard/tree/([0-9.]+)})
+    url "https://github.com/broadinstitute/picard/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

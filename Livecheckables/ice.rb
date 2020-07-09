@@ -1,6 +1,6 @@
 class Ice
   livecheck do
-    url "https://github.com/zeroc-ice/ice/releases"
-    regex(%r{latest.*?href="/zeroc-ice/ice/tree/v?([0-9.]+)}m)
+    url "https://github.com/zeroc-ice/ice/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

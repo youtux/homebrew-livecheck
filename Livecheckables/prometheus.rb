@@ -1,6 +1,6 @@
 class Prometheus
   livecheck do
-    url "https://api.github.com/repos/prometheus/prometheus/releases/latest"
-    regex(/([0-9.]+\.[0-9.]+)"/)
+    url "https://github.com/prometheus/prometheus/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

@@ -1,6 +1,6 @@
 class Ocamlbuild
   livecheck do
-    url "https://github.com/ocaml/ocamlbuild/releases"
-    regex(%r{href="/ocaml/ocamlbuild/tree/v?([0-9.]+)})
+    url "https://github.com/ocaml/ocamlbuild/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

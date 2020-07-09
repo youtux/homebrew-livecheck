@@ -1,6 +1,6 @@
 class Maxwell
   livecheck do
-    url "https://github.com/zendesk/maxwell/releases"
-    regex(%r{Latest.*?href="/zendesk/maxwell/tree/v?([0-9.]+)}m)
+    url "https://github.com/zendesk/maxwell/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

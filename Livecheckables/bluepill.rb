@@ -1,6 +1,6 @@
 class Bluepill
   livecheck do
-    url "https://github.com/linkedin/bluepill/releases"
-    regex(%r{Latest.*?href="/linkedin/bluepill/tree/v?([0-9.]+)}m)
+    url "https://github.com/linkedin/bluepill/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

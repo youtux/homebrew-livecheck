@@ -1,6 +1,6 @@
 class CdogsSdl
   livecheck do
-    url "https://github.com/cxong/cdogs-sdl/releases"
-    regex(%r{Latest.*?href="/cxong/cdogs-sdl/tree/v?([0-9.]+)}m)
+    url "https://github.com/cxong/cdogs-sdl/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

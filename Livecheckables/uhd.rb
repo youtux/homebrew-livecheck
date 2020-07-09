@@ -1,6 +1,6 @@
 class Uhd
   livecheck do
-    url "https://github.com/EttusResearch/uhd/releases"
-    regex(%r{Latest.*?href="/EttusResearch/uhd/tree/v?([0-9.]+)}m)
+    url "https://github.com/EttusResearch/uhd/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

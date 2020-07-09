@@ -1,6 +1,6 @@
 class Lean
   livecheck do
-    url "https://github.com/leanprover/lean/releases"
-    regex(%r{Latest.*?href="/leanprover/lean/tree/v?([0-9.]+)}m)
+    url "https://github.com/leanprover/lean/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

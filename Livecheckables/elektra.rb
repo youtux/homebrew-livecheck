@@ -1,6 +1,6 @@
 class Elektra
   livecheck do
-    url "https://github.com/ElektraInitiative/libelektra/releases"
-    regex(%r{Latest.*?href="/ElektraInitiative/libelektra/tree/v?([0-9.]+)}m)
+    url "https://github.com/ElektraInitiative/libelektra/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

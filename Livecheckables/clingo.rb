@@ -1,6 +1,6 @@
 class Clingo
   livecheck do
-    url "https://github.com/potassco/clingo/releases"
-    regex(%r{Latest.*?href="/potassco/clingo/tree/v?([0-9.]+)}m)
+    url "https://github.com/potassco/clingo/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

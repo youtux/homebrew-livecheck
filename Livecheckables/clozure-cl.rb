@@ -1,6 +1,6 @@
 class ClozureCl
   livecheck do
-    url "https://github.com/Clozure/ccl/releases"
-    regex(%r{Latest.*?href="/Clozure/ccl/tree/v?([0-9.]+)}m)
+    url "https://github.com/Clozure/ccl/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
