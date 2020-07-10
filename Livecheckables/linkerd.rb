@@ -1,6 +1,6 @@
 class Linkerd
   livecheck do
     url :stable
-    regex(/^stable[._-]v?(\d+(?:\.\d+)+)$/)
+    regex(/^stable[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 end
