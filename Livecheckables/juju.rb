@@ -1,6 +1,6 @@
 class Juju
   livecheck do
-    url :stable
-    regex(/^juju-v?(\d+(?:\.\d+)+)$/i)
+    url "https://github.com/juju/juju/releases/latest"
+    regex(%r{href=.+?/tag/juju-v?(\d+(?:\.\d+)+)}i)
   end
 end
