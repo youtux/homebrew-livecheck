@@ -5,12 +5,23 @@ module LivecheckStrategy
     NAME = name.demodulize
     PRIORITY = 8
 
+    def self.tag_info(repo_url, filter = nil)
+      raw_tags = `GIT_TERMINAL_PROMPT=0 git ls-remote --tags #{repo_url}`
+      raw_tags.gsub!(%r{^.*\trefs/tags/}, "")
+      raw_tags.delete_suffix!("^{}")
+
+      tags = raw_tags.split("\n").uniq.sort
+      tags.select! { |t| t =~ filter } if filter
+      tags
+    end
+    private_class_method :tag_info
+
     def self.match?(url)
       DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
     end
 
     def self.find_versions(url, regex)
-      tags = git_tags(url, regex)
+      tags = tag_info(url, regex)
       tags_only_debian = tags.all? { |tag| tag.start_with?("debian/") }
 
       match_data = { :matches => {}, :regex => regex, :url => url }
