@@ -9,7 +9,7 @@ module LivecheckStrategy
       /registry\.npmjs\.org/.match?(url)
     end
 
-    def self.find_versions(url, regex)
+    def self.find_versions(url, regex = nil)
       package_name = url.split("/")[3..-3].reject { |s| s == "-" }.join("/")
 
       page_url = "https://www.npmjs.com/package/#{package_name}?activeTab=versions"

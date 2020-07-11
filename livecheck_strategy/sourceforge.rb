@@ -27,7 +27,7 @@ module LivecheckStrategy
         SPECIAL_CASES.none? { |sc| url.include? sc }
     end
 
-    def self.find_versions(url, regex)
+    def self.find_versions(url, regex = nil)
       project_name = if url.include?("/project")
         url.match(%r{/projects?/([^/]+)/})[1]
       elsif url.include?(".net/p/")

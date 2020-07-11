@@ -20,7 +20,7 @@ module LivecheckStrategy
       DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
     end
 
-    def self.find_versions(url, regex)
+    def self.find_versions(url, regex = nil)
       tags = tag_info(url, regex)
       tags_only_debian = tags.all? { |tag| tag.start_with?("debian/") }
 

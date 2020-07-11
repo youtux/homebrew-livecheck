@@ -29,7 +29,7 @@ module LivecheckStrategy
       url.include?("gnu.org") && SPECIAL_CASES.none? { |sc| url.include? sc }
     end
 
-    def self.find_versions(url, regex)
+    def self.find_versions(url, regex = nil)
       match_list = PROJECT_NAME_REGEXES.map { |r| url.match(r) }.compact
       return { :matches => {}, :regex => regex, :url => url } if match_list.empty?
 

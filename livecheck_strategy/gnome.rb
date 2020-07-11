@@ -20,7 +20,7 @@ module LivecheckStrategy
       /download\.gnome\.org/.match?(url)
     end
 
-    def self.find_versions(url, regex)
+    def self.find_versions(url, regex = nil)
       package_name = url.match(%r{/sources/(.*?)/})[1]
 
       page_url = "https://download.gnome.org/sources/#{package_name}/cache.json"
