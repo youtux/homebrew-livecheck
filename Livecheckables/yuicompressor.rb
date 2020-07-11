@@ -1,6 +1,6 @@
 class Yuicompressor
   livecheck do
-    url "https://github.com/yui/yuicompressor/releases/"
-    regex(%r{href="/yui/yuicompressor/tree/v([\d.]+)"})
+    url "https://github.com/yui/yuicompressor/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

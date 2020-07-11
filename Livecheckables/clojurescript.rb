@@ -1,6 +1,6 @@
 class Clojurescript
   livecheck do
-    url "https://github.com/clojure/clojurescript/releases"
-    regex(%r{Latest.*?href="/clojure/clojurescript/tree/r([0-9.]+)}m)
+    url "https://github.com/clojure/clojurescript/releases/latest"
+    regex(%r{href=.*?/tag/r?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

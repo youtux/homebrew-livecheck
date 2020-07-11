@@ -1,6 +1,6 @@
 class Libusb
   livecheck do
-    url "https://github.com/libusb/libusb/releases"
-    regex(%r{latest.*?href="/libusb/libusb/tree/v?([0-9.]+)}m)
+    url "https://github.com/libusb/libusb/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

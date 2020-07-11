@@ -1,6 +1,6 @@
 class Sysdig
   livecheck do
-    url "https://api.github.com/repos/draios/sysdig/releases/latest"
-    regex(/([0-9.]+\.[0-9.]+)"/)
+    url "https://github.com/draios/sysdig/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

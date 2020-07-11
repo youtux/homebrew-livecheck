@@ -1,6 +1,6 @@
 class Exa
   livecheck do
-    url "https://github.com/ogham/exa/releases"
-    regex(%r{latest.*?href="/ogham/exa/tree/v?([0-9.]+)}m)
+    url "https://github.com/ogham/exa/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

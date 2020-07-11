@@ -1,6 +1,6 @@
 class Leptonica
   livecheck do
-    url "https://github.com/DanBloomberg/leptonica/releases"
-    regex(%r{href="/DanBloomberg/leptonica/releases/tag/([\d.]+)"})
+    url "http://www.leptonica.org/download.html"
+    regex(/href=.*?leptonica[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

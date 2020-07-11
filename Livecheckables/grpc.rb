@@ -1,6 +1,6 @@
 class Grpc
   livecheck do
-    url "https://github.com/grpc/grpc/releases"
-    regex(%r{latest.*?href="/grpc/grpc/tree/v?([0-9.]+)}m)
+    url "https://github.com/grpc/grpc/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

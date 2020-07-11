@@ -1,6 +1,6 @@
 class Z3
   livecheck do
-    url "https://github.com/Z3Prover/z3/releases"
-    regex(%r{Latest.*?href="/Z3Prover/z3/tree/z3-([0-9.]+)}m)
+    url "https://github.com/Z3Prover/z3/releases/latest"
+    regex(%r{href=.*?/tag/z3[._-]v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

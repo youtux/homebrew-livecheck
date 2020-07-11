@@ -1,6 +1,6 @@
 class LibatomicOps
   livecheck do
-    url "https://github.com/ivmai/libatomic_ops/releases"
-    regex(%r{latest.*?href="/ivmai/libatomic_ops/tree/v?([0-9.]+)}m)
+    url "https://github.com/ivmai/libatomic_ops/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

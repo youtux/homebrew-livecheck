@@ -1,6 +1,6 @@
 class Gperftools
   livecheck do
-    url "https://github.com/gperftools/gperftools/releases"
-    regex(%r{Latest.*?href="/gperftools/gperftools/tree/gperftools-([0-9.]+)}m)
+    url "https://github.com/gperftools/gperftools/releases/latest"
+    regex(%r{href=.*?/tag/gperftools[._-]v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

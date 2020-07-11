@@ -1,6 +1,6 @@
 class PyenvVirtualenv
   livecheck do
-    url "https://api.github.com/repos/pyenv/pyenv-virtualenv/releases/latest"
-    regex(/([0-9.]+\.[0-9.]+)"/)
+    url "https://github.com/pyenv/pyenv-virtualenv/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

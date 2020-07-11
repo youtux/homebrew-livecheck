@@ -1,6 +1,6 @@
 class Dub
   livecheck do
-    url "https://github.com/dlang/dub/releases"
-    regex(%r{href="/dlang/dub/releases/tag/v([0-9,.]+)"})
+    url :head
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end

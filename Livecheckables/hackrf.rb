@@ -1,6 +1,6 @@
 class Hackrf
   livecheck do
-    url "https://github.com/mossmann/hackrf/releases"
-    regex(%r{Latest.*?href="/mossmann/hackrf/tree/v?([0-9.]+)"}m)
+    url "https://github.com/mossmann/hackrf/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
