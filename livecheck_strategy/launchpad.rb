@@ -8,7 +8,7 @@ module LivecheckStrategy
       /launchpad\.net/.match?(url)
     end
 
-    def self.find_versions(url, regex)
+    def self.find_versions(url, regex = nil)
       package_name = url.match(%r{launchpad\.net/([^/]*)})[1]
 
       page_url = "https://launchpad.net/#{package_name}"

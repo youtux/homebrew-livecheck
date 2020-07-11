@@ -9,7 +9,7 @@ module LivecheckStrategy
       /files\.pythonhosted\.org/.match?(url)
     end
 
-    def self.find_versions(url, regex)
+    def self.find_versions(url, regex = nil)
       package_name = url[%r{https://files.pythonhosted.org/packages/.*/.*/(.*)-.*}, 1]
 
       page_url = "https://pypi.org/project/#{package_name}"

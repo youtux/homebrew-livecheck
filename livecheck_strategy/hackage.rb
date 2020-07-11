@@ -8,7 +8,7 @@ module LivecheckStrategy
       /hackage\.haskell\.org/.match?(url)
     end
 
-    def self.find_versions(url, regex)
+    def self.find_versions(url, regex = nil)
       package_name = ((url.split("/")[4]).split("-")[0..-2]).join("-")
 
       page_url = "https://hackage.haskell.org/package/#{package_name}/src"

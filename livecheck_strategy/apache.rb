@@ -8,7 +8,7 @@ module LivecheckStrategy
       %r{www\.apache\.org/dyn}.match?(url)
     end
 
-    def self.find_versions(url, regex)
+    def self.find_versions(url, regex = nil)
       path, prefix, suffix = url.match(%r{path=(.+?)/([^/]*?)\d+(?:\.\d+)+(/|[^/]*)})[1, 3]
 
       page_url = "https://archive.apache.org/dist/#{path}/"
