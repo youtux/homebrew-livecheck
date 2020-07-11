@@ -1,6 +1,6 @@
 require "cli/parser"
 
-require_relative "../livecheck/livecheck_strategy"
+require_relative "../livecheck_strategy"
 require_relative "../livecheck/utils"
 require_relative "../livecheck/heuristic"
 require_relative "../livecheck/extend/formulary"
