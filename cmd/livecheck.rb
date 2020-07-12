@@ -1,17 +1,47 @@
+# frozen_string_literal: true
+
 require "cli/parser"
 
 require_relative "../livecheck_strategy"
-require_relative "../livecheck/utils"
-require_relative "../livecheck/heuristic"
 require_relative "../livecheck/extend/formulary"
-
-LIVECHECKABLES_PATH = Pathname(__dir__).parent/"Livecheckables"
-
-WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
-WATCHLIST_PATH ||= Pathname.new(Dir.home)/".brew_livecheck_watchlist"
 
 module Homebrew
   module_function
+
+  WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
+  WATCHLIST_PATH ||= Pathname.new(Dir.home)/".brew_livecheck_watchlist"
+  private_constant :WATCHLIST_PATH
+
+  GITHUB_SPECIAL_CASES = %w[
+    api.github.com
+    /latest
+    mednafen
+    camlp5
+    kotlin
+    osrm-backend
+    prometheus
+    pyenv-virtualenv
+    sysdig
+    shairport-sync
+    yuicompressor
+  ].freeze
+  private_constant :GITHUB_SPECIAL_CASES
+
+  UNSTABLE_VERSION_KEYWORDS = %w[
+    alpha
+    beta
+    bpo
+    dev
+    experimental
+    prerelease
+    preview
+    rc
+  ].freeze
+  private_constant :UNSTABLE_VERSION_KEYWORDS
+
+  NO_VERSIONS_MSG = "Unable to get versions"
+  HEAD_ONLY_MSG = "HEAD only formula must be installed to be livecheckable"
+  private_constant :NO_VERSIONS_MSG, :HEAD_ONLY_MSG
 
   def livecheck_args
     Homebrew::CLI::Parser.new do
@@ -95,16 +125,63 @@ module Homebrew
 
     formulae_checked = formulae_to_check.sort.map.with_index do |formula, i|
       puts "\n----------\n" if Homebrew.args.debug? && i.positive?
-      print_latest_version formula
+
+      skip_result = skip_conditions(formula)
+      next skip_result if skip_result != false
+
+      formula.head.downloader.shutup! unless formula.stable?
+
+      current = formula.stable? ? formula.version : formula.installed_version.version.commit
+
+      version_info = nil
+      latest = if formula.stable?
+        version_info = latest_version(formula)
+        version_info.nil? ? nil : version_info["latest"]
+      else
+        formula.head.downloader.fetch_last_commit
+      end
+
+      if latest.nil?
+        if Homebrew.args.json?
+          next status_hash(formula, "error", [NO_VERSIONS_MSG])
+        else
+          raise TypeError, NO_VERSIONS_MSG
+        end
+      end
+
+      if (m = latest.to_s.match(/(.*)-release$/)) && !current.to_s.match(/.*-release$/)
+        latest = Version.new(m[1])
+      end
+
+      info = {
+        "formula" => formula_name(formula),
+        "version" => {
+          "current"             => current.to_s,
+          "latest"              => latest.to_s,
+          "outdated"            => formula.stable? ? (current < latest) : (current != latest),
+          "newer_than_upstream" => formula.stable? && (current > latest),
+        },
+        "meta"    => {
+          "livecheckable" => formula.livecheckable?,
+        },
+      }
+      info["meta"]["head_only"] = !formula.stable? unless formula.stable?
+      info["meta"].merge!(version_info["meta"]) unless version_info.nil? || !version_info.key?("meta")
+
+      next if Homebrew.args.newer_only? && !info["version"]["outdated"]
+
+      if Homebrew.args.json?
+        info.except!("meta") unless Homebrew.args.verbose?
+        next info
+      end
+
+      print_latest_version(info)
+      nil
     rescue => e
       Homebrew.failed = true
 
       if Homebrew.args.json?
-        {
-          "formula"  => formula_name(formula),
-          "status"   => "error",
-          "messages" => [e.to_s],
-        }
+        status_hash(formula, "error", [e.to_s])
       elsif !Homebrew.args.quiet?
         onoe "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}: #{e}"
         nil
@@ -114,13 +191,33 @@ module Homebrew
     puts JSON.generate(formulae_checked.compact) if Homebrew.args.json?
   end
 
-  def print_latest_version(formula)
+  def self.formula_name(formula)
+    Homebrew.args.full_name? ? formula.full_name : formula
+  end
+  private_class_method :formula_name
+
+  def self.status_hash(formula, status_str, messages = nil)
+    status_hash = {
+      "formula" => formula_name(formula),
+      "status"  => status_str,
+    }
+    status_hash["messages"] = messages if messages.is_a?(Array)
+
+    if Homebrew.args.verbose?
+      status_hash["meta"] = {
+        "livecheckable" => formula.livecheckable?,
+      }
+      status_hash["meta"]["head_only"] = !formula.stable? unless formula.stable?
+    end
+
+    status_hash
+  end
+  private_class_method :status_hash
+
+  def self.skip_conditions(formula)
     if formula.deprecated? && !formula.livecheckable?
       if Homebrew.args.json?
-        return {
-          "formula" => formula_name(formula),
-          "status"  => "deprecated",
-        }
+        return status_hash(formula, "deprecated")
       elsif !Homebrew.args.quiet?
         puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : deprecated"
         return
@@ -129,10 +226,7 @@ module Homebrew
 
     if formula.to_s.include?("@") && !formula.livecheckable?
       if Homebrew.args.json?
-        return {
-          "formula" => formula_name(formula),
-          "status"  => "versioned",
-        }
+        return status_hash(formula, "versioned")
       elsif !Homebrew.args.quiet?
         puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : versioned"
         return
@@ -141,16 +235,9 @@ module Homebrew
 
     if !formula.stable? && !formula.any_version_installed?
       if Homebrew.args.json?
-        return {
-          "formula"  => formula_name(formula),
-          "status"   => "error",
-          "messages" => [
-            "HEAD only formula must be installed to be livecheckable",
-          ],
-        }
+        return status_hash(formula, "error", [HEAD_ONLY_MSG])
       elsif !Homebrew.args.quiet?
-        puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : " \
-          "HEAD only formula must be installed to be livecheckable"
+        puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : #{HEAD_ONLY_MSG}"
         return
       end
     end
@@ -167,12 +254,11 @@ module Homebrew
       end
 
       if Homebrew.args.json?
-        json_hash = {
-          "formula" => formula_name(formula),
-          "status"  => "skipped",
-        }
-        json_hash["messages"] = [skip_msg] unless skip_msg.nil? || skip_msg.empty?
-        return json_hash
+        if skip_msg.nil? || skip_msg.empty?
+          return status_hash(formula, "skipped")
+        else
+          return status_hash(formula, "skipped", [skip_msg])
+        end
       elsif !Homebrew.args.quiet?
         puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : skipped" \
              "#{" - #{skip_msg}" unless skip_msg.empty?}"
@@ -180,75 +266,166 @@ module Homebrew
       end
     end
 
-    formula.head.downloader.shutup! unless formula.stable?
+    false
+  end
+  private_class_method :skip_conditions
 
-    current = formula.stable? ? formula.version : formula.installed_version.version.commit
+  def self.print_latest_version(info)
+    formula_s = "#{Tty.blue}#{info["formula"]}#{Tty.reset}"
+    formula_s += " (guessed)" if !info["meta"]["livecheckable"] && Homebrew.args.verbose?
 
-    version_info = nil
-    latest = if formula.stable?
-      version_info = latest_version(formula)
-      version_info.nil? ? nil : version_info["latest"]
-    else
-      formula.head.downloader.fetch_last_commit
-    end
-
-    if latest.nil?
-      if Homebrew.args.json?
-        return {
-          "formula"  => formula_name(formula),
-          "status"   => "error",
-          "messages" => ["Unable to get versions"],
-        }
-      else
-        raise TypeError, "Unable to get versions"
-      end
-    end
-
-    if (m = latest.to_s.match(/(.*)-release$/)) && !current.to_s.match(/.*-release$/)
-      latest = Version.new(m[1])
-    end
-
-    is_outdated = formula.stable? ? (current < latest) : (current != latest)
-    is_newer_than_upstream = formula.stable? && (current > latest)
-
-    formula_s = "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}"
-
-    return if Homebrew.args.newer_only? && !is_outdated
-
-    if Homebrew.args.json?
-      json_hash = {
-        "formula" => formula_name(formula),
-        "version" => {
-          "current"             => current.to_s,
-          "latest"              => latest.to_s,
-          "outdated"            => is_outdated,
-          "newer_than_upstream" => is_newer_than_upstream,
-        },
-      }
-
-      if Homebrew.args.verbose?
-        json_hash["meta"] = {}
-        json_hash["meta"]["livecheckable"] = formula.livecheckable?
-        json_hash["meta"]["head_only"] = !formula.stable? unless formula.stable?
-        json_hash["meta"].merge!(version_info["meta"]) unless version_info.nil?
-      end
-
-      return json_hash
-    end
-
-    formula_s += " (guessed)" if !formula.livecheckable? && Homebrew.args.verbose?
     current_s =
-      if is_newer_than_upstream
-        "#{Tty.red}#{current}#{Tty.reset}"
+      if info["version"]["newer_than_upstream"]
+        "#{Tty.red}#{info["version"]["current"]}#{Tty.reset}"
       else
-        current.to_s
+        info["version"]["current"]
       end
+
     latest_s =
-      if is_outdated
-        "#{Tty.green}#{latest}#{Tty.reset}"
+      if info["version"]["outdated"]
+        "#{Tty.green}#{info["version"]["latest"]}#{Tty.reset}"
       else
-        latest.to_s
+        info["version"]["latest"]
       end
+
     puts "#{formula_s} : #{current_s} ==> #{latest_s}"
   end
+  private_class_method :print_latest_version
+
+  def self.checkable_urls(formula)
+    urls = []
+    urls << formula.head.url if formula.head
+    if formula.stable
+      urls << formula.stable.url
+      urls.concat(formula.stable.mirrors)
+    end
+    urls << formula.homepage if formula.homepage
+
+    urls.compact
+  end
+  private_class_method :checkable_urls
+
+  def self.preprocess_url(url)
+    # Check for GitHub repos on github.com, not AWS
+    url.sub!("github.s3.amazonaws.com", "github.com") if url.include?("github")
+
+    # Use repo from GitHub or GitLab inferred from download URL
+    if url.include?("github.com") && GITHUB_SPECIAL_CASES.none? { |sc| url.include? sc }
+      if url.include? "archive"
+        url = url.sub(%r{/archive/.*}, ".git") if url.include? "github"
+      elsif url.include? "releases"
+        url = url.sub(%r{/releases/.*}, ".git")
+      elsif url.include? "downloads"
+        url = Pathname.new(url.sub(%r{/downloads(.*)}, "\\1")).dirname.to_s+".git"
+      elsif !url.end_with?(".git")
+        # Truncate the URL at the user/repo part, if possible
+        github_repo_url = url[%r{((?:[a-z]+://)?github.com/[^/]+/[^/#]+)}]
+        url = github_repo_url unless github_repo_url.nil?
+
+        url = url[0..-2] if url.end_with?("/")
+
+        url += ".git"
+      end
+    elsif url.include?("/-/archive/")
+      url = url.sub(%r{/-/archive/.*$}i, ".git")
+    end
+
+    url
+  end
+  private_class_method :preprocess_url
+
+  def self.latest_version(formula)
+    has_livecheckable = formula.livecheckable?
+    livecheck = formula.livecheck
+    livecheck_regex = livecheck.regex
+    livecheck_url = livecheck.url
+
+    urls = [livecheck_url] if livecheck_url.is_a?(String) && !livecheck_url.blank?
+    urls ||= checkable_urls(formula)
+
+    if Homebrew.args.debug?
+      puts "\nFormula:          #{formula_name(formula)}"
+      puts "Head only?:       #{!formula.stable?}" unless formula.stable?
+      puts "Livecheckable?:   #{has_livecheckable ? "Yes" : "No"}"
+    end
+
+    urls.each do |original_url|
+      puts "\nURL:              #{original_url}" if Homebrew.args.debug?
+
+      # Skip Gists until/unless we create a method of identifying revisions
+      if original_url.include?("gist.github.com")
+        odebug "Skipping: GitHub Gists are not supported"
+        next
+      end
+
+      url = preprocess_url(original_url)
+      strategies = LivecheckStrategy.from_url(url, livecheck_regex.present?)
+      strategy = strategies[0]
+
+      if Homebrew.args.debug?
+        puts "URL (processed):  #{url}" if url != original_url
+        unless strategies.empty? || !Homebrew.args.verbose?
+          puts "Strategies:       #{strategies.map { |s| s::NAME }.join(", ")}"
+        end
+        puts "Strategy:         #{strategy.nil? ? "None" : strategy::NAME}"
+        puts "Regex:            #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
+      end
+
+      next if strategy.nil?
+
+      strategy_data = strategy.find_versions(url, livecheck_regex)
+      match_version_map = strategy_data[:matches]
+      regex = strategy_data[:regex]
+
+      if Homebrew.args.debug?
+        puts "URL (strategy):   #{strategy_data[:url]}" if strategy_data[:url] != url
+        puts "Regex (strategy): #{strategy_data[:regex].inspect}\n" if strategy_data[:regex] != livecheck_regex
+      end
+
+      match_version_map.delete_if do |_match, version|
+        next true if version.empty?
+        next false if has_livecheckable
+
+        UNSTABLE_VERSION_KEYWORDS.any? do |rejection|
+          version.to_s.include?(rejection)
+        end
+      end
+
+      if Homebrew.args.debug? && !match_version_map.empty?
+        puts "\nMatched Versions:\n"
+
+        if Homebrew.args.verbose?
+          match_version_map.each do |match, version|
+            puts "#{match} => #{version.inspect}"
+          end
+        else
+          puts match_version_map.values.join(", ")
+        end
+      end
+
+      next if match_version_map.empty?
+
+      version_info = {
+        "latest" => Version.new(match_version_map.values.max),
+      }
+
+      if Homebrew.args.json? && Homebrew.args.verbose?
+        version_info["meta"] = {
+          "url"      => {
+            "original" => original_url,
+          },
+          "strategy" => strategy.nil? ? nil : strategy::NAME,
+        }
+        version_info["meta"]["url"]["processed"] = url if url != original_url
+        version_info["meta"]["url"]["strategy"] = strategy_data[:url] if strategy_data[:url] != url
+        version_info["meta"]["strategies"] = strategies.map { |s| s::NAME } unless strategies.empty?
+        version_info["meta"]["regex"] = regex.inspect unless regex.nil?
+      end
+
+      return version_info
+    end
+
+    nil
+  end
+  private_class_method :latest_version
 end
