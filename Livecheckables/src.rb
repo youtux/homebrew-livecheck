@@ -1,6 +1,6 @@
 class Src
   livecheck do
     url :homepage
-    regex(%r{href='.*?/src-([0-9.]+)\.t})
+    regex(/href=.*?src[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
