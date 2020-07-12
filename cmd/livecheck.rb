@@ -254,11 +254,7 @@ module Homebrew
       end
 
       if Homebrew.args.json?
-        if skip_msg.nil? || skip_msg.empty?
-          return status_hash(formula, "skipped")
-        else
-          return status_hash(formula, "skipped", [skip_msg])
-        end
+        return status_hash(formula, "skipped", (skip_msg.empty? ? nil : [skip_msg]))
       elsif !Homebrew.args.quiet?
         puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : skipped" \
              "#{" - #{skip_msg}" unless skip_msg.empty?}"
