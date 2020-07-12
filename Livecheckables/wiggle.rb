@@ -1,5 +1,6 @@
 class Wiggle
   livecheck do
-    url "https://github.com/neilbrown/wiggle"
+    url "https://neil.brown.name/wiggle/"
+    regex(/href=.*?wiggle[._-](\d+(?:\.\d+)+)\.t/i)
   end
 end
