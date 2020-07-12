@@ -1,6 +1,6 @@
 class Cassandra
   livecheck do
-    url :homepage
-    regex(%r{href=".*?refs/tags/cassandra-([0-9.]+)"})
+    url "https://cassandra.apache.org/download/"
+    regex(/href=.*?apache-cassandra[._-]v?(\d+(?:\.\d+)+)(?:-bin)?\.t/i)
   end
 end
