@@ -1,6 +1,6 @@
 class Mbedtls
   livecheck do
-    url "https://tls.mbed.org/download"
-    regex(%r{href="/download/start/mbedtls-([0-9.]+)-})
+    url "https://github.com/ARMmbed/mbedtls/releases/latest"
+    regex(%r{href=.*/tag/mbedtls[._-]v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
