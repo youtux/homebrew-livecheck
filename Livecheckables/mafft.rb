@@ -3,6 +3,6 @@ class Mafft
   # text after the link for the archive.
   livecheck do
     url "https://mafft.cbrc.jp/alignment/software/source.html"
-    regex(%r{href=.+?mafft-v?(\d+(?:\.\d+)+)-with-extensions-src\.t.+?</a>\s*?<(?:br[^>]*?|/li|/ul)>}i)
+    regex(%r{href=.*?mafft[._-]v?(\d+(?:\.\d+)+)-with-extensions-src\.t.+?</a>\s*?<(?:br[^>]*?|/li|/ul)>}i)
   end
 end
