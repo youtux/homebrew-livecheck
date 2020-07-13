@@ -1,6 +1,6 @@
 class Abcl
   livecheck do
-    url "https://common-lisp.net/project/armedbear/releases/"
-    regex(%r{<a href="([0-9,.]+)/">})
+    url "https://abcl.org/releases/"
+    regex(%r{href=.*?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
 end
