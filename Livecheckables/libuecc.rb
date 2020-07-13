@@ -1,6 +1,6 @@
 class Libuecc
   livecheck do
     url :head
-    regex(%r{href='/libuecc/tag/\?h=v([0-9]+)'>})
+    regex(/href=.*?libuecc[._-]v?(\d+(?:\.\d+)*)\.t/i)
   end
 end
