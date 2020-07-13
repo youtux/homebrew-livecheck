@@ -1,6 +1,6 @@
 class Libcello
   livecheck do
     url :homepage
-    regex(%r{href=".*?/libCello-([0-9.]+)\.t.*?>Download})
+    regex(/href=.*?libCello[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
