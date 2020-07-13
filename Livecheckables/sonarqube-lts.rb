@@ -4,6 +4,6 @@ class SonarqubeLts
   # doesn't distinguish between current and LTS releases.
   livecheck do
     url "https://www.sonarqube.org/downloads/"
-    regex(/downloads-lts.+?href=.+?sonarqube-v?(\d+(?:\.\d+)+)\.(?:z|t)/m)
+    regex(/downloads-lts.+?href=.*?sonarqube[._-]v?(\d+(?:\.\d+)+)\.(?:zip|t)/im)
   end
 end
