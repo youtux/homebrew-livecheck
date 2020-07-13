@@ -1,6 +1,6 @@
 class Dterm
   livecheck do
     url :homepage
-    regex(/href=.+dterm-v?(\d+(?:\.\d+)+)\.t/)
+    regex(/href=.*?dterm[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
