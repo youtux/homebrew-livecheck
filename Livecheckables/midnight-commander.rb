@@ -1,6 +1,6 @@
 class MidnightCommander
   livecheck do
-    url "https://midnight-commander.org/"
-    regex(/Current version is: ([0-9.]+)/)
+    url "http://ftp.midnight-commander.org"
+    regex(/href=.*?mc[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
