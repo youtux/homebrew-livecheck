@@ -33,4 +33,4 @@ module LivecheckStrategy
   end
 end
 
-Dir.glob(File.join(__dir__, "livecheck_strategy", "*.rb"), &method(:require))
+Dir[File.join(__dir__, "livecheck_strategy", "*.rb")].sort.each(&method(:require))

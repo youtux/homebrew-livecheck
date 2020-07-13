@@ -120,7 +120,7 @@ module Homebrew
     # Load additional LivecheckStrategy files from taps
     non_core_taps.each do |tap_name|
       tap_strategy_path = File.join(Tap.fetch(tap_name).path, "livecheck_strategy")
-      Dir.glob(File.join(tap_strategy_path, "*.rb"), &method(:require)) if Dir.exist?(tap_strategy_path)
+      Dir[File.join(tap_strategy_path, "*.rb")].sort.each(&method(:require)) if Dir.exist?(tap_strategy_path)
     end
 
     formulae_checked = formulae_to_check.sort.map.with_index do |formula, i|
