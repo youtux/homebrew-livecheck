@@ -1,6 +1,6 @@
 class Jhiccup
   livecheck do
     url :homepage
-    regex(%r{href=".*?/jHiccup-([0-9.]+)-dist})
+    regex(/href=.*?jHiccup[._-]v?(\d+(?:\.\d+)+)-dist\.zip/i)
   end
 end
