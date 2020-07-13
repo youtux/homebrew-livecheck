@@ -1,5 +1,6 @@
 class Darkice
   livecheck do
-    regex(%r{url=.+?/darkice-v?(\d+(?:\.\d+)+)\.t})
+    url "https://github.com/rafael2k/darkice/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
