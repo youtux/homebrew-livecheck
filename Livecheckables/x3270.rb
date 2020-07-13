@@ -1,5 +1,6 @@
 class X3270
   livecheck do
-    regex(%r{url=.+?/suite3270-v?(\d+(?:\.\d+)+(?:ga\d+)?)(?:-src)?\.t})
+    url "http://x3270.bgp.nu/download.html"
+    regex(/href=.*?suite3270[._-]v?(\d+(?:\.\d+)+(?:ga\d+)?)(?:-src)?\.t/i)
   end
 end
