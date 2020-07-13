@@ -1,6 +1,6 @@
 class Libflowmanager
   livecheck do
     url :homepage
-    regex(%r{latest version is.*?href=".*?/libflowmanager-([0-9.]+)\.t}m)
+    regex(/href=.*?libflowmanager[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
