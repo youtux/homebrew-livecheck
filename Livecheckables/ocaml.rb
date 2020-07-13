@@ -1,6 +1,6 @@
 class Ocaml
   livecheck do
     url "https://ocaml.org/releases"
-    regex(/<a href='([\d.]+\.[\d.]+\.?[\d.]?)\.html'>/)
+    regex(/href=.*?v?(\d+(?:\.\d+)+)\.html/i)
   end
 end
