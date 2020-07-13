@@ -1,6 +1,6 @@
 class Aqbanking
   livecheck do
     url "https://www.aquamaniac.de/rdm/projects/aqbanking/files"
-    regex(/href=.*aqbanking-([0-9.]+)\.t/)
+    regex(/href=.*?aqbanking[._-](\d+(?:\.\d+)+)\.t/i)
   end
 end

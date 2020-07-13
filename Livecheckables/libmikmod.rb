@@ -1,6 +1,6 @@
 class Libmikmod
   livecheck do
     url "http://mikmod.sourceforge.net/"
-    regex(/href=.*libmikmod-([0-9,.]+)\.t/)
+    regex(/href=.*?libmikmod[._-](\d+(?:\.\d+)+)\.t/i)
   end
 end
