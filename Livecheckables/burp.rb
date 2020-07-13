@@ -1,6 +1,6 @@
 class Burp
   livecheck do
-    url "https://burp.grke.org/download.html"
-    regex(/<li>([0-9.]+): Stable/)
+    url :stable
+    regex(%r{url=.*?/burp[._-]v?(\d+(?:\.\d+)+)\.t}i)
   end
 end
