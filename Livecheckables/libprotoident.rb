@@ -1,6 +1,6 @@
 class Libprotoident
   livecheck do
     url :homepage
-    regex(%r{latest version is.*?href=".*?/libprotoident-([0-9.]+)\.t}m)
+    regex(/href=.*?libprotoident[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
