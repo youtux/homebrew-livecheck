@@ -1,6 +1,6 @@
 class Cvsync
   livecheck do
     url :homepage
-    regex(/href=.+cvsync-v?(\d+(?:\.\d+)+)\.t/)
+    regex(/href=.*?cvsync[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

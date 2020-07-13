@@ -6,6 +6,6 @@ class Zabbix
   # a proper check sometime in the future and need to be updated.
   livecheck do
     url "https://cdn.zabbix.com/zabbix/sources/stable/5.0/"
-    regex(/href=.+?zabbix-(\d+(?:\.\d+)+)\.t/)
+    regex(/href=.*?zabbix[._-](\d+(?:\.\d+)+)\.t/i)
   end
 end
