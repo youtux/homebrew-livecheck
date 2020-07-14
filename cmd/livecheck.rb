@@ -104,7 +104,11 @@ module Homebrew
           onoe e
         end
       end
-    return unless formulae_to_check
+
+    if formulae_to_check.nil? || (formulae_to_check.is_a?(Array) && formulae_to_check.empty?)
+      onoe "No formulae to check."
+      return
+    end
 
     # Identify any non-homebrew/core taps in use for current formulae
     non_core_taps = {}
@@ -119,6 +123,7 @@ module Homebrew
       Dir[File.join(tap_strategy_path, "*.rb")].sort.each(&method(:require)) if Dir.exist?(tap_strategy_path)
     end
 
+    has_a_newer_upstream_version = false
     formulae_checked = formulae_to_check.sort.map.with_index do |formula, i|
       puts "\n----------\n" if Homebrew.args.debug? && i.positive?
 
@@ -166,6 +171,8 @@ module Homebrew
 
       next if Homebrew.args.newer_only? && !info["version"]["outdated"]
 
+      has_a_newer_upstream_version ||= true
+
       if Homebrew.args.json?
         info.except!("meta") unless Homebrew.args.verbose?
         next info
@@ -182,6 +189,11 @@ module Homebrew
         onoe "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}: #{e}"
         nil
       end
+    end
+
+    if (Homebrew.args.newer_only? && !has_a_newer_upstream_version) &&
+       !(Homebrew.args.json? || Homebrew.args.debug?)
+      puts "No newer upstream versions."
     end
 
     puts JSON.generate(formulae_checked.compact) if Homebrew.args.json?
