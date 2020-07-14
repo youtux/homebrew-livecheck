@@ -1,6 +1,6 @@
 class Augeas
   livecheck do
     url "http://download.augeas.net/"
-    regex(/href="augeas-([0-9,.]+)\.t/)
+    regex(/href=.*?augeas-([0-9,.]+)\.t/)
   end
 end

@@ -1,6 +1,6 @@
 class NagiosPlugins
   livecheck do
     url "https://nagios-plugins.org/download/"
-    regex(/href="nagios-plugins-([\d.]+)\.t/)
+    regex(/href=.*?nagios-plugins-([\d.]+)\.t/)
   end
 end
