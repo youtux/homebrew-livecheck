@@ -1,6 +1,6 @@
 class Vault
   livecheck do
     url "https://releases.hashicorp.com/vault/"
-    regex(%r{href="/vault/(\d+(?:\.\d+)+)/})
+    regex(%r{href=.*?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
 end
