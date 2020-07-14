@@ -96,13 +96,9 @@ module Homebrew
       elsif !Homebrew.args.formulae.empty?
         Homebrew.args.formulae
       elsif File.exist?(WATCHLIST_PATH)
-        Enumerator.new do |enum|
-          File.open(WATCHLIST_PATH).each do |line|
-            next if line.start_with?("#")
-
-            line.split.each do |word|
-              enum.yield Formulary.factory(word)
-            end
+        begin
+          File.readlines(WATCHLIST_PATH).each_with_object([]) do |word, memo|
+            memo << Formulary.factory(word.chomp) unless word.start_with?("#")
           end
         rescue Errno::ENOENT => e
           onoe e
