@@ -1,6 +1,6 @@
 class Nss
   livecheck do
-    url "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
-    regex(/href="[^"]*?NSS_(\d+(?:\.\d+)+)_release_notes"/)
+    url "https://ftp.mozilla.org/pub/security/nss/releases/"
+    regex(%r{href=.*?NSS[._-]v?(\d+(?:[._]\d+)+)[._-]RTM/?["' >]}i)
   end
 end
