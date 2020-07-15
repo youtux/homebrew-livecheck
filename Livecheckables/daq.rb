@@ -1,6 +1,6 @@
 class Daq
   livecheck do
     url "https://www.snort.org/downloads"
-    regex(%r{id="snort_stable_version">.*?href="/downloads/snort/daq-([0-9.]+)\.t}m)
+    regex(/id=.*?snort_stable_version[^>]*>.*?href=.*?daq[._-]v?(\d+(?:\.\d+)+)\.t/im)
   end
 end
