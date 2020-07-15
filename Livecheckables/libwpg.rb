@@ -1,6 +1,6 @@
 class Libwpg
   livecheck do
     url "https://dev-www.libreoffice.org/src/"
-    regex(/.*href="libwpg-([0-9.\-]+)\.t/)
+    regex(/.*href=.*?libwpg-([0-9.\-]+)\.t/)
   end
 end

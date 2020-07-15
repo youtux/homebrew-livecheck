@@ -1,6 +1,6 @@
 class Efl
   livecheck do
     url "https://download.enlightenment.org/rel/libs/efl/"
-    regex(/href="efl-([0-9,.]+)\.t/)
+    regex(/href=.*?efl-([0-9,.]+)\.t/)
   end
 end
