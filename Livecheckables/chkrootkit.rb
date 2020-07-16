@@ -1,6 +1,6 @@
 class Chkrootkit
   livecheck do
     url :homepage
-    regex(%r{href="/download/">chkrootkit ([0-9,.]+)})
+    regex(/href=.*?download[^>]*>chkrootkit v?(\d+(?:\.\d+)+)/i)
   end
 end
