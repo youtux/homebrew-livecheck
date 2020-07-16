@@ -1,6 +1,6 @@
 class Opus
   livecheck do
-    url "https://www.opus-codec.org/downloads/"
-    regex(%r{href="/release/stable/.*libopus ([0-9,.]+)</a>})
+    url "https://archive.mozilla.org/pub/opus/"
+    regex(%r{href=(?:["']?|.*?/)opus[._-]v?(\d+(?:\.\d+)+)\.t}i)
   end
 end
