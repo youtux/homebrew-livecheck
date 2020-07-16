@@ -1,6 +1,6 @@
 class Pgcli
   livecheck do
-    url "https://pypi.org/simple/pgcli/"
+    url :stable
     regex(/href=.*?pgcli-([0-9,.]+)\.t/)
   end
 end
