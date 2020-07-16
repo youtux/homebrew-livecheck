@@ -1,6 +1,6 @@
 class SaneBackends
   livecheck do
-    url :homepage
-    regex(%r{href="source\.html">SANE-Backends-([0-9.]+)</a>})
+    url :head
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end
