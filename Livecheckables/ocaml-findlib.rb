@@ -1,6 +1,6 @@
 class OcamlFindlib
   livecheck do
-    url :homepage
-    regex(%r{href=".*?/findlib-([0-9.]+)\.t})
+    url "http://download.camlcity.org/download/"
+    regex(/href=.*?findlib-([0-9.]+)\.t/)
   end
 end

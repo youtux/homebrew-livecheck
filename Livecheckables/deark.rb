@@ -1,6 +1,6 @@
 class Deark
   livecheck do
-    url :homepage
-    regex(%r{href=".*?/deark-([0-9.]+)\.t})
+    url "https://entropymine.com/deark/releases/"
+    regex(/href=.*?deark-([0-9.]+)\.t/)
   end
 end

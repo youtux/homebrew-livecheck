@@ -1,6 +1,6 @@
 class Lwtools
   livecheck do
-    url :homepage
-    regex(%r{href=".*?/lwtools-([0-9.]+)\.t})
+    url "http://www.lwtools.ca/releases/lwtools/"
+    regex(/href=.*?lwtools-([0-9.]+)\.t/)
   end
 end
