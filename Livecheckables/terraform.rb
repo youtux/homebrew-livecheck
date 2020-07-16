@@ -1,6 +1,6 @@
 class Terraform
   livecheck do
-    url "https://www.terraform.io/downloads.html"
-    regex(%r{href="https://releases.hashicorp.com/terraform/([0-9.]+)})
+    url "https://github.com/hashicorp/terraform/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
