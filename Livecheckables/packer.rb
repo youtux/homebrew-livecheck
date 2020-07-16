@@ -1,6 +1,6 @@
 class Packer
   livecheck do
-    url "https://packer.io/downloads.html"
-    regex(%r{href="https://releases.hashicorp.com/packer/([0-9.]+)})
+    url "https://releases.hashicorp.com/packer/"
+    regex(%r{href=.*?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
 end
