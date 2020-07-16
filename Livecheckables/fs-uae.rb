@@ -1,6 +1,6 @@
 class FsUae
   livecheck do
-    url "http://fs-uae.net/stable/"
-    regex(%r{href=.*?v?(\d+(?:\.\d+)+(?:u\d+)?)/?["' >]}i)
+    url "https://fs-uae.net/download"
+    regex(/href=.*?fs-uae[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
