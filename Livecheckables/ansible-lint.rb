@@ -1,6 +1,6 @@
 class AnsibleLint
   livecheck do
-    url "https://pypi.org/simple/ansible-lint/"
+    url :stable
     regex(/href=.*?ansible-lint-([0-9.]+)\.t/)
   end
 end

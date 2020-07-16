@@ -1,6 +1,6 @@
 class Csvkit
   livecheck do
-    url "https://pypi.org/simple/csvkit/"
+    url :stable
     regex(/href=.*?csvkit-([0-9.]+)\.t/)
   end
 end

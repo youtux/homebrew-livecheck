@@ -1,6 +1,6 @@
 class Liblwgeom
   livecheck do
-    url "https://postgis.net/source/"
+    url "https://download.osgeo.org/postgis/source/"
     regex(/href=.*?postgis-([0-9.]+)\.t/)
   end
 end

@@ -1,6 +1,6 @@
 class AwsElasticbeanstalk
   livecheck do
-    url "https://pypi.org/simple/awsebcli/"
+    url :stable
     regex(/href=.*?awsebcli-([0-9.]+)\.t/)
   end
 end

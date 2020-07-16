@@ -1,6 +1,6 @@
 class Ptex
   livecheck do
-    url "http://ptex.us/download.html"
-    regex(/href=.*?v([0-9.]+)\.zip/)
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end

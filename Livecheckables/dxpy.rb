@@ -1,6 +1,6 @@
 class Dxpy
   livecheck do
-    url "https://pypi.org/simple/dxpy/"
+    url :stable
     regex(/href=.*?dxpy-([0-9.]+)\.t/)
   end
 end
