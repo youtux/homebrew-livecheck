@@ -1,6 +1,6 @@
 class FsUae
   livecheck do
-    url :homepage
-    regex(%r{Latest Version.*?href="/download">([0-9.]+)<}m)
+    url "https://fs-uae.net/download"
+    regex(/href=.*?fs-uae[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
