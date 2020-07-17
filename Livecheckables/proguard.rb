@@ -1,6 +1,6 @@
 class Proguard
   livecheck do
-    url "https://sourceforge.net/projects/proguard/"
-    regex(%r{.*?/proguard([0-9.]+)\.t})
+    url "https://github.com/Guardsquare/proguard/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
