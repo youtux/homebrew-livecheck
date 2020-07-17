@@ -1,6 +1,6 @@
 class BoostBuild
   livecheck do
     url :head
-    regex(/boost-([0-9.]+)/)
+    regex(/^boost[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 end
