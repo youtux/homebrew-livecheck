@@ -5,6 +5,6 @@ class Geoserver
   # repo tags here instead, to make sure we get all the latest versions.
   livecheck do
     url "https://github.com/geoserver/geoserver"
-    regex(/^v?(\d+(?:\.\d+)+)$/)
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end

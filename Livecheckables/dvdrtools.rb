@@ -1,6 +1,6 @@
 class Dvdrtools
   livecheck do
     url "https://download.savannah.gnu.org/releases/dvdrtools/"
-    regex(/href=.*?dvdrtools-([0-9.]+)\.t/)
+    regex(/href=.*?dvdrtools-([0-9.]+)\.t/i)
   end
 end

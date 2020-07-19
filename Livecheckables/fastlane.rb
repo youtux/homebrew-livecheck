@@ -1,6 +1,6 @@
 class Fastlane
   livecheck do
     url :head
-    regex(/^([\d.]+)$/)
+    regex(/^([\d.]+)$/i)
   end
 end

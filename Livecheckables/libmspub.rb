@@ -1,6 +1,6 @@
 class Libmspub
   livecheck do
     url "https://dev-www.libreoffice.org/src/libmspub/"
-    regex(/href=.*?libmspub-([0-9,.]+)\.t/)
+    regex(/href=.*?libmspub-([0-9,.]+)\.t/i)
   end
 end

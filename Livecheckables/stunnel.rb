@@ -1,6 +1,6 @@
 class Stunnel
   livecheck do
     url "https://www.stunnel.org/downloads.html"
-    regex(/href=.*?stunnel-([0-9.]+)\.t/)
+    regex(/href=.*?stunnel-([0-9.]+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Jansson
   livecheck do
     url "https://digip.org/jansson/releases/"
-    regex(/href=.*?jansson-([0-9.]+)\.t/)
+    regex(/href=.*?jansson-([0-9.]+)\.t/i)
   end
 end

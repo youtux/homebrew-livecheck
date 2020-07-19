@@ -1,6 +1,6 @@
 class Curl
   livecheck do
     url "https://curl.haxx.se/download/"
-    regex(/curl-(.*?)\.t/)
+    regex(/curl-(.*?)\.t/i)
   end
 end

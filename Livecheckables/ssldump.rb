@@ -3,6 +3,6 @@ class Ssldump
   # (0.9b3) is available at the time of writing.
   livecheck do
     url :stable
-    regex(%r{url=.*?/ssldump/([^/]+)/[^/]+\.t})
+    regex(%r{url=.*?/ssldump/([^/]+)/[^/]+\.t}i)
   end
 end

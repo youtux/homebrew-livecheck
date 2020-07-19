@@ -1,6 +1,6 @@
 class Antlr
   livecheck do
     url "https://www.antlr.org/download/"
-    regex(/antlr-([0-9.]+)-complete\.jar/)
+    regex(/antlr-([0-9.]+)-complete\.jar/i)
   end
 end

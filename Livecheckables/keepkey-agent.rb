@@ -1,6 +1,6 @@
 class KeepkeyAgent
   livecheck do
     url :stable
-    regex(/href=.*?keepkey_agent-([0-9.]+)\.t/)
+    regex(/href=.*?keepkey_agent-([0-9.]+)\.t/i)
   end
 end
