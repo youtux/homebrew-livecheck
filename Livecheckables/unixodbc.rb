@@ -1,6 +1,6 @@
 class Unixodbc
   livecheck do
-    url "http://www.unixodbc.org/unixODBC.html"
-    regex(/\s+([0-9.]+) Released/i)
+    url "http://www.unixodbc.org/download.html"
+    regex(/href=.*?unixODBC[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
