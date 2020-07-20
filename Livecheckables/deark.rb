@@ -1,6 +1,6 @@
 class Deark
   livecheck do
     url "https://entropymine.com/deark/releases/"
-    regex(/href=.*?deark-([0-9.]+)\.t/)
+    regex(/href=.*?deark-([0-9.]+)\.t/i)
   end
 end

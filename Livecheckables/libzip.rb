@@ -1,6 +1,6 @@
 class Libzip
   livecheck do
     url "https://libzip.org/download/"
-    regex(/href=.*?libzip-([0-9.]+)\.t/)
+    regex(/href=.*?libzip-([0-9.]+)\.t/i)
   end
 end

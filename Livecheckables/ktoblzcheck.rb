@@ -1,6 +1,6 @@
 class Ktoblzcheck
   livecheck do
     url "https://sourceforge.net/projects/ktoblzcheck/"
-    regex(%r{/ktoblzcheck-([0-9.]+)\.t})
+    regex(%r{/ktoblzcheck-([0-9.]+)\.t}i)
   end
 end

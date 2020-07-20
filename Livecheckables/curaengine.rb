@@ -6,6 +6,6 @@ class Curaengine
   # way in the future, to avoid the possibility of missing good versions.
   livecheck do
     url :head
-    regex(/^v?(\d+\.\d(?:\.\d+)+)$/)
+    regex(/^v?(\d+\.\d(?:\.\d+)+)$/i)
   end
 end

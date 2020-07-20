@@ -1,6 +1,6 @@
 class Opensaml
   livecheck do
     url "https://shibboleth.net/downloads/c++-opensaml/latest/"
-    regex(/href=.*?opensaml-(\d+(?:\.\d+)+)\.t/)
+    regex(/href=.*?opensaml-(\d+(?:\.\d+)+)\.t/i)
   end
 end

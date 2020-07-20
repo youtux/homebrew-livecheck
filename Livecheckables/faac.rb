@@ -1,6 +1,6 @@
 class Faac
   livecheck do
     url "https://sourceforge.net/projects/faac/files/faac-src/"
-    regex(/faac-(\d+(?:\.\d+)*)\.t/)
+    regex(/faac-(\d+(?:\.\d+)*)\.t/i)
   end
 end

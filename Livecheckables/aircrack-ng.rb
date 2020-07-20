@@ -1,6 +1,6 @@
 class AircrackNg
   livecheck do
     url :homepage
-    regex(/href=.*?aircrack-ng-([0-9.]+)\.t/)
+    regex(/href=.*?aircrack-ng-([0-9.]+)\.t/i)
   end
 end

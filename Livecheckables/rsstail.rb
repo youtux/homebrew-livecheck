@@ -1,6 +1,6 @@
 class Rsstail
   livecheck do
     url :homepage
-    regex(/Latest release.*HREF="rsstail-([0-9.]+)\.t/)
+    regex(/Latest release.*HREF="rsstail-([0-9.]+)\.t/i)
   end
 end

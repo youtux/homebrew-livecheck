@@ -1,6 +1,6 @@
 class CabalInstall
   livecheck do
     url "https://www.haskell.org/cabal/download.html"
-    regex(/cabal-install tool \(version ([0-9.]+)/)
+    regex(/cabal-install tool \(version ([0-9.]+)/i)
   end
 end

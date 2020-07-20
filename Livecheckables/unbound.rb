@@ -4,6 +4,6 @@ class Unbound
   # tendency to lead to an `execution expired` error.
   livecheck do
     url :head
-    regex(/^(?:release-)?v?(\d+(?:\.\d+)+)$/)
+    regex(/^(?:release-)?v?(\d+(?:\.\d+)+)$/i)
   end
 end

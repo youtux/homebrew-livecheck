@@ -1,6 +1,6 @@
 class Sfk
   livecheck do
     url "https://sourceforge.net/projects/swissfileknife/"
-    regex(%r{swissfileknife/([0-9.]+)/})
+    regex(%r{swissfileknife/([0-9.]+)/}i)
   end
 end

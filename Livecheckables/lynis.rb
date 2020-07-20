@@ -1,6 +1,6 @@
 class Lynis
   livecheck do
     url "https://cisofy.com/downloads/lynis/"
-    regex(%r{href=.*?/lynis-([0-9.]+)\.t})
+    regex(%r{href=.*?/lynis-([0-9.]+)\.t}i)
   end
 end

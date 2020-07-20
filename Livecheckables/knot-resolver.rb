@@ -1,6 +1,6 @@
 class KnotResolver
   livecheck do
     url "https://secure.nic.cz/files/knot-resolver/"
-    regex(/href=.*?knot-resolver-([0-9.]+)\.t/)
+    regex(/href=.*?knot-resolver-([0-9.]+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class WildflyAs
   livecheck do
     url "https://wildfly.org/downloads/"
-    regex(/href=.*?wildfly-([0-9.]+\.Final)\.t/)
+    regex(/href=.*?wildfly-([0-9.]+\.Final)\.t/i)
   end
 end
