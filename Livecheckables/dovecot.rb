@@ -1,6 +1,6 @@
 class Dovecot
   livecheck do
-    url "https://dovecot.org/releases/2.3/"
-    regex(/dovecot-(\d+\.\d+([0-9rc.]+)?)\.t/i)
+    url "https://dovecot.org/download"
+    regex(/href=.*?dovecot[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
