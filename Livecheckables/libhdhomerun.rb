@@ -1,6 +1,6 @@
 class Libhdhomerun
   livecheck do
     url :homepage
-    regex(/href=.*?libhdhomerun_([0-9]+)\.t/i)
+    regex(/href=.*?libhdhomerun[._-]v?(\d{6,8})\.t/i)
   end
 end
