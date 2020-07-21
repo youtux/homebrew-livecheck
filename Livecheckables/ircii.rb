@@ -1,6 +1,6 @@
 class Ircii
   livecheck do
-    url :homepage
-    regex(/current release is ircII ([0-9]+)/i)
+    url "https://ircii.warped.com/"
+    regex(/href=.*?ircii[._-]v?(\d{6,8})\.t/i)
   end
 end
