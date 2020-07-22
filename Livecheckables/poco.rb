@@ -1,6 +1,6 @@
 class Poco
   livecheck do
     url "https://pocoproject.org/releases"
-    regex(%r{href=.*?poco-([0-9.]+)/?["' >]}i)
+    regex(%r{href=.*?poco-v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
 end

@@ -1,6 +1,6 @@
 class Tor
   livecheck do
     url "https://dist.torproject.org/"
-    regex(/tor-([0-9.]+)\.t/i)
+    regex(/tor-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

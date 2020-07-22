@@ -1,6 +1,6 @@
 class Dxpy
   livecheck do
     url :stable
-    regex(/href=.*?dxpy-([0-9.]+)\.t/i)
+    regex(/href=.*?dxpy-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

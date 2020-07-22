@@ -1,6 +1,6 @@
 class Hercules
   livecheck do
     url :homepage
-    regex(/href=.*?hercules-([0-9.]+)\.t/i)
+    regex(/href=.*?hercules-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

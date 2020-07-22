@@ -1,6 +1,6 @@
 class GraphTool
   livecheck do
     url "https://downloads.skewed.de/graph-tool/"
-    regex(/href=.*?graph-tool-([0-9.]+)\.t/i)
+    regex(/href=.*?graph-tool-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

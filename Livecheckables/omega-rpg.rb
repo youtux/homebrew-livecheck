@@ -1,6 +1,6 @@
 class OmegaRpg
   livecheck do
     url :homepage
-    regex(/latest.*?>([0-9.]+)</i)
+    regex(/latest.*?>v?(\d+(?:\.\d+)+)</i)
   end
 end

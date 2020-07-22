@@ -1,6 +1,6 @@
 class Batik
   livecheck do
     url "https://xmlgraphics.apache.org/batik/download.html"
-    regex(/href=.*?batik-bin-([0-9.]+)\.t/i)
+    regex(/href=.*?batik-bin-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

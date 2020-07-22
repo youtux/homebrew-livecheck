@@ -1,6 +1,6 @@
 class Geeqie
   livecheck do
     url :homepage
-    regex(/href=.*?geeqie-([0-9.]+)\.t/i)
+    regex(/href=.*?geeqie-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Astyle
   livecheck do
     url "https://sourceforge.net/projects/astyle/"
-    regex(%r{.*?/astyle_([0-9.]+)_}i)
+    regex(%r{.*?/astyle_v?(\d+(?:\.\d+)+)_}i)
   end
 end

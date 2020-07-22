@@ -1,6 +1,6 @@
 class Ffmpeg
   livecheck do
     url "https://ffmpeg.org/download.html"
-    regex(/ffmpeg-([0-9.]+)\.t/i)
+    regex(/ffmpeg-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

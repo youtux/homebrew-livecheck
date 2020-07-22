@@ -1,6 +1,6 @@
 class Cython
   livecheck do
     url :stable
-    regex(/href=.*?Cython-([0-9.]+)\.t/i)
+    regex(/href=.*?Cython-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

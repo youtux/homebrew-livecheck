@@ -1,6 +1,6 @@
 class Links
   livecheck do
     url "http://links.twibright.com/download.php"
-    regex(/Current version is ([0-9.]+)\. /i)
+    regex(/Current version is v?(\d+(?:\.\d+)+)\. /i)
   end
 end

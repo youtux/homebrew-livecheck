@@ -1,6 +1,6 @@
 class Libmodplug
   livecheck do
     url "https://sourceforge.net/projects/modplug-xmms/"
-    regex(%r{/libmodplug-([0-9.]+)\.t}i)
+    regex(%r{/libmodplug-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

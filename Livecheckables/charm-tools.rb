@@ -1,6 +1,6 @@
 class CharmTools
   livecheck do
     url :stable
-    regex(/href=.*?charm-tools-([0-9.]+)\.t/i)
+    regex(/href=.*?charm-tools-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

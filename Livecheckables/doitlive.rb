@@ -1,6 +1,6 @@
 class Doitlive
   livecheck do
     url :stable
-    regex(/href=.*?doitlive-([0-9.]+)\.t/i)
+    regex(/href=.*?doitlive-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

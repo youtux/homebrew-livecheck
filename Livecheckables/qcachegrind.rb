@@ -1,6 +1,6 @@
 class Qcachegrind
   livecheck do
     url "https://download.kde.org/stable/applications"
-    regex(%r{href=.*?([0-9.]+)/?["' >]}i)
+    regex(%r{href=.*?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
 end

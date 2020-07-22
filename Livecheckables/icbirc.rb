@@ -1,6 +1,6 @@
 class Icbirc
   livecheck do
     url :homepage
-    regex(/href=.*?icbirc-([0-9.]+)\.t/i)
+    regex(/href=.*?icbirc-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

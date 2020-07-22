@@ -1,6 +1,6 @@
 class Gpgme
   livecheck do
     url "https://gnupg.org/ftp/gcrypt/gpgme/"
-    regex(/gpgme-([0-9.]+)\.t/i)
+    regex(/gpgme-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

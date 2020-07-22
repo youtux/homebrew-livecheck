@@ -1,6 +1,6 @@
 class Sundials
   livecheck do
     url "https://computation.llnl.gov/projects/sundials/sundials-software"
-    regex(/href=.*?sundials-([0-9.]+)\.t/i)
+    regex(/href=.*?sundials-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

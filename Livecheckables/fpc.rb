@@ -1,6 +1,6 @@
 class Fpc
   livecheck do
     url "https://sourceforge.net/projects/freepascal/"
-    regex(%r{/Linux/([0-9.]+)/readme.txt}i)
+    regex(%r{/Linux/v?(\d+(?:\.\d+)+)/readme.txt}i)
   end
 end

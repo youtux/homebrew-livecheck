@@ -1,6 +1,6 @@
 class MkConfigure
   livecheck do
     url "https://sourceforge.net/projects/mk-configure/"
-    regex(%r{.*?/mk-configure-([0-9.]+)\.t}i)
+    regex(%r{.*?/mk-configure-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

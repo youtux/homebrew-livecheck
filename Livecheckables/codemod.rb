@@ -1,6 +1,6 @@
 class Codemod
   livecheck do
     url :stable
-    regex(/href=.*?codemod-([0-9.]+)\.t/i)
+    regex(/href=.*?codemod-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

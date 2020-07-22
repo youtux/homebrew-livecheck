@@ -1,6 +1,6 @@
 class Graphicsmagick
   livecheck do
     url :homepage
-    regex(/<td>([0-9.]+) \(Released/i)
+    regex(/<td>v?(\d+(?:\.\d+)+) \(Released/i)
   end
 end

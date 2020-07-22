@@ -1,6 +1,6 @@
 class Gromacs
   livecheck do
     url "https://ftp.gromacs.org/pub/gromacs/"
-    regex(/href=.*?gromacs-([0-9.]+)\.t/i)
+    regex(/href=.*?gromacs-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

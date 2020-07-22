@@ -1,6 +1,6 @@
 class Ykpers
   livecheck do
     url "https://developers.yubico.com/yubikey-personalization/Releases/"
-    regex(/href=.*?ykpers-([0-9.]+)\.t/i)
+    regex(/href=.*?ykpers-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

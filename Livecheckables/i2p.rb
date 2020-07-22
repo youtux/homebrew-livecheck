@@ -1,6 +1,6 @@
 class I2p
   livecheck do
     url "https://geti2p.net/en/download"
-    regex(/i2pinstall_([0-9.]+)\.jar/i)
+    regex(/i2pinstall_v?(\d+(?:\.\d+)+)\.jar/i)
   end
 end

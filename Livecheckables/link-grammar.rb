@@ -1,6 +1,6 @@
 class LinkGrammar
   livecheck do
     url :homepage
-    regex(/href=.*?link-grammar-([0-9.]+)\.t/i)
+    regex(/href=.*?link-grammar-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

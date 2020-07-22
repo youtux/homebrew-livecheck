@@ -1,6 +1,6 @@
 class Silk
   livecheck do
     url :homepage
-    regex(%r{".*?/silk-([0-9.]+)\.t}i)
+    regex(%r{".*?/silk-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

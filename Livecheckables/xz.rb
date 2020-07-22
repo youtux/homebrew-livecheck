@@ -1,6 +1,6 @@
 class Xz
   livecheck do
     url :homepage
-    regex(/([0-9.]+) was released/i)
+    regex(/v?(\d+(?:\.\d+)+) was released/i)
   end
 end

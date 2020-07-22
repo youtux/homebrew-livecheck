@@ -1,6 +1,6 @@
 class WirouterKeyrec
   livecheck do
     url :homepage
-    regex(%r{href=.*?/WiRouter_KeyRec_([0-9.]+)\.zip}i)
+    regex(%r{href=.*?/WiRouter_KeyRec_v?(\d+(?:\.\d+)+)\.zip}i)
   end
 end

@@ -1,6 +1,6 @@
 class Quex
   livecheck do
     url "https://sourceforge.net/projects/quex/"
-    regex(%r{.*?/quex-([0-9.]+)\.t}i)
+    regex(%r{.*?/quex-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

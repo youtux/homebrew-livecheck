@@ -1,6 +1,6 @@
 class Mariadb
   livecheck do
     url "https://downloads.mariadb.org/"
-    regex(/Download ([0-9.]+) Stable Now/i)
+    regex(/Download v?(\d+(?:\.\d+)+) Stable Now/i)
   end
 end

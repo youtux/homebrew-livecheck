@@ -1,6 +1,6 @@
 class ExactImage
   livecheck do
     url "https://dl.exactcode.de/oss/exact-image/"
-    regex(/href=.*?exact-image-([0-9.]+)\.t/i)
+    regex(/href=.*?exact-image-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

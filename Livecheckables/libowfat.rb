@@ -1,6 +1,6 @@
 class Libowfat
   livecheck do
     url :homepage
-    regex(/href=.*?libowfat-([0-9.]+)\.t/i)
+    regex(/href=.*?libowfat-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

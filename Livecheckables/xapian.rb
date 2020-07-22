@@ -1,6 +1,6 @@
 class Xapian
   livecheck do
     url :homepage
-    regex(/latest stable version.*?is ([0-9.]+)</im)
+    regex(/latest stable version.*?is v?(\d+(?:\.\d+)+)</im)
   end
 end

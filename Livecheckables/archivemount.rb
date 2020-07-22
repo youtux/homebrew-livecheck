@@ -1,6 +1,6 @@
 class Archivemount
   livecheck do
     url :homepage
-    regex(/href=.*?archivemount-([0-9.]+)\.t/i)
+    regex(/href=.*?archivemount-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

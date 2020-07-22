@@ -1,6 +1,6 @@
 class Uftp
   livecheck do
     url "https://sourceforge.net/projects/uftp-multicast/"
-    regex(%r{.*?/uftp-([0-9.]+)\.t}i)
+    regex(%r{.*?/uftp-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

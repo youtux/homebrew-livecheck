@@ -1,6 +1,6 @@
 class Ledit
   livecheck do
     url :homepage
-    regex(/current .*? is ([0-9.]+) /i)
+    regex(/current .*? is v?(\d+(?:\.\d+)+) /i)
   end
 end
