@@ -1,6 +1,6 @@
 class Cabextract
   livecheck do
-    url "https://github.com/kyz/libmspack.git"
-    regex(/v?(\d+(?:\.\d+)+)/i)
+    url :homepage
+    regex(/href=.*?cabextract[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
