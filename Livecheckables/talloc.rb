@@ -1,6 +1,6 @@
 class Talloc
   livecheck do
     url "https://www.samba.org/ftp/talloc/"
-    regex(/href=.*?talloc-([0-9.]+)\.t/i)
+    regex(/href=.*?talloc-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

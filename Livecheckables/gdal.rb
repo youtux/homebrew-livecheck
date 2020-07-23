@@ -1,6 +1,6 @@
 class Gdal
   livecheck do
     url "https://download.osgeo.org/gdal/CURRENT/"
-    regex(/href=.*?gdal-([0-9.]+)\.t/i)
+    regex(/href=.*?gdal-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

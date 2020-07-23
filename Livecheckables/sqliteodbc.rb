@@ -1,6 +1,6 @@
 class Sqliteodbc
   livecheck do
     url "http://www.ch-werner.de/sqliteodbc/"
-    regex(/HREF="sqliteodbc-([0-9.]+)\.t/i)
+    regex(/HREF="sqliteodbc-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

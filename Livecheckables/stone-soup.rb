@@ -1,6 +1,6 @@
 class StoneSoup
   livecheck do
     url "https://crawl.develz.org/download.htm"
-    regex(/Stable.*?>([0-9.]+)</i)
+    regex(/Stable.*?>v?(\d+(?:\.\d+)+)</i)
   end
 end

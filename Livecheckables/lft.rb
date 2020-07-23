@@ -1,6 +1,6 @@
 class Lft
   livecheck do
     url :homepage
-    regex(/value="lft-([0-9.]+)\.t/i)
+    regex(/value="lft-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

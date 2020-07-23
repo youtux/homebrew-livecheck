@@ -1,6 +1,6 @@
 class Qsoas
   livecheck do
     url "http://bip.cnrs-mrs.fr/bip06/qsoas/downloads.html"
-    regex(/href=.*?qsoas-([0-9.]+)\.t/i)
+    regex(/href=.*?qsoas-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Fox
   livecheck do
     url "http://www.fox-toolkit.org/news.html"
-    regex(/FOX STABLE ([0-9.]+)/i)
+    regex(/FOX STABLE v?(\d+(?:\.\d+)+)/i)
   end
 end

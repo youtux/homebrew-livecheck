@@ -1,6 +1,6 @@
 class Psqlodbc
   livecheck do
     url "https://ftp.postgresql.org/pub/odbc/versions/src/"
-    regex(/href=.*?psqlodbc-([0-9.]+)\.t/i)
+    regex(/href=.*?psqlodbc-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

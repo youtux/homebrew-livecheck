@@ -1,6 +1,6 @@
 class Ocrmypdf
   livecheck do
     url :stable
-    regex(/href=.*?ocrmypdf-([0-9.]+)\.t/i)
+    regex(/href=.*?ocrmypdf-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Phpunit
   livecheck do
     url "https://phar.phpunit.de/"
-    regex(/href=.*?phpunit-([0-9.]+)\.phar/i)
+    regex(/href=.*?phpunit-v?(\d+(?:\.\d+)+)\.phar/i)
   end
 end

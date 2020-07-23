@@ -1,6 +1,6 @@
 class Keepassc
   livecheck do
     url :stable
-    regex(/href=.*?keepassc-([0-9.]+)\.t/i)
+    regex(/href=.*?keepassc-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Dvdauthor
   livecheck do
     url "https://sourceforge.net/projects/dvdauthor/"
-    regex(%r{/dvdauthor-([0-9.]+)\.t}i)
+    regex(%r{/dvdauthor-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

@@ -1,6 +1,6 @@
 class Idnits
   livecheck do
     url :homepage
-    regex(/href=.*?idnits-([0-9.]+)\.t/i)
+    regex(/href=.*?idnits-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

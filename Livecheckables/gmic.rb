@@ -1,6 +1,6 @@
 class Gmic
   livecheck do
     url "https://gmic.eu/files/source/"
-    regex(/gmic_([0-9.]+)\.t/i)
+    regex(/gmic_v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

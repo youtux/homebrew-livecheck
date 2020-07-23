@@ -1,6 +1,6 @@
 class Zsh
   livecheck do
     url "https://www.zsh.org/pub/"
-    regex(/zsh-([0-9.]+)\./i)
+    regex(/zsh-v?(\d+(?:\.\d+)+)\./i)
   end
 end

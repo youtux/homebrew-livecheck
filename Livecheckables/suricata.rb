@@ -1,6 +1,6 @@
 class Suricata
   livecheck do
     url "https://suricata-ids.org/download/"
-    regex(/suricata-([0-9.]+)\.t/i)
+    regex(/suricata-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

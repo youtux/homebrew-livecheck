@@ -1,6 +1,6 @@
 class Mairix
   livecheck do
     url "https://sourceforge.net/projects/mairix/"
-    regex(%r{/mairix-([0-9.]+)\.t}i)
+    regex(%r{/mairix-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

@@ -1,6 +1,6 @@
 class Duply
   livecheck do
     url :homepage
-    regex(%r{<title><!\[CDATA\[/duply \(simple duplicity\).*?duply_([0-9.]+)\.t}i)
+    regex(%r{<title><!\[CDATA\[/duply \(simple duplicity\).*?duply_v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

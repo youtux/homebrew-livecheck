@@ -1,6 +1,6 @@
 class Launch
   livecheck do
     url "https://sabi.net/nriley/software/"
-    regex(/href=.*?launch-([0-9.]+)\.t/i)
+    regex(/href=.*?launch-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

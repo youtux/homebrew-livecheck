@@ -1,6 +1,6 @@
 class Socat
   livecheck do
     url "http://www.dest-unreach.org/socat/download/"
-    regex(/socat-([0-9.]+)\.t/i)
+    regex(/socat-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Libpng
   livecheck do
     url "https://sourceforge.net/projects/libpng/"
-    regex(%r{/libpng-([0-9.]+)\.t}i)
+    regex(%r{/libpng-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

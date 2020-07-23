@@ -1,6 +1,6 @@
 class Gnupg
   livecheck do
     url "https://gnupg.org/ftp/gcrypt/gnupg/"
-    regex(/gnupg-([0-9.]+)\.t/i)
+    regex(/gnupg-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

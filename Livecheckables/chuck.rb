@@ -1,6 +1,6 @@
 class Chuck
   livecheck do
     url "https://chuck.cs.princeton.edu/release/files/"
-    regex(/href=.*?chuck-([0-9.]+)\.t/i)
+    regex(/href=.*?chuck-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

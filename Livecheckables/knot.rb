@@ -1,6 +1,6 @@
 class Knot
   livecheck do
     url "https://secure.nic.cz/files/knot-dns/"
-    regex(/href=.*?knot-([0-9.]+)\.t/i)
+    regex(/href=.*?knot-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Csvkit
   livecheck do
     url :stable
-    regex(/href=.*?csvkit-([0-9.]+)\.t/i)
+    regex(/href=.*?csvkit-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Ykman
   livecheck do
     url "https://developers.yubico.com/yubikey-manager/Releases/"
-    regex(/href=.*?yubikey-manager-([0-9.]+)\.t/i)
+    regex(/href=.*?yubikey-manager-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Bitlbee
   livecheck do
     url "https://get.bitlbee.org/src/"
-    regex(/href=.*?bitlbee-([0-9.]+)\.t/i)
+    regex(/href=.*?bitlbee-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

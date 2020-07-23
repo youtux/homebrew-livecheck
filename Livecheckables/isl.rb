@@ -1,6 +1,6 @@
 class Isl
   livecheck do
     url "http://isl.gforge.inria.fr/"
-    regex(/href=.*?isl-([0-9.]+)\.t/i)
+    regex(/href=.*?isl-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class FbClient
   livecheck do
     url :homepage
-    regex(%r{Latest release:.*?/fb-([0-9.]+)\.t}i)
+    regex(%r{Latest release:.*?/fb-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

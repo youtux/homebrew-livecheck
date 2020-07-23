@@ -1,6 +1,6 @@
 class UBootTools
   livecheck do
     url "https://ftp.denx.de/pub/u-boot/"
-    regex(/href=.*?u-boot-([0-9.]+)\.t/i)
+    regex(/href=.*?u-boot-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

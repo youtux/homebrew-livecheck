@@ -1,6 +1,6 @@
 class Nano
   livecheck do
     url "https://www.nano-editor.org/download.php"
-    regex(/nano-([0-9.]+)\.t/i)
+    regex(/nano-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

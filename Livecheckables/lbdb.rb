@@ -1,6 +1,6 @@
 class Lbdb
   livecheck do
     url "https://www.spinnaker.de/lbdb/download/"
-    regex(/href=.*?lbdb_([0-9.]+)\.t/i)
+    regex(/href=.*?lbdb_v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

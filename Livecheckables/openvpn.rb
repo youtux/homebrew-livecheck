@@ -1,6 +1,6 @@
 class Openvpn
   livecheck do
     url :homepage
-    regex(/href=.*?openvpn-([0-9.]+)\.t/i)
+    regex(/href=.*?openvpn-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

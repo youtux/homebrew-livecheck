@@ -1,6 +1,6 @@
 class ZitaConvolver
   livecheck do
     url "https://kokkinizita.linuxaudio.org/linuxaudio/downloads/index.html"
-    regex(/href=.*?zita-convolver-([0-9.]+)\.t/i)
+    regex(/href=.*?zita-convolver-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

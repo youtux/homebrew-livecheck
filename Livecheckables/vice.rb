@@ -1,6 +1,6 @@
 class Vice
   livecheck do
     url :homepage
-    regex(%r{.*?/vice-([0-9.]+)\.t}i)
+    regex(%r{.*?/vice-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end
