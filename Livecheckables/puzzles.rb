@@ -1,6 +1,6 @@
 class Puzzles
   livecheck do
     url "https://www.freshports.org/games/sgt-puzzles"
-    regex(/puzzles-([0-9.]+)\..*?\.t/i)
+    regex(/puzzles-v?(\d{6,8})\..*?\.t/i)
   end
 end
