@@ -1,6 +1,6 @@
 class Feh
   livecheck do
     url :homepage
-    regex(/href=.*?feh-([0-9,.]+)\.t/i)
+    regex(/href=.*?feh-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

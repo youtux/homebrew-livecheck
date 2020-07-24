@@ -1,6 +1,6 @@
 class Ansifilter
   livecheck do
     url "http://www.andre-simon.de/zip/download.php"
-    regex(/href=.*?ansifilter-([0-9,.]+)\.t/i)
+    regex(/href=.*?ansifilter-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

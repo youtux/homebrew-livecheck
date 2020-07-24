@@ -1,6 +1,6 @@
 class Ccm
   livecheck do
     url :stable
-    regex(%r{/ccm-([0-9,.]+)\.t}i)
+    regex(%r{/ccm-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

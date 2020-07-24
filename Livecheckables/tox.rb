@@ -1,6 +1,6 @@
 class Tox
   livecheck do
     url :stable
-    regex(%r{/tox-([0-9,.]+)\.t}i)
+    regex(%r{/tox-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

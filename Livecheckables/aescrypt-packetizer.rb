@@ -1,6 +1,6 @@
 class AescryptPacketizer
   livecheck do
     url "https://www.aescrypt.com/download/"
-    regex(%r{href=.*?/linux/aescrypt-([0-9,.]+)\.t}i)
+    regex(%r{href=.*?/linux/aescrypt-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

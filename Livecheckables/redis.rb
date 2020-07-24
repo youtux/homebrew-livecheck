@@ -1,6 +1,6 @@
 class Redis
   livecheck do
     url "http://download.redis.io/releases/"
-    regex(/href=.*?redis-([0-9,.]+)\.t/i)
+    regex(/href=.*?redis-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

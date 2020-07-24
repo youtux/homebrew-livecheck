@@ -1,6 +1,6 @@
 class Argus
   livecheck do
     url "https://qosient.com/argus/src/"
-    regex(/href=.*?argus-([0-9,.]+)\.t/i)
+    regex(/href=.*?argus-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

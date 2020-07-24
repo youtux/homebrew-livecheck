@@ -1,6 +1,6 @@
 class Nagios
   livecheck do
     url "https://sourceforge.net/projects/nagios/"
-    regex(%r{/.*nagios-.*/nagios-([0-9,.]+)\.t}i)
+    regex(%r{/.*nagios-.*/nagios-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

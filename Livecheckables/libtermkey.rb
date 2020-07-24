@@ -1,6 +1,6 @@
 class Libtermkey
   livecheck do
     url :homepage
-    regex(/href=.*?libtermkey-([0-9,.]+)\.t/i)
+    regex(/href=.*?libtermkey-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
