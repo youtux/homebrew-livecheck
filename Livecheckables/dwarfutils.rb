@@ -1,6 +1,6 @@
 class Dwarfutils
   livecheck do
     url :homepage
-    regex(%r{href=(?:["']?|.*?/)libdwarf-([0-9.]+)\.t}i)
+    regex(%r{href=(?:["']?|.*?/)libdwarf-v?(\d{6,8})\.t}i)
   end
 end
