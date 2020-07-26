@@ -1,6 +1,6 @@
 class Txr
   livecheck do
     url "http://www.kylheku.com/cgit/txr"
-    regex(%r{href=.*?/txr-([0-9.]+)\.t}i)
+    regex(/href=.*?txr[._-]v?(\d+)\.t/i)
   end
 end
