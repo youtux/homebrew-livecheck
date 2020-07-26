@@ -1,6 +1,6 @@
 class Logcheck
   livecheck do
     url "https://packages.debian.org/unstable/logcheck"
-    regex(/logcheck_([0-9,.]+)\.t/i)
+    regex(/logcheck_v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

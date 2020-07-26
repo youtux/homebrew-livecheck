@@ -1,6 +1,6 @@
 class Dnsmasq
   livecheck do
     url "http://www.thekelleys.org.uk/dnsmasq/"
-    regex(/href=.*?dnsmasq-([0-9,.]+)\.t/i)
+    regex(/href=.*?dnsmasq-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

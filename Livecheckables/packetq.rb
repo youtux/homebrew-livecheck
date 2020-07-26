@@ -1,6 +1,6 @@
 class Packetq
   livecheck do
     url :homepage
-    regex(/href=.*?packetq-([0-9,.]+)\.t/i)
+    regex(/href=.*?packetq-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

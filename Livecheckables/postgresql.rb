@@ -1,6 +1,6 @@
 class Postgresql
   livecheck do
     url "https://www.postgresql.org/docs/current/static/release.html"
-    regex(/Release ([0-9,.]+)/i)
+    regex(/Release v?(\d+(?:\.\d+)+)/i)
   end
 end

@@ -1,6 +1,6 @@
 class Xrootd
   livecheck do
     url "http://xrootd.org/dload.html"
-    regex(/href=.*?xrootd-([0-9,.]+)\.t/i)
+    regex(/href=.*?xrootd-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
