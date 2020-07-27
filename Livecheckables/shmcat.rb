@@ -1,6 +1,6 @@
 class Shmcat
   livecheck do
     url "https://sourceforge.net/projects/shmcat/"
-    regex(%r{.*?/shmcat-([0-9.]+\.[0-9.]+)\.t}i)
+    regex(%r{.*?/shmcat-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end
