@@ -1,6 +1,6 @@
 class Abcmidi
   livecheck do
     url :homepage
-    regex(/abcMIDI-(20[0-9]+\.[0-9]+\.[0-9]+)/i)
+    regex(/href=.*?abcMIDI[._-]v?(\d{4}(?:\.\d+)+)\.zip/i)
   end
 end
