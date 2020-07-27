@@ -2,7 +2,7 @@
 
 module LivecheckStrategy
   class Git
-    NAME = name.demodulize
+    NAME = name.demodulize.freeze
     PRIORITY = 8
 
     def self.tag_info(repo_url, filter = nil)
@@ -24,7 +24,7 @@ module LivecheckStrategy
       tags = tag_info(url, regex)
       tags_only_debian = tags.all? { |tag| tag.start_with?("debian/") }
 
-      match_data = { :matches => {}, :regex => regex, :url => url }
+      match_data = { matches: {}, regex: regex, url: url }
       tags.each do |tag|
         # Skip tag if it has a 'debian/' prefix and upstream does not do only
         # 'debian/' prefixed tags

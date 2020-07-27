@@ -4,7 +4,7 @@ require "open-uri"
 
 module LivecheckStrategy
   class PageMatch
-    NAME = name.demodulize
+    NAME = name.demodulize.freeze
     NICE_NAME = "Page match"
     PRIORITY = 0
 
@@ -16,7 +16,7 @@ module LivecheckStrategy
     private_class_method :page_matches
 
     def self.find_versions(url, regex)
-      match_data = { :matches => {}, :regex => regex, :url => url }
+      match_data = { matches: {}, regex: regex, url: url }
 
       page_matches(url, regex).each do |match|
         match_data[:matches][match] = Version.new(match)

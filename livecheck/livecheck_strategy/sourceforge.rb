@@ -2,7 +2,7 @@
 
 module LivecheckStrategy
   class Sourceforge
-    NAME = name.demodulize
+    NAME = name.demodulize.freeze
     NICE_NAME = "SourceForge"
 
     SPECIAL_CASES = %w[
