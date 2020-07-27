@@ -1,6 +1,6 @@
 class V8
   livecheck do
     url "https://omahaproxy.appspot.com/all.json?os=mac&channel=stable"
-    regex(/"v8_version": "(([0-9]+\.){3}[0-9]+)"/i)
+    regex(/"v8_version": "v?(\d+(?:\.\d+)+)"/i)
   end
 end
