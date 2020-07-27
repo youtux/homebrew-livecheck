@@ -2,7 +2,7 @@
 
 module LivecheckStrategy
   class Npm
-    NAME = name.demodulize
+    NAME = name.demodulize.freeze
     NICE_NAME = "npm"
 
     def self.match?(url)

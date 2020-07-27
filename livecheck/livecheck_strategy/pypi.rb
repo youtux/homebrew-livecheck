@@ -2,7 +2,7 @@
 
 module LivecheckStrategy
   class Pypi
-    NAME = name.demodulize
+    NAME = name.demodulize.freeze
     NICE_NAME = "PyPI"
 
     def self.match?(url)

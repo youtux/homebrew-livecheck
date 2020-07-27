@@ -2,7 +2,7 @@
 
 module LivecheckStrategy
   class Gnu
-    NAME = name.demodulize
+    NAME = name.demodulize.freeze
     NICE_NAME = "GNU"
 
     PROJECT_NAME_REGEXES = [
@@ -31,7 +31,7 @@ module LivecheckStrategy
 
     def self.find_versions(url, regex = nil)
       match_list = PROJECT_NAME_REGEXES.map { |r| url.match(r) }.compact
-      return { :matches => {}, :regex => regex, :url => url } if match_list.empty?
+      return { matches: {}, regex: regex, url: url } if match_list.empty?
 
       puts "\nMultiple project names found: #{match_list}\n" if match_list.length > 1 && Homebrew.args.debug?
 

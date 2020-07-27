@@ -8,8 +8,7 @@ require_relative "../livecheck/extend/formulary"
 module Homebrew
   module_function
 
-  WATCHLIST_PATH = ENV["HOMEBREW_LIVECHECK_WATCHLIST"]
-  WATCHLIST_PATH ||= Pathname.new(Dir.home)/".brew_livecheck_watchlist"
+  WATCHLIST_PATH = (ENV["HOMEBREW_LIVECHECK_WATCHLIST"] || Pathname.new(Dir.home)/".brew_livecheck_watchlist").freeze
   private_constant :WATCHLIST_PATH
 
   GITHUB_SPECIAL_CASES = %w[
