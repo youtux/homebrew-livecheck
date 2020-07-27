@@ -1,6 +1,6 @@
 class Libcdr
   livecheck do
     url "https://dev-www.libreoffice.org/src/"
-    regex(/.*href=.*?libcdr-([0-9.\-]+)\.t/i)
+    regex(/.*href=.*?libcdr-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

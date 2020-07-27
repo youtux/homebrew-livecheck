@@ -1,6 +1,6 @@
 class Libtiff
   livecheck do
     url "https://download.osgeo.org/libtiff/"
-    regex(/href=.*?tiff-([0-9.\-]+)\.t/i)
+    regex(/href=.*?tiff-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

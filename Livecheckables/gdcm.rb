@@ -1,6 +1,6 @@
 class Gdcm
   livecheck do
     url :homepage
-    regex(%r{/gdcm-([0-9.\-]+)\.t}i)
+    regex(%r{/gdcm-v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

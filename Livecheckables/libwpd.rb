@@ -1,6 +1,6 @@
 class Libwpd
   livecheck do
     url "https://dev-www.libreoffice.org/src/"
-    regex(/.*href=.*?libwpd-([0-9.\-]+)\.t/i)
+    regex(/.*href=.*?libwpd-v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

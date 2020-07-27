@@ -1,6 +1,6 @@
 class Gputils
   livecheck do
     url "https://sourceforge.net/projects/gputils/"
-    regex(%r{/gputils-([0-9.\-]+)\.t}i)
+    regex(%r{/gputils-v?(\d+(?:\.\d+)+(?:-\d+)?)\.t}i)
   end
 end
