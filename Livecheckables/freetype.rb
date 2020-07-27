@@ -1,6 +1,6 @@
 class Freetype
   livecheck do
     url :stable
-    regex(%r{freetype2/([a-zA-Z0-9.]+(?:\.[a-zA-Z0-9.]+)*)}i)
+    regex(%r{url=.*?freetype2/v?(\d+(?:\.\d+)+)/}i)
   end
 end
