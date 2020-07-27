@@ -1,6 +1,6 @@
 class Cppad
   livecheck do
     url :head
-    regex(/(20[0-9]+\.[0-9]+)/i)
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end
