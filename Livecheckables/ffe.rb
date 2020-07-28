@@ -1,6 +1,6 @@
 class Ffe
   livecheck do
     url "https://sourceforge.net/projects/ff-extractor/"
-    regex(%r{/ff-extractor/([0-9.-]+)/}i)
+    regex(%r{url=.*?/ffe-v?(\d+(?:\.\d+)+(?:-\d+)?)\.t}i)
   end
 end
