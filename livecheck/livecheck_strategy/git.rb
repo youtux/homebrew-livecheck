@@ -2,7 +2,6 @@
 
 module LivecheckStrategy
   class Git
-    NAME = name.demodulize.freeze
     PRIORITY = 8
 
     def self.tag_info(repo_url, filter = nil)

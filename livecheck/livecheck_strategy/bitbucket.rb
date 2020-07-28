@@ -2,8 +2,6 @@
 
 module LivecheckStrategy
   class Bitbucket
-    NAME = name.demodulize.freeze
-
     def self.match?(url)
       %r{bitbucket\.org(/[^/]+){4}\.\w+}.match?(url)
     end

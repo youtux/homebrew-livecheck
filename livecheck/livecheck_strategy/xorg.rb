@@ -4,7 +4,6 @@ require "open-uri"
 
 module LivecheckStrategy
   class Xorg
-    NAME = name.demodulize.freeze
     NICE_NAME = "X.Org"
 
     @page_data = {}

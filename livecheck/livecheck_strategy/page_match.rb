@@ -4,7 +4,6 @@ require "open-uri"
 
 module LivecheckStrategy
   class PageMatch
-    NAME = name.demodulize.freeze
     NICE_NAME = "Page match"
     PRIORITY = 0
 

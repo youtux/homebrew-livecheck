@@ -2,8 +2,6 @@
 
 module LivecheckStrategy
   class Launchpad
-    NAME = name.demodulize.freeze
-
     def self.match?(url)
       /launchpad\.net/.match?(url)
     end
