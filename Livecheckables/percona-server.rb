@@ -1,6 +1,6 @@
 class PerconaServer
   livecheck do
     url "https://www.percona.com/downloads/Percona-Server-LATEST/"
-    regex(%r{value="Percona-Server-LATEST/Percona-Server-([0-9\-.]+)"}i)
+    regex(/value=.*?Percona-Server[._-]v?(\d+(?:\.\d+)+-\d+)["' >]/i)
   end
 end
