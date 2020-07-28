@@ -7,24 +7,24 @@ on:
 
 jobs:
   tests:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     env:
       HOMEBREW_NO_AUTO_UPDATE: 1
+      HOMEBREW_NO_ANALYTICS: 1
     steps:
     - name: Update Homebrew
-      run: |
-        brew update-reset
+      run: brew update-reset $(brew --repo)
 
     - name: Checkout tap
       uses: actions/checkout@v2
 
     - name: Setup tap
       run: |
-        mkdir -p $(dirname $(brew --repository $GITHUB_REPOSITORY))
-        ln -s $PWD $(brew --repository $GITHUB_REPOSITORY)
+        mkdir -p $(dirname $(brew --repo $GITHUB_REPOSITORY))
+        ln -s $PWD $(brew --repo $GITHUB_REPOSITORY)
 
-    - name: Run brew style
-      run: brew style $GITHUB_REPOSITORY
+    - name: Run brew test-bot --only-tap-syntax
+      run: brew test-bot --only-tap-syntax
 
     - name: Run brew livecheck
       run: brew livecheck
@@ -34,6 +34,6 @@ jobs:
 
     - name: Run brew livecheck on added/modified Livecheckables
       run: |
-          git diff --name-only --diff-filter=AM origin/master...${{ github.sha }} -- Livecheckables/ |
+          git diff --name-only --diff-filter=AM origin/master...$GITHUB_SHA -- Livecheckables/ |
           sed "s|Livecheckables/\(.*\)\.rb|\1|" |
           xargs brew livecheck
