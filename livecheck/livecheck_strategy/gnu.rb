@@ -2,7 +2,6 @@
 
 module LivecheckStrategy
   class Gnu
-    NAME = name.demodulize.freeze
     NICE_NAME = "GNU"
 
     PROJECT_NAME_REGEXES = [

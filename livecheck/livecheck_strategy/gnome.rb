@@ -2,7 +2,6 @@
 
 module LivecheckStrategy
   class Gnome
-    NAME = name.demodulize.freeze
     NICE_NAME = "GNOME"
 
     # Formulae that do not use GNOME's "even-numbered minor is stable" scheme

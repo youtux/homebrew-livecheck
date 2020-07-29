@@ -2,8 +2,6 @@
 
 module LivecheckStrategy
   class Hackage
-    NAME = name.demodulize.freeze
-
     def self.match?(url)
       /hackage\.haskell\.org/.match?(url)
     end

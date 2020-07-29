@@ -42,6 +42,8 @@ module Homebrew
   HEAD_ONLY_MSG = "HEAD only formula must be installed to be livecheckable"
   private_constant :NO_VERSIONS_MSG, :HEAD_ONLY_MSG
 
+  @livecheck_strategy_names = {}
+
   def livecheck_args
     Homebrew::CLI::Parser.new do
       usage_banner <<~EOS
@@ -121,6 +123,13 @@ module Homebrew
       tap_strategy_path = File.join(Tap.fetch(tap_name).path, "livecheck_strategy")
       Dir[File.join(tap_strategy_path, "*.rb")].sort.each(&method(:require)) if Dir.exist?(tap_strategy_path)
     end
+
+    # Cache demodulized strategy names, to avoid repeating this work
+    LivecheckStrategy.constants.sort.each do |strategy_symbol|
+      strategy = LivecheckStrategy.const_get(strategy_symbol)
+      @livecheck_strategy_names[strategy] = strategy.name.demodulize
+    end
+    @livecheck_strategy_names.freeze
 
     has_a_newer_upstream_version = false
     formulae_checked = formulae_to_check.sort.map.with_index do |formula, i|
@@ -364,13 +373,14 @@ module Homebrew
       url = preprocess_url(original_url)
       strategies = LivecheckStrategy.from_url(url, livecheck_regex.present?)
       strategy = strategies[0]
+      strategy_name = @livecheck_strategy_names[strategy]
 
       if Homebrew.args.debug?
         puts "URL (processed):  #{url}" if url != original_url
         unless strategies.empty? || !Homebrew.args.verbose?
-          puts "Strategies:       #{strategies.map { |s| s::NAME }.join(", ")}"
+          puts "Strategies:       #{strategies.map { |s| @livecheck_strategy_names[s] }.join(", ")}"
         end
-        puts "Strategy:         #{strategy.nil? ? "None" : strategy::NAME}"
+        puts "Strategy:         #{strategy.nil? ? "None" : strategy_name}"
         puts "Regex:            #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
       end
 
@@ -417,11 +427,13 @@ module Homebrew
           "url"      => {
             "original" => original_url,
           },
-          "strategy" => strategy.nil? ? nil : strategy::NAME,
+          "strategy" => strategy.nil? ? nil : strategy_name,
         }
         version_info["meta"]["url"]["processed"] = url if url != original_url
         version_info["meta"]["url"]["strategy"] = strategy_data[:url] if strategy_data[:url] != url
-        version_info["meta"]["strategies"] = strategies.map { |s| s::NAME } unless strategies.empty?
+        unless strategies.empty?
+          version_info["meta"]["strategies"] = strategies.map { |s| @livecheck_strategy_names[s] }
+        end
         version_info["meta"]["regex"] = regex.inspect unless regex.nil?
       end
 

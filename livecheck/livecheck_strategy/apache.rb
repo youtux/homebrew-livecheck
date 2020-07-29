@@ -2,8 +2,6 @@
 
 module LivecheckStrategy
   class Apache
-    NAME = name.demodulize.freeze
-
     def self.match?(url)
       %r{www\.apache\.org/dyn}.match?(url)
     end
