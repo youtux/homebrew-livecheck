@@ -1,6 +1,6 @@
 class Jpeg
   livecheck do
     url :homepage
-    regex(/current version is release ([0-9.a-z]+)/i)
+    regex(/href=.*?jpegsrc[._-]v?(\d+[a-z]?)\.t/i)
   end
 end
