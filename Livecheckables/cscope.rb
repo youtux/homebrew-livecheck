@@ -1,6 +1,6 @@
 class Cscope
   livecheck do
     url "https://sourceforge.net/projects/cscope/rss"
-    regex(/cscope-([a-zA-Z0-9.]+(?:\.[a-zA-Z0-9.]+)*)\.t/i)
+    regex(/cscope-v?(\d+(?:\.\d+)+[\da-z]*)\.t/i)
   end
 end

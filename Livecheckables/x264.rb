@@ -4,6 +4,6 @@ class X264
   # the version information at the time of writing.
   livecheck do
     url "https://artifacts.videolan.org/x264/release-macos/"
-    regex(%r{href=.*?x264[._-](r\d+)[._-][a-z0-9]+/?["' >]}i)
+    regex(%r{href=.*?x264[._-](r\d+)[._-][\da-z]+/?["' >]}i)
   end
 end
