@@ -1,6 +1,6 @@
 class Readosm
   livecheck do
     url :homepage
-    regex(%r{current version is <b>([0-9a-z.]+)</b>}i)
+    regex(/href=.*?readosm[._-]v?(\d+(?:\.\d+)+[a-z]?)\.t/i)
   end
 end
