@@ -1,6 +1,6 @@
 class Vgrep
   livecheck do
-    url :stable
-    regex(/^v?(\d(?:\.\d+)+)$/i)
+    url "https://github.com/vrothberg/vgrep/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
