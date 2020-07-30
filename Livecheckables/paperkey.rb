@@ -1,6 +1,6 @@
 class Paperkey
   livecheck do
     url :homepage
-    regex(/paperkey-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/paperkey[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

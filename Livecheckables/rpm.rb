@@ -1,6 +1,6 @@
 class Rpm
   livecheck do
     url "https://github.com/rpm-software-management/rpm.git"
-    regex(/rpm-v?(\d+(?:\.\d+)+)-release/i)
+    regex(/rpm[._-]v?(\d+(?:\.\d+)+)-release/i)
   end
 end

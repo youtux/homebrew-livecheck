@@ -5,6 +5,6 @@ class Bsdiff
   # bsdiff page, for whatever reason.
   livecheck do
     url "http://www.daemonology.net/bsdiff"
-    regex(/href=.*?bsdiff-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/href=.*?bsdiff[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

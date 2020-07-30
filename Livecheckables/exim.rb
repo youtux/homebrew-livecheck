@@ -8,6 +8,6 @@ class Exim
   # over https.
   livecheck do
     url "https://github.com/Exim/exim.git"
-    regex(/^exim-v?(\d+(?:\.\d+)+)$/i)
+    regex(/^exim[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 end

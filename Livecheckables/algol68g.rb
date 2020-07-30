@@ -5,6 +5,6 @@ class Algol68g
   # checking a third-party source for new releases as an interim solution.
   livecheck do
     url "https://openports.se/lang/algol68g"
-    regex(/href=.*?algol68g-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/href=.*?algol68g[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

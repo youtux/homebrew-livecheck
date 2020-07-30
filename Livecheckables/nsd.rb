@@ -4,6 +4,6 @@ class Nsd
   # tendency to lead to an `execution expired` error.
   livecheck do
     url "https://github.com/NLnetLabs/nsd.git"
-    regex(/^NSD.v?(\d+(?:[-_.]\d+)+).REL$/i)
+    regex(/^NSD[._-]v?(\d+(?:[-_.]\d+)+).REL$/i)
   end
 end

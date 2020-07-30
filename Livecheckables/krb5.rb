@@ -1,6 +1,6 @@
 class Krb5
   livecheck do
     url :homepage
-    regex(/Current release: .*?>krb5-v?(\d+(?:\.\d+)+)</i)
+    regex(/Current release: .*?>krb5[._-]v?(\d+(?:\.\d+)+)</i)
   end
 end

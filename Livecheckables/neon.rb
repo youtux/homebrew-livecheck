@@ -1,6 +1,6 @@
 class Neon
   livecheck do
     url :homepage
-    regex(/href=.*?neon-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/href=.*?neon[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

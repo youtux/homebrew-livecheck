@@ -1,6 +1,6 @@
 class DosboxX
   livecheck do
     url :head
-    regex(/^dosbox-x-v?(\d+(?:\.\d+)+)$/i)
+    regex(/^dosbox-x[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 end

@@ -1,6 +1,6 @@
 class Convmv
   livecheck do
     url :homepage
-    regex(/convmv-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/convmv[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

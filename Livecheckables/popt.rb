@@ -6,6 +6,6 @@ class Popt
   # Checking the Git repo seems like a safe bet until we see how this plays out.
   livecheck do
     url :homepage
-    regex(/^(?:popt)?-v?(\d+(?:[._-]\d+)+)(?:-release)?$/i)
+    regex(/^(?:popt)?[._-]v?(\d+(?:[._-]\d+)+)(?:-release)?$/i)
   end
 end

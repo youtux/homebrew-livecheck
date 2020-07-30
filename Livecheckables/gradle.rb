@@ -1,6 +1,6 @@
 class Gradle
   livecheck do
     url "https://services.gradle.org/distributions/"
-    regex(/href=.*?gradle-v?(\d+(?:\.\d+)+)-all\.(?:[tz])/i)
+    regex(/href=.*?gradle[._-]v?(\d+(?:\.\d+)+)-all\.(?:[tz])/i)
   end
 end

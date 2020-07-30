@@ -1,6 +1,6 @@
 class Hspell
   livecheck do
     url "http://hspell.ivrix.org.il/download.html"
-    regex(/href=.*?hspell-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/href=.*?hspell[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

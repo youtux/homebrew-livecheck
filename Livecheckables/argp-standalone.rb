@@ -1,6 +1,6 @@
 class ArgpStandalone
   livecheck do
     url :homepage
-    regex(/href=.*?argp-standalone-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/href=.*?argp-standalone[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
