@@ -152,6 +152,8 @@ module Homebrew
 
       if latest.nil?
         if Homebrew.args.json?
+          next version_info if version_info.is_a?(Hash) && version_info["status"] && version_info["messages"]
+
           next status_hash(formula, "error", [NO_VERSIONS_MSG])
         else
           raise TypeError, NO_VERSIONS_MSG
@@ -208,7 +210,7 @@ module Homebrew
   end
 
   def self.formula_name(formula)
-    Homebrew.args.full_name? ? formula.full_name : formula
+    Homebrew.args.full_name? ? formula.full_name : formula.name
   end
   private_class_method :formula_name
 
@@ -361,7 +363,7 @@ module Homebrew
       puts "Livecheckable?:   #{has_livecheckable ? "Yes" : "No"}"
     end
 
-    urls.each do |original_url|
+    urls.each_with_index do |original_url, i|
       puts "\nURL:              #{original_url}" if Homebrew.args.debug?
 
       # Skip Gists until/unless we create a method of identifying revisions
@@ -389,6 +391,13 @@ module Homebrew
       strategy_data = strategy.find_versions(url, livecheck_regex)
       match_version_map = strategy_data[:matches]
       regex = strategy_data[:regex]
+
+      if strategy_data[:messages].is_a?(Array) && match_version_map.empty?
+        puts strategy_data[:messages] unless Homebrew.args.json?
+        next if i + 1 < urls.length
+
+        return status_hash(formula, "error", strategy_data[:messages])
+      end
 
       if Homebrew.args.debug?
         puts "URL (strategy):   #{strategy_data[:url]}" if strategy_data[:url] != url
