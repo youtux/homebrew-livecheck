@@ -4,6 +4,7 @@ require "cli/parser"
 
 require_relative "../livecheck/livecheck_strategy"
 require_relative "../livecheck/extend/formulary"
+require_relative "../livecheck/extend/livecheck"
 
 module Homebrew
   module_function
@@ -350,6 +351,7 @@ module Homebrew
     has_livecheckable = formula.livecheckable?
     livecheck = formula.livecheck
     livecheck_regex = livecheck.regex
+    livecheck_strategy = livecheck.strategy
     livecheck_url = livecheck.url
 
     urls = [livecheck_url] if livecheck_url.is_a?(String) && !livecheck_url.blank?
@@ -370,9 +372,11 @@ module Homebrew
         next
       end
 
-      url = preprocess_url(original_url)
+      # Do not preprocess the URL when livecheck.strategy is set to :page_match
+      url = (livecheck_strategy == :page_match) ? original_url : preprocess_url(original_url)
+
       strategies = LivecheckStrategy.from_url(url, livecheck_regex.present?)
-      strategy = strategies[0]
+      strategy = LivecheckStrategy.from_symbol(livecheck_strategy) || strategies[0]
       strategy_name = @livecheck_strategy_names[strategy]
 
       if Homebrew.args.debug?
@@ -382,6 +386,16 @@ module Homebrew
         end
         puts "Strategy:         #{strategy.nil? ? "None" : strategy_name}"
         puts "Regex:            #{livecheck_regex.inspect}\n" unless livecheck_regex.nil?
+      end
+
+      if livecheck_strategy == :page_match && !livecheck_regex.present?
+        odebug "#{strategy_name} strategy requires a regex"
+        next
+      end
+
+      if livecheck_strategy.present? && !strategies.include?(strategy)
+        odebug "#{strategy_name} strategy does not apply to this URL"
+        next
       end
 
       next if strategy.nil?
