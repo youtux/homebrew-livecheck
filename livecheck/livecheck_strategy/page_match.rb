@@ -7,6 +7,12 @@ module LivecheckStrategy
     NICE_NAME = "Page match"
     PRIORITY = 0
 
+    # PageMatch will technically match any HTTP URL but it's only usable when
+    # there's a `livecheck` block containing a regex.
+    def self.match?(url)
+      %r{^https?://}i.match?(url)
+    end
+
     def self.page_matches(url, regex)
       page = URI.open(url).read
       matches = page.scan(regex)
