@@ -23,8 +23,8 @@ jobs:
         mkdir -p $(dirname $(brew --repo $GITHUB_REPOSITORY))
         ln -s $PWD $(brew --repo $GITHUB_REPOSITORY)
 
-    - name: Run brew test-bot --only-tap-syntax
-      run: brew test-bot --only-tap-syntax
+    - name: Run brew style
+      run: brew style $GITHUB_REPOSITORY
 
     - name: Run brew livecheck
       run: brew livecheck
