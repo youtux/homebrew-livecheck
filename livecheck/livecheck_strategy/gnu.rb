@@ -32,7 +32,7 @@ module LivecheckStrategy
       match_list = PROJECT_NAME_REGEXES.map { |r| url.match(r) }.compact
       return { matches: {}, regex: regex, url: url } if match_list.empty?
 
-      puts "\nMultiple project names found: #{match_list}\n" if match_list.length > 1 && Homebrew.args.debug?
+      odebug "\nMultiple project names found: #{match_list}\n" if match_list.length > 1
 
       project_name = match_list[0][1]
 
