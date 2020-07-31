@@ -1,6 +1,6 @@
 class Ekg2
   livecheck do
     url :homepage
-    regex(/^ekg2_(\d+(?:\.\d+)+)$/i)
+    regex(/^ekg2[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 end

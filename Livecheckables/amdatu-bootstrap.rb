@@ -1,6 +1,6 @@
 class AmdatuBootstrap
   livecheck do
     url "https://bitbucket.org/amdatuadm/amdatu-bootstrap/downloads/"
-    regex(/href=.*?bootstrap-(?:bin-)?r(\d+(?:\.\d+)*)(?:-bin)?\./i)
+    regex(/href=.*?bootstrap[._-]v?(?:bin-)?r(\d+(?:\.\d+)*)(?:-bin)?\./i)
   end
 end

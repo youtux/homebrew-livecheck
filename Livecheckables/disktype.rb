@@ -1,6 +1,6 @@
 class Disktype
   livecheck do
     url :head
-    regex(/release_(\d+)/i)
+    regex(/release[._-]v?(\d+)/i)
   end
 end

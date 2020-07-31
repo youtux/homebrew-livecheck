@@ -1,6 +1,6 @@
 class Sdl2Image
   livecheck do
     url :homepage
-    regex(/SDL2_image-(\d+(?:\.\d+)*)/i)
+    regex(/SDL2_image[._-]v?(\d+(?:\.\d+)*)/i)
   end
 end

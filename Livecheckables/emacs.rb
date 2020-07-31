@@ -1,6 +1,6 @@
 class Emacs
   livecheck do
     url :head
-    regex(/emacs-(\d+\.\d+)$/i)
+    regex(/emacs[._-]v?(\d+\.\d+)$/i)
   end
 end

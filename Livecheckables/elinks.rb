@@ -1,6 +1,6 @@
 class Elinks
   livecheck do
     url :head
-    regex(/^elinks-(\d+(?:\.\d+)+)$/i)
+    regex(/^elinks[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 end
