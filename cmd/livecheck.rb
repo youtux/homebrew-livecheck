@@ -76,27 +76,27 @@ module Homebrew
   end
 
   def livecheck
-    livecheck_args.parse
+    @args = livecheck_args.parse
 
-    if Homebrew.args.debug? && Homebrew.args.verbose?
+    if @args.debug? && @args.verbose?
       puts ARGV.inspect
-      puts Homebrew.args
+      puts @args
       puts ENV["HOMEBREW_LIVECHECK_WATCHLIST"] if ENV["HOMEBREW_LIVECHECK_WATCHLIST"].present?
     end
 
-    if (cmd = Homebrew.args.named.first)
+    if (cmd = @args.named.first)
       require?("livecheck/commands/#{cmd}") && return
     end
 
     formulae_to_check =
-      if Homebrew.args.tap
-        Tap.fetch(Homebrew.args.tap).formula_names.map { |name| Formula[name] }
-      elsif Homebrew.args.installed?
+      if @args.tap
+        Tap.fetch(@args.tap).formula_names.map { |name| Formula[name] }
+      elsif @args.installed?
         Formula.installed
-      elsif Homebrew.args.all?
+      elsif @args.all?
         Formula.full_names.map { |name| Formula[name] }
-      elsif !Homebrew.args.formulae.empty?
-        Homebrew.args.formulae
+      elsif !@args.formulae.empty?
+        @args.formulae
       elsif File.exist?(WATCHLIST_PATH)
         begin
           File.readlines(WATCHLIST_PATH).each_with_object([]) do |word, memo|
@@ -134,7 +134,7 @@ module Homebrew
 
     has_a_newer_upstream_version = false
     formulae_checked = formulae_to_check.sort.map.with_index do |formula, i|
-      puts "\n----------\n" if Homebrew.args.debug? && i.positive?
+      puts "\n----------\n" if @args.debug? && i.positive?
 
       skip_result = skip_conditions(formula)
       next skip_result if skip_result != false
@@ -152,7 +152,7 @@ module Homebrew
       end
 
       if latest.nil?
-        if Homebrew.args.json?
+        if @args.json?
           next version_info if version_info.is_a?(Hash) && version_info["status"] && version_info["messages"]
 
           next status_hash(formula, "error", [NO_VERSIONS_MSG])
@@ -180,12 +180,12 @@ module Homebrew
       info["meta"]["head_only"] = !formula.stable? unless formula.stable?
       info["meta"].merge!(version_info["meta"]) unless version_info.nil? || !version_info.key?("meta")
 
-      next if Homebrew.args.newer_only? && !info["version"]["outdated"]
+      next if @args.newer_only? && !info["version"]["outdated"]
 
       has_a_newer_upstream_version ||= true
 
-      if Homebrew.args.json?
-        info.except!("meta") unless Homebrew.args.verbose?
+      if @args.json?
+        info.except!("meta") unless @args.verbose?
         next info
       end
 
@@ -194,24 +194,24 @@ module Homebrew
     rescue => e
       Homebrew.failed = true
 
-      if Homebrew.args.json?
+      if @args.json?
         status_hash(formula, "error", [e.to_s])
-      elsif !Homebrew.args.quiet?
+      elsif !@args.quiet?
         onoe "#{Tty.blue}#{formula_name(formula)}#{Tty.reset}: #{e}"
         nil
       end
     end
 
-    if (Homebrew.args.newer_only? && !has_a_newer_upstream_version) &&
-       !(Homebrew.args.json? || Homebrew.args.debug?)
+    if (@args.newer_only? && !has_a_newer_upstream_version) &&
+       !(@args.json? || @args.debug?)
       puts "No newer upstream versions."
     end
 
-    puts JSON.generate(formulae_checked.compact) if Homebrew.args.json?
+    puts JSON.generate(formulae_checked.compact) if @args.json?
   end
 
   def self.formula_name(formula)
-    Homebrew.args.full_name? ? formula.full_name : formula.name
+    @args.full_name? ? formula.full_name : formula.name
   end
   private_class_method :formula_name
 
@@ -222,7 +222,7 @@ module Homebrew
     }
     status_hash["messages"] = messages if messages.is_a?(Array)
 
-    if Homebrew.args.verbose?
+    if @args.verbose?
       status_hash["meta"] = {
         "livecheckable" => formula.livecheckable?,
       }
@@ -235,27 +235,27 @@ module Homebrew
 
   def self.skip_conditions(formula)
     if formula.deprecated? && !formula.livecheckable?
-      if Homebrew.args.json?
+      if @args.json?
         return status_hash(formula, "deprecated")
-      elsif !Homebrew.args.quiet?
+      elsif !@args.quiet?
         puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : deprecated"
         return
       end
     end
 
     if formula.to_s.include?("@") && !formula.livecheckable?
-      if Homebrew.args.json?
+      if @args.json?
         return status_hash(formula, "versioned")
-      elsif !Homebrew.args.quiet?
+      elsif !@args.quiet?
         puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : versioned"
         return
       end
     end
 
     if !formula.stable? && !formula.any_version_installed?
-      if Homebrew.args.json?
+      if @args.json?
         return status_hash(formula, "error", [HEAD_ONLY_MSG])
-      elsif !Homebrew.args.quiet?
+      elsif !@args.quiet?
         puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : #{HEAD_ONLY_MSG}"
         return
       end
@@ -272,9 +272,9 @@ module Homebrew
         ""
       end
 
-      if Homebrew.args.json?
+      if @args.json?
         return status_hash(formula, "skipped", (skip_msg.empty? ? nil : [skip_msg]))
-      elsif !Homebrew.args.quiet?
+      elsif !@args.quiet?
         puts "#{Tty.red}#{formula_name(formula)}#{Tty.reset} : skipped" \
              "#{" - #{skip_msg}" unless skip_msg.empty?}"
         return
@@ -287,7 +287,7 @@ module Homebrew
 
   def self.print_latest_version(info)
     formula_s = "#{Tty.blue}#{info["formula"]}#{Tty.reset}"
-    formula_s += " (guessed)" if !info["meta"]["livecheckable"] && Homebrew.args.verbose?
+    formula_s += " (guessed)" if !info["meta"]["livecheckable"] && @args.verbose?
 
     current_s =
       if info["version"]["newer_than_upstream"]
@@ -359,14 +359,14 @@ module Homebrew
     urls = [livecheck_url] if livecheck_url.is_a?(String) && !livecheck_url.blank?
     urls ||= checkable_urls(formula)
 
-    if Homebrew.args.debug?
+    if @args.debug?
       puts "\nFormula:          #{formula_name(formula)}"
       puts "Head only?:       #{!formula.stable?}" unless formula.stable?
       puts "Livecheckable?:   #{has_livecheckable ? "Yes" : "No"}"
     end
 
     urls.each_with_index do |original_url, i|
-      puts "\nURL:              #{original_url}" if Homebrew.args.debug?
+      puts "\nURL:              #{original_url}" if @args.debug?
 
       # Skip Gists until/unless we create a method of identifying revisions
       if original_url.include?("gist.github.com")
@@ -381,9 +381,9 @@ module Homebrew
       strategy = LivecheckStrategy.from_symbol(livecheck_strategy) || strategies[0]
       strategy_name = @livecheck_strategy_names[strategy]
 
-      if Homebrew.args.debug?
+      if @args.debug?
         puts "URL (processed):  #{url}" if url != original_url
-        unless strategies.empty? || !Homebrew.args.verbose?
+        unless strategies.empty? || !@args.verbose?
           puts "Strategies:       #{strategies.map { |s| @livecheck_strategy_names[s] }.join(", ")}"
         end
         puts "Strategy:         #{strategy.nil? ? "None" : strategy_name}"
@@ -407,13 +407,13 @@ module Homebrew
       regex = strategy_data[:regex]
 
       if strategy_data[:messages].is_a?(Array) && match_version_map.empty?
-        puts strategy_data[:messages] unless Homebrew.args.json?
+        puts strategy_data[:messages] unless @args.json?
         next if i + 1 < urls.length
 
         return status_hash(formula, "error", strategy_data[:messages])
       end
 
-      if Homebrew.args.debug?
+      if @args.debug?
         puts "URL (strategy):   #{strategy_data[:url]}" if strategy_data[:url] != url
         puts "Regex (strategy): #{strategy_data[:regex].inspect}\n" if strategy_data[:regex] != livecheck_regex
       end
@@ -427,10 +427,10 @@ module Homebrew
         end
       end
 
-      if Homebrew.args.debug? && !match_version_map.empty?
+      if @args.debug? && !match_version_map.empty?
         puts "\nMatched Versions:\n"
 
-        if Homebrew.args.verbose?
+        if @args.verbose?
           match_version_map.each do |match, version|
             puts "#{match} => #{version.inspect}"
           end
@@ -445,7 +445,7 @@ module Homebrew
         "latest" => Version.new(match_version_map.values.max),
       }
 
-      if Homebrew.args.json? && Homebrew.args.verbose?
+      if @args.json? && @args.verbose?
         version_info["meta"] = {
           "url"      => {
             "original" => original_url,
