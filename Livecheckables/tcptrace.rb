@@ -4,6 +4,6 @@ class Tcptrace
   # unable to find versions.
   livecheck do
     url "http://www.tcptrace.org/download.shtml"
-    regex(/href=.*?tcptrace-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/href=.*?tcptrace[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

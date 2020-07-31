@@ -1,6 +1,6 @@
 class Bzt
   livecheck do
     url :stable
-    regex(/href=.*?bzt-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/href=.*?bzt[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

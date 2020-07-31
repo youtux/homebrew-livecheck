@@ -5,6 +5,6 @@ class Ncview
   # than having no check at all.
   livecheck do
     url "http://ftp.debian.org/debian/pool/main/n/ncview/"
-    regex(/href=.*?ncview_v?(\d+(?:\.\d+)+)(?:\+ds)?\.orig\.t/i)
+    regex(/href=.*?ncview[._-]v?(\d+(?:\.\d+)+)(?:\+ds)?\.orig\.t/i)
   end
 end

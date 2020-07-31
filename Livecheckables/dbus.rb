@@ -1,6 +1,6 @@
 class Dbus
   livecheck do
     url :head
-    regex(/^dbus-v?(\d+\.\d*?[02468](?:\.\d+)*)$/i)
+    regex(/^dbus[._-]v?(\d+\.\d*?[02468](?:\.\d+)*)$/i)
   end
 end

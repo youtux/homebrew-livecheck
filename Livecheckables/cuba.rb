@@ -1,6 +1,6 @@
 class Cuba
   livecheck do
     url :homepage
-    regex(/href=.*?Cuba-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/href=.*?Cuba[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class VertX
   livecheck do
     url "https://vertx.io/download/"
-    regex(/href=.*?vert\.x-v?(\d+(?:\.\d+)+)-full\.t/i)
+    regex(/href=.*?vert\.x[._-]v?(\d+(?:\.\d+)+)-full\.t/i)
   end
 end

@@ -5,6 +5,6 @@ class Procmail
   # instead of the actual procmail version.
   livecheck do
     url "https://opensource.apple.com/tarballs/procmail/"
-    regex(/href=.*?procmail-v?(\d+(?:\.\d+)*)\.t/i)
+    regex(/href=.*?procmail[._-]v?(\d+(?:\.\d+)*)\.t/i)
   end
 end

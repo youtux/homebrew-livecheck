@@ -4,6 +4,6 @@ class MecabIpadic
   # can't identify the newest version there.
   livecheck do
     url "https://deb.debian.org/debian/pool/main/m/mecab-ipadic/"
-    regex(/href=.*?mecab-ipadic.v?(\d+(?:\.\d+)+(?:-\d+)?)(?:\+main)?\.orig\.t/i)
+    regex(/href=.*?mecab-ipadic[._-]v?(\d+(?:\.\d+)+(?:-\d+)?)(?:\+main)?\.orig\.t/i)
   end
 end

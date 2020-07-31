@@ -3,6 +3,6 @@ class Gplcver
   # available version at the time of writing was `2.12a`.
   livecheck do
     url :stable
-    regex(%r{url=.*?/gplcver-v?(\d+(?:\.\d+)+[a-z]?)\.src\.}i)
+    regex(%r{url=.*?/gplcver[._-]v?(\d+(?:\.\d+)+[a-z]?)\.src\.}i)
   end
 end

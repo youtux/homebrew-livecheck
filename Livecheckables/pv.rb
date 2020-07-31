@@ -1,6 +1,6 @@
 class Pv
   livecheck do
     url :homepage
-    regex(/pv-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/pv[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

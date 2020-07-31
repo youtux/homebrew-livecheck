@@ -4,6 +4,6 @@ class Iftop
   # 2014-01-19, so it could be a while.
   livecheck do
     url "https://www.ex-parrot.com/pdw/iftop/download/"
-    regex(/href=.*?iftop-v?(\d+(?:\.\d+)+(?:pre\d+)?)\.t/i)
+    regex(/href=.*?iftop[._-]v?(\d+(?:\.\d+)+(?:pre\d+)?)\.t/i)
   end
 end

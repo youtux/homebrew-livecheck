@@ -1,6 +1,6 @@
 class Colordiff
   livecheck do
     url :homepage
-    regex(/colordiff-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/colordiff[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Sloccount
   livecheck do
     url :homepage
-    regex(/href=.*?sloccount-v?(\d+(?:\.\d+)+)\.t/i)
+    regex(/href=.*?sloccount[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
