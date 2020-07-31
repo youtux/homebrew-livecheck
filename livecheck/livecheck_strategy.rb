@@ -19,7 +19,9 @@ module LivecheckStrategy
   end
 
   def self.from_url(url, regex_provided = nil)
-    usable_strategies = strategies.except(:page_match).values.select do |strategy|
+    usable_strategies = strategies.values.select do |strategy|
+      next if strategy.const_defined?(:PRIORITY) && !strategy::PRIORITY.positive?
+
       strategy.respond_to?(:match?) && strategy.match?(url)
     end
 
