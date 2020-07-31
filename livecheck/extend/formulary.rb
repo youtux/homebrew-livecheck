@@ -28,7 +28,7 @@ module Formulary
 
       lc_path = livecheckable_path(path)
       if lc_path&.exist?
-        puts "Loading #{lc_path}" if Homebrew.args.debug?
+        odebug "Loading #{lc_path}"
         mod.module_eval(lc_path.read, lc_path)
       end
 
