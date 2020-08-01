@@ -1,6 +1,6 @@
 class Libev
   livecheck do
     url "http://dist.schmorp.de/libev/"
-    regex(/libev-([\d.]+)\./i)
+    regex(/libev[._-]v?([\d.]+)\./i)
   end
 end

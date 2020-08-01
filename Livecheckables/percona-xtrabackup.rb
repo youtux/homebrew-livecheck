@@ -1,6 +1,6 @@
 class PerconaXtrabackup
   livecheck do
     url "https://github.com/percona/percona-xtrabackup.git"
-    regex(/^percona-xtrabackup-(\d+(?:\.\d+)+)$/i)
+    regex(/^percona-xtrabackup[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 end

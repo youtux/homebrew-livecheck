@@ -1,6 +1,6 @@
 class Libsndfile
   livecheck do
     url :homepage
-    regex(/libsndfile-([\d.]+)\.t/i)
+    regex(/libsndfile[._-]v?([\d.]+)\.t/i)
   end
 end

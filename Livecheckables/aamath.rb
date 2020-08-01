@@ -1,6 +1,6 @@
 class Aamath
   livecheck do
     url :homepage
-    regex(/aamath-(\d+(?:\.\d+)+)\.t/i)
+    regex(/aamath[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

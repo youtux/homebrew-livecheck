@@ -1,6 +1,6 @@
 class Ibex
   livecheck do
     url :head
-    regex(/^ibex-(\d+(?:\.\d+)+)$/i)
+    regex(/^ibex[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 end
