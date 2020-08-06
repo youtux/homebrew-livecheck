@@ -55,9 +55,6 @@ module Homebrew
         If no formula argument is passed, the list of formulae to check is taken from `HOMEBREW_LIVECHECK_WATCHLIST`
         or `~/.brew_livecheck_watchlist`.
       EOS
-      switch :verbose
-      switch :quiet
-      switch :debug
       switch "--full-name",
              description: "Print formulae with fully-qualified names."
       flag   "--tap=",
