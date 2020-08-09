@@ -10,22 +10,8 @@ module LivecheckStrategy
     ].freeze
     private_constant :PROJECT_NAME_REGEXES
 
-    SPECIAL_CASES = %w[
-      avrdude
-      clisp
-      cvs
-      dvdrtools
-      icoutils
-      kawa
-      lzip
-      mit-scheme
-      numdiff
-      oath-toolkit
-    ].freeze
-    private_constant :SPECIAL_CASES
-
     def self.match?(url)
-      url.include?("gnu.org") && SPECIAL_CASES.none? { |sc| url.include? sc }
+      url.include?("gnu.org")
     end
 
     def self.find_versions(url, regex = nil)
