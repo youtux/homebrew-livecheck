@@ -1,6 +1,6 @@
 class Mpg123
   livecheck do
-    url "https://sourceforge.net/projects/mpg123/rss"
-    regex(%r{url=.*?/mpg123[._-]v?(\d+(?:\.\d+)+)\.t}i)
+    url "https://www.mpg123.de/download/"
+    regex(/href=.*?mpg123[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

@@ -1,6 +1,6 @@
 class Harbour
   livecheck do
-    url "https://sourceforge.net/projects/harbour-project/rss"
+    url :stable
     regex(%r{url=.*?/harbour[._-]v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

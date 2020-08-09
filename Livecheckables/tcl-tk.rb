@@ -1,6 +1,6 @@
 class TclTk
   livecheck do
-    url "https://sourceforge.net/projects/tcl/rss"
-    regex(%r{url=.*?/(?:tcl|tk).?v?(\d+(?:\.\d+)+)-src\.t}i)
+    url :stable
+    regex(%r{url=.*?/(?:tcl|tk).?v?(\d+(?:\.\d+)+)[._-]src\.t}i)
   end
 end
