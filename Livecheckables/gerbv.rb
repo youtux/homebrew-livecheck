@@ -1,6 +1,6 @@
 class Gerbv
   livecheck do
-    url "https://sourceforge.net/projects/gerbv/"
+    url :stable
     regex(%r{/gerbv/gerbv[._-]v?(\d+(?:\.\d+)+)/}i)
   end
 end

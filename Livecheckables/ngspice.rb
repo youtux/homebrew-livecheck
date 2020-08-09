@@ -1,6 +1,6 @@
 class Ngspice
   livecheck do
-    url "https://sourceforge.net/projects/ngspice/rss"
+    url :stable
     regex(%r{url=.*?/ngspice[._-]v?(\d+(?:\.\d+)*)\.t}i)
   end
 end

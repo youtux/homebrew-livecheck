@@ -1,6 +1,6 @@
 class Tintin
   livecheck do
-    url "https://sourceforge.net/projects/tintin/"
-    regex(%r{.*?/tintin[._-]v?(\d+(?:\.\d+)+)\.t}i)
+    url "https://github.com/scandum/tintin/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end

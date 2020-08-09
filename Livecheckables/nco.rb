@@ -1,6 +1,6 @@
 class Nco
   livecheck do
-    url "https://sourceforge.net/projects/nco/"
-    regex(%r{/nco[._-]v?(\d+(?:\.\d+)+)\.t}i)
+    url "https://github.com/nco/nco/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
