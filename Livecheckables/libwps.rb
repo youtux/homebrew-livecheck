@@ -1,6 +1,6 @@
 class Libwps
   livecheck do
-    url "https://sourceforge.net/projects/libwps/files/libwps/"
-    regex(%r{href=.*?libwps(?:/|[._-])v?(\d+(?:\.\d+)+)/?["' >]}i)
+    url :stable
+    regex(%r{url=.*?/libwps(?:/|[._-])v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

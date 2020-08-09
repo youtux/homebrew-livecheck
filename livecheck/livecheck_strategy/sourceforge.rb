@@ -4,23 +4,8 @@ module LivecheckStrategy
   class Sourceforge
     NICE_NAME = "SourceForge"
 
-    SPECIAL_CASES = %w[
-      /avf/
-      /bashdb/
-      /netpbm/
-      bcrypt.sourceforge.net
-      foremost.sourceforge.net
-      liba52.sourceforge.net
-      libwps
-      mikmod
-      potrace
-      remake
-    ].freeze
-    private_constant :SPECIAL_CASES
-
     def self.match?(url)
-      /(sourceforge|sf)\.net/.match?(url) &&
-        SPECIAL_CASES.none? { |sc| url.include? sc }
+      /(sourceforge|sf)\.net/.match?(url)
     end
 
     def self.find_versions(url, regex = nil)
