@@ -1,6 +1,6 @@
 class Libvterm
   livecheck do
     url :homepage
-    regex(/libvterm[._-]v?(\d+(?:\.\d+)+)\./i)
+    regex(/href=.*?libvterm[._-]v?(\d+(?:\.\d+)+)\./i)
   end
 end

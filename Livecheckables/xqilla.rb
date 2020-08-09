@@ -1,6 +1,6 @@
 class Xqilla
   livecheck do
-    url "https://sourceforge.net/projects/xqilla/"
-    regex(%r{.*?/XQilla[._-]v?(\d+(?:\.\d+)+)\.t}i)
+    url :stable
+    regex(%r{url=.*?/XQilla[._-]v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

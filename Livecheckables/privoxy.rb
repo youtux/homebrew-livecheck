@@ -1,6 +1,6 @@
 class Privoxy
   livecheck do
-    url "https://www.privoxy.org/feeds/privoxy-releases.xml"
-    regex(/privoxy[._-]v?(\d+(?:\.\d+)+)-stable-src\./i)
+    url :stable
+    regex(%r{url=.*?/privoxy[._-]v?(\d+(?:\.\d+)+)[._-]stable[._-]src\.t}i)
   end
 end

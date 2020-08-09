@@ -1,6 +1,6 @@
 class Bibutils
   livecheck do
-    url "sourceforge.net/projects/bibutils/files/"
-    regex(%r{/bibutils/files/bibutils[._-]v?(\d+(?:\.\d+)+)_src\.t}i)
+    url :stable
+    regex(%r{url=.*?/bibutils[._-]v?(\d+(?:\.\d+)+)[._-]src\.t}i)
   end
 end

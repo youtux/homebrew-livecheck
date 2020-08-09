@@ -9,13 +9,10 @@ module LivecheckStrategy
       /bashdb/
       /netpbm/
       bcrypt.sourceforge.net
-      e2fsprogs
       foremost.sourceforge.net
       liba52.sourceforge.net
       libwps
-      log4cpp
       mikmod
-      opencore-amr
       potrace
       remake
     ].freeze

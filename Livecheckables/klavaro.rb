@@ -1,6 +1,6 @@
 class Klavaro
   livecheck do
-    url "https://sourceforge.net/projects/klavaro/"
-    regex(%r{/klavaro[._-]v?(\d+(?:\.\d+)+)\.t}i)
+    url :stable
+    regex(%r{url=.*?/klavaro[._-]v?(\d+(?:\.\d+)+)\.t}i)
   end
 end

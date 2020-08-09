@@ -1,6 +1,6 @@
 class Ruby
   livecheck do
     url "https://www.ruby-lang.org/en/downloads/"
-    regex(/The current stable version is v?(\d+(?:\.\d+)+)\./i)
+    regex(/href=.*?ruby[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end

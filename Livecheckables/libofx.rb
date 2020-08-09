@@ -1,6 +1,6 @@
 class Libofx
   livecheck do
-    url "https://sourceforge.net/projects/libofx/"
-    regex(%r{/libofx[._-]v?(\d+(?:\.\d+)+)\.t}i)
+    url :stable
+    regex(%r{url=.*?/libofx[._-]v?(\d+(?:\.\d+)+)\.t}i)
   end
 end
