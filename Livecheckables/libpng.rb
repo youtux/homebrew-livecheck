@@ -1,6 +1,6 @@
 class Libpng
   livecheck do
-    url "https://sourceforge.net/projects/libpng/"
-    regex(%r{/libpng[._-]v?(\d+(?:\.\d+)+)\.t}i)
+    url :stable
+    regex(%r{url=.*?/libpng[._-]v?(\d+(?:\.\d+)+)\.t}i)
   end
 end
