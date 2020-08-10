@@ -1,6 +1,6 @@
 class Fontconfig
   livecheck do
-    url :homepage
-    regex(/current stable.*? v?(\d+(?:\.\d+)+)\./i)
+    url :stable
+    regex(/href=.*?fontconfig[._-]v?(\d+\.\d+\.(?:\d|[0-8]\d+))\.t/i)
   end
 end
