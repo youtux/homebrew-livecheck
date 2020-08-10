@@ -5,13 +5,14 @@ module LivecheckStrategy
     NICE_NAME = "GNU"
 
     PROJECT_NAME_REGEXES = [
-      %r{/(?:software|gnu)/(.*?)/},
-      %r{//(.*?)\.gnu\.org(?:/)?$},
+      %r{/(?:gnu|software)/(.+?)/},
+      %r{//(.+?)\.gnu\.org(?:/)?$},
     ].freeze
     private_constant :PROJECT_NAME_REGEXES
 
     def self.match?(url)
-      url.include?("gnu.org")
+      url.match?(%r{//.+?\.gnu\.org|gnu\.org/(?:gnu|software)/}i) &&
+        !url.include?("savannah.")
     end
 
     def self.find_versions(url, regex = nil)
@@ -23,7 +24,7 @@ module LivecheckStrategy
       project_name = match_list[0][1]
 
       page_url = "http://ftp.gnu.org/gnu/#{project_name}/?C=M&O=D"
-      regex ||= /#{project_name}-(\d+(?:\.\d+)*)/
+      regex ||= %r{href=.*?#{project_name}[._-]v?(\d+(?:\.\d+)*)(?:\.[a-z]+|/)}i
 
       PageMatch.find_versions(page_url, regex)
     end
