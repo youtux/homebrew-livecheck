@@ -1,6 +1,6 @@
 class Poppler
   livecheck do
-    url "https://poppler.freedesktop.org/releases.html"
+    url :homepage
     regex(/href=.*?poppler[._-]v?(\d+(?:\.\d+)*)\.t/i)
   end
 end
