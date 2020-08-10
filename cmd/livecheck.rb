@@ -4,7 +4,6 @@ require "cli/parser"
 
 require_relative "../livecheck/livecheck_strategy"
 require_relative "../livecheck/extend/formulary"
-require_relative "../livecheck/extend/livecheck"
 
 module Homebrew
   module_function
