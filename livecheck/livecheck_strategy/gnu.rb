@@ -11,7 +11,7 @@ module LivecheckStrategy
     private_constant :PROJECT_NAME_REGEXES
 
     def self.match?(url)
-      url.match?(%r{//.+?\.gnu\.org|gnu\.org/(?:gnu|software)/}i) &&
+      url.match?(%r{//.+?\.gnu\.org$|gnu\.org/(?:gnu|software)/}i) &&
         !url.include?("savannah.")
     end
 
