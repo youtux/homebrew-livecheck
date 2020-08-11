@@ -9,8 +9,11 @@ module LivecheckStrategy
     def self.find_versions(url, regex = nil)
       path, prefix, suffix = url.match(%r{path=(.+?)/([^/]*?)\d+(?:\.\d+)+(/|[^/]*)})[1, 3]
 
+      # Use `\.t` instead of specific tarball extensions (e.g., .tar.gz)
+      suffix.sub!(/\.t(?:ar\..+|[a-z0-9]+)$/, "\.t")
+
       page_url = "https://archive.apache.org/dist/#{path}/"
-      regex ||= /href="#{Regexp.escape(prefix)}(\d+(?:\.\d+)+)#{Regexp.escape(suffix)}/
+      regex ||= /href=["']?#{Regexp.escape(prefix)}v?(\d+(?:\.\d+)+)#{Regexp.escape(suffix)}/
 
       PageMatch.find_versions(page_url, regex)
     end
