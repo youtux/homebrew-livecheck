@@ -1,4 +1,4 @@
-class Insect
+class WriteGood
   livecheck do
     url :stable
   end

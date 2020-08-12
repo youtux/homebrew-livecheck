@@ -1,4 +1,4 @@
-class Insect
+class Quicktype
   livecheck do
     url :stable
   end

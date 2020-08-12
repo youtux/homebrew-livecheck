@@ -1,4 +1,4 @@
-class Insect
+class GatsbyCli
   livecheck do
     url :stable
   end

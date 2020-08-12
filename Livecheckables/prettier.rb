@@ -1,4 +1,4 @@
-class Insect
+class Prettier
   livecheck do
     url :stable
   end

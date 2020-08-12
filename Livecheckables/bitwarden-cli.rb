@@ -1,4 +1,4 @@
-class Insect
+class BitwardenCli
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Insect
+class CubejsCli
   livecheck do
     url :stable
   end

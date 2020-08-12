@@ -1,4 +1,4 @@
-class Insect
+class Nativefier
   livecheck do
     url :stable
   end

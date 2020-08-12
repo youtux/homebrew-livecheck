@@ -1,4 +1,4 @@
-class Insect
+class Triton
   livecheck do
     url :stable
   end

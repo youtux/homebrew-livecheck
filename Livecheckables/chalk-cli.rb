@@ -1,4 +1,4 @@
-class Insect
+class ChalkCli
   livecheck do
     url :stable
   end

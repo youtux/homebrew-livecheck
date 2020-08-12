@@ -1,4 +1,4 @@
-class Insect
+class Babel
   livecheck do
     url :stable
   end

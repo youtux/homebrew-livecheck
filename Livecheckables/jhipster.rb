@@ -1,4 +1,4 @@
-class Insect
+class Jhipster
   livecheck do
     url :stable
   end

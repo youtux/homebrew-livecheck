@@ -1,4 +1,4 @@
-class Insect
+class Eslint
   livecheck do
     url :stable
   end

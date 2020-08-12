@@ -1,4 +1,4 @@
-class Insect
+class Ungit
   livecheck do
     url :stable
   end

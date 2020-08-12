@@ -1,4 +1,4 @@
-class Insect
+class AskCli
   livecheck do
     url :stable
   end

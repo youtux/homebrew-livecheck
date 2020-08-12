@@ -1,4 +1,4 @@
-class Insect
+class FirebaseCli
   livecheck do
     url :stable
   end

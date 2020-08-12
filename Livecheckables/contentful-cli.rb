@@ -1,4 +1,4 @@
-class Insect
+class ContentfulCli
   livecheck do
     url :stable
   end

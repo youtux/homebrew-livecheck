@@ -1,4 +1,4 @@
-class Insect
+class Jsdoc3
   livecheck do
     url :stable
   end

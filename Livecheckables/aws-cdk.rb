@@ -1,4 +1,4 @@
-class Insect
+class AwsCdk
   livecheck do
     url :stable
   end

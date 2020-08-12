@@ -1,4 +1,4 @@
-class Insect
+class Newman
   livecheck do
     url :stable
   end

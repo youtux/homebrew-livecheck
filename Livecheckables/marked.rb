@@ -1,4 +1,4 @@
-class Insect
+class Marked
   livecheck do
     url :stable
   end
