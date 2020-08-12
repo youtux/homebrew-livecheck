@@ -1,4 +1,4 @@
-class CabalInstall
+class PandocIncludeCode
   livecheck do
     url :stable
   end

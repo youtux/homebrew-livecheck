@@ -1,4 +1,4 @@
-class CabalInstall
+class Mighttpd2
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class CabalInstall
+class Allureofthestars
   livecheck do
     url :stable
   end

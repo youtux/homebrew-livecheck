@@ -1,4 +1,4 @@
-class CabalInstall
+class Bench
   livecheck do
     url :stable
   end

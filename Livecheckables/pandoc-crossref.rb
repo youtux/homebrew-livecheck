@@ -1,4 +1,4 @@
-class CabalInstall
+class PandocCrossref
   livecheck do
     url :stable
   end

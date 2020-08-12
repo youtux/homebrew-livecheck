@@ -1,4 +1,4 @@
-class CabalInstall
+class DhallBash
   livecheck do
     url :stable
   end

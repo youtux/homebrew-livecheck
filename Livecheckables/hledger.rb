@@ -1,4 +1,4 @@
-class CabalInstall
+class Hledger
   livecheck do
     url :stable
   end
