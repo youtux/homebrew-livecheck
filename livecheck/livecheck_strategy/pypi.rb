@@ -10,6 +10,7 @@ module LivecheckStrategy
 
     def self.find_versions(url, regex = nil)
       package_name = url[%r{https://files.pythonhosted.org/packages/.*/.*/(.*)-.*}, 1]
+      package_name.gsub!("%20", "-")
 
       page_url = "https://pypi.org/project/#{package_name}"
       regex ||= /#{package_name} ([0-9.]+)/
