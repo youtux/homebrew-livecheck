@@ -1,4 +1,4 @@
-class CabalInstall
+class HopenpgpTools
   livecheck do
     url :stable
   end

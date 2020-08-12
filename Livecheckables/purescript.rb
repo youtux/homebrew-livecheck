@@ -1,4 +1,4 @@
-class CabalInstall
+class Purescript
   livecheck do
     url :stable
   end

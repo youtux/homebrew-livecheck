@@ -1,4 +1,4 @@
-class CabalInstall
+class DhallLspServer
   livecheck do
     url :stable
   end

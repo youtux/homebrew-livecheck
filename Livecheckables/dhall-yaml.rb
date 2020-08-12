@@ -1,4 +1,4 @@
-class CabalInstall
+class DhallYaml
   livecheck do
     url :stable
   end
