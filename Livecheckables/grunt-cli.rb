@@ -1,4 +1,4 @@
-class Insect
+class GruntCli
   livecheck do
     url :stable
   end

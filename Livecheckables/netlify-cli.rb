@@ -1,4 +1,4 @@
-class Insect
+class NetlifyCli
   livecheck do
     url :stable
   end

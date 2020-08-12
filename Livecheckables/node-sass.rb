@@ -1,4 +1,4 @@
-class Insect
+class NodeSass
   livecheck do
     url :stable
   end

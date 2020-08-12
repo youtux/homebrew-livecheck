@@ -1,4 +1,4 @@
-class Insect
+class Typescript
   livecheck do
     url :stable
   end

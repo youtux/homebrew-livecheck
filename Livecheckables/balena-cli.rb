@@ -1,4 +1,4 @@
-class Insect
+class BalenaCli
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Insect
+class Appium
   livecheck do
     url :stable
   end

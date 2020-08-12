@@ -1,4 +1,4 @@
-class Insect
+class WebtorrentCli
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Insect
+class GraphqlCli
   livecheck do
     url :stable
   end

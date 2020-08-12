@@ -1,4 +1,4 @@
-class Insect
+class ReactNativeCli
   livecheck do
     url :stable
   end

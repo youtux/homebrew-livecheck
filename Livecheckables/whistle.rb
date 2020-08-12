@@ -1,4 +1,4 @@
-class Insect
+class Whistle
   livecheck do
     url :stable
   end

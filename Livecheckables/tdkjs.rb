@@ -1,4 +1,4 @@
-class Insect
+class Tdkjs
   livecheck do
     url :stable
   end

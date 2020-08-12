@@ -1,4 +1,4 @@
-class Insect
+class FaunaShell
   livecheck do
     url :stable
   end

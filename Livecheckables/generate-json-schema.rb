@@ -1,4 +1,4 @@
-class Insect
+class GenerateJsonSchema
   livecheck do
     url :stable
   end

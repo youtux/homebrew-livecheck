@@ -1,4 +1,4 @@
-class Insect
+class GulpCli
   livecheck do
     url :stable
   end

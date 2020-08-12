@@ -1,4 +1,4 @@
-class Insect
+class Autorest
   livecheck do
     url :stable
   end

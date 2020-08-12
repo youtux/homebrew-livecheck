@@ -1,4 +1,4 @@
-class Insect
+class ApolloCli
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Insect
+class Pulp
   livecheck do
     url :stable
   end
