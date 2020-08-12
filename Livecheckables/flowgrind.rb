@@ -1,6 +1,6 @@
 class Flowgrind
   livecheck do
-    url :homepage
-    regex(/Latest version is flowgrind[._-]v?(\d+(?:\.\d+)+)/i)
+    url :stable
+    regex(%r{<div class="version">\s*Latest version is flowgrind[._-]v?(\d+(?:\.\d+)+)\s*</div>})
   end
 end
