@@ -1,4 +1,4 @@
-class Pwncat
+class TrezorAgent
   livecheck do
     url :stable
   end
