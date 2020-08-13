@@ -9,11 +9,14 @@ module LivecheckStrategy
     end
 
     def self.find_versions(url, regex = nil)
-      package_name = url[%r{https://files.pythonhosted.org/packages/.*/.*/(.*)-.*}, 1]
-      package_name.gsub!(/%20|_/, "-")
+      /(?<package_name>.*)-.*?
+       (?<filename_end>\.tar\.[a-z0=9]+|\.[a-z0-9]+)$/ix =~ File.basename(url)
 
-      page_url = "https://pypi.org/project/#{package_name}"
-      regex ||= /#{package_name} ([0-9.]+)/
+      # Use `\.t` instead of specific tarball extensions (e.g., .tar.gz)
+      filename_end.sub!(/\.t(?:ar\..+|[a-z0-9]+)$/, "\.t")
+
+      page_url = "https://pypi.org/project/#{package_name.gsub(/%20|_/, "-")}"
+      regex ||= %r{href=.*?/packages.*?/#{package_name}[._-]v?(\d+(?:\.\d+)*)#{filename_end}}i
 
       PageMatch.find_versions(page_url, regex)
     end
