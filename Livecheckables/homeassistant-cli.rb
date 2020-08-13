@@ -1,6 +1,5 @@
 class HomeassistantCli
   livecheck do
-    url :head
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    url :stable
   end
 end
