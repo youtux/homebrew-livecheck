@@ -12,8 +12,8 @@ module LivecheckStrategy
       )
 
       tags_data = { tags: [] }
-      tags_data[:messages] = stderr_str.split("\n") unless stderr_str.empty?
-      return tags_data if stdout_str.empty?
+      tags_data[:messages] = stderr_str.split("\n") unless stderr_str.blank?
+      return tags_data if stdout_str.blank?
 
       stdout_str.gsub!(%r{^.*\trefs/tags/}, "")
       stdout_str.delete_suffix!("^{}")
@@ -37,7 +37,7 @@ module LivecheckStrategy
 
       if tags_data.key?(:messages)
         match_data[:messages] = tags_data[:messages]
-        return match_data if tags_data[:tags].empty?
+        return match_data if tags_data[:tags].blank?
       end
 
       tags_only_debian = tags_data[:tags].all? { |tag| tag.start_with?("debian/") }
