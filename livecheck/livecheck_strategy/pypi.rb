@@ -10,7 +10,7 @@ module LivecheckStrategy
 
     def self.find_versions(url, regex = nil)
       /(?<package_name>.*)-.*?
-       (?<filename_end>\.tar\.[a-z0=9]+|\.[a-z0-9]+)$/ix =~ File.basename(url)
+       (?<filename_end>\.tar\.[a-z0-9]+|\.[a-z0-9]+)$/ix =~ File.basename(url)
 
       # Use `\.t` instead of specific tarball extensions (e.g., .tar.gz)
       filename_end.sub!(/\.t(?:ar\..+|[a-z0-9]+)$/, "\.t")
