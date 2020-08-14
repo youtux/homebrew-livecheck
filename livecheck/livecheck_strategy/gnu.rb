@@ -17,7 +17,7 @@ module LivecheckStrategy
 
     def self.find_versions(url, regex = nil)
       match_list = PROJECT_NAME_REGEXES.map { |r| url.match(r) }.compact
-      return { matches: {}, regex: regex, url: url } if match_list.empty?
+      return { matches: {}, regex: regex, url: url } if match_list.blank?
 
       odebug "\nMultiple project names found: #{match_list}\n" if match_list.length > 1
 
