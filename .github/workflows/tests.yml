@@ -3,31 +3,19 @@ name: GitHub Actions CI
 on:
   push:
     branches: master
-  pull_request: []
+  pull_request:
 
 jobs:
   tests:
     runs-on: macOS-latest
-    env:
-      HOMEBREW_NO_AUTO_UPDATE: 1
-      HOMEBREW_NO_ANALYTICS: 1
     steps:
-    - name: Update Homebrew
-      run: brew update-reset $(brew --repo)
+    - name: Set up Homebrew
+      id: set-up-homebrew
+      uses: Homebrew/actions/setup-homebrew@master
 
-    - name: Checkout tap
-      uses: actions/checkout@v2
+    - run: brew style $GITHUB_REPOSITORY
 
-    - name: Setup tap
-      run: |
-        mkdir -p $(dirname $(brew --repo $GITHUB_REPOSITORY))
-        ln -s $PWD $(brew --repo $GITHUB_REPOSITORY)
-
-    - name: Run brew style
-      run: brew style $GITHUB_REPOSITORY
-
-    - name: Run brew livecheck
-      run: brew livecheck
+    - run: brew livecheck
 
     - name: Fetch origin/master
       run: git fetch --depth=1 origin master
