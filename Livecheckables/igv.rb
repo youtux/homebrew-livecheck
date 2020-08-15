@@ -1,6 +1,6 @@
 class Igv
   livecheck do
-    url "https://data.broadinstitute.org/igv/projects/downloads/2.8/"
+    url "http://software.broadinstitute.org/software/igv/download"
     regex(/href=.*?IGV[._-]v?(\d+(?:\.\d+)+)\.zip/i)
   end
 end
