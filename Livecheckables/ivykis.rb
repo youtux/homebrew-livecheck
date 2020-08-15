@@ -1,6 +1,6 @@
 class Ivykis
   livecheck do
-    url :homepage
-    regex(%r{url=.*?/ivykis[._-]v?(\d+(?:\.\d+)+)\.t}i)
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)(?:[._-]trunk)?$/i)
   end
 end
