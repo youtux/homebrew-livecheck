@@ -1,4 +1,4 @@
-class Mutt
+class Mvnvm
   livecheck do
     url :stable
   end

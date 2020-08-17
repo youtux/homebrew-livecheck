@@ -1,4 +1,4 @@
-class Mutt
+class Foma
   livecheck do
     url :stable
   end

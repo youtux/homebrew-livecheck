@@ -1,4 +1,4 @@
-class Mutt
+class CsvFix
   livecheck do
     url :stable
   end

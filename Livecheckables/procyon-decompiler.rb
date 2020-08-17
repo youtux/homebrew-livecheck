@@ -1,4 +1,4 @@
-class Mutt
+class ProcyonDecompiler
   livecheck do
     url :stable
   end
