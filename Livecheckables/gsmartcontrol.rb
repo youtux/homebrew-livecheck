@@ -1,6 +1,5 @@
 class Gsmartcontrol
   livecheck do
-    url :homepage
-    regex(/GSmartControl (\d+(\.\d+)*)/i)
+    url :stable
   end
 end
