@@ -1,4 +1,4 @@
-class Goffice
+class Libgnomecanvasmm
   livecheck do
     url :stable
   end

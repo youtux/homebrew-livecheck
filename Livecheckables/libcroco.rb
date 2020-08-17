@@ -1,4 +1,4 @@
-class Goffice
+class Libcroco
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Goffice
+class GeocodeGlib
   livecheck do
     url :stable
   end

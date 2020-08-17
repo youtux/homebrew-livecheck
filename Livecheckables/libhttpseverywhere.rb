@@ -1,4 +1,4 @@
-class Goffice
+class Libhttpseverywhere
   livecheck do
     url :stable
   end

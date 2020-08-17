@@ -1,4 +1,4 @@
-class Goffice
+class ClutterGtk
   livecheck do
     url :stable
   end

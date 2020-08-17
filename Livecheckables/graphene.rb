@@ -1,4 +1,4 @@
-class Goffice
+class Graphene
   livecheck do
     url :stable
   end

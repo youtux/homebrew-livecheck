@@ -1,4 +1,4 @@
-class Goffice
+class Goocanvas
   livecheck do
     url :stable
   end

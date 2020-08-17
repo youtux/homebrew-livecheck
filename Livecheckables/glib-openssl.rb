@@ -1,4 +1,4 @@
-class Goffice
+class GlibOpenssl
   livecheck do
     url :stable
   end

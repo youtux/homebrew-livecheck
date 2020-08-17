@@ -1,4 +1,4 @@
-class Goffice
+class AdwaitaIconTheme
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Goffice
+class Gtranslator
   livecheck do
     url :stable
   end

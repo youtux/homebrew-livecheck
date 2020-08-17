@@ -1,4 +1,4 @@
-class Goffice
+class Zenity
   livecheck do
     url :stable
   end

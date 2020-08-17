@@ -1,4 +1,4 @@
-class Goffice
+class GnomeAutoar
   livecheck do
     url :stable
   end

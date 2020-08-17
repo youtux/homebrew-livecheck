@@ -1,4 +1,4 @@
-class Goffice
+class Gconf
   livecheck do
     url :stable
   end
