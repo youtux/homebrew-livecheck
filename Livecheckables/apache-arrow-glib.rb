@@ -1,4 +1,4 @@
-class TomcatAT7
+class ApacheArrowGlib
   livecheck do
     url :stable
   end

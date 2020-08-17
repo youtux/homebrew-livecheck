@@ -1,4 +1,4 @@
-class TomcatAT7
+class Trafficserver
   livecheck do
     url :stable
   end

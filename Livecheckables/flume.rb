@@ -1,4 +1,4 @@
-class TomcatAT7
+class Flume
   livecheck do
     url :stable
   end

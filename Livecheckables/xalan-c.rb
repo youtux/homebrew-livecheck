@@ -1,4 +1,4 @@
-class TomcatAT7
+class XalanC
   livecheck do
     url :stable
   end

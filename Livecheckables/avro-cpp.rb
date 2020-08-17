@@ -1,4 +1,4 @@
-class TomcatAT7
+class AvroCpp
   livecheck do
     url :stable
   end

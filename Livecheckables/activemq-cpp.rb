@@ -1,4 +1,4 @@
-class TomcatAT7
+class ActivemqCpp
   livecheck do
     url :stable
   end

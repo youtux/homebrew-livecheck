@@ -1,4 +1,4 @@
-class TomcatAT7
+class Hbase
   livecheck do
     url :stable
   end

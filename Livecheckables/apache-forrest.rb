@@ -1,4 +1,4 @@
-class TomcatAT7
+class ApacheForrest
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class TomcatAT7
+class Solr
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class TomcatAT7
+class TomeePlus
   livecheck do
     url :stable
   end

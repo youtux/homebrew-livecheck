@@ -1,4 +1,4 @@
-class TomcatAT7
+class Mesos
   livecheck do
     url :stable
   end

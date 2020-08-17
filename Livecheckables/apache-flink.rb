@@ -1,4 +1,4 @@
-class TomcatAT7
+class ApacheFlink
   livecheck do
     url :stable
   end

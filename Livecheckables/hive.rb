@@ -1,4 +1,4 @@
-class TomcatAT7
+class Hive
   livecheck do
     url :stable
   end

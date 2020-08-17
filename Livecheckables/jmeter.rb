@@ -1,4 +1,4 @@
-class TomcatAT7
+class Jmeter
   livecheck do
     url :stable
   end

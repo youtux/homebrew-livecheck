@@ -1,4 +1,4 @@
-class TomcatAT7
+class Thrift
   livecheck do
     url :stable
   end

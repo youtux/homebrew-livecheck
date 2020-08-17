@@ -1,4 +1,4 @@
-class TomcatAT7
+class Derby
   livecheck do
     url :stable
   end

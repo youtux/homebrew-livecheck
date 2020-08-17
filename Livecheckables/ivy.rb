@@ -1,4 +1,4 @@
-class TomcatAT7
+class Ivy
   livecheck do
     url :stable
   end

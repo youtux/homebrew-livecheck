@@ -1,4 +1,4 @@
-class TomcatAT7
+class XmlSecurityC
   livecheck do
     url :stable
   end

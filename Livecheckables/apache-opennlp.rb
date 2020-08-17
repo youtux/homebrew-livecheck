@@ -1,4 +1,4 @@
-class TomcatAT7
+class ApacheOpennlp
   livecheck do
     url :stable
   end

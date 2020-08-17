@@ -1,4 +1,4 @@
-class TomcatAT7
+class Pig
   livecheck do
     url :stable
   end

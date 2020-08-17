@@ -1,4 +1,4 @@
-class TomcatAT7
+class Nifi
   livecheck do
     url :stable
   end

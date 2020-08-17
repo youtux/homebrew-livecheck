@@ -1,4 +1,4 @@
-class TomcatAT7
+class AvroTools
   livecheck do
     url :stable
   end
