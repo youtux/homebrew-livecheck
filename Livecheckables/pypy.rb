@@ -1,4 +1,4 @@
-class Mutt
+class Pypy
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Mutt
+class SagittariusScheme
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Mutt
+class Vcprompt
   livecheck do
     url :stable
   end

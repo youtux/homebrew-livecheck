@@ -1,4 +1,4 @@
-class Mutt
+class FuseZip
   livecheck do
     url :stable
   end

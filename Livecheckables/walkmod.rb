@@ -1,4 +1,4 @@
-class Mutt
+class Walkmod
   livecheck do
     url :stable
   end

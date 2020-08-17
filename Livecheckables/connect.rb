@@ -1,4 +1,4 @@
-class Mutt
+class Connect
   livecheck do
     url :stable
   end

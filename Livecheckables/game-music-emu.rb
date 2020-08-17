@@ -1,4 +1,4 @@
-class Mutt
+class GameMusicEmu
   livecheck do
     url :stable
   end
