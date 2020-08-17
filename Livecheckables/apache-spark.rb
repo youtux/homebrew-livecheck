@@ -1,4 +1,4 @@
-class TomcatAT7
+class ApacheSpark
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class TomcatAT7
+class Fop
   livecheck do
     url :stable
   end

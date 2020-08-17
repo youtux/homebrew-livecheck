@@ -1,4 +1,4 @@
-class TomcatAT7
+class Kafka
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class TomcatAT7
+class AuroraCli
   livecheck do
     url :stable
   end

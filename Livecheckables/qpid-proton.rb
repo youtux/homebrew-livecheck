@@ -1,4 +1,4 @@
-class TomcatAT7
+class QpidProton
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class TomcatAT7
+class ApacheDrill
   livecheck do
     url :stable
   end

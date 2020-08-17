@@ -1,4 +1,4 @@
-class TomcatAT7
+class AprUtil
   livecheck do
     url :stable
   end

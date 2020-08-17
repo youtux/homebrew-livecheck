@@ -1,4 +1,4 @@
-class TomcatAT7
+class Jsvc
   livecheck do
     url :stable
   end

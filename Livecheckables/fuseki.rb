@@ -1,4 +1,4 @@
-class TomcatAT7
+class Fuseki
   livecheck do
     url :stable
   end

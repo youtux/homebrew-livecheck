@@ -1,4 +1,4 @@
-class TomcatAT7
+class ApacheArchiva
   livecheck do
     url :stable
   end

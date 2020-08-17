@@ -1,4 +1,4 @@
-class TomcatAT7
+class Storm
   livecheck do
     url :stable
   end

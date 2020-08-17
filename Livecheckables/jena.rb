@@ -1,4 +1,4 @@
-class TomcatAT7
+class Jena
   livecheck do
     url :stable
   end

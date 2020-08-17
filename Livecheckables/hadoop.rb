@@ -1,4 +1,4 @@
-class TomcatAT7
+class Hadoop
   livecheck do
     url :stable
   end
