@@ -1,4 +1,4 @@
-class Goffice
+class Gspell
   livecheck do
     url :stable
   end

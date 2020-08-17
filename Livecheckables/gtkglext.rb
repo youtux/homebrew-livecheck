@@ -1,4 +1,4 @@
-class Goffice
+class Gtkglext
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Goffice
+class Msitools
   livecheck do
     url :stable
   end

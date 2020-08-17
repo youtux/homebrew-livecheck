@@ -1,4 +1,4 @@
-class Goffice
+class FileRoller
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Goffice
+class TemplateGlib
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Goffice
+class Libgdata
   livecheck do
     url :stable
   end

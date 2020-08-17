@@ -1,4 +1,4 @@
-class Goffice
+class Libgee
   livecheck do
     url :stable
   end

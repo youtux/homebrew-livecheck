@@ -1,4 +1,4 @@
-class Goffice
+class GtkDoc
   livecheck do
     url :stable
   end

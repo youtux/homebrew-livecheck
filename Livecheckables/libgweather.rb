@@ -1,4 +1,4 @@
-class Goffice
+class Libgweather
   livecheck do
     url :stable
   end

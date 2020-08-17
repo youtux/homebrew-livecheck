@@ -1,4 +1,4 @@
-class Goffice
+class Libglademm
   livecheck do
     url :stable
   end

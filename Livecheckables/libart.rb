@@ -1,4 +1,4 @@
-class Goffice
+class Libart
   livecheck do
     url :stable
   end

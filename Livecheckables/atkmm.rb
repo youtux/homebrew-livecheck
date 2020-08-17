@@ -1,4 +1,4 @@
-class Goffice
+class Atkmm
   livecheck do
     url :stable
   end

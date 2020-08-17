@@ -1,4 +1,4 @@
-class Goffice
+class Gucharmap
   livecheck do
     url :stable
   end

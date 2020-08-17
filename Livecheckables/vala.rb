@@ -1,4 +1,4 @@
-class Goffice
+class Vala
   livecheck do
     url :stable
   end

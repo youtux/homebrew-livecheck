@@ -1,4 +1,4 @@
-class Goffice
+class Baobab
   livecheck do
     url :stable
   end

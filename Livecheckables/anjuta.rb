@@ -1,4 +1,4 @@
-class Goffice
+class Anjuta
   livecheck do
     url :stable
   end

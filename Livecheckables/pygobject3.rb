@@ -1,4 +1,4 @@
-class Goffice
+class Pygobject3
   livecheck do
     url :stable
   end

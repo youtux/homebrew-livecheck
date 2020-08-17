@@ -1,4 +1,4 @@
-class Goffice
+class Cogl
   livecheck do
     url :stable
   end

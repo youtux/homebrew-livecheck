@@ -1,4 +1,4 @@
-class Goffice
+class GsettingsDesktopSchemas
   livecheck do
     url :stable
   end

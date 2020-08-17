@@ -1,4 +1,4 @@
-class Goffice
+class Libsigcxx
   livecheck do
     url :stable
   end

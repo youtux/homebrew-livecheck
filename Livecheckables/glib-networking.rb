@@ -1,4 +1,4 @@
-class Goffice
+class GlibNetworking
   livecheck do
     url :stable
   end

@@ -1,4 +1,4 @@
-class Goffice
+class Ghex
   livecheck do
     url :stable
   end

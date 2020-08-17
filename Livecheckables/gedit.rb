@@ -1,4 +1,4 @@
-class Goffice
+class Gedit
   livecheck do
     url :stable
   end

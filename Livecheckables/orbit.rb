@@ -1,4 +1,4 @@
-class Goffice
+class Orbit
   livecheck do
     url :stable
   end
