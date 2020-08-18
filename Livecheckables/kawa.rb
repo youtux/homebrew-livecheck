@@ -1,7 +1,6 @@
 class Kawa
   livecheck do
-    url "https://ftp.gnu.org/gnu/kawa"
-    strategy :page_match
-    regex(/href=.*?kawa[._-]v?(\d+\.\d+(\.\d+)?)\.zip/i)
+    url :stable
+    regex(/href=.*?kawa[._-]v?(\d+(?:\.\d+)+)\.(?:t|zip)/i)
   end
 end

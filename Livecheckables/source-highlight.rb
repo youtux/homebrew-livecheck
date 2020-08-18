@@ -1,6 +1,6 @@
 class SourceHighlight
   livecheck do
     url :stable
-    regex(/source-highlight[._-]v?(\d+(?:\.\d+)+)/i)
+    regex(/href=.*?source-highlight[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 end
