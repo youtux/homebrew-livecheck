@@ -1,4 +1,4 @@
-class Mesa
+class Uchardet
   livecheck do
     url :stable
   end

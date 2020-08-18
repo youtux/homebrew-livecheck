@@ -1,4 +1,4 @@
-class Mesa
+class Libdc1394
   livecheck do
     url :stable
   end
