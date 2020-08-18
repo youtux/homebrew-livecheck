@@ -1,6 +1,6 @@
 class Autogen
   livecheck do
-    url "https://ftp.gnu.org/gnu/autogen/"
+    url :stable
     regex(%r{href=.*?rel(\d+(?:\.\d+)+)/?["' >]}i)
   end
 end
