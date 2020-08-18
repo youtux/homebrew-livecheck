@@ -1,6 +1,6 @@
 class Gdcm
   livecheck do
-    url :homepage
-    regex(%r{url=.*?/gdcm[._-]v?(\d+(?:\.\d+)+)\.t}i)
+    url "https://github.com/malaterre/GDCM/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
