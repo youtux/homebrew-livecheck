@@ -1,4 +1,4 @@
-class Mesa
+class Devil
   livecheck do
     url :stable
   end

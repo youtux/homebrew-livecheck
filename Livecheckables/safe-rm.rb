@@ -1,4 +1,4 @@
-class Mesa
+class SafeRm
   livecheck do
     url :stable
   end
