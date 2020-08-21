@@ -1,6 +1,6 @@
 class Inlets
   livecheck do
-    url :stable
-    regex(/^(\d+\.\d+.\d+)$/i)
+    url "https://github.com/inlets/inlets/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
