@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "cli/parser"
+require "formula"
 
 require_relative "../livecheck/livecheck_strategy"
 require_relative "../livecheck/extend/formulary"
