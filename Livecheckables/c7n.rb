@@ -1,6 +1,6 @@
 class C7n
   livecheck do
-    url :stable
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    url "https://github.com/cloud-custodian/cloud-custodian/releases/latest"
+    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
   end
 end
