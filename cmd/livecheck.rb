@@ -122,7 +122,7 @@ module Homebrew
 
     # Load additional Strategy files from taps
     non_core_taps.each_value do |tap|
-      tap_strategy_path = "#{tap.path}/livecheck_strategy"
+      tap_strategy_path = "#{tap.path}/livecheck/strategy"
       Dir["#{tap_strategy_path}/*.rb"].sort.each(&method(:require)) if Dir.exist?(tap_strategy_path)
     end
 
