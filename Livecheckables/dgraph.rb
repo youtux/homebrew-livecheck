@@ -1,6 +1,6 @@
 class Dgraph
   livecheck do
-    url :head
+    url :stable
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 end
