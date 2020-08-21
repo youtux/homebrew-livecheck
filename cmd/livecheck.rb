@@ -112,14 +112,18 @@ module Homebrew
     # Identify any non-homebrew/core taps in use for current formulae
     non_core_taps = {}
     formulae_to_check.each do |f|
-      non_core_taps[f.tap.name] = true unless f.tap.nil? || f.tap.name == "homebrew/core"
-    end
-    non_core_taps = non_core_taps.keys.sort
+      next if f.tap.blank?
+      next if f.tap.name == CoreTap.instance.name
+      next if non_core_taps[f.tap.name]
 
-    # Load additional LivecheckStrategy files from taps
-    non_core_taps.each do |tap_name|
-      tap_strategy_path = File.join(Tap.fetch(tap_name).path, "livecheck_strategy")
-      Dir[File.join(tap_strategy_path, "*.rb")].sort.each(&method(:require)) if Dir.exist?(tap_strategy_path)
+      non_core_taps[f.tap.name] = f.tap
+    end
+    non_core_taps = non_core_taps.sort.to_h
+
+    # Load additional Strategy files from taps
+    non_core_taps.each_value do |tap|
+      tap_strategy_path = "#{tap.path}/livecheck_strategy"
+      Dir["#{tap_strategy_path}/*.rb"].sort.each(&method(:require)) if Dir.exist?(tap_strategy_path)
     end
 
     # Cache demodulized strategy names, to avoid repeating this work
