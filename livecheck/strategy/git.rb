@@ -3,10 +3,12 @@
 require "open3"
 
 module LivecheckStrategy
-  class Git
+  module Git
+    module_function
+
     PRIORITY = 8
 
-    def self.tag_info(repo_url, filter = nil)
+    def tag_info(repo_url, filter = nil)
       stdout_str, stderr_str, _status = Open3.capture3(
         { "GIT_TERMINAL_PROMPT" => "0" }, "git", "ls-remote", "--tags", repo_url
       )
@@ -24,13 +26,12 @@ module LivecheckStrategy
 
       tags_data
     end
-    private_class_method :tag_info
 
-    def self.match?(url)
+    def match?(url)
       DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
     end
 
-    def self.find_versions(url, regex = nil)
+    def find_versions(url, regex = nil)
       match_data = { matches: {}, regex: regex, url: url }
 
       tags_data = tag_info(url, regex)

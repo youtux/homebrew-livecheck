@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  class Pypi
+  module Pypi
+    module_function
+
     NICE_NAME = "PyPI"
 
-    def self.match?(url)
+    def match?(url)
       /files\.pythonhosted\.org/.match?(url)
     end
 
-    def self.find_versions(url, regex = nil)
+    def find_versions(url, regex = nil)
       /(?<package_name>.*)-.*?
        (?<filename_end>\.tar\.[a-z0-9]+|\.[a-z0-9]+)$/ix =~ File.basename(url)
 

@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  class Launchpad
-    def self.match?(url)
+  module Launchpad
+    module_function
+
+    def match?(url)
       /launchpad\.net/.match?(url)
     end
 
-    def self.find_versions(url, regex = nil)
+    def find_versions(url, regex = nil)
       package_name = url.match(%r{launchpad\.net/([^/]*)})[1]
 
       page_url = "https://launchpad.net/#{package_name}"

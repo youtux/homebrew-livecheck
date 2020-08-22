@@ -1,21 +1,22 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  class Gnu
+  module Gnu
+    module_function
+
     NICE_NAME = "GNU"
 
     PROJECT_NAME_REGEXES = [
       %r{/(?:gnu|software)/(.+?)/},
       %r{//(.+?)\.gnu\.org(?:/)?$},
     ].freeze
-    private_constant :PROJECT_NAME_REGEXES
 
-    def self.match?(url)
+    def match?(url)
       url.match?(%r{//.+?\.gnu\.org$|gnu\.org/(?:gnu|software)/}i) &&
         !url.include?("savannah.")
     end
 
-    def self.find_versions(url, regex = nil)
+    def find_versions(url, regex = nil)
       match_list = PROJECT_NAME_REGEXES.map { |r| url.match(r) }.compact
       return { matches: {}, regex: regex, url: url } if match_list.blank?
 

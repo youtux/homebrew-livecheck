@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  def self.strategies
+  module_function
+
+  def strategies
     return @strategies if defined? @strategies
 
     @strategies = {}
@@ -14,11 +16,11 @@ module LivecheckStrategy
   end
   private_class_method :strategies
 
-  def self.from_symbol(symbol)
+  def from_symbol(symbol)
     strategies[symbol]
   end
 
-  def self.from_url(url, regex_provided = nil)
+  def from_url(url, regex_provided = nil)
     usable_strategies = strategies.values.select do |strategy|
       next if strategy.const_defined?(:PRIORITY) && !strategy::PRIORITY.positive?
 
@@ -35,4 +37,15 @@ module LivecheckStrategy
   end
 end
 
-Dir[File.join(__dir__, "livecheck_strategy", "*.rb")].sort.each(&method(:require))
+require_relative "strategy/apache"
+require_relative "strategy/bitbucket"
+require_relative "strategy/git"
+require_relative "strategy/gnome"
+require_relative "strategy/gnu"
+require_relative "strategy/hackage"
+require_relative "strategy/launchpad"
+require_relative "strategy/npm"
+require_relative "strategy/page_match"
+require_relative "strategy/pypi"
+require_relative "strategy/sourceforge"
+require_relative "strategy/xorg"
