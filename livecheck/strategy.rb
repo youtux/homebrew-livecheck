@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  def self.strategies
+  module_function
+
+  def strategies
     return @strategies if defined? @strategies
 
     @strategies = {}
@@ -14,11 +16,11 @@ module LivecheckStrategy
   end
   private_class_method :strategies
 
-  def self.from_symbol(symbol)
+  def from_symbol(symbol)
     strategies[symbol]
   end
 
-  def self.from_url(url, regex_provided = nil)
+  def from_url(url, regex_provided = nil)
     usable_strategies = strategies.values.select do |strategy|
       next if strategy.const_defined?(:PRIORITY) && !strategy::PRIORITY.positive?
 

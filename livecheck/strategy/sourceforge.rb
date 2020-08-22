@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  class Sourceforge
+  module Sourceforge
+    module_function
+
     NICE_NAME = "SourceForge"
 
-    def self.match?(url)
+    def match?(url)
       /(sourceforge|sf)\.net/.match?(url)
     end
 
-    def self.find_versions(url, regex = nil)
+    def find_versions(url, regex = nil)
       project_name = if url.include?("/project")
         url.match(%r{/projects?/([^/]+)/})[1]
       elsif url.include?(".net/p/")

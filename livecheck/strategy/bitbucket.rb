@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  class Bitbucket
-    def self.match?(url)
+  module Bitbucket
+    module_function
+
+    def match?(url)
       %r{bitbucket\.org(/[^/]+){4}\.\w+}.match?(url)
     end
 
-    def self.find_versions(url, regex = nil)
+    def find_versions(url, regex = nil)
       path, kind, suffix =
         url.match(%r{bitbucket\.org/(.+?)/(get|downloads)/(?:.*?[-_])?v?\d+(?:\.\d+)+([^/]+)})[1, 3]
 

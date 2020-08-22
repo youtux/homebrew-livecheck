@@ -3,16 +3,18 @@
 require "open-uri"
 
 module LivecheckStrategy
-  class Xorg
+  module Xorg
+    module_function
+
     NICE_NAME = "X.Org"
 
     @page_data = {}
 
-    def self.match?(url)
+    def match?(url)
       %r{[./]x\.org.*?/individual/|freedesktop\.org/(?:archive|dist|software)/}i.match?(url)
     end
 
-    def self.find_versions(url, regex)
+    def find_versions(url, regex)
       file_name = File.basename(url)
       return { matches: {}, regex: regex, url: url } unless file_name.include?("-")
 

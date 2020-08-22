@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
-  class Hackage
-    def self.match?(url)
+  module Hackage
+    module_function
+
+    def match?(url)
       /(?:downloads|hackage)\.haskell\.org/i.match?(url)
     end
 
-    def self.find_versions(url, regex = nil)
+    def find_versions(url, regex = nil)
       /^(?<package_name>.+?)-\d+/i =~ File.basename(url)
 
       page_url = "https://hackage.haskell.org/package/#{package_name}/src"
