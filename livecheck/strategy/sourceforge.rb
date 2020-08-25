@@ -1,26 +1,65 @@
 # frozen_string_literal: true
 
 module LivecheckStrategy
+  # The `Sourceforge` strategy identifies versions of software at
+  # sourceforge.net by checking a project's RSS feed.
+  #
+  # SourceForge URLs take a few different formats:
+  # * https://downloads.sourceforge.net/project/example/example-1.2.3.tar.gz
+  # * https://svn.code.sf.net/p/example/code/trunk
+  # * :pserver:anonymous:@example.cvs.sourceforge.net:/cvsroot/example
+  #
+  # The RSS feed for a project contains the most recent release archives
+  # and this is fine for most projects but this approach has some
+  # shortcomings. Some project releases involve so many files that the one
+  # we're interested in isn't present in the feed content. Some projects
+  # contain additional software and the archive we're interested in is
+  # pushed out of the feed (especially if it hasn't been updated recently).
+  #
+  # Usually we address this situation by adding a `livecheck` block to
+  # the formula that checks the page for the relevant directory in the
+  # project instead. In this situation, it's necessary to use
+  # `strategy :page_match` to prevent the `Sourceforge` stratgy from
+  # being used.
+  #
+  # The default regex matches within `url` attributes in the RSS feed
+  # and identifies versions within directory names or filenames.
   module Sourceforge
     module_function
 
     NICE_NAME = "SourceForge"
 
+    # The `Regexp` used to determine if the strategy applies to the URL.
+    URL_MATCH_REGEX = /(?:sourceforge|sf)\.net/i.freeze
+
+    # Whether the strategy can be applied to the provided URL.
+    # @param url [String] the URL to match against
+    # @return [Boolean]
     def match?(url)
-      /(sourceforge|sf)\.net/i.match?(url)
+      URL_MATCH_REGEX.match?(url)
     end
 
+    # Generates a URL and regex (if one isn't provided) and passes them
+    # to the `PageMatch#find_versions` method to identify versions in the
+    # content.
+    # @param url [String] the URL of the content to check
+    # @param regex [Regexp] a regex used for matching versions in content
+    # @return [Hash]
     def find_versions(url, regex = nil)
-      project_name = if url.include?("/project")
-        url.match(%r{/projects?/([^/]+)/}i)[1]
+      if url.include?("/project")
+        %r{/projects?/(?<project_name>[^/]+)/}i =~ url
       elsif url.include?(".net/p/")
-        url.match(%r{\.net/p/([^/]+)/}i)[1]
+        %r{\.net/p/(?<project_name>[^/]+)/}i =~ url
       else
-        url.match(%r{\.net(?::/cvsroot)?/([^/]+)}i)[1]
+        %r{\.net(?::/cvsroot)?/(?<project_name>[^/]+)}i =~ url
       end
 
       page_url = "https://sourceforge.net/projects/#{project_name}/rss"
-      regex ||= %r{url=.*?/#{project_name}/files/.*?[-_/](\d+(?:[-.]\d+)+)[-_/%.]}i
+
+      # It may be possible to improve the default regex but there's quite a
+      # bit of variation between projects and it can be challenging to
+      # create something that works for most URLs.
+      regex ||= %r{url=.*?/#{Regexp.escape(project_name)}/files/.*?[-_/](\d+(?:[-.]\d+)+)[-_/%.]}i
 
       PageMatch.find_versions(page_url, regex)
     end
