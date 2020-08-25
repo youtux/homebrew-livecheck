@@ -8,20 +8,20 @@ module LivecheckStrategy
 
     PRIORITY = 8
 
-    def tag_info(repo_url, filter = nil)
+    def tag_info(url, regex = nil)
       stdout_str, stderr_str, _status = Open3.capture3(
-        { "GIT_TERMINAL_PROMPT" => "0" }, "git", "ls-remote", "--tags", repo_url
+        { "GIT_TERMINAL_PROMPT" => "0" }, "git", "ls-remote", "--tags", url
       )
 
       tags_data = { tags: [] }
-      tags_data[:messages] = stderr_str.split("\n") unless stderr_str.blank?
+      tags_data[:messages] = stderr_str.split("\n") if stderr_str.present?
       return tags_data if stdout_str.blank?
 
       stdout_str.gsub!(%r{^.*\trefs/tags/}, "")
-      stdout_str.delete_suffix!("^{}")
+      stdout_str.gsub!("^{}", "")
 
       tags = stdout_str.split("\n").uniq.sort
-      tags.select! { |t| t =~ filter } if filter
+      tags.select! { |t| t =~ regex } if regex
       tags_data[:tags] = tags
 
       tags_data
