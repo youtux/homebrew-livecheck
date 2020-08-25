@@ -1,5 +1,5 @@
 class Connect
   livecheck do
-    url :stable
+    skip "Bitbucket repository is missing"
   end
 end
