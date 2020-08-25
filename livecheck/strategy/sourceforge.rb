@@ -7,16 +7,16 @@ module LivecheckStrategy
     NICE_NAME = "SourceForge"
 
     def match?(url)
-      /(sourceforge|sf)\.net/.match?(url)
+      /(sourceforge|sf)\.net/i.match?(url)
     end
 
     def find_versions(url, regex = nil)
       project_name = if url.include?("/project")
-        url.match(%r{/projects?/([^/]+)/})[1]
+        url.match(%r{/projects?/([^/]+)/}i)[1]
       elsif url.include?(".net/p/")
-        url.match(%r{\.net/p/([^/]+)/})[1]
+        url.match(%r{\.net/p/([^/]+)/}i)[1]
       else
-        url.match(%r{\.net(?::/cvsroot)?/([^/]+)})[1]
+        url.match(%r{\.net(?::/cvsroot)?/([^/]+)}i)[1]
       end
 
       page_url = "https://sourceforge.net/projects/#{project_name}/rss"

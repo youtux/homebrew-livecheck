@@ -7,14 +7,14 @@ module LivecheckStrategy
     NICE_NAME = "npm"
 
     def match?(url)
-      /registry\.npmjs\.org/.match?(url)
+      /registry\.npmjs\.org/i.match?(url)
     end
 
     def find_versions(url, regex = nil)
-      package_name = url.split("/")[3..-3].reject { |s| s == "-" }.join("/")
+      %r{registry\.npmjs\.org/(?<package_name>.+)/-/}i =~ url
 
       page_url = "https://www.npmjs.com/package/#{package_name}?activeTab=versions"
-      regex ||= %r{/package/#{package_name}/v/(\d+(?:\.\d+)+)"}
+      regex ||= %r{href=.*?/package/#{package_name}/v/(\d+(?:\.\d+)+)"}i
 
       PageMatch.find_versions(page_url, regex)
     end
