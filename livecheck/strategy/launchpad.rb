@@ -12,7 +12,7 @@ module LivecheckStrategy
       package_name = url.match(%r{launchpad\.net/([^/]*)})[1]
 
       page_url = "https://launchpad.net/#{package_name}"
-      regex ||= %r{<div class="version">\s*Latest version is (.+)\s*</div>}
+      regex ||= %r{class="[^"]*version[^"]*"[^>]*>\s*Latest version is (.+)\s*</}
 
       PageMatch.find_versions(page_url, regex)
     end
