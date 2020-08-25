@@ -7,8 +7,8 @@ module LivecheckStrategy
     NICE_NAME = "GNU"
 
     PROJECT_NAME_REGEXES = [
-      %r{/(?:gnu|software)/(.+?)/},
-      %r{//(.+?)\.gnu\.org(?:/)?$},
+      %r{/(?:gnu|software)/(.+?)/}i,
+      %r{//(.+?)\.gnu\.org(?:/)?$}i,
     ].freeze
 
     def match?(url)

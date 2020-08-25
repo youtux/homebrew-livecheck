@@ -21,7 +21,7 @@ module LivecheckStrategy
       module_name = file_name.match(/^(.*)-\d+/)[1]
 
       page_url = url.sub("x.org/pub/", "x.org/archive/").delete_suffix(file_name)
-      regex ||= /href=.*?#{module_name}[._-]v?(\d+(?:\.\d+)+)\.t/
+      regex ||= /href=.*?#{module_name}[._-]v?(\d+(?:\.\d+)+)\.t/i
 
       match_data = { matches: {}, regex: regex, url: page_url }
 

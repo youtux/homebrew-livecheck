@@ -5,15 +5,15 @@ module LivecheckStrategy
     module_function
 
     def match?(url)
-      %r{bitbucket\.org(/[^/]+){4}\.\w+}.match?(url)
+      %r{bitbucket\.org(/[^/]+){4}\.\w+}i.match?(url)
     end
 
     def find_versions(url, regex = nil)
       path, kind, prefix, suffix =
-        url.match(%r{bitbucket\.org/(.+?)/(get|downloads)/((?:[^/]+?[_-])?)v?\d+(?:\.\d+)+([^/]+)})[1, 4]
+        url.match(%r{bitbucket\.org/(.+?)/(get|downloads)/((?:[^/]+?[_-])?)v?\d+(?:\.\d+)+([^/]+)}i)[1, 4]
 
       # Use `\.t` instead of specific tarball extensions (e.g., .tar.gz)
-      suffix.sub!(/\.t(?:ar\..+|[a-z0-9]+)$/, "\.t")
+      suffix.sub!(/\.t(?:ar\..+|[a-z0-9]+)$/i, "\.t")
 
       page_url = if kind == "get"
         "https://bitbucket.org/#{path}/downloads/?tab=tags"

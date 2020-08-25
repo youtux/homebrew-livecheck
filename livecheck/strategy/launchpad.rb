@@ -5,11 +5,11 @@ module LivecheckStrategy
     module_function
 
     def match?(url)
-      /launchpad\.net/.match?(url)
+      /launchpad\.net/i.match?(url)
     end
 
     def find_versions(url, regex = nil)
-      package_name = url.match(%r{launchpad\.net/([^/]*)})[1]
+      package_name = url.match(%r{launchpad\.net/([^/]*)}i)[1]
 
       page_url = "https://launchpad.net/#{package_name}"
       regex ||= %r{class="[^"]*version[^"]*"[^>]*>\s*Latest version is (.+)\s*</}
