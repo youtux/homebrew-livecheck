@@ -14,7 +14,7 @@ module LivecheckStrategy
       %r{registry\.npmjs\.org/(?<package_name>.+)/-/}i =~ url
 
       page_url = "https://www.npmjs.com/package/#{package_name}?activeTab=versions"
-      regex ||= %r{/package/#{package_name}/v/(\d+(?:\.\d+)+)"}
+      regex ||= %r{href=.*?/package/#{package_name}/v/(\d+(?:\.\d+)+)"}
 
       PageMatch.find_versions(page_url, regex)
     end
