@@ -24,9 +24,7 @@ module LivecheckStrategy
   #
   # The default regex matches within `url` attributes in the RSS feed
   # and identifies versions within directory names or filenames.
-  module Sourceforge
-    module_function
-
+  class Sourceforge
     NICE_NAME = "SourceForge"
 
     # The `Regexp` used to determine if the strategy applies to the URL.
@@ -35,7 +33,7 @@ module LivecheckStrategy
     # Whether the strategy can be applied to the provided URL.
     # @param url [String] the URL to match against
     # @return [Boolean]
-    def match?(url)
+    def self.match?(url)
       URL_MATCH_REGEX.match?(url)
     end
 
@@ -45,7 +43,7 @@ module LivecheckStrategy
     # @param url [String] the URL of the content to check
     # @param regex [Regexp] a regex used for matching versions in content
     # @return [Hash]
-    def find_versions(url, regex = nil)
+    def self.find_versions(url, regex = nil)
       if url.include?("/project")
         %r{/projects?/(?<project_name>[^/]+)/}i =~ url
       elsif url.include?(".net/p/")
