@@ -18,9 +18,7 @@ module LivecheckStrategy
   # `Version`. This works for some simple situations but even one unusual
   # tag can cause a bad result. It's better to provide a regex in a
   # `livecheck` block, so `livecheck` only matches what we really want.
-  module Git
-    module_function
-
+  class Git
     # The priority of the strategy on an informal scale of 1 to 10 (from
     # lowest to highest).
     PRIORITY = 8
@@ -31,7 +29,7 @@ module LivecheckStrategy
     # @param url [String] the URL of the Git repository to check
     # @param regex [Regexp] the regex to use for filtering tags
     # @return [Hash]
-    def tag_info(url, regex = nil)
+    def self.tag_info(url, regex = nil)
       # Open3#capture3 is used here because we need to capture stderr
       # output and handle it in an appropriate manner. Alternatives like
       # SystemCommand always print errors (as well as debug output) and
@@ -58,7 +56,7 @@ module LivecheckStrategy
     # Whether the strategy can be applied to the provided URL.
     # @param url [String] the URL to match against
     # @return [Boolean]
-    def match?(url)
+    def self.match?(url)
       (DownloadStrategyDetector.detect(url) <= GitDownloadStrategy) == true
     end
 
@@ -68,7 +66,7 @@ module LivecheckStrategy
     # @param url [String] the URL of the Git repository to check
     # @param regex [Regexp] the regex to use for matching versions
     # @return [Hash]
-    def find_versions(url, regex = nil)
+    def self.find_versions(url, regex = nil)
       match_data = { matches: {}, regex: regex, url: url }
 
       tags_data = tag_info(url, regex)

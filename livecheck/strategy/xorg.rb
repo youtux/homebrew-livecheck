@@ -32,9 +32,7 @@ module LivecheckStrategy
   #
   # The default regex identifies versions in archive files found in `href`
   # attributes.
-  module Xorg
-    module_function
-
+  class Xorg
     NICE_NAME = "X.Org"
 
     # The `Regexp` used to determine if the strategy applies to the URL.
@@ -50,7 +48,7 @@ module LivecheckStrategy
     # Whether the strategy can be applied to the provided URL.
     # @param url [String] the URL to match against
     # @return [Boolean]
-    def match?(url)
+    def self.match?(url)
       URL_MATCH_REGEX.match?(url)
     end
 
@@ -65,7 +63,7 @@ module LivecheckStrategy
     # @param url [String] the URL of the content to check
     # @param regex [Regexp] a regex used for matching versions in content
     # @return [Hash]
-    def find_versions(url, regex)
+    def self.find_versions(url, regex)
       file_name = File.basename(url)
 
       /^(?<module_name>.+)-\d+/i =~ file_name

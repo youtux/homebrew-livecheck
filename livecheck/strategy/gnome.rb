@@ -10,9 +10,7 @@ module LivecheckStrategy
   #
   # The default regex restricts matching to filenames containing a version
   # with an even-numbered minor below 90, as these are stable releases.
-  module Gnome
-    module_function
-
+  class Gnome
     NICE_NAME = "GNOME"
 
     # The `Regexp` used to determine if the strategy applies to the URL.
@@ -21,7 +19,7 @@ module LivecheckStrategy
     # Whether the strategy can be applied to the provided URL.
     # @param url [String] the URL to match against
     # @return [Boolean]
-    def match?(url)
+    def self.match?(url)
       URL_MATCH_REGEX.match?(url)
     end
 
@@ -31,7 +29,7 @@ module LivecheckStrategy
     # @param url [String] the URL of the content to check
     # @param regex [Regexp] a regex used for matching versions in content
     # @return [Hash]
-    def find_versions(url, regex = nil)
+    def self.find_versions(url, regex = nil)
       %r{/sources/(?<package_name>.*?)/}i =~ url
 
       page_url = "https://download.gnome.org/sources/#{package_name}/cache.json"

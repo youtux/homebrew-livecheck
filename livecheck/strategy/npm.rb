@@ -10,9 +10,7 @@ module LivecheckStrategy
   #
   # The default regex matches URLs in the `href` attributes of version tags
   # on the "Versions" tab of the package page.
-  module Npm
-    module_function
-
+  class Npm
     NICE_NAME = "npm"
 
     # The `Regexp` used to determine if the strategy applies to the URL.
@@ -21,7 +19,7 @@ module LivecheckStrategy
     # Whether the strategy can be applied to the provided URL.
     # @param url [String] the URL to match against
     # @return [Boolean]
-    def match?(url)
+    def self.match?(url)
       URL_MATCH_REGEX.match?(url)
     end
 
@@ -31,7 +29,7 @@ module LivecheckStrategy
     # @param url [String] the URL of the content to check
     # @param regex [Regexp] a regex used for matching versions in content
     # @return [Hash]
-    def find_versions(url, regex = nil)
+    def self.find_versions(url, regex = nil)
       %r{registry\.npmjs\.org/(?<package_name>.+)/-/}i =~ url
 
       page_url = "https://www.npmjs.com/package/#{package_name}?activeTab=versions"

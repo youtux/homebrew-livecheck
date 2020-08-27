@@ -10,16 +10,14 @@ module LivecheckStrategy
   #
   # The default regex checks for the latest version an `h3` heading element
   # with a format like `<h3>example-1.2.3/</h3>`.
-  module Hackage
-    module_function
-
+  class Hackage
     # The `Regexp` used to determine if the strategy applies to the URL.
     URL_MATCH_REGEX = /(?:downloads|hackage)\.haskell\.org/i.freeze
 
     # Whether the strategy can be applied to the provided URL.
     # @param url [String] the URL to match against
     # @return [Boolean]
-    def match?(url)
+    def self.match?(url)
       URL_MATCH_REGEX.match?(url)
     end
 
@@ -29,7 +27,7 @@ module LivecheckStrategy
     # @param url [String] the URL of the content to check
     # @param regex [Regexp] a regex used for matching versions in content
     # @return [Hash]
-    def find_versions(url, regex = nil)
+    def self.find_versions(url, regex = nil)
       /^(?<package_name>.+?)-\d+/i =~ File.basename(url)
 
       # A page containing a directory listing of the latest source tarball

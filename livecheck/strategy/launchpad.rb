@@ -17,16 +17,14 @@ module LivecheckStrategy
   #   Latest version is 1.2.3
   # </div>
   # ```
-  module Launchpad
-    module_function
-
+  class Launchpad
     # The `Regexp` used to determine if the strategy applies to the URL.
     URL_MATCH_REGEX = /launchpad\.net/i.freeze
 
     # Whether the strategy can be applied to the provided URL.
     # @param url [String] the URL to match against
     # @return [Boolean]
-    def match?(url)
+    def self.match?(url)
       URL_MATCH_REGEX.match?(url)
     end
 
@@ -36,7 +34,7 @@ module LivecheckStrategy
     # @param url [String] the URL of the content to check
     # @param regex [Regexp] a regex used for matching versions in content
     # @return [Hash]
-    def find_versions(url, regex = nil)
+    def self.find_versions(url, regex = nil)
       %r{launchpad\.net/(?<project_name>[^/]+)}i =~ url
 
       # The main page for the project on Launchpad

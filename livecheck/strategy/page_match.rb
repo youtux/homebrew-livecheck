@@ -13,9 +13,7 @@ module LivecheckStrategy
   # The `PageMatch#find_versions` method is also used within other
   # strategies, to handle the process of identifying version text in
   # content.
-  module PageMatch
-    module_function
-
+  class PageMatch
     NICE_NAME = "Page match"
 
     # A priority of zero causes livecheck to skip the strategy. We do this
@@ -32,7 +30,7 @@ module LivecheckStrategy
     # when the formula has a `livecheck` block containing a regex.
     # @param url [String] the URL to match against
     # @return [Boolean]
-    def match?(url)
+    def self.match?(url)
       URL_MATCH_REGEX.match?(url)
     end
 
@@ -42,7 +40,7 @@ module LivecheckStrategy
     # @param regex [Regexp] a regex used for matching versions in the
     #   content
     # @return [Array]
-    def page_matches(url, regex)
+    def self.page_matches(url, regex)
       page = URI.open(url).read
       matches = page.scan(regex)
       matches.map(&:first).uniq
@@ -53,7 +51,7 @@ module LivecheckStrategy
     # @param url [String] the URL of the content to check
     # @param regex [Regexp] a regex used for matching versions in content
     # @return [Hash]
-    def find_versions(url, regex)
+    def self.find_versions(url, regex)
       match_data = { matches: {}, regex: regex, url: url }
 
       page_matches(url, regex).each do |match|
