@@ -19,7 +19,7 @@ module LivecheckStrategy
     module_function
 
     # The `Regexp` used to determine if the strategy applies to the URL.
-    URL_MATCH_REGEX = %r{www\.apache\.org/dyn}i.freeze
+    URL_MATCH_REGEX = %r{www\.apache\.org/dyn/.+path=.+}i.freeze
 
     # Whether the strategy can be applied to the provided URL.
     # @param url [String] the URL to match against
