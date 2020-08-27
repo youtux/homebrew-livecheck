@@ -59,7 +59,7 @@ module LivecheckStrategy
     # @param url [String] the URL to match against
     # @return [Boolean]
     def match?(url)
-      DownloadStrategyDetector.detect(url) <= GitDownloadStrategy
+      (DownloadStrategyDetector.detect(url) <= GitDownloadStrategy) == true
     end
 
     # Checks the Git tags for new versions. When a regex isn't provided,
